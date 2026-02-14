@@ -1,94 +1,60 @@
-// app/logic/page.tsx
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "計算ロジック",
-  description: "本ツールの利息計算、返済方式、金利ステップ、ボーナス返済の扱いを説明します。",
-};
+export const metadata = { title: "計算ロジック" };
 
 export default function Page() {
   return (
-    <div className="grid gap-6">
-      <header className="rounded-3xl border border-gray-200 bg-white p-6">
-        <h1 className="text-2xl font-black">計算ロジック</h1>
-        <p className="mt-2 text-sm text-gray-600">
-          本ページは「このツールがどう計算しているか」を明示するための説明です。契約上の算定方法は各社で異なり得ます。
-        </p>
-      </header>
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <h1 className="text-2xl font-black">計算ロジック</h1>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6">
-        <h2 className="text-lg font-black">1. 月利と利息</h2>
-        <div className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
-          <p>
-            年利（%）を月利に換算して利息を計算します。概念的には
-            <span className="font-bold"> 月利 = 年利 / 12 </span>（%換算は小数で扱う）です。
-          </p>
-          <p>
-            月次の利息は概ね <span className="font-bold">利息 = 残高 × 月利</span> の形で算出します。
-            端数処理（切捨/四捨五入など）は金融機関ごとに異なるため、本ツールでは一般的な単純化を採用しています。
-          </p>
-        </div>
-      </section>
+      <div className="mt-5 grid gap-5 text-sm text-gray-700 leading-relaxed">
+        <section>
+          <h2 className="text-base font-black text-gray-900">前提</h2>
+          <ul className="mt-2 list-disc pl-5 space-y-1">
+            <li>月次計算（年利% → 月利 = 年利/12）</li>
+            <li>利息 = 当月期首残高 × 月利（端数処理あり）</li>
+            <li>支払 = 利息 + 元金（ボーナス返済は別枠で元金に加算）</li>
+            <li>返済は残高が0になるまで継続（上限月数を設けています）</li>
+          </ul>
+        </section>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6">
-        <h2 className="text-lg font-black">2. 返済方式</h2>
-        <div className="mt-3 space-y-4 text-sm leading-relaxed text-gray-700">
-          <div>
-            <div className="font-black">元利均等（回数）</div>
-            <p className="mt-1">
-              返済回数を固定し、毎月の支払額（元金＋利息）を一定にする方式です。
-              金利が一定の場合は、標準的な元利均等の計算式で毎月返済額を決めます。
-            </p>
+        <section>
+          <h2 className="text-base font-black text-gray-900">返済方式</h2>
+          <div className="mt-2 grid gap-3">
+            <div>
+              <div className="font-black text-gray-900">元利均等（回数指定）</div>
+              <div>
+                初期月利で毎月返済額（定額）を計算し、各月は「返済額−利息＝元金」で残高を減らします。
+                途中で金利が変わる場合、厳密には返済額の再計算が必要ですが、本ツールは“目安”としての近似です。
+              </div>
+            </div>
+            <div>
+              <div className="font-black text-gray-900">元金均等（回数指定）</div>
+              <div>
+                元金を毎月一定で返済し、利息は残高に応じて逓減します。返済初期の支払が大きくなりやすい特徴があります。
+              </div>
+            </div>
+            <div>
+              <div className="font-black text-gray-900">定額元利（金額指定）</div>
+              <div>
+                毎月返済額を固定し、利息を差し引いた残りが元金になります。返済額が利息以下の場合、完済不能となるためエラー表示します。
+              </div>
+            </div>
+            <div>
+              <div className="font-black text-gray-900">定額元金（金額指定）</div>
+              <div>
+                毎月元金を固定し、利息を上乗せして支払います。元金が大きいほど完済が早まります。
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div>
-            <div className="font-black">元金均等（回数）</div>
-            <p className="mt-1">
-              毎月返済する元金を一定にする方式です。序盤は利息が多く支払額が大きく、元金が減るにつれて支払額が小さくなる傾向があります。
-            </p>
-          </div>
-
-          <div>
-            <div className="font-black">定額元利（金額）</div>
-            <p className="mt-1">
-              毎月の返済額（元金＋利息）を金額指定します。返済額が利息以下だと元金が減らず完済できないため、ツールはエラー表示します。
-            </p>
-          </div>
-
-          <div>
-            <div className="font-black">定額元金（金額）</div>
-            <p className="mt-1">
-              毎月返済する元金を金額指定します。利息は残高に応じて変動するため、支払額（元金＋利息）は月ごとに変わります。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="rounded-3xl border border-gray-200 bg-white p-6">
-        <h2 className="text-lg font-black">3. 金利ステップ（段階変更）</h2>
-        <div className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
-          <p>
-            「月N〜 年利X%」のように、返済開始後の月数に応じて年利を切り替えられます。
-            例：優遇金利が終了して金利が上がる、借換で金利が下がる、など。
+        <section>
+          <h2 className="text-base font-black text-gray-900">免責</h2>
+          <p className="mt-2">
+            実際の返済計算は金融機関の約定（返済日、日割り、端数処理、手数料等）に依存します。
+            本ツールは意思決定の参考情報であり、正確性を保証するものではありません。
           </p>
-          <p>
-            ツールは各月ごとに、その月に該当する年利を選んで利息計算に使用します。
-          </p>
-        </div>
-      </section>
-
-      <section className="rounded-3xl border border-gray-200 bg-white p-6">
-        <h2 className="text-lg font-black">4. ボーナス返済</h2>
-        <div className="mt-3 space-y-3 text-sm leading-relaxed text-gray-700">
-          <p>
-            指定した月に追加返済を行います。本ツールでは、ボーナス返済は主に<span className="font-bold">元金の追加返済</span>として扱います。
-          </p>
-          <p>
-            実際の契約では、任意返済の充当順序（利息→元金、手数料の有無など）が異なる場合があります。
-            正確な扱いは契約内容をご確認ください。
-          </p>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

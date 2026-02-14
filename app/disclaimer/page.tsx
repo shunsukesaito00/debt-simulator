@@ -1,27 +1,22 @@
-export const metadata = {
-  title: "免責事項 | 借金返済シミュレーター",
-};
+export const metadata = { title: "免責事項" };
 
-export default function DisclaimerPage() {
+export default function Page() {
   return (
-    <main style={{ maxWidth: 860, margin: "40px auto", padding: "0 16px", lineHeight: 1.8 }}>
-      <h1>免責事項</h1>
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <h1 className="text-2xl font-black">免責事項</h1>
 
-      <p>
-        当サイトのシミュレーション結果・情報は、一般的な計算方法に基づく参考情報です。実際の返済条件・手数料・金利等は金融機関や契約内容により異なります。
-      </p>
-
-      <h2>計算結果について</h2>
-      <ul>
-        <li>入力値（借入額、金利、返済額等）により結果は大きく変動します。</li>
-        <li>端数処理や最終月調整等により、実際の返済額と差が生じる場合があります。</li>
-        <li>当サイトの結果を用いて生じた損害について、当サイトは責任を負いません。</li>
-      </ul>
-
-      <h2>最終判断</h2>
-      <p>
-        借入・返済に関する最終判断は、必ずご自身の責任で行ってください。必要に応じて金融機関・専門家へご相談ください。
-      </p>
-    </main>
+      <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
+        <p>
+          当サイトのシミュレーション結果は参考情報です。正確性・完全性を保証するものではありません。
+          実際の返済条件は契約内容（金融機関の約定）をご確認ください。
+        </p>
+        <p>
+          当サイトの利用により生じた損害等について、当サイトは一切の責任を負いません。
+        </p>
+        <p>
+          投資・借入・借換等の判断は、ご自身の責任で行ってください。必要に応じて金融機関または専門家へご相談ください。
+        </p>
+      </div>
+    </div>
   );
 }

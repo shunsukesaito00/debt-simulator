@@ -1,8 +1,8 @@
-// app/sitemap.ts
 import type { MetadataRoute } from "next";
 
+const BASE = "https://debt-simulator-akvc.vercel.app";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-akvc.vercel.app";
   const now = new Date();
 
   const routes = [
@@ -11,16 +11,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/how-to",
     "/logic",
     "/faq",
+    "/about",
+    "/contact",
     "/privacy",
     "/disclaimer",
-    "/contact",
-    "/about",
   ];
 
-  return routes.map((path) => ({
-    url: `${siteUrl}${path}`,
+  return routes.map((p) => ({
+    url: `${BASE}${p}`,
     lastModified: now,
     changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.7,
+    priority: p === "/" ? 1 : 0.7,
   }));
 }

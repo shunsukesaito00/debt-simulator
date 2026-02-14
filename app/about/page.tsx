@@ -1,41 +1,47 @@
-export const metadata = {
-  title: "運営者情報 | Debt Simulator",
-  description: "Debt Simulator の運営者情報・目的・連絡方法について掲載します。",
-};
+import Link from "next/link";
 
-export default function AboutPage() {
+export const metadata = { title: "運営者情報" };
+
+export default function Page() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-black text-gray-900">運営者情報</h1>
+    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <h1 className="text-2xl font-black">運営者情報</h1>
 
-      <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
-        <h2 className="text-lg font-black text-gray-900">サイトについて</h2>
-        <p className="mt-3 text-sm leading-7 text-gray-700">
-          Debt Simulator は、借入額・金利・期間などを入力して、毎月返済額や総返済額の目安を確認できる
-          返済シミュレーターです。比較や検討の補助を目的としており、最終的な返済条件は各社の契約内容をご確認ください。
-        </p>
-      </section>
-
-      <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
-        <h2 className="text-lg font-black text-gray-900">運営者</h2>
-        <div className="mt-3 text-sm leading-7 text-gray-700">
-          <p>運営形態：個人</p>
-          <p>
-            連絡方法：{" "}
-            <a className="underline" href="/contact">
-              お問い合わせフォーム
-            </a>
-          </p>
-          <p>対応時間：原則 3 営業日以内（内容により返信しない場合があります）</p>
+      <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
+        <div>
+          <div className="font-black text-gray-900">サイト名</div>
+          <div>借入返済シミュレーター</div>
         </div>
-      </section>
 
-      <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
-        <h2 className="text-lg font-black text-gray-900">収益化について</h2>
-        <p className="mt-3 text-sm leading-7 text-gray-700">
-          本サイトでは、運営コストの補填のため広告（Google AdSense 等）を利用する場合があります。
-        </p>
-      </section>
-    </main>
+        <div>
+          <div className="font-black text-gray-900">運営目的</div>
+          <div>
+            借入返済の見通し（完済までの回数、利息総額、月次の推移）を把握し、
+            条件比較の判断材料を提供することを目的としています。
+          </div>
+        </div>
+
+        <div>
+          <div className="font-black text-gray-900">運営者</div>
+          <div>個人運営（氏名・住所の公開は行っていません）</div>
+        </div>
+
+        <div>
+          <div className="font-black text-gray-900">連絡先</div>
+          <div>
+            お問い合わせは{" "}
+            <Link
+              href="https://github.com/shunsukesaito00/debt-simulator/issues"
+              className="font-black text-gray-800 underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub Issues
+            </Link>
+            からお願いします（メールアドレスの公開は行っていません）。
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
