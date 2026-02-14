@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { AdSlot } from "@/app/components/AdSlot";
 
 type RepaymentMethod =
   | "annuity_months"
@@ -125,13 +126,15 @@ function simulate(s: Scenario): SimResult {
       const need = balance + interest;
       payment = Math.min(payment, need);
       principal = payment - interest;
-      if (principal <= 0) return { ok: false, reason: "返済条件が成立しません（毎月返済が利息以下）。" };
+      if (principal <= 0)
+        return { ok: false, reason: "返済条件が成立しません（毎月返済が利息以下）。" };
     } else if (s.method === "equal_principal_months") {
       principal = Math.min(equalPrincipal, balance);
       payment = principal + interest;
     } else if (s.method === "fixed_payment") {
       payment = Math.max(0, Math.round(s.monthlyPaymentYen));
-      if (payment <= interest) return { ok: false, reason: "完済できません（毎月返済額が利息以下）。" };
+      if (payment <= interest)
+        return { ok: false, reason: "完済できません（毎月返済額が利息以下）。" };
       const need = balance + interest;
       payment = Math.min(payment, need);
       principal = payment - interest;
@@ -315,7 +318,6 @@ function Select({
   onChange: (v: string) => void;
   children: React.ReactNode;
 }) {
-  // ✅ ここが崩れの主因だったので、常に w-full に固定（md固定幅を撤廃）
   return (
     <label className="grid gap-2">
       <div className="text-sm font-black text-gray-900">{label}</div>
@@ -327,25 +329,6 @@ function Select({
         {children}
       </select>
     </label>
-  );
-}
-
-function AdSlot({
-  id,
-  height = 90,
-}: {
-  id: string;
-  height?: number;
-}) {
-  return (
-    <div
-      id={id}
-      className="rounded-3xl border border-gray-200 bg-white shadow-soft flex items-center justify-center text-xs font-black text-gray-400"
-      style={{ minHeight: height }}
-      aria-label="広告"
-    >
-      AD SPACE
-    </div>
   );
 }
 
@@ -587,16 +570,6 @@ export default function Page() {
     return `${window.location.origin}${window.location.pathname}?${qs}`;
   }, [A, B]);
 
-  const copyShare = async () => {
-    if (!shareUrl) return;
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      alert("共有リンクをコピーしました。");
-    } catch {
-      prompt("コピーできない場合は手動でコピーしてください。", shareUrl);
-    }
-  };
-
   const compare = useMemo(() => {
     if (!resA || !resB || !resA.ok || !resB.ok) return null;
     return {
@@ -615,19 +588,11 @@ export default function Page() {
     { key: "fixed_principal", label: "定額元金（金額）" },
   ] as const;
 
-  const viewItems = [
-    { key: "summary", label: "サマリー" },
-    { key: "chart", label: "グラフ" },
-    { key: "table", label: "表" },
-    { key: "compare", label: "比較" },
-  ] as const;
-
   const yearsOptions = [1, 2, 3, 5, 7, 10, 15, 20];
 
   const renderScenarioForm = (s: Scenario, setS: (u: (p: Scenario) => Scenario) => void, advanced: boolean) => {
     return (
       <div className="grid gap-5">
-        {/* ✅ ここを md:3列（借入 / 年 / 月）にして崩れを完全解消 */}
         <div className="grid gap-4 md:grid-cols-3">
           <NumInput
             label="借入金額"
@@ -714,7 +679,6 @@ export default function Page() {
           />
         )}
 
-        {/* 金利（段階） */}
         <div className="rounded-3xl border border-gray-200 bg-gray-50 p-4">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div className="text-sm font-black text-gray-900">金利（段階変更）</div>
@@ -776,7 +740,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* ボーナス */}
         <div className="rounded-3xl border border-gray-200 bg-gray-50 p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-sm font-black text-gray-900">ボーナス返済</div>
@@ -865,13 +828,12 @@ export default function Page() {
 
   return (
     <div className="grid gap-6">
-      {/* hero */}
       <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-soft md:p-8">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <h1 className="text-2xl font-black text-gray-900 md:text-4xl">カードローン返済シミュレーター</h1>
             <p className="mt-2 text-sm text-gray-600">
-              A/B比較・保存・共有リンク・CSV・グラフ（残高/支払/利息）・返済表（年月付き）に対応。
+              2条件の比較、CSV出力、共有リンク、返済表、グラフ表示に対応しています。
             </p>
           </div>
           <button
@@ -909,23 +871,20 @@ export default function Page() {
         </div>
       </div>
 
-      {/* ✅ 広告枠（上） */}
-      <AdSlot id="ad_sim_top" height={90} />
+      {/* 審査中は非表示（NEXT_PUBLIC_SHOW_ADS=0）。将来ONにしたらここに広告が入る */}
+      <AdSlot className="my-1" />
 
-      {/* inputs */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card title="入力（A：本命）" sub="手元の条件を入力して結果を確認します。">
+        <Card title="入力（A）" sub="メインの条件を入力します。">
           {renderScenarioForm(A, (u) => setA(u), true)}
         </Card>
-        <Card title="入力（B：比較用）" sub="Aと比較して差分（利息/期間）を確認します。">
+        <Card title="入力（B）" sub="比較用の条件を入力します。">
           {renderScenarioForm(B, (u) => setB(u), false)}
         </Card>
       </div>
 
-      {/* ✅ 広告枠（中：レクタングル想定） */}
-      <AdSlot id="ad_sim_mid" height={250} />
+      <AdSlot className="my-1" />
 
-      {/* views */}
       {view === "summary" && (
         <div className="grid gap-6 lg:grid-cols-2">
           <Card title="結果（A）">
@@ -938,12 +897,24 @@ export default function Page() {
       )}
 
       {view === "compare" && (
-        <Card title="A/B比較（差分：A - B）" sub="マイナスならAが有利（少ない/早い）です。">
+        <Card title="A/B比較（差分：A - B）" sub="マイナスならAが少ない/早いです。">
           {compare ? (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <Stat label="合計返済差" value={`${fmtSignedYen(compare.dPay)} 円`} hint={compare.dPay < 0 ? "Aが少ない" : "Bが少ない"} />
-              <Stat label="利息差" value={`${fmtSignedYen(compare.dInt)} 円`} hint={compare.dInt < 0 ? "Aが少ない" : "Bが少ない"} />
-              <Stat label="完済月数差" value={`${compare.dMonths >= 0 ? "+" : ""}${compare.dMonths} ヶ月`} hint={compare.dMonths < 0 ? "Aが早い" : "Bが早い"} />
+              <Stat
+                label="合計返済差"
+                value={`${fmtSignedYen(compare.dPay)} 円`}
+                hint={compare.dPay < 0 ? "Aが少ない" : "Bが少ない"}
+              />
+              <Stat
+                label="利息差"
+                value={`${fmtSignedYen(compare.dInt)} 円`}
+                hint={compare.dInt < 0 ? "Aが少ない" : "Bが少ない"}
+              />
+              <Stat
+                label="完済月数差"
+                value={`${compare.dMonths >= 0 ? "+" : ""}${compare.dMonths} ヶ月`}
+                hint={compare.dMonths < 0 ? "Aが早い" : "Bが早い"}
+              />
             </div>
           ) : (
             <div className="text-sm text-gray-500">A/Bいずれかの計算が成立していません（入力条件を確認してください）。</div>
@@ -954,10 +925,18 @@ export default function Page() {
       {view === "chart" && (
         <div className="grid gap-6 lg:grid-cols-2">
           <Card title="グラフ（A）" sub="残高 / 支払 / 利息（線）">
-            {resA && resA.ok ? <LineChart rows={resA.rows} amountYen={amountYenA} /> : <div className="text-sm text-gray-500">Aの結果がありません。</div>}
+            {resA && resA.ok ? (
+              <LineChart rows={resA.rows} amountYen={amountYenA} />
+            ) : (
+              <div className="text-sm text-gray-500">Aの結果がありません。</div>
+            )}
           </Card>
           <Card title="グラフ（B）" sub="残高 / 支払 / 利息（線）">
-            {resB && resB.ok ? <LineChart rows={resB.rows} amountYen={amountYenB} /> : <div className="text-sm text-gray-500">Bの結果がありません。</div>}
+            {resB && resB.ok ? (
+              <LineChart rows={resB.rows} amountYen={amountYenB} />
+            ) : (
+              <div className="text-sm text-gray-500">Bの結果がありません。</div>
+            )}
           </Card>
         </div>
       )}
@@ -1038,8 +1017,7 @@ export default function Page() {
         </Card>
       )}
 
-      {/* ✅ 広告枠（下） */}
-      <AdSlot id="ad_sim_bottom" height={90} />
+      <AdSlot className="my-1" />
 
       <div className="text-xs text-gray-500">
         ※ 本ツールは参考情報です。最終的な返済条件は契約内容をご確認ください。
