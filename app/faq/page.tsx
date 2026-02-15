@@ -1,42 +1,145 @@
-import Link from "next/link";
+// app/faq/page.tsx
+import type { Metadata } from "next";
 
-export const metadata = { title: "FAQ" };
+export const metadata: Metadata = {
+  title: "FAQ",
+  description:
+    "借入返済シミュレーターのよくある質問。金利、元利均等/元金均等、ボーナス返済、繰上返済、端数処理など。",
+};
+
+function Item({
+  q,
+  children,
+}: {
+  q: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-3xl border border-gray-200 bg-white p-5 shadow-soft">
+      <h2 className="text-base font-black text-gray-900">{q}</h2>
+      <div className="mt-3 text-sm text-gray-700 leading-relaxed">{children}</div>
+    </section>
+  );
+}
 
 export default function Page() {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
-      <h1 className="text-2xl font-black">FAQ</h1>
+    <div className="grid gap-6">
+      <header className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
+        <h1 className="text-2xl font-black text-gray-900 md:text-3xl">FAQ（よくある質問）</h1>
+        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+          借入返済シミュレーターの使い方・計算結果の見方・金利や返済方式の考え方について、よくある質問をまとめています。
+          実際の返済条件は契約内容（適用金利、約定日、端数処理、手数料等）を優先してください。
+        </p>
+      </header>
 
-      <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
-        <div className="rounded-2xl border border-gray-200 p-4">
-          <div className="font-black text-gray-900">Q. これって公式の計算ですか？</div>
-          <div className="mt-2">
-            A. いいえ。一般的な月次モデルでの試算です。契約内容（金融機関の約定）が正です。
-          </div>
-        </div>
+      <Item q="Q1. このシミュレーターで何ができますか？">
+        <p>
+          借入金額、年利（段階変更にも対応）、返済方式、返済開始年月、ボーナス返済などの条件を入力し、
+          毎月の返済（支払額・利息・元金）と残高の推移、完済までの回数、利息総額、合計返済額を試算できます。
+          A/Bの2条件を並べて比較でき、結果はCSVとしてダウンロードできます。
+        </p>
+      </Item>
 
-        <div className="rounded-2xl border border-gray-200 p-4">
-          <div className="font-black text-gray-900">Q. 金利が途中で変わる場合は？</div>
-          <div className="mt-2">
-            A. 段階変更として入力できます。元利均等は厳密には返済額の再計算が必要になるため、
-            本ツールは目安の近似になります（詳しくは <Link href="/logic" className="font-black underline">計算ロジック</Link>）。
-          </div>
-        </div>
+      <Item q="Q2. 年利（%）はどう扱われますか？">
+        <p>
+          年利（年率）を月利に換算して計算します。一般的には「月利＝年利÷12」で近似します。
+          実際の金融商品では、約定日や日割り計算、利息の端数処理の規定があり、厳密には差が出ることがあります。
+          本ツールは契約書の細かなルールを完全再現する目的ではなく、条件比較と概算把握を主目的としています。
+        </p>
+      </Item>
 
-        <div className="rounded-2xl border border-gray-200 p-4">
-          <div className="font-black text-gray-900">Q. 入力したデータは保存されますか？</div>
-          <div className="mt-2">
-            A. 端末内（ブラウザのローカルストレージ）に保存される場合があります。サーバーへ送信はしません。
-          </div>
-        </div>
+      <Item q="Q3. 元利均等（回数指定）とは何ですか？">
+        <p>
+          元利均等返済は、毎月の返済額（元金＋利息）が原則として一定になる方式です。
+          返済初期は利息の割合が大きく、元金の減りが遅くなりやすい一方、返済額が一定なので家計管理がしやすい特徴があります。
+          本ツールでは回数（年数）を指定し、その回数で完済するための毎月返済額を算出して返済表を作ります。
+        </p>
+      </Item>
 
-        <div className="rounded-2xl border border-gray-200 p-4">
-          <div className="font-black text-gray-900">Q. お問い合わせ先は？</div>
-          <div className="mt-2">
-            A. <Link href="/contact" className="font-black underline">お問い合わせ</Link>をご確認ください。
-          </div>
-        </div>
-      </div>
+      <Item q="Q4. 元金均等（回数指定）とは何ですか？">
+        <p>
+          元金均等返済は、毎月の元金部分を（概ね）均等に返す方式です。
+          返済初期は残高が大きいため利息が高く、毎月の支払総額は大きくなりやすいですが、
+          元金の減りが早い分、総利息が小さくなりやすい傾向があります。
+          本ツールは回数（年数）から毎月の元金を割り出し、利息を上乗せして毎月の支払額を算出します。
+        </p>
+      </Item>
+
+      <Item q="Q5. 定額元利（毎月返済額を固定）とは何ですか？">
+        <p>
+          毎月の支払額（元金＋利息）を「金額で固定」する方式です。
+          ただし金利や残高に対して毎月返済額が小さすぎると、利息分を下回って元金が減らず、完済できません。
+          本ツールでは「毎月返済額が利息以下」の場合は計算が成立しないとしてエラー表示します。
+        </p>
+      </Item>
+
+      <Item q="Q6. 定額元金（毎月元金を固定）とは何ですか？">
+        <p>
+          毎月返す元金額を固定し、そこに利息を上乗せする方式です。
+          残高が減るにつれて利息が減るため、毎月の支払総額は徐々に小さくなるのが一般的です。
+          実務では「毎月いくら元金を減らしたいか」を基準に計画したい場合に分かりやすい方式です。
+        </p>
+      </Item>
+
+      <Item q="Q7. ボーナス返済はどう計算されますか？">
+        <p>
+          指定した月（例：6月・12月など）に、追加で返済する金額を設定できます。
+          ボーナス返済は「元金の繰上返済」に近い挙動として扱われ、毎月の通常返済で減った残高に対して、さらに元金が減る形になります。
+          実際の商品ではボーナス返済の扱い（利息計算タイミング、約定返済との関係）が異なる場合があるため、
+          目安としてご利用ください。
+        </p>
+      </Item>
+
+      <Item q="Q8. 金利が途中で変わる場合はどうすればいいですか？">
+        <p>
+          「金利（段階変更）」で、何ヶ月目から年利が変わるかを設定できます。
+          例えば「月1〜12は年利15%」「月13〜は年利12%」のように、複数ステップを作ることで条件の変化を試算できます。
+          実際の変動金利では、見直しルール（何ヶ月ごと、上限、基準金利等）があり、完全一致はしないことがありますが、
+          ざっくり影響を把握する用途には有効です。
+        </p>
+      </Item>
+
+      <Item q="Q9. 結果の『利息合計』はどのように解釈すべきですか？">
+        <p>
+          利息合計は、返済期間中に支払う利息の総額です。返済方式の違い、金利の違い、ボーナス返済の有無によって大きく変わります。
+          例えば、元金の減りが早い方式（元金均等、あるいは元金を厚めに返す設計）ほど、残高が早く減るため利息合計が小さくなる傾向があります。
+          ただし、月々の負担が大きくなりやすい点とのトレードオフがあります。
+        </p>
+      </Item>
+
+      <Item q="Q10. A/B比較は何を見るのがポイントですか？">
+        <p>
+          A/B比較では、主に「利息差」「完済までの回数差」「合計返済差」を見ます。
+          利息差が小さくても、月々の支払額やボーナス月の負担が現実的かは別問題です。
+          無理のない返済計画（生活費・予備費を確保できるか）を前提に、利息の削減効果を評価するのが安全です。
+        </p>
+      </Item>
+
+      <Item q="Q11. CSVダウンロードの内容は何ですか？">
+        <p>
+          各月の「年月」「年利（%）」「支払」「利息」「元金」「ボーナス返済」「残高」を行として出力します。
+          家計簿や資金繰り表に取り込んで、月別に集計したり、別シナリオと比較したりする用途を想定しています。
+          表示と同様に、端数処理や利息計算ルールはツールの方式に準拠します。
+        </p>
+      </Item>
+
+      <Item q="Q12. このツールの計算結果は正確ですか？（審査・実務の注意）">
+        <p>
+          本ツールは、条件比較と概算把握のためのシミュレーターです。
+          実際の金融商品は、約定日、日割り利息、繰上返済手数料、遅延損害金、利息の端数処理などの規定があり、
+          それらを完全再現するには契約書ベースでの個別対応が必要になります。
+          重要な意思決定（借換、繰上返済、返済条件の交渉等）を行う場合は、契約内容や金融機関の試算を必ず確認してください。
+        </p>
+      </Item>
+
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
+        <h2 className="text-base font-black text-gray-900">補足</h2>
+        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+          使い方の詳細は「使い方」ページ、計算の考え方は「計算ロジック」ページにまとめています。
+          追加してほしい質問があれば「お問い合わせ」からご連絡ください。
+        </p>
+      </section>
     </div>
   );
 }
