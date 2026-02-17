@@ -81,6 +81,10 @@ const DEFAULT_FORM: FormState = {
   monthlyPrincipal: null,
 };
 
+const QUICK_PRINCIPAL = [30, 50, 100, 200, 300, 500];
+const QUICK_RATE = [5, 10, 15, 18, 20];
+const QUICK_YEARS = [1, 2, 3, 5, 7, 10];
+
 function RepaymentChart({ result }: { result: CalcResult }) {
   if (!result.ok || result.schedule.length === 0) return null;
 
@@ -200,16 +204,42 @@ export default function Page() {
 
         <form className="mt-6 grid gap-6" onSubmit={(e) => e.preventDefault()}>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="space-y-1">
-              <label className="block text-xs font-black text-gray-700">借入金額（万円）</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                min={1}
-                className="w-full rounded-2xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/20"
-                value={form.principalMan}
-                onChange={(e) => updateForm({ principalMan: Number(e.target.value) || 0 })}
-              />
+            <div className="space-y-2">
+              <label className="block text-xs font-black text-gray-700">借入金額</label>
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min={10}
+                  max={500}
+                  step={5}
+                  className="flex-1"
+                  value={Math.min(500, Math.max(10, form.principalMan || 10))}
+                  onChange={(e) => updateForm({ principalMan: Number(e.target.value) })}
+                />
+                <div className="flex w-24 shrink-0 gap-1">
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    min={1}
+                    className="w-full rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                    value={form.principalMan || ""}
+                    onChange={(e) => updateForm({ principalMan: Number(e.target.value) || 0 })}
+                  />
+                  <span className="flex shrink-0 items-center text-xs text-gray-500">万</span>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {QUICK_PRINCIPAL.map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => updateForm({ principalMan: v })}
+                    className={`rounded-xl px-2.5 py-1 text-xs font-bold ${form.principalMan === v ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                  >
+                    {v}万
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="space-y-1">
               <label className="block text-xs font-black text-gray-700">返済開始年月</label>
@@ -239,7 +269,16 @@ export default function Page() {
               <select
                 className="w-full rounded-2xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/20"
                 value={form.method}
-                onChange={(e) => updateForm({ method: e.target.value as RepaymentMethod })}
+                onChange={(e) => {
+                  const m = e.target.value as RepaymentMethod;
+                  if (m === "fixed_payment" && form.monthlyPayment == null) {
+                    updateForm({ method: m, monthlyPayment: 25000 });
+                  } else if (m === "fixed_principal" && form.monthlyPrincipal == null) {
+                    updateForm({ method: m, monthlyPrincipal: 20000 });
+                  } else {
+                    updateForm({ method: m });
+                  }
+                }}
               >
                 {Object.entries(REPAYMENT_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>{v}</option>
@@ -247,45 +286,127 @@ export default function Page() {
               </select>
             </div>
             {(form.method === "equal_payment" || form.method === "equal_principal") && (
-              <div className="space-y-1">
-                <label className="block text-xs font-black text-gray-700">返済期間（年）</label>
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min={0.5}
-                  step={0.5}
-                  className="w-full rounded-2xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/20"
-                  value={form.years}
-                  onChange={(e) => updateForm({ years: Number(e.target.value) || 1 })}
-                />
+              <div className="space-y-2">
+                <label className="block text-xs font-black text-gray-700">返済期間</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={1}
+                    max={30}
+                    step={1}
+                    className="flex-1"
+                    value={Math.min(30, Math.max(1, form.years || 5))}
+                    onChange={(e) => updateForm({ years: Number(e.target.value) })}
+                  />
+                  <div className="flex w-16 shrink-0 gap-1">
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      min={0.5}
+                      step={0.5}
+                      className="w-full rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                      value={form.years || ""}
+                      onChange={(e) => updateForm({ years: Number(e.target.value) || 1 })}
+                    />
+                    <span className="flex shrink-0 items-center text-xs text-gray-500">年</span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {QUICK_YEARS.map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => updateForm({ years: v })}
+                      className={`rounded-xl px-2.5 py-1 text-xs font-bold ${form.years === v ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                    >
+                      {v}年
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
             {form.method === "fixed_payment" && (
-              <div className="space-y-1">
-                <label className="block text-xs font-black text-gray-700">毎月返済額（円）</label>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={1}
-                  className="w-full rounded-2xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/20"
-                  value={form.monthlyPayment ?? ""}
-                  placeholder="例: 25000"
-                  onChange={(e) => updateForm({ monthlyPayment: e.target.value ? Number(e.target.value) : null })}
-                />
+              <div className="space-y-2">
+                <label className="block text-xs font-black text-gray-700">毎月返済額</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={5000}
+                    max={100000}
+                    step={5000}
+                    className="flex-1"
+                    value={Math.min(100000, Math.max(5000, form.monthlyPayment ?? 25000))}
+                    onChange={(e) => updateForm({ monthlyPayment: Number(e.target.value) })}
+                  />
+                  <div className="flex w-24 shrink-0 gap-1">
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min={1}
+                      className="w-full rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                      value={form.monthlyPayment ?? ""}
+                      onChange={(e) => updateForm({ monthlyPayment: e.target.value ? Number(e.target.value) : null })}
+                    />
+                    <span className="flex shrink-0 items-center text-xs text-gray-500">円</span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[1, 2, 3, 5, 10].map((v) => {
+                    const amt = v * 10000;
+                    return (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => updateForm({ monthlyPayment: amt })}
+                        className={`rounded-xl px-2.5 py-1 text-xs font-bold ${form.monthlyPayment === amt ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                      >
+                        {v}万円
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
             {form.method === "fixed_principal" && (
-              <div className="space-y-1">
-                <label className="block text-xs font-black text-gray-700">毎月元金（円）</label>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={1}
-                  className="w-full rounded-2xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900/20"
-                  value={form.monthlyPrincipal ?? ""}
-                  placeholder="例: 20000"
-                  onChange={(e) => updateForm({ monthlyPrincipal: e.target.value ? Number(e.target.value) : null })}
-                />
+              <div className="space-y-2">
+                <label className="block text-xs font-black text-gray-700">毎月元金</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={5000}
+                    max={100000}
+                    step={5000}
+                    className="flex-1"
+                    value={Math.min(100000, Math.max(5000, form.monthlyPrincipal ?? 20000))}
+                    onChange={(e) => updateForm({ monthlyPrincipal: Number(e.target.value) })}
+                  />
+                  <div className="flex w-24 shrink-0 gap-1">
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min={1}
+                      className="w-full rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                      value={form.monthlyPrincipal ?? ""}
+                      onChange={(e) => updateForm({ monthlyPrincipal: e.target.value ? Number(e.target.value) : null })}
+                    />
+                    <span className="flex shrink-0 items-center text-xs text-gray-500">円</span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[1, 2, 3, 5, 10].map((v) => {
+                    const amt = v * 10000;
+                    return (
+                      <button
+                        key={v}
+                        type="button"
+                        onClick={() => updateForm({ monthlyPrincipal: amt })}
+                        className={`rounded-xl px-2.5 py-1 text-xs font-bold ${form.monthlyPrincipal === amt ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                      >
+                        {v}万円
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
@@ -297,6 +418,44 @@ export default function Page() {
                 + 追加
               </button>
             </div>
+            <div className="mt-2 flex items-center gap-3">
+              <input
+                type="range"
+                min={1}
+                max={20}
+                step={0.5}
+                className="flex-1"
+                value={Math.min(20, Math.max(1, form.rateSteps[0]?.rate ?? 15))}
+                onChange={(e) =>
+                  setForm((prev) => {
+                    const next = [...prev.rateSteps];
+                    if (next[0]) next[0] = { ...next[0], rate: Number(e.target.value) };
+                    return { ...prev, rateSteps: next };
+                  })
+                }
+              />
+              <span className="w-12 shrink-0 text-right text-sm font-bold">
+                {form.rateSteps[0]?.rate ?? 15}%
+              </span>
+            </div>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {QUICK_RATE.map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() =>
+                    setForm((prev) => {
+                      const next = [...prev.rateSteps];
+                      if (next[0]) next[0] = { ...next[0], rate: v };
+                      return { ...prev, rateSteps: next };
+                    })
+                  }
+                  className={`rounded-xl px-2.5 py-1 text-xs font-bold ${form.rateSteps[0]?.rate === v ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                >
+                  {v}%
+                </button>
+              ))}
+            </div>
             <div className="mt-2 space-y-2">
               {form.rateSteps.map((r, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -304,7 +463,7 @@ export default function Page() {
                   <input
                     type="number"
                     min={1}
-                    className="w-20 rounded-xl border border-gray-200 px-2 py-1.5 text-sm"
+                    className="w-20 rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
                     value={r.fromMonth}
                     onChange={(e) =>
                       setForm((prev) => {
@@ -342,47 +501,90 @@ export default function Page() {
 
           <div>
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-black text-gray-700">ボーナス返済（月指定・円）</label>
+              <label className="block text-xs font-black text-gray-700">ボーナス返済（月指定）</label>
               <button type="button" onClick={addBonus} className="text-xs font-black text-gray-600 hover:underline">
                 + 追加
               </button>
             </div>
-            <div className="mt-2 space-y-2">
+            <div className="mt-2 space-y-3">
               {form.bonusPayments.map((b, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <select
-                    className="rounded-xl border border-gray-200 px-2 py-1.5 text-sm"
-                    value={b.month}
-                    onChange={(e) =>
-                      setForm((prev) => {
-                        const next = [...prev.bonusPayments];
-                        next[i] = { ...next[i], month: Number(e.target.value) };
-                        return { ...prev, bonusPayments: next };
-                      })
-                    }
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => (
-                      <option key={m} value={m}>{m}月</option>
-                    ))}
-                  </select>
-                  <input
-                    type="number"
-                    min={0}
-                    className="w-28 rounded-xl border border-gray-200 px-2 py-1.5 text-sm"
-                    value={b.amount || ""}
-                    placeholder="金額"
-                    onChange={(e) =>
-                      setForm((prev) => {
-                        const next = [...prev.bonusPayments];
-                        next[i] = { ...next[i], amount: Number(e.target.value) || 0 };
-                        return { ...prev, bonusPayments: next };
-                      })
-                    }
-                  />
-                  <span className="text-xs text-gray-500">円</span>
-                  <button type="button" onClick={() => removeBonus(i)} className="text-xs text-red-600 hover:underline">
-                    削除
-                  </button>
+                <div key={i} className="flex flex-col gap-2 rounded-xl border border-gray-100 bg-gray-50/50 p-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <select
+                      className="rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-900"
+                      value={b.month}
+                      onChange={(e) =>
+                        setForm((prev) => {
+                          const next = [...prev.bonusPayments];
+                          next[i] = { ...next[i], month: Number(e.target.value) };
+                          return { ...prev, bonusPayments: next };
+                        })
+                      }
+                    >
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => (
+                        <option key={m} value={m}>{m}月</option>
+                      ))}
+                    </select>
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="number"
+                        min={0}
+                        inputMode="numeric"
+                        placeholder="100000"
+                        className="w-24 rounded-xl border border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                        value={b.amount || ""}
+                        onChange={(e) =>
+                          setForm((prev) => {
+                            const next = [...prev.bonusPayments];
+                            next[i] = { ...next[i], amount: Number(e.target.value) || 0 };
+                            return { ...prev, bonusPayments: next };
+                          })
+                        }
+                      />
+                      <span className="text-xs text-gray-500">円</span>
+                    </div>
+                    <div className="flex gap-1">
+                      {[5, 10, 20, 50].map((v) => {
+                        const amt = v * 10000;
+                        return (
+                          <button
+                            key={v}
+                            type="button"
+                            onClick={() =>
+                              setForm((prev) => {
+                                const next = [...prev.bonusPayments];
+                                next[i] = { ...next[i], amount: amt };
+                                return { ...prev, bonusPayments: next };
+                              })
+                            }
+                            className={`rounded-lg px-2 py-1 text-xs font-bold ${b.amount === amt ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"}`}
+                          >
+                            {v}万
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <button type="button" onClick={() => removeBonus(i)} className="ml-auto text-xs text-red-600 hover:underline">
+                      削除
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="range"
+                      min={0}
+                      max={500000}
+                      step={10000}
+                      className="flex-1"
+                      value={Math.min(500000, Math.max(0, b.amount || 0))}
+                      onChange={(e) =>
+                        setForm((prev) => {
+                          const next = [...prev.bonusPayments];
+                          next[i] = { ...next[i], amount: Number(e.target.value) };
+                          return { ...prev, bonusPayments: next };
+                        })
+                      }
+                    />
+                  </div>
                 </div>
               ))}
             </div>
