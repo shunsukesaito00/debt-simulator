@@ -10,7 +10,7 @@ const links = [
 export default function FooterNav() {
   return (
     <footer className="border-t border-gray-200 bg-white">
-      <div className="mx-auto w-full max-w-6xl px-4 py-8 md:px-6">
+      <div className="mx-auto w-full max-w-4xl px-3 py-5 md:px-4">
         <div className="flex flex-wrap items-center gap-3">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="text-sm font-black text-gray-700 hover:underline">

@@ -18,7 +18,7 @@ export default function HeaderNav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+      <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-3 py-2 md:px-4">
         <Link href="/" className="shrink-0 font-black text-gray-900">
           借入返済シミュレーター
         </Link>

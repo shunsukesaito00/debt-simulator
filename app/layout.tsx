@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HeaderNav />
 
         {/* ヘッダ固定分の余白 */}
-        <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-24 md:px-6">
+        <main className="mx-auto w-full max-w-5xl px-4 pb-12 pt-20 md:px-6">
           {children}
         </main>
 
