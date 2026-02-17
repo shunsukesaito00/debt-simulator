@@ -1,7 +1,17 @@
-export function AdSlot({ className = "" }: { className?: string }) {
-  // 審査中は広告を一切表示しない
-  if (process.env.NEXT_PUBLIC_SHOW_ADS !== "1") return null;
+"use client";
 
-  // 将来 AdSense を入れるときの挿入ポイント（今は空の箱）
-  return <div className={className} aria-label="advertisement" />;
+export default function AdSlot({
+  className = "",
+}: {
+  className?: string;
+}) {
+  const enabled = process.env.NEXT_PUBLIC_ADS_ENABLED === "1";
+  if (!enabled) return null;
+
+  // 合格後にここへ AdSense の実コードを入れる想定
+  return (
+    <div className={className} aria-label="広告">
+      {/* AdSense code goes here */}
+    </div>
+  );
 }
