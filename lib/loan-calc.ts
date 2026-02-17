@@ -116,6 +116,8 @@ export function calcLoan(input: CalcInput): CalcResult {
   // 定額系の場合は月額が決まっている
   let fixedMonthlyPayment: number | null = null;
   let fixedMonthlyPrincipal: number | null = null;
+  let lastRateForEqualPayment: number | null = null; // 元利均等: 直近で使用した金利
+  const totalMonths = method === "equal_payment" || method === "equal_principal" ? (input.months ?? 0) : 0;
 
   if (method === "equal_payment" || method === "equal_principal") {
     const months = input.months ?? 0;
@@ -123,16 +125,22 @@ export function calcLoan(input: CalcInput): CalcResult {
     if (months > maxMonths) return { ok: false, error: `返済回数は${maxMonths}回以内で指定してください。` };
   }
 
+  /** 元利均等: 残高・金利・残月数から毎月返済額を算出 */
+  function calcEqualPaymentAmount(
+    remainingBalance: number,
+    annualRatePercent: number,
+    remainingMonths: number
+  ): number {
+    if (remainingMonths <= 0) return 0;
+    const monthlyRate = (annualRatePercent / 100) / 12;
+    if (monthlyRate === 0) return remainingBalance / remainingMonths;
+    const factor = Math.pow(1 + monthlyRate, remainingMonths);
+    return (remainingBalance * monthlyRate * factor) / (factor - 1);
+  }
+
   if (method === "equal_payment") {
-    const months = input.months!;
-    const r = getRateAtMonth(rateSteps, 1);
-    const monthlyRate = (r / 100) / 12;
-    if (monthlyRate === 0) {
-      fixedMonthlyPayment = principal / months;
-    } else {
-      const factor = Math.pow(1 + monthlyRate, months);
-      fixedMonthlyPayment = (principal * monthlyRate * factor) / (factor - 1);
-    }
+    // 毎月返済額はループ内で金利変更のたびに再計算する（初期値はループ開始時に設定）
+    fixedMonthlyPayment = null; // ループ内で設定
   }
 
   if (method === "equal_principal") {
@@ -160,8 +168,15 @@ export function calcLoan(input: CalcInput): CalcResult {
     let payment: number;
     let principalPaid: number;
 
-    if (method === "equal_payment" && fixedMonthlyPayment !== null) {
-      payment = Math.round(fixedMonthlyPayment);
+    if (method === "equal_payment") {
+      // 金利が変わったとき（または初回）は残高・残期間・新金利で毎月返済額を再計算
+      const remainingMonths = Math.max(1, totalMonths - (rowIndex - 1));
+      const rateChanged = lastRateForEqualPayment !== null && lastRateForEqualPayment !== annualRate;
+      if (rateChanged || lastRateForEqualPayment === null) {
+        fixedMonthlyPayment = calcEqualPaymentAmount(balance, annualRate, remainingMonths);
+        lastRateForEqualPayment = annualRate;
+      }
+      payment = Math.round(fixedMonthlyPayment!);
       principalPaid = payment - interest;
     } else if (method === "equal_principal" && fixedMonthlyPrincipal !== null) {
       principalPaid = Math.min(Math.round(fixedMonthlyPrincipal), balance);
