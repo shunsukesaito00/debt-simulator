@@ -17,6 +17,20 @@ export default function Page() {
         </section>
 
         <section>
+          <h2 className="text-base font-black text-gray-900">端数処理</h2>
+          <p className="mt-2">
+            利息計算の端数は切り捨て（円未満）で行っています。金融機関の約定（四捨五入・切り上げ等）とは異なる場合があります。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-black text-gray-900">最終月の調整</h2>
+          <p className="mt-2">
+            最終月は過払いにならないよう、支払額を調整しています。通常返済＋追加返済の合計が残高＋利息を超える場合は、超過分を減額して残高0で完済する形で計算しています。
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-base font-black text-gray-900">返済方式</h2>
           <div className="mt-2 grid gap-3">
             <div>

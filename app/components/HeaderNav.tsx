@@ -42,8 +42,6 @@ export default function HeaderNav() {
           })}
         </nav>
 
-        {/* モバイルはヘッダ右に最低限（スマホは「とりあえずいい」方針） */}
-        <div className="md:hidden text-xs font-black text-gray-500">MenuはPC最適</div>
       </div>
     </header>
   );
