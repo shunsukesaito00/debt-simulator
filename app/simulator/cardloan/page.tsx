@@ -4,9 +4,9 @@ import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   calcLoan,
-  type BonusPayment,
   type CalcInput,
   type CalcResult,
+  type ExtraPayment,
   type RateStep,
   type RepaymentMethod,
 } from "@/lib/loan-calc";
@@ -35,9 +35,20 @@ function toCalcInput(form: FormState): CalcInput {
     fromMonth: r.fromMonth,
     annualRatePercent: r.rate,
   }));
-  const bonusPayments: BonusPayment[] = form.bonusPayments
-    .filter((b) => b.amount > 0)
-    .map((b) => ({ month: b.month, amount: b.amount }));
+
+  const extraPayments: ExtraPayment[] = [];
+  if (form.extraEnabled) {
+    const startYyyymm = form.startYear * 100 + form.startMonth;
+    if (form.monthlyExtraAmount > 0) {
+      extraPayments.push({ type: "monthly", amount: form.monthlyExtraAmount, startYyyymm });
+    }
+    for (const o of form.oneTimeExtras.filter((x) => x.amount > 0)) {
+      extraPayments.push({ type: "oneTime", yyyymm: o.year * 100 + o.month, amount: o.amount });
+    }
+    for (const b of form.bonusPayments.filter((x) => x.amount > 0)) {
+      extraPayments.push({ type: "bonus", month: b.month, amount: b.amount });
+    }
+  }
 
   const base: CalcInput = {
     principal: form.principalMan * 10000,
@@ -45,7 +56,7 @@ function toCalcInput(form: FormState): CalcInput {
     startMonth: form.startMonth,
     method: form.method,
     rateSteps,
-    bonusPayments,
+    extraPayments,
   };
 
   if (form.method === "equal_payment" || form.method === "equal_principal") {
@@ -67,6 +78,9 @@ type FormState = {
   bonusPayments: { month: number; amount: number }[];
   monthlyPayment: number | null;
   monthlyPrincipal: number | null;
+  extraEnabled: boolean;
+  monthlyExtraAmount: number;
+  oneTimeExtras: { year: number; month: number; amount: number }[];
 };
 
 const DEFAULT_FORM: FormState = {
@@ -79,6 +93,9 @@ const DEFAULT_FORM: FormState = {
   bonusPayments: [],
   monthlyPayment: null,
   monthlyPrincipal: null,
+  extraEnabled: false,
+  monthlyExtraAmount: 0,
+  oneTimeExtras: [],
 };
 
 function RepaymentChart({ result, className }: { result: CalcResult; className?: string }) {
@@ -141,7 +158,7 @@ function RepaymentChart({ result, className }: { result: CalcResult; className?:
 
 function downloadCsv(result: CalcResult, label: string) {
   if (!result.ok) return;
-  const headers = ["年月", "年利(%)", "支払", "利息", "元金", "ボーナス返済", "残高"];
+  const headers = ["年月", "年利(%)", "支払", "利息", "元金", "追加返済", "残高"];
   const rows = result.schedule.map((r) =>
     [`${r.year}/${r.month}`, r.annualRatePercent, r.payment, r.interest, r.principal, r.bonus, r.balance].join(",")
   );
@@ -157,8 +174,14 @@ function downloadCsv(result: CalcResult, label: string) {
 
 export default function Page() {
   const [formA, setFormA] = useState<FormState>(DEFAULT_FORM);
-  const [formB, setFormB] = useState<FormState>({ ...DEFAULT_FORM, principalMan: 80 });
+  const [formB, setFormB] = useState<FormState>({
+    ...DEFAULT_FORM,
+    principalMan: 100,
+    extraEnabled: true,
+    monthlyExtraAmount: 5000,
+  });
   const [activeTab, setActiveTab] = useState<"A" | "B">("A");
+  const [extraTab, setExtraTab] = useState<"monthly" | "oneTime" | "bonus">("monthly");
 
   const resultA = useMemo(() => calcLoan(toCalcInput(formA)), [formA]);
   const resultB = useMemo(() => calcLoan(toCalcInput(formB)), [formB]);
@@ -194,6 +217,19 @@ export default function Page() {
 
   const removeBonus = useCallback(
     (i: number) => setForm((prev) => ({ ...prev, bonusPayments: prev.bonusPayments.filter((_, j) => j !== i) })),
+    [setForm]
+  );
+
+  const addOneTime = useCallback(() => {
+    const startYyyymm = form.startYear * 100 + form.startMonth;
+    setForm((prev) => ({
+      ...prev,
+      oneTimeExtras: [...prev.oneTimeExtras, { year: form.startYear, month: form.startMonth, amount: 100000 }],
+    }));
+  }, [form.startYear, form.startMonth, setForm]);
+
+  const removeOneTime = useCallback(
+    (i: number) => setForm((prev) => ({ ...prev, oneTimeExtras: prev.oneTimeExtras.filter((_, j) => j !== i) })),
     [setForm]
   );
 
@@ -448,71 +484,195 @@ return { ...prev, rateSteps: next };
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center gap-3 min-h-12">
-              <span className="w-24 shrink-0 text-base font-bold text-gray-800">ボーナス</span>
-              <button type="button" onClick={addBonus} className="text-sm font-bold text-gray-600 hover:underline">
-                +追加
+              <span className="w-24 shrink-0 text-base font-bold text-gray-800">追加返済</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={form.extraEnabled}
+                onClick={() => updateForm({ extraEnabled: !form.extraEnabled })}
+                className={`relative inline-flex h-7 w-12 shrink-0 rounded-full transition-colors ${form.extraEnabled ? "bg-gray-900" : "bg-gray-200"}`}
+              >
+                <span className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${form.extraEnabled ? "translate-x-6" : "translate-x-1"} mt-1`} />
               </button>
+              <span className="text-sm text-gray-600">{form.extraEnabled ? "ON" : "OFF"}</span>
             </div>
-            {form.bonusPayments.map((b, i) => (
-              <div key={i} className="flex items-center gap-3 min-h-12 pl-6">
-                <select
-                  className="w-16 shrink-0 rounded-lg border-2 border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
-                  value={b.month}
-                  onChange={(e) =>
-                    setForm((prev) => {
-                      const next = [...prev.bonusPayments];
-                      next[i] = { ...next[i], month: Number(e.target.value) };
-                      return { ...prev, bonusPayments: next };
-                    })
-                  }
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => (
-                    <option key={m} value={m}>{m}月</option>
+            {form.extraEnabled && (
+              <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+                <div className="flex gap-2 border-b border-gray-200 pb-2">
+                  {(["monthly", "oneTime", "bonus"] as const).map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setExtraTab(t)}
+                      className={`rounded-lg px-3 py-1.5 text-sm font-bold ${extraTab === t ? "bg-gray-900 text-white" : "bg-white text-gray-600 hover:bg-gray-100"}`}
+                    >
+                      {t === "monthly" ? "毎月追加" : t === "oneTime" ? "単発追加" : "ボーナス追加"}
+                    </button>
                   ))}
-                </select>
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <input
-                    type="range"
-                    min={0}
-                    max={2000000}
-                    step={10000}
-                    className="min-w-0 flex-1"
-                    value={Math.min(2000000, Math.max(0, b.amount || 0))}
-                      onChange={(e) =>
-                        setForm((prev) => {
-                          const next = [...prev.bonusPayments];
-                          next[i] = { ...next[i], amount: Number(e.target.value) };
-                          return { ...prev, bonusPayments: next };
-                        })
-                      }
-                    />
-                  <div className="flex min-w-[7rem] shrink-0 items-center gap-0.5">
-                    <input
-                      type="number"
-                      min={0}
-                      max={2000000}
-                      inputMode="numeric"
-                      placeholder="0"
-                      className="min-w-[5.5rem] w-24 rounded-xl border-2 border-gray-200 px-3 py-2 text-base outline-none focus:border-gray-900"
-                      value={b.amount || ""}
-                      onChange={(e) =>
-                        setForm((prev) => {
-                          const next = [...prev.bonusPayments];
-                          next[i] = { ...next[i], amount: Number(e.target.value) || 0 };
-                          return { ...prev, bonusPayments: next };
-                        })
-                      }
-                    />
-                    <span className="text-sm text-gray-600">円</span>
-                  </div>
                 </div>
-                <button type="button" onClick={() => removeBonus(i)} className="shrink-0 text-sm text-red-600 hover:underline">
-                  削除
-                </button>
+                {extraTab === "monthly" && (
+                  <div className="mt-3 flex items-center gap-3 min-h-12">
+                    <label className="w-28 shrink-0 text-sm font-bold text-gray-800">毎月追加額</label>
+                    <div className="flex min-w-0 flex-1 items-center gap-2">
+                      <input
+                        type="range"
+                        min={0}
+                        max={100000}
+                        step={5000}
+                        className="min-w-0 flex-1"
+                        value={Math.min(100000, Math.max(0, form.monthlyExtraAmount || 0))}
+                        onChange={(e) => updateForm({ monthlyExtraAmount: Number(e.target.value) })}
+                      />
+                      <div className="flex min-w-[7rem] shrink-0 items-center gap-0.5">
+                        <input
+                          type="number"
+                          min={0}
+                          max={100000}
+                          inputMode="numeric"
+                          className="min-w-[5.5rem] w-24 rounded-xl border-2 border-gray-200 px-3 py-2 text-base font-bold outline-none focus:border-gray-900"
+                          value={form.monthlyExtraAmount || ""}
+                          onChange={(e) => updateForm({ monthlyExtraAmount: Number(e.target.value) || 0 })}
+                        />
+                        <span className="text-base font-bold text-gray-600">円</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {extraTab === "oneTime" && (
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-gray-800">単発の追加返済</span>
+                      <button type="button" onClick={addOneTime} className="text-sm font-bold text-gray-600 hover:underline">
+                        +追加
+                      </button>
+                    </div>
+                    {form.oneTimeExtras.map((o, i) => (
+                      <div key={i} className="flex flex-wrap items-center gap-2">
+                        <input
+                          type="number"
+                          min={form.startYear}
+                          max={2100}
+                          className="w-16 rounded-lg border-2 border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                          value={o.year}
+                          onChange={(e) =>
+                            setForm((prev) => {
+                              const next = [...prev.oneTimeExtras];
+                              next[i] = { ...next[i], year: Number(e.target.value) || form.startYear };
+                              return { ...prev, oneTimeExtras: next };
+                            })
+                          }
+                        />
+                        <span className="text-sm text-gray-600">年</span>
+                        <input
+                          type="number"
+                          min={1}
+                          max={12}
+                          className="w-12 rounded-lg border-2 border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                          value={o.month}
+                          onChange={(e) =>
+                            setForm((prev) => {
+                              const next = [...prev.oneTimeExtras];
+                              next[i] = { ...next[i], month: Number(e.target.value) || 1 };
+                              return { ...prev, oneTimeExtras: next };
+                            })
+                          }
+                        />
+                        <span className="text-sm text-gray-600">月</span>
+                        <input
+                          type="number"
+                          min={0}
+                          max={2000000}
+                          inputMode="numeric"
+                          className="w-24 rounded-lg border-2 border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                          value={o.amount || ""}
+                          onChange={(e) =>
+                            setForm((prev) => {
+                              const next = [...prev.oneTimeExtras];
+                              next[i] = { ...next[i], amount: Number(e.target.value) || 0 };
+                              return { ...prev, oneTimeExtras: next };
+                            })
+                          }
+                        />
+                        <span className="text-sm text-gray-600">円</span>
+                        <button type="button" onClick={() => removeOneTime(i)} className="text-sm text-red-600 hover:underline">
+                          削除
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {extraTab === "bonus" && (
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-gray-800">ボーナス返済</span>
+                      <button type="button" onClick={addBonus} className="text-sm font-bold text-gray-600 hover:underline">
+                        +追加
+                      </button>
+                    </div>
+                    {form.bonusPayments.map((b, i) => (
+                      <div key={i} className="flex items-center gap-3 min-h-12">
+                        <select
+                          className="w-16 shrink-0 rounded-lg border-2 border-gray-200 px-2 py-1.5 text-sm outline-none focus:border-gray-900"
+                          value={b.month}
+                          onChange={(e) =>
+                            setForm((prev) => {
+                              const next = [...prev.bonusPayments];
+                              next[i] = { ...next[i], month: Number(e.target.value) };
+                              return { ...prev, bonusPayments: next };
+                            })
+                          }
+                        >
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => (
+                            <option key={m} value={m}>{m}月</option>
+                          ))}
+                        </select>
+                        <div className="flex min-w-0 flex-1 items-center gap-2">
+                          <input
+                            type="range"
+                            min={0}
+                            max={2000000}
+                            step={10000}
+                            className="min-w-0 flex-1"
+                            value={Math.min(2000000, Math.max(0, b.amount || 0))}
+                            onChange={(e) =>
+                              setForm((prev) => {
+                                const next = [...prev.bonusPayments];
+                                next[i] = { ...next[i], amount: Number(e.target.value) };
+                                return { ...prev, bonusPayments: next };
+                              })
+                            }
+                          />
+                          <div className="flex min-w-[7rem] shrink-0 items-center gap-0.5">
+                            <input
+                              type="number"
+                              min={0}
+                              max={2000000}
+                              inputMode="numeric"
+                              placeholder="0"
+                              className="min-w-[5.5rem] w-24 rounded-xl border-2 border-gray-200 px-3 py-2 text-base outline-none focus:border-gray-900"
+                              value={b.amount || ""}
+                              onChange={(e) =>
+                                setForm((prev) => {
+                                  const next = [...prev.bonusPayments];
+                                  next[i] = { ...next[i], amount: Number(e.target.value) || 0 };
+                                  return { ...prev, bonusPayments: next };
+                                })
+                              }
+                            />
+                            <span className="text-sm text-gray-600">円</span>
+                          </div>
+                        </div>
+                        <button type="button" onClick={() => removeBonus(i)} className="shrink-0 text-sm text-red-600 hover:underline">
+                          削除
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            ))}
+            )}
           </div>
         </form>
 
@@ -521,41 +681,62 @@ return { ...prev, rateSteps: next };
         )}
       </section>
 
-      {result.ok && (
+      {(resultA.ok || resultB.ok) && (
         <>
           <div className="grid gap-4 md:grid-cols-2">
             <section className="flex min-h-0 flex-col rounded-xl border border-gray-200 bg-white p-5">
-              <h2 className="text-base font-bold text-gray-900">サマリー（{activeTab}）</h2>
-              <div className="mt-4 grid flex-1 grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm text-gray-500">毎月返済額</div>
-                  <div className="text-xl font-bold">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm text-gray-500">総返済額</div>
-                  <div className="text-xl font-bold">{formatYen(result.totalPayment + result.totalBonus)}</div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm text-gray-500">利息合計</div>
-                  <div className="text-xl font-bold">{formatYen(result.totalInterest)}</div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="text-sm text-gray-500">完済</div>
-                  <div className="text-xl font-bold">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
-                </div>
+              <h2 className="text-base font-bold text-gray-900">サマリー（A/B 比較）</h2>
+              <div className="mt-4 grid flex-1 grid-cols-3 gap-3 text-sm">
+                <div className="text-xs text-gray-500 font-medium">項目</div>
+                <div className={`text-xs font-bold ${activeTab === "A" ? "text-gray-900" : "text-gray-500"}`}>A</div>
+                <div className={`text-xs font-bold ${activeTab === "B" ? "text-gray-900" : "text-gray-500"}`}>B</div>
+                <div className="text-xs text-gray-500">毎月返済額</div>
+                <div>{resultA.ok ? formatYen(resultA.schedule[0]?.payment ?? 0) : "-"}</div>
+                <div>{resultB.ok ? formatYen(resultB.schedule[0]?.payment ?? 0) : "-"}</div>
+                <div className="text-xs text-gray-500">総返済額</div>
+                <div>{resultA.ok ? formatYen(resultA.totalPayment + resultA.totalBonus) : "-"}</div>
+                <div>{resultB.ok ? formatYen(resultB.totalPayment + resultB.totalBonus) : "-"}</div>
+                <div className="text-xs text-gray-500">利息合計</div>
+                <div>{resultA.ok ? formatYen(resultA.totalInterest) : "-"}</div>
+                <div>{resultB.ok ? formatYen(resultB.totalInterest) : "-"}</div>
+                <div className="text-xs text-gray-500">完済</div>
+                <div>{resultA.ok ? `${resultA.finalYear}年${resultA.finalMonth}月（${resultA.months}回）` : "-"}</div>
+                <div>{resultB.ok ? `${resultB.finalYear}年${resultB.finalMonth}月（${resultB.months}回）` : "-"}</div>
+                {resultA.ok && resultB.ok && (
+                  <>
+                    <div className="text-xs text-gray-500 pt-2 border-t border-gray-100">差分（B−A）</div>
+                    <div className="pt-2 border-t border-gray-100" />
+                    <div className="pt-2 border-t border-gray-100" />
+                    <div className="text-xs text-gray-500">総返済額</div>
+                    <div className={`col-span-2 font-bold ${(resultB.totalPayment + resultB.totalBonus) - (resultA.totalPayment + resultA.totalBonus) <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
+                      {formatYen((resultB.totalPayment + resultB.totalBonus) - (resultA.totalPayment + resultA.totalBonus))}
+                    </div>
+                    <div className="text-xs text-gray-500">利息</div>
+                    <div className={`col-span-2 font-bold ${resultB.totalInterest - resultA.totalInterest <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
+                      {formatYen(resultB.totalInterest - resultA.totalInterest)}
+                    </div>
+                    <div className="text-xs text-gray-500">完済月数</div>
+                    <div className={`col-span-2 font-bold ${resultB.months - resultA.months <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
+                      {resultB.months <= resultA.months
+                        ? `${resultA.months - resultB.months}ヶ月短縮`
+                        : `${resultB.months - resultA.months}ヶ月延長`}
+                    </div>
+                  </>
+                )}
               </div>
             </section>
             <section className="flex min-h-0 flex-col rounded-xl border border-gray-200 bg-white p-5">
-              <h2 className="text-base font-bold text-gray-900">推移グラフ</h2>
+              <h2 className="text-base font-bold text-gray-900">推移グラフ（{activeTab}）</h2>
               <div className="mt-3 min-h-[260px] flex-1 w-full">
-                <RepaymentChart result={result} className="w-full" />
+                {result.ok ? <RepaymentChart result={result} className="w-full" /> : <p className="text-sm text-gray-500 py-8">計算結果がありません</p>}
               </div>
             </section>
           </div>
 
+          {result.ok && (
           <section className="rounded-xl border border-gray-200 bg-white p-5">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-gray-900">返済表</h2>
+              <h2 className="text-base font-bold text-gray-900">返済表（{activeTab}）</h2>
               <button
                 type="button"
                 onClick={() => downloadCsv(result, activeTab)}
@@ -573,7 +754,7 @@ return { ...prev, rateSteps: next };
                     <th className="py-2.5 pr-4 text-right">支払</th>
                     <th className="py-2.5 pr-4 text-right">利息</th>
                     <th className="py-2.5 pr-4 text-right">元金</th>
-                    <th className="py-2.5 pr-4 text-right">ボーナス</th>
+                    <th className="py-2.5 pr-4 text-right">追加返済</th>
                     <th className="py-2.5 text-right">残高</th>
                   </tr>
                 </thead>
@@ -593,6 +774,7 @@ return { ...prev, rateSteps: next };
               </table>
             </div>
           </section>
+          )}
 
           {resultA.ok && resultB.ok && (
             <section className="rounded-xl border border-gray-200 bg-white p-5">
