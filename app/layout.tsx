@@ -19,6 +19,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3293510133025826"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-dvh bg-gray-50 text-gray-900">
         {/* 上段固定ヘッダ（ナビをここに固定） */}
         <HeaderNav />
