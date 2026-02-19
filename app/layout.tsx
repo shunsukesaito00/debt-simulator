@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "カードローン等の借入返済を、金利・返済方式・ボーナス返済を加味して試算できます。サマリー/グラフ/返済表/比較/CSVに対応。",
   robots: { index: true, follow: true },
+  verification: {
+    google: "068cd6d5bb52c21b",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
