@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "/",
     "/simulator/cardloan",
+    "/articles/borrow-100-interest",
     "/how-to",
     "/logic",
     "/faq",
