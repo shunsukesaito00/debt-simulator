@@ -95,6 +95,20 @@ export default function Page() {
         />
       </section>
 
+      {/* 知っておきたいこと（記事一覧） */}
+      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <h2 className="text-xl font-black text-gray-900">知っておきたいこと</h2>
+        <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+          返済額や利息の考え方、借入額別の目安などを解説した記事一覧です。シミュレーターとあわせてご活用ください。
+        </p>
+        <Link
+          href="/articles"
+          className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+        >
+          記事一覧を見る <span aria-hidden>→</span>
+        </Link>
+      </section>
+
       {/* Trust / notes */}
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
         <h2 className="text-lg font-black text-gray-900">注意事項</h2>

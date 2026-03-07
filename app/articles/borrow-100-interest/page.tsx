@@ -67,7 +67,7 @@ export default function Page() {
           <ol className="flex flex-wrap items-center gap-1">
             <li><Link href="/" className="hover:underline">トップ</Link></li>
             <li aria-hidden>/</li>
-            <li>記事</li>
+            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
             <li aria-hidden>/</li>
             <li className="text-gray-900 font-bold" aria-current="page">{ARTICLE_TITLE}</li>
           </ol>
@@ -308,9 +308,9 @@ export default function Page() {
             </section>
           </div>
 
-          {/* 関連記事 */}
+          {/* 関連リンク */}
           <section className="mt-10 border-t border-gray-200 pt-8">
-            <h2 className="text-base font-black text-gray-900">関連記事</h2>
+            <h2 className="text-base font-black text-gray-900">関連リンク</h2>
             <ul className="mt-3 flex flex-col gap-2">
               {relatedLinks.map((link) => (
                 <li key={link.href}>
@@ -319,6 +319,11 @@ export default function Page() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/articles" className="text-sm font-bold text-gray-700 hover:underline">
+                  記事一覧へ戻る
+                </Link>
+              </li>
             </ul>
           </section>
         </div>

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const items = [
   { href: "/", label: "トップ" },
   { href: "/simulator/cardloan", label: "カードローン" },
+  { href: "/articles", label: "知っておきたいこと" },
   { href: "/how-to", label: "使い方" },
   { href: "/logic", label: "計算ロジック" },
   { href: "/faq", label: "FAQ" },
