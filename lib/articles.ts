@@ -22,6 +22,13 @@ export const articlesList = [
     title: "リボ払い100万円の利息はいくら？完済までの総支払額をシミュレーション",
     summary:
       "リボ払いで100万円を利用した場合の利息、完済までの期間、総支払額を比較しながら、返済額による違いをわかりやすく解説します。",
+    badge: undefined as string | undefined,
+  },
+  {
+    slug: "repayment-method-difference",
+    title: "元利均等返済と元金均等返済の違いは？4つの返済方式を比較して解説",
+    summary:
+      "元利均等返済と元金均等返済の違いを中心に、定額元利・定額元金も含めた4つの返済方式の特徴や向いている人を比較して解説します。",
     badge: "新着" as string | undefined,
   },
 ] as const;
