@@ -208,7 +208,7 @@ export function getArticlesByCategory(): Map<ArticleCategory, ArticleItem[]> {
   return map;
 }
 
-/** シミュレーターページ下部に表示する関連記事の slug 一覧（3〜5件） */
+/** シミュレーターページ下部に表示する関連記事の slug 一覧（固定表示用） */
 const SIMULATOR_RELATED_SLUGS = [
   "borrow-100-interest",
   "repayment-method-difference",
@@ -217,9 +217,124 @@ const SIMULATOR_RELATED_SLUGS = [
   "revo-100man-15percent-simulation",
 ] as const;
 
-/** シミュレーターページ用の関連記事リスト（タイトル・要約・href） */
+/** シミュレーターページ用の関連記事リスト（固定・条件連動でない場合のフォールバック） */
 export function getArticlesForSimulator(): ArticleItem[] {
   return SIMULATOR_RELATED_SLUGS.map((slug) => getArticle(slug)).filter(
     (a): a is ArticleItem => a != null
   );
+}
+
+/** 条件連動でスコア対象にする記事の slug 一覧 */
+const SIMULATOR_CANDIDATE_SLUGS = [
+  "borrow-100-interest",
+  "borrow-200-monthly-payment",
+  "repayment-method-difference",
+  "fixed-payment-principal-interest-cannot-payoff",
+  "early-repayment-effect",
+  "revo-100-interest",
+  "monthly-50000-how-much-can-borrow",
+  "fixed-monthly-payment-borrowing-reverse-calculator",
+  "monthly-50000-interest-at-15percent",
+  "100man-100months-risk-at-15percent",
+  "revo-100man-15percent-simulation",
+] as const;
+
+/** フォールバックで最低スコアを付与する記事（件数不足時用） */
+const SIMULATOR_FALLBACK_SLUGS = [
+  "repayment-method-difference",
+  "borrow-100-interest",
+  "early-repayment-effect",
+  "revo-100-interest",
+] as const;
+
+/** シミュレーター入力条件（条件連動表示用） */
+export interface SimulatorContext {
+  principalMan: number;
+  method: string;
+  extraEnabled: boolean;
+  years?: number;
+  monthlyPayment?: number | null;
+  monthlyPrincipal?: number | null;
+}
+
+const SCORE_METHOD = 5;
+const SCORE_PRINCIPAL = 4;
+const SCORE_EXTRA = 4;
+const SCORE_MONTHLY = 3;
+const SCORE_FALLBACK = 1;
+
+/** 条件に応じて記事ごとのスコアを計算（安定ソート用に slug の辞書順を二次キーに使う） */
+function scoreArticlesForContext(ctx: SimulatorContext): Map<string, number> {
+  const scores = new Map<string, number>();
+
+  for (const slug of SIMULATOR_CANDIDATE_SLUGS) {
+    scores.set(slug, 0);
+  }
+
+  const { principalMan, method, extraEnabled, monthlyPayment } = ctx;
+
+  // A. 返済方式で優先
+  if (method === "equal_payment" || method === "equal_principal") {
+    scores.set("repayment-method-difference", (scores.get("repayment-method-difference") ?? 0) + SCORE_METHOD);
+  }
+  if (method === "fixed_payment") {
+    scores.set("fixed-payment-principal-interest-cannot-payoff", (scores.get("fixed-payment-principal-interest-cannot-payoff") ?? 0) + SCORE_METHOD);
+  }
+  if (method === "fixed_principal") {
+    scores.set("repayment-method-difference", (scores.get("repayment-method-difference") ?? 0) + SCORE_METHOD - 1);
+    scores.set("fixed-payment-principal-interest-cannot-payoff", (scores.get("fixed-payment-principal-interest-cannot-payoff") ?? 0) + SCORE_METHOD - 1);
+  }
+
+  // B. 借入額で優先
+  if (principalMan <= 120) {
+    scores.set("borrow-100-interest", (scores.get("borrow-100-interest") ?? 0) + SCORE_PRINCIPAL);
+    scores.set("100man-100months-risk-at-15percent", (scores.get("100man-100months-risk-at-15percent") ?? 0) + SCORE_PRINCIPAL);
+  } else if (principalMan <= 250) {
+    scores.set("borrow-200-monthly-payment", (scores.get("borrow-200-monthly-payment") ?? 0) + SCORE_PRINCIPAL);
+    scores.set("monthly-50000-interest-at-15percent", (scores.get("monthly-50000-interest-at-15percent") ?? 0) + SCORE_PRINCIPAL);
+  } else {
+    scores.set("monthly-50000-interest-at-15percent", (scores.get("monthly-50000-interest-at-15percent") ?? 0) + SCORE_PRINCIPAL);
+    scores.set("monthly-50000-how-much-can-borrow", (scores.get("monthly-50000-how-much-can-borrow") ?? 0) + SCORE_PRINCIPAL);
+  }
+
+  // C. 追加返済ONで優先
+  if (extraEnabled) {
+    scores.set("early-repayment-effect", (scores.get("early-repayment-effect") ?? 0) + SCORE_EXTRA);
+  }
+
+  // D. 毎月返済額で優先（定額元利のみ）
+  if (method === "fixed_payment" && monthlyPayment != null) {
+    if (monthlyPayment <= 30000) {
+      scores.set("fixed-payment-principal-interest-cannot-payoff", (scores.get("fixed-payment-principal-interest-cannot-payoff") ?? 0) + SCORE_MONTHLY);
+    }
+    if (monthlyPayment >= 50000) {
+      scores.set("monthly-50000-interest-at-15percent", (scores.get("monthly-50000-interest-at-15percent") ?? 0) + SCORE_MONTHLY);
+    }
+  }
+
+  // E. フォールバック記事に最低スコア（常に何かしら出るように）
+  for (const slug of SIMULATOR_FALLBACK_SLUGS) {
+    scores.set(slug, (scores.get(slug) ?? 0) + SCORE_FALLBACK);
+  }
+
+  return scores;
+}
+
+/** 条件連動でシミュレーター下部に表示する記事を取得（最大5件・スコア降順・同点は slug 昇順で安定） */
+export function getArticlesForSimulatorContext(ctx: SimulatorContext): ArticleItem[] {
+  const scores = scoreArticlesForContext(ctx);
+  const slugsWithScore = SIMULATOR_CANDIDATE_SLUGS.map((slug) => ({
+    slug,
+    score: scores.get(slug) ?? 0,
+  }));
+  slugsWithScore.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.slug.localeCompare(b.slug);
+  });
+  const topSlugs = slugsWithScore.slice(0, 5).map((s) => s.slug);
+  const items = topSlugs.map((slug) => getArticle(slug)).filter((a): a is ArticleItem => a != null);
+  if (items.length === 0) {
+    return SIMULATOR_FALLBACK_SLUGS.map((slug) => getArticle(slug)).filter((a): a is ArticleItem => a != null);
+  }
+  return items;
 }

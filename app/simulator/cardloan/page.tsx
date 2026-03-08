@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
-import { getArticlesForSimulator } from "@/lib/articles";
+import { getArticlesForSimulatorContext, type SimulatorContext } from "@/lib/articles";
 import {
   calcLoan,
   type CalcInput,
@@ -31,13 +31,33 @@ function formatNum(value: number) {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function SimulatorRelatedArticles() {
-  const articles = getArticlesForSimulator();
+type SimulatorRelatedArticlesProps = SimulatorContext;
+
+function SimulatorRelatedArticles({
+  principalMan,
+  method,
+  extraEnabled,
+  years,
+  monthlyPayment,
+  monthlyPrincipal,
+}: SimulatorRelatedArticlesProps) {
+  const articles = useMemo(
+    () =>
+      getArticlesForSimulatorContext({
+        principalMan,
+        method,
+        extraEnabled,
+        years,
+        monthlyPayment,
+        monthlyPrincipal,
+      }),
+    [principalMan, method, extraEnabled, years, monthlyPayment, monthlyPrincipal]
+  );
   if (articles.length === 0) return null;
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-5">
       <h2 className="text-base font-bold text-gray-900">あわせて読みたい</h2>
-      <p className="mt-1 text-sm text-gray-600">返済額・利息・返済方式について解説した記事です。</p>
+      <p className="mt-1 text-sm text-gray-600">現在の入力条件に近い返済方式・利息・返済改善の記事です。</p>
       <ul className="mt-4 space-y-3">
         {articles.map((a) => (
           <li key={a.slug}>
@@ -847,7 +867,14 @@ return { ...prev, rateSteps: next };
         </>
       )}
 
-      <SimulatorRelatedArticles />
+      <SimulatorRelatedArticles
+        principalMan={form.principalMan}
+        method={form.method}
+        extraEnabled={form.extraEnabled}
+        years={form.years}
+        monthlyPayment={form.monthlyPayment}
+        monthlyPrincipal={form.monthlyPrincipal}
+      />
 
       <section className="rounded-xl border border-gray-200 bg-white p-5">
         <div className="text-base font-bold text-gray-900">注意点</div>
