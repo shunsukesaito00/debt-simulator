@@ -36,6 +36,27 @@ export const articlesList = [
     title: "繰り上げ返済の効果とは？利息はいくら減る？返済期間短縮との違いも解説",
     summary:
       "繰り上げ返済をすると何が変わるのかを、利息軽減、完済時期、毎月返済額の違いからわかりやすく解説します。",
+    badge: undefined as string | undefined,
+  },
+  {
+    slug: "fixed-payment-principal-interest-cannot-payoff",
+    title: "定額元利で完済できないのはなぜ？返済額が足りないケースをわかりやすく解説",
+    summary:
+      "定額元利返済で完済できないと言われる理由を、利息と返済額の関係から整理し、具体例・表・グラフでわかりやすく解説します。",
+    badge: undefined as string | undefined,
+  },
+  {
+    slug: "monthly-50000-how-much-can-borrow",
+    title: "借金返済が月5万円ならいくらまで借りられる？返済額から逆算する目安を解説",
+    summary:
+      "毎月5万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較でわかりやすく解説します。",
+    badge: undefined as string | undefined,
+  },
+  {
+    slug: "fixed-monthly-payment-borrowing-reverse-calculator",
+    title: "月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説",
+    summary:
+      "月々の返済額を固定した場合に、返済期間や金利によって借入額の目安がどう変わるかを、表とグラフでわかりやすく解説します。",
     badge: "新着" as string | undefined,
   },
 ] as const;
