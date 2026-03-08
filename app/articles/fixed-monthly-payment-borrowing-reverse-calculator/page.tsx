@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleFooter } from "@/app/components/ArticleFooter";
 import {
   PrincipalByPaymentBarChart,
   InterestByPaymentBarChart,
@@ -50,12 +51,6 @@ const tocItems = [
   { id: "notice", label: "注意点" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
-];
-
-const relatedLinks = [
-  { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられるかを知りたい方はこちら" },
-  { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を知りたい方はこちら" },
-  { href: "/simulator/cardloan", label: "借入返済シミュレーターはこちら" },
 ];
 
 export default function Page() {
@@ -349,23 +344,7 @@ export default function Page() {
             </section>
           </div>
 
-          <section className="mt-10 border-t border-gray-200 pt-8">
-            <h2 className="text-base font-black text-gray-900">関連記事</h2>
-            <ul className="mt-3 flex flex-col gap-2">
-              {relatedLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm font-bold text-gray-700 hover:underline">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link href="/articles" className="text-sm font-bold text-gray-700 hover:underline">
-                  記事一覧へ戻る
-                </Link>
-              </li>
-            </ul>
-          </section>
+          <ArticleFooter articleSlug="fixed-monthly-payment-borrowing-reverse-calculator" />
         </div>
       </article>
     </>

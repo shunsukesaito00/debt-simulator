@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articlesList } from "@/lib/articles";
+import {
+  getArticlesByCategory,
+  ARTICLE_CATEGORIES,
+  CATEGORY_LABELS,
+} from "@/lib/articles";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
@@ -11,10 +15,25 @@ export const metadata: Metadata = {
   alternates: { canonical: `${BASE}/articles` },
 };
 
+const breadcrumbListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "トップ", item: `${BASE}/` },
+    { "@type": "ListItem", position: 2, name: "知っておきたいこと", item: `${BASE}/articles` },
+  ],
+};
+
 export default function ArticlesListPage() {
+  const byCategory = getArticlesByCategory();
+
   return (
     <div className="mx-auto max-w-3xl">
-      {/* パンくず */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbListJsonLd) }}
+      />
+
       <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
@@ -32,32 +51,51 @@ export default function ArticlesListPage() {
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">知っておきたいこと</h1>
         <p className="mt-4 text-sm text-gray-700 leading-relaxed">
-          借入返済やカードローンの利息は、返済期間や金利によって大きく変わります。このページでは、返済額・利息・返済計画の立て方に関する記事をまとめています。気になるテーマからご覧ください。
+          借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。気になるテーマからご覧ください。
         </p>
 
-        <ul className="mt-8 grid gap-5">
-          {articlesList.map((article) => (
-            <li key={article.slug}>
-              <Link
-                href={`/articles/${article.slug}`}
-                className="block rounded-2xl border border-gray-200 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
-              >
-                <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-lg font-black text-gray-900">{article.title}</h2>
-                  {article.badge && (
-                    <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">
-                      {article.badge}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-sm text-gray-600 leading-relaxed">{article.summary}</p>
-                <span className="mt-3 inline-block text-sm font-bold text-gray-700">記事を読む →</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-8 space-y-10">
+          {ARTICLE_CATEGORIES.map((cat) => {
+            const items = byCategory.get(cat);
+            if (!items || items.length === 0) return null;
 
-        {/* 一覧下部 CTA */}
+            const label = CATEGORY_LABELS[cat];
+            const id = cat;
+
+            return (
+              <section key={cat} id={id} className="scroll-mt-24">
+                <h2 className="text-lg font-black text-gray-900 border-b border-gray-200 pb-2">
+                  {label}
+                </h2>
+                <ul className="mt-4 grid gap-5">
+                  {items.map((article) => (
+                    <li key={article.slug}>
+                      <Link
+                        href={`/articles/${article.slug}`}
+                        className="block rounded-2xl border border-gray-200 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                      >
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="rounded-full border border-gray-300 bg-gray-50 px-2.5 py-0.5 text-xs font-bold text-gray-700">
+                            {label}
+                          </span>
+                          {article.badge && (
+                            <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">
+                              {article.badge}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="mt-3 text-lg font-black text-gray-900">{article.title}</h3>
+                        <p className="mt-2 text-sm text-gray-600 leading-relaxed">{article.summary}</p>
+                        <span className="mt-3 inline-block text-sm font-bold text-gray-700">記事を読む →</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
+
         <section className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6">
           <h2 className="text-base font-black text-gray-900">自分の条件で試算する</h2>
           <p className="mt-2 text-sm text-gray-700 leading-relaxed">

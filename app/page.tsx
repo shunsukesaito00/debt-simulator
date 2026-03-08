@@ -99,11 +99,38 @@ export default function Page() {
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h2 className="text-xl font-black text-gray-900">知っておきたいこと</h2>
         <p className="mt-2 text-sm text-gray-700 leading-relaxed">
-          返済額や利息の考え方、借入額別の目安などを解説した記事一覧です。シミュレーターとあわせてご活用ください。
+          借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。シミュレーターとあわせてご活用ください。
         </p>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          <li>
+            <Link href="/articles#loan-amount" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
+              借入額別で調べる
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles#repayment-method" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
+              返済方式を比較する
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles#revolving" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
+              リボ払いを理解する
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles#repayment-improvement" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
+              返済改善を知る
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles#repayment-planning" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
+              逆算・返済計画
+            </Link>
+          </li>
+        </ul>
         <Link
           href="/articles"
-          className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
         >
           記事一覧を見る <span aria-hidden>→</span>
         </Link>
