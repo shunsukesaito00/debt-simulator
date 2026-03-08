@@ -131,6 +131,42 @@ const articlesData: ArticleItem[] = [
       { href: "/simulator/cardloan", label: "借入返済シミュレーターはこちら" },
     ],
   },
+  {
+    slug: "monthly-50000-interest-at-15percent",
+    title: "借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較",
+    summary:
+      "毎月5万円返済・年利15%を前提に、借入額100万円・200万円・300万円で総利息と完済期間がどう変わるかを表とグラフでわかりやすく解説します。",
+    category: "loan-amount",
+    relatedLinks: [
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられるかを知りたい方はこちら" },
+      { href: "/articles/fixed-monthly-payment-borrowing-reverse-calculator", label: "月々返済額から借入額を逆算したい方はこちら" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターはこちら" },
+    ],
+  },
+  {
+    slug: "100man-100months-risk-at-15percent",
+    title: "金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説",
+    summary:
+      "年利15%で100万円を100ヶ月かけて返済すると、毎月返済額は低く見えても総利息は大きく膨らみます。長期返済のリスクを表とグラフでわかりやすく解説します。",
+    category: "loan-amount",
+    relatedLinks: [
+      { href: "/articles/borrow-100-interest", label: "借金100万円の利息・返済額を知りたい方はこちら" },
+      { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を知りたい方はこちら" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターはこちら" },
+    ],
+  },
+  {
+    slug: "revo-100man-15percent-simulation",
+    title: "リボ払い100万円・金利15%の返済シミュレーション｜毎月返済額でどう変わる？",
+    summary:
+      "リボ払い100万円を年利15%で利用した場合、毎月3万円・5万円・7万円返済で完済までの期間、総支払額、総利息がどう変わるかを表とグラフでわかりやすく解説します。",
+    category: "revolving",
+    relatedLinks: [
+      { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息を知りたい方はこちら" },
+      { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を知りたい方はこちら" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターはこちら" },
+    ],
+  },
 ];
 
 /** 記事一覧（従来互換・サイトマップ等で利用） */
