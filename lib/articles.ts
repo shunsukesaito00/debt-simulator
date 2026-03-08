@@ -97,6 +97,21 @@ const articlesData: ArticleItem[] = [
     ],
   },
   {
+    slug: "repayment-improvement-guide",
+    title: "返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説",
+    summary:
+      "返済を軽くする方法を、繰り上げ返済、返済期間、毎月返済額、返済方式の見直しという4つの視点から整理してわかりやすく解説します。",
+    category: "repayment-improvement",
+    order: 0,
+    relatedLinks: [
+      { href: "/articles/early-repayment-effect", label: "繰り上げ返済の効果を詳しく見る" },
+      { href: "/articles/100man-100months-risk-at-15percent", label: "長期返済のリスクを詳しく見る" },
+      { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を見る" },
+      { href: "/articles/repayment-method-difference", label: "返済方式の違いを詳しく見る" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
+    ],
+  },
+  {
     slug: "early-repayment-effect",
     title: "繰り上げ返済の効果とは？利息はいくら減る？返済期間短縮との違いも解説",
     summary:
@@ -198,11 +213,13 @@ export function getArticle(slug: string): ArticleItem | undefined {
   return articlesData.find((a) => a.slug === slug);
 }
 
-/** カテゴリ別に記事をグループ化（表示順はカテゴリ定義順・同一カテゴリ内は登録順） */
+/** カテゴリ別に記事をグループ化（表示順はカテゴリ定義順・同一カテゴリ内は order 昇順→登録順） */
 export function getArticlesByCategory(): Map<ArticleCategory, ArticleItem[]> {
   const map = new Map<ArticleCategory, ArticleItem[]>();
   for (const cat of ARTICLE_CATEGORIES) {
-    const list = articlesData.filter((a) => a.category === cat);
+    const list = articlesData
+      .filter((a) => a.category === cat)
+      .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
     if (list.length > 0) map.set(cat, list);
   }
   return map;
