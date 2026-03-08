@@ -2,7 +2,11 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
-import { getArticlesForSimulatorContext, type SimulatorContext } from "@/lib/articles";
+import {
+  getArticlesForSimulatorContext,
+  getArticlesForRepaymentImprovement,
+  type SimulatorContext,
+} from "@/lib/articles";
 import {
   calcLoan,
   type CalcInput,
@@ -56,14 +60,47 @@ function SimulatorRelatedArticles({
   if (articles.length === 0) return null;
   return (
     <section className="rounded-xl border border-gray-200 bg-white p-5">
-      <h2 className="text-base font-bold text-gray-900">あわせて読みたい</h2>
-      <p className="mt-1 text-sm text-gray-600">現在の入力条件に近い返済方式・利息・返済改善の記事です。</p>
+      <h2 className="text-lg font-black text-gray-900">あわせて読みたい</h2>
+      <p className="mt-1.5 text-sm text-gray-600">いまの入力条件で次に確認すると役立つ記事です。</p>
+      <ul className="mt-4 space-y-3">
+        {articles.map((a, i) => (
+          <li key={a.slug}>
+            <Link
+              href={`/articles/${a.slug}`}
+              className={`block rounded-xl p-4 transition hover:bg-gray-50 ${i === 0 ? "border border-gray-300 bg-gray-50/80" : "border border-gray-100 bg-gray-50/50"}`}
+            >
+              <span className={`font-bold text-gray-900 ${i === 0 ? "text-base" : "text-sm"}`}>{a.title}</span>
+              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link
+        href="/articles"
+        className="mt-4 inline-block text-sm font-bold text-gray-700 hover:underline"
+      >
+        記事一覧を見る →
+      </Link>
+    </section>
+  );
+}
+
+/** 返済を改善したい人向けの固定導線（条件連動の下に表示） */
+function SimulatorRepaymentImprovementBlock() {
+  const articles = useMemo(() => getArticlesForRepaymentImprovement(), []);
+  if (articles.length === 0) return null;
+  return (
+    <section className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+      <h2 className="text-base font-bold text-gray-800">返済を改善したい方へ</h2>
+      <p className="mt-1.5 text-sm text-gray-600">
+        繰り上げ返済や返済方式の見直しで、総利息や完済時期が変わることがあります。いまの返済条件を改善したい方は、こちらの記事もご確認ください。
+      </p>
       <ul className="mt-4 space-y-3">
         {articles.map((a) => (
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="block rounded-xl border border-gray-100 bg-gray-50 p-4 transition hover:bg-gray-100"
+              className="block rounded-xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50"
             >
               <span className="text-sm font-bold text-gray-900">{a.title}</span>
               <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
@@ -288,7 +325,7 @@ export default function Page() {
     <div className="grid gap-5">
       <section className="rounded-xl border border-gray-200 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="text-2xl font-bold md:text-3xl">カードローン返済シミュレーター</h1>
+          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">カードローン返済シミュレーター</h1>
           <div className="flex gap-2">
           <button
             type="button"
@@ -307,9 +344,9 @@ export default function Page() {
           </div>
         </div>
 
-        <form className="mt-4 space-y-3" onSubmit={(e) => e.preventDefault()}>
-          {/* 項目名・スライダー・数値を同行・スライダー右端 */}
-          <div className="flex flex-col gap-3">
+        <form className="mt-5 space-y-5" onSubmit={(e) => e.preventDefault()}>
+          {/* 基本条件 */}
+          <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3 min-h-12">
               <label className="w-24 shrink-0 text-base font-bold text-gray-800">借入金額</label>
               <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -465,7 +502,7 @@ onChange={(e) => updateForm({ monthlyPrincipal: Number(e.target.value) })}
             )}
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 pt-1 border-t border-gray-100">
             <div className="flex items-center gap-3 min-h-12">
               <label className="w-24 shrink-0 text-base font-bold text-gray-800">金利</label>
               <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -535,7 +572,7 @@ return { ...prev, rateSteps: next };
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className={`space-y-3 pt-1 border-t border-gray-100 ${form.extraEnabled ? "rounded-xl bg-gray-50/80 p-4 -mx-1" : ""}`}>
             <div className="flex items-center gap-3 min-h-12">
               <span className="w-24 shrink-0 text-base font-bold text-gray-800">追加返済</span>
               <button
@@ -736,7 +773,28 @@ return { ...prev, rateSteps: next };
         <>
           <div className="grid gap-4 md:grid-cols-2">
             <section className="flex min-h-0 flex-col rounded-xl border border-gray-200 bg-white p-5">
-              <h2 className="text-base font-bold text-gray-900">サマリー（A/B 比較）</h2>
+              <h2 className="text-lg font-black text-gray-900">サマリー（A/B 比較）</h2>
+              {/* 選択中タブの主要指標を数字の主役として表示 */}
+              {result.ok && (
+                <div className="mt-4 grid grid-cols-2 gap-3 rounded-xl border border-gray-200 bg-gray-50/80 p-4">
+                  <div>
+                    <div className="text-xs font-bold text-gray-500">毎月返済額</div>
+                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500">総返済額</div>
+                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.totalPayment + result.totalBonus)}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500">利息合計</div>
+                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.totalInterest)}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-gray-500">完済</div>
+                    <div className="mt-0.5 text-base font-black text-gray-900">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
+                  </div>
+                </div>
+              )}
               <div className="mt-4 grid flex-1 grid-cols-3 gap-3 text-sm">
                 <div className="text-xs text-gray-500 font-medium">項目</div>
                 <div className={`text-xs font-bold ${activeTab === "A" ? "text-gray-900" : "text-gray-500"}`}>A</div>
@@ -876,16 +934,18 @@ return { ...prev, rateSteps: next };
         monthlyPrincipal={form.monthlyPrincipal}
       />
 
-      <section className="rounded-xl border border-gray-200 bg-white p-5">
-        <div className="text-base font-bold text-gray-900">注意点</div>
-        <ul className="mt-3 list-disc pl-5 text-sm text-gray-700 space-y-1">
+      <SimulatorRepaymentImprovementBlock />
+
+      <section className="rounded-xl border border-gray-200 bg-gray-50/80 p-5">
+        <div className="text-sm font-bold text-gray-700">注意点</div>
+        <ul className="mt-2 list-disc pl-5 text-xs text-gray-600 leading-relaxed space-y-1">
           <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>
           <li>計算は一般的な月次の近似です。金融機関の計算と差が出る場合があります。</li>
         </ul>
-        <div className="mt-3 flex flex-wrap gap-3">
-          <Link href="/logic" className="text-base font-bold text-gray-700 hover:underline">計算ロジック</Link>
-          <Link href="/faq" className="text-base font-bold text-gray-700 hover:underline">FAQ</Link>
-          <Link href="/how-to" className="text-base font-bold text-gray-700 hover:underline">使い方</Link>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm">
+          <Link href="/logic" className="font-bold text-gray-700 hover:underline">計算ロジック</Link>
+          <Link href="/faq" className="font-bold text-gray-700 hover:underline">FAQ</Link>
+          <Link href="/how-to" className="font-bold text-gray-700 hover:underline">使い方</Link>
         </div>
       </section>
     </div>

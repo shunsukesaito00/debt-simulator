@@ -254,6 +254,7 @@ const SIMULATOR_CANDIDATE_SLUGS = [
   "monthly-50000-interest-at-15percent",
   "100man-100months-risk-at-15percent",
   "revo-100man-15percent-simulation",
+  "repayment-improvement-guide",
 ] as const;
 
 /** フォールバックで最低スコアを付与する記事（件数不足時用） */
@@ -276,7 +277,7 @@ export interface SimulatorContext {
 
 const SCORE_METHOD = 5;
 const SCORE_PRINCIPAL = 4;
-const SCORE_EXTRA = 4;
+const SCORE_EXTRA = 6; /* 追加返済ONのとき「次に読むべき」は繰り上げ記事を最優先 */
 const SCORE_MONTHLY = 3;
 const SCORE_FALLBACK = 1;
 
@@ -302,10 +303,12 @@ function scoreArticlesForContext(ctx: SimulatorContext): Map<string, number> {
     scores.set("fixed-payment-principal-interest-cannot-payoff", (scores.get("fixed-payment-principal-interest-cannot-payoff") ?? 0) + SCORE_METHOD - 1);
   }
 
-  // B. 借入額で優先
+  // B. 借入額で優先（定額元利のときは「100ヶ月リスク」より「完済できない理由」を優先するため 100man は加算しない）
   if (principalMan <= 120) {
     scores.set("borrow-100-interest", (scores.get("borrow-100-interest") ?? 0) + SCORE_PRINCIPAL);
-    scores.set("100man-100months-risk-at-15percent", (scores.get("100man-100months-risk-at-15percent") ?? 0) + SCORE_PRINCIPAL);
+    if (method !== "fixed_payment") {
+      scores.set("100man-100months-risk-at-15percent", (scores.get("100man-100months-risk-at-15percent") ?? 0) + SCORE_PRINCIPAL);
+    }
   } else if (principalMan <= 250) {
     scores.set("borrow-200-monthly-payment", (scores.get("borrow-200-monthly-payment") ?? 0) + SCORE_PRINCIPAL);
     scores.set("monthly-50000-interest-at-15percent", (scores.get("monthly-50000-interest-at-15percent") ?? 0) + SCORE_PRINCIPAL);
@@ -337,15 +340,31 @@ function scoreArticlesForContext(ctx: SimulatorContext): Map<string, number> {
   return scores;
 }
 
-/** 条件連動でシミュレーター下部に表示する記事を取得（最大5件・スコア降順・同点は slug 昇順で安定） */
+/** 同点時の「次に読むべき順」の並び順（小さいほど先に表示） */
+const NEXT_QUESTION_ORDER: Record<string, number> = {
+  "repayment-method-difference": 1,
+  "early-repayment-effect": 2,
+  "borrow-100-interest": 3,
+  "100man-100months-risk-at-15percent": 4,
+  "revo-100-interest": 5,
+  "fixed-payment-principal-interest-cannot-payoff": 6,
+  "borrow-200-monthly-payment": 7,
+  "monthly-50000-interest-at-15percent": 8,
+  "monthly-50000-how-much-can-borrow": 9,
+  "repayment-improvement-guide": 10,
+};
+
+/** 条件連動でシミュレーター下部に表示する記事を取得（最大4件・スコア降順・同点は次に読む順→slug昇順で安定） */
 export function getArticlesForSimulatorContext(ctx: SimulatorContext): ArticleItem[] {
   const scores = scoreArticlesForContext(ctx);
   const slugsWithScore = SIMULATOR_CANDIDATE_SLUGS.map((slug) => ({
     slug,
     score: scores.get(slug) ?? 0,
+    order: NEXT_QUESTION_ORDER[slug] ?? 999,
   }));
   slugsWithScore.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
+    if (a.order !== b.order) return a.order - b.order;
     return a.slug.localeCompare(b.slug);
   });
   const topSlugs = slugsWithScore.slice(0, 5).map((s) => s.slug);
@@ -353,5 +372,19 @@ export function getArticlesForSimulatorContext(ctx: SimulatorContext): ArticleIt
   if (items.length === 0) {
     return SIMULATOR_FALLBACK_SLUGS.map((slug) => getArticle(slug)).filter((a): a is ArticleItem => a != null);
   }
-  return items;
+  return items.slice(0, 5);
+}
+
+/** シミュレーター用「返済を改善したい方へ」ブロックに表示する記事（固定・最大3件・存在するもののみ） */
+const REPAYMENT_IMPROVEMENT_SLUGS = [
+  "early-repayment-effect",
+  "repayment-improvement-guide",
+  "fixed-payment-principal-interest-cannot-payoff",
+  "repayment-method-difference",
+] as const;
+
+export function getArticlesForRepaymentImprovement(): ArticleItem[] {
+  return REPAYMENT_IMPROVEMENT_SLUGS.map((slug) => getArticle(slug))
+    .filter((a): a is ArticleItem => a != null)
+    .slice(0, 3);
 }

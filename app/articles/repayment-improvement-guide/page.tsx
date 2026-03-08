@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { getArticle, type ArticleItem } from "@/lib/articles";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/repayment-improvement-guide`;
@@ -43,11 +44,50 @@ const tocItems = [
   { id: "method-4", label: "方法4｜返済方式を理解して、自分に合う返し方を選ぶ" },
   { id: "compare-table", label: "返済改善の方法を一覧で比べる" },
   { id: "priority", label: "どの改善策を優先すべきか" },
+  { id: "category-read", label: "このカテゴリで読むべき記事" },
   { id: "simulator", label: "迷ったらシミュレーターで比較するのが早い" },
   { id: "notice", label: "注意点" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
+
+/** 返済改善カテゴリで読むべき記事（親記事用ブロック） */
+const CATEGORY_READ_SLUGS = [
+  "early-repayment-effect",
+  "100man-100months-risk-at-15percent",
+  "fixed-payment-principal-interest-cannot-payoff",
+  "revo-100-interest",
+] as const;
+
+function CategoryReadBlock() {
+  const articles = CATEGORY_READ_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
+  if (articles.length === 0) return null;
+  return (
+    <section id="category-read">
+      <h2 className="text-lg font-black text-gray-900 md:text-xl">
+        このカテゴリで読むべき記事
+      </h2>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        返済改善カテゴリでは、次の記事もあわせて読むと理解が深まります。
+      </p>
+      <ul className="mt-4 space-y-3">
+        {articles.map((a) => (
+          <li key={a.slug}>
+            <Link
+              href={`/articles/${a.slug}`}
+              className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-gray-100"
+            >
+              <span className="text-sm font-bold text-gray-900">{a.title}</span>
+              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
 
 const comparisonRows = [
   {
@@ -296,6 +336,8 @@ export default function Page() {
                 一方で、今の返済方式自体が自分に合っていない場合は、そもそもの返し方を見直す方が効果的なこともあります。1つの方法だけを見るのではなく、全体を比較して考えることが重要です。
               </p>
             </section>
+
+            <CategoryReadBlock />
 
             <section id="simulator">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">

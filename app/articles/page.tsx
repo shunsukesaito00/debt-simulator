@@ -51,11 +51,11 @@ export default function ArticlesListPage() {
 
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">知っておきたいこと</h1>
-        <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+        <p className="mt-5 text-sm text-gray-700 leading-relaxed">
           借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。気になるテーマからご覧ください。
         </p>
 
-        <div className="mt-8 space-y-10">
+        <div className="mt-10 space-y-12">
           {ARTICLE_CATEGORIES.map((cat) => {
             const items = byCategory.get(cat);
             if (!items || items.length === 0) return null;
@@ -65,18 +65,18 @@ export default function ArticlesListPage() {
 
             return (
               <section key={cat} id={id} className="scroll-mt-24">
-                <h2 className="text-lg font-black text-gray-900 border-b border-gray-200 pb-2">
+                <h2 className="text-xl font-black text-gray-900 border-b-2 border-gray-200 pb-2">
                   {label}
                 </h2>
-                <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+                <p className="mt-4 text-sm text-gray-700 leading-relaxed">
                   {CATEGORY_DESCRIPTIONS[cat]}
                 </p>
-                <ul className="mt-4 grid gap-5">
-                  {items.map((article) => (
+                <ul className="mt-5 grid gap-5">
+                  {items.map((article, idx) => (
                     <li key={article.slug}>
                       <Link
                         href={`/articles/${article.slug}`}
-                        className="block rounded-2xl border border-gray-200 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className={`block rounded-2xl border p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10 ${idx === 0 ? "border-gray-300 bg-gray-50/50" : "border-gray-200 bg-white"}`}
                       >
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="rounded-full border border-gray-300 bg-gray-50 px-2.5 py-0.5 text-xs font-bold text-gray-700">
@@ -100,14 +100,14 @@ export default function ArticlesListPage() {
           })}
         </div>
 
-        <section className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6">
-          <h2 className="text-base font-black text-gray-900">自分の条件で試算する</h2>
-          <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+        <section className="mt-12 rounded-2xl border-2 border-gray-200 bg-white p-6">
+          <h2 className="text-lg font-black text-gray-900">自分の条件で試算する</h2>
+          <p className="mt-3 text-sm text-gray-700 leading-relaxed">
             借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
           </p>
           <Link
             href="/simulator/cardloan"
-            className="mt-4 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+            className="mt-5 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3.5 text-base font-black text-white hover:opacity-90"
           >
             自分の条件で返済額を試算する →
           </Link>
