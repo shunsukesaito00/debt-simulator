@@ -29,6 +29,13 @@ export const articlesList = [
     title: "元利均等返済と元金均等返済の違いは？4つの返済方式を比較して解説",
     summary:
       "元利均等返済と元金均等返済の違いを中心に、定額元利・定額元金も含めた4つの返済方式の特徴や向いている人を比較して解説します。",
+    badge: undefined as string | undefined,
+  },
+  {
+    slug: "early-repayment-effect",
+    title: "繰り上げ返済の効果とは？利息はいくら減る？返済期間短縮との違いも解説",
+    summary:
+      "繰り上げ返済をすると何が変わるのかを、利息軽減、完済時期、毎月返済額の違いからわかりやすく解説します。",
     badge: "新着" as string | undefined,
   },
 ] as const;
