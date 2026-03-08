@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getArticle, CATEGORY_LABELS } from "@/lib/articles";
 
 const SIMULATOR_HREF = "/simulator/cardloan";
-const SIMULATOR_LABEL = "自分の条件で返済額を試算する";
+const SIMULATOR_LABEL = "借入返済シミュレーターで計算する";
 
 interface ArticleFooterProps {
   /** 記事の slug（関連リンク・カテゴリをここから取得） */

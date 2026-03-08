@@ -21,6 +21,20 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
   "repayment-planning": "逆算・返済計画",
 };
 
+/** 各カテゴリの説明文（/articles のカテゴリ見出し直下に表示） */
+export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
+  "loan-amount":
+    "借入額が100万円、200万円、300万円と増えると、月々返済額・総利息・完済までの期間は大きく変わります。このカテゴリでは、借入額別の返済イメージを整理します。",
+  "repayment-method":
+    "元利均等・元金均等・定額元利・定額元金では、毎月返済額の推移や総利息が変わります。このカテゴリでは返済方式ごとの違いを比較します。",
+  revolving:
+    "リボ払いは毎月の返済額を一定にしやすい一方で、元本が減りにくく利息が重くなりやすい特徴があります。このカテゴリでは、リボ払いの負担を数値で整理します。",
+  "repayment-improvement":
+    "繰り上げ返済や追加返済、返済期間の見直しによって、総利息や完済時期は変わります。このカテゴリでは、返済を改善する考え方を解説します。",
+  "repayment-planning":
+    "毎月いくら返せるかを先に決めて、無理のない借入額や返済期間を考えるのが返済計画の基本です。このカテゴリでは、逆算の考え方を整理します。",
+};
+
 export type ArticleRelatedLink = { href: string; label: string };
 
 export interface ArticleItem {
@@ -148,7 +162,7 @@ const articlesData: ArticleItem[] = [
     title: "金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説",
     summary:
       "年利15%で100万円を100ヶ月かけて返済すると、毎月返済額は低く見えても総利息は大きく膨らみます。長期返済のリスクを表とグラフでわかりやすく解説します。",
-    category: "loan-amount",
+    category: "repayment-improvement",
     relatedLinks: [
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息・返済額を知りたい方はこちら" },
       { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を知りたい方はこちら" },
@@ -192,4 +206,20 @@ export function getArticlesByCategory(): Map<ArticleCategory, ArticleItem[]> {
     if (list.length > 0) map.set(cat, list);
   }
   return map;
+}
+
+/** シミュレーターページ下部に表示する関連記事の slug 一覧（3〜5件） */
+const SIMULATOR_RELATED_SLUGS = [
+  "borrow-100-interest",
+  "repayment-method-difference",
+  "early-repayment-effect",
+  "fixed-payment-principal-interest-cannot-payoff",
+  "revo-100man-15percent-simulation",
+] as const;
+
+/** シミュレーターページ用の関連記事リスト（タイトル・要約・href） */
+export function getArticlesForSimulator(): ArticleItem[] {
+  return SIMULATOR_RELATED_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
 }

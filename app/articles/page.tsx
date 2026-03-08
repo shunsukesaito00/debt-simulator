@@ -4,6 +4,7 @@ import {
   getArticlesByCategory,
   ARTICLE_CATEGORIES,
   CATEGORY_LABELS,
+  CATEGORY_DESCRIPTIONS,
 } from "@/lib/articles";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -67,6 +68,9 @@ export default function ArticlesListPage() {
                 <h2 className="text-lg font-black text-gray-900 border-b border-gray-200 pb-2">
                   {label}
                 </h2>
+                <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+                  {CATEGORY_DESCRIPTIONS[cat]}
+                </p>
                 <ul className="mt-4 grid gap-5">
                   {items.map((article) => (
                     <li key={article.slug}>

@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
+import { getArticlesForSimulator } from "@/lib/articles";
 import {
   calcLoan,
   type CalcInput,
@@ -28,6 +29,36 @@ function formatYen(value: number) {
 function formatNum(value: number) {
   const n = Math.round(value);
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function SimulatorRelatedArticles() {
+  const articles = getArticlesForSimulator();
+  if (articles.length === 0) return null;
+  return (
+    <section className="rounded-xl border border-gray-200 bg-white p-5">
+      <h2 className="text-base font-bold text-gray-900">あわせて読みたい</h2>
+      <p className="mt-1 text-sm text-gray-600">返済額・利息・返済方式について解説した記事です。</p>
+      <ul className="mt-4 space-y-3">
+        {articles.map((a) => (
+          <li key={a.slug}>
+            <Link
+              href={`/articles/${a.slug}`}
+              className="block rounded-xl border border-gray-100 bg-gray-50 p-4 transition hover:bg-gray-100"
+            >
+              <span className="text-sm font-bold text-gray-900">{a.title}</span>
+              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link
+        href="/articles"
+        className="mt-4 inline-block text-sm font-bold text-gray-700 hover:underline"
+      >
+        記事一覧を見る →
+      </Link>
+    </section>
+  );
 }
 
 function toCalcInput(form: FormState): CalcInput {
@@ -815,6 +846,8 @@ return { ...prev, rateSteps: next };
           )}
         </>
       )}
+
+      <SimulatorRelatedArticles />
 
       <section className="rounded-xl border border-gray-200 bg-white p-5">
         <div className="text-base font-bold text-gray-900">注意点</div>

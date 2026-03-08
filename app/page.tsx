@@ -101,30 +101,35 @@ export default function Page() {
         <p className="mt-2 text-sm text-gray-700 leading-relaxed">
           借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。シミュレーターとあわせてご活用ください。
         </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
+        <ul className="mt-4 space-y-3">
           <li>
-            <Link href="/articles#loan-amount" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
-              借入額別で調べる
+            <Link href="/articles#loan-amount" className="block rounded-2xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50">
+              <span className="text-sm font-bold text-gray-900">借入額別で調べる</span>
+              <p className="mt-1 text-xs text-gray-600">借入100万・200万・300万で返済負担がどう変わるかを見る</p>
             </Link>
           </li>
           <li>
-            <Link href="/articles#repayment-method" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
-              返済方式を比較する
+            <Link href="/articles#repayment-method" className="block rounded-2xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50">
+              <span className="text-sm font-bold text-gray-900">返済方式を比較する</span>
+              <p className="mt-1 text-xs text-gray-600">元利均等・元金均等・定額元利・定額元金の違いを整理する</p>
             </Link>
           </li>
           <li>
-            <Link href="/articles#revolving" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
-              リボ払いを理解する
+            <Link href="/articles#revolving" className="block rounded-2xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50">
+              <span className="text-sm font-bold text-gray-900">リボ払いを理解する</span>
+              <p className="mt-1 text-xs text-gray-600">リボ払いの利息や完済期間の重さを確認する</p>
             </Link>
           </li>
           <li>
-            <Link href="/articles#repayment-improvement" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
-              返済改善を知る
+            <Link href="/articles#repayment-improvement" className="block rounded-2xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50">
+              <span className="text-sm font-bold text-gray-900">返済改善を知る</span>
+              <p className="mt-1 text-xs text-gray-600">繰り上げ返済や追加返済の効果を見る</p>
             </Link>
           </li>
           <li>
-            <Link href="/articles#repayment-planning" className="rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-800 hover:bg-gray-50">
-              逆算・返済計画
+            <Link href="/articles#repayment-planning" className="block rounded-2xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50">
+              <span className="text-sm font-bold text-gray-900">逆算・返済計画</span>
+              <p className="mt-1 text-xs text-gray-600">毎月返せる額から借入額・返済期間を考える</p>
             </Link>
           </li>
         </ul>
