@@ -49,6 +49,21 @@ export interface ArticleItem {
 
 const articlesData: ArticleItem[] = [
   {
+    slug: "loan-amount-guide",
+    title: "借入額別に見る返済負担の違い｜100万・200万・300万で比較",
+    summary:
+      "借入額100万円・200万円・300万円で、月々返済額、完済までの期間、総利息がどう変わるかをわかりやすく整理して解説します。",
+    category: "loan-amount",
+    order: 0,
+    relatedLinks: [
+      { href: "/articles/borrow-100-interest", label: "借金100万円の利息を詳しく見る" },
+      { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を詳しく見る" },
+      { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円での総利息を詳しく見る" },
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "返済額から借入額を逆算する" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
+    ],
+  },
+  {
     slug: "borrow-100-interest",
     title: "借金100万円の利息はいくら？年利15%での返済額をシミュレーション",
     summary:
