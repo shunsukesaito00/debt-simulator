@@ -59,7 +59,7 @@ function SimulatorRelatedArticles({
   );
   if (articles.length === 0) return null;
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-5">
+    <section className="rounded-xl border-2 border-gray-200 bg-white p-5">
       <h2 className="text-lg font-black text-gray-900">あわせて読みたい</h2>
       <p className="mt-1.5 text-sm text-gray-600">いまの入力条件で次に確認すると役立つ記事です。</p>
       <ul className="mt-4 space-y-3">
@@ -67,10 +67,11 @@ function SimulatorRelatedArticles({
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className={`block rounded-xl p-4 transition hover:bg-gray-50 ${i === 0 ? "border border-gray-300 bg-gray-50/80" : "border border-gray-100 bg-gray-50/50"}`}
+              className={`block rounded-xl p-4 transition hover:bg-gray-50 ${i === 0 ? "border-2 border-gray-900 bg-gray-100 shadow-md ring-2 ring-gray-900/10" : "border border-gray-100 bg-gray-50/50"}`}
             >
-              <span className={`font-bold text-gray-900 ${i === 0 ? "text-base" : "text-sm"}`}>{a.title}</span>
-              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+              {i === 0 && <span className="mb-1.5 inline-block rounded bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">おすすめ</span>}
+              <span className={`font-bold text-gray-900 block ${i === 0 ? "text-base md:text-lg leading-snug" : "text-sm"}`}>{a.title}</span>
+              <p className={`mt-1 text-gray-600 line-clamp-2 ${i === 0 ? "text-xs md:text-sm" : "text-xs"}`}>{a.summary}</p>
             </Link>
           </li>
         ))}
@@ -90,17 +91,20 @@ function SimulatorRepaymentImprovementBlock() {
   const articles = useMemo(() => getArticlesForRepaymentImprovement(), []);
   if (articles.length === 0) return null;
   return (
-    <section className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-      <h2 className="text-base font-bold text-gray-800">返済を改善したい方へ</h2>
-      <p className="mt-1.5 text-sm text-gray-600">
-        繰り上げ返済や返済方式の見直しで、総利息や完済時期が変わることがあります。いまの返済条件を改善したい方は、こちらの記事もご確認ください。
+    <section className="mt-6 rounded-xl border-2 border-emerald-300 bg-emerald-50/70 p-5" aria-label="返済改善の導線">
+      <div className="flex items-center gap-2">
+        <span className="rounded bg-emerald-600 px-2 py-0.5 text-xs font-bold text-white">改善</span>
+        <h2 className="text-base font-bold text-emerald-900">返済を改善したい方へ</h2>
+      </div>
+      <p className="mt-1.5 text-sm text-emerald-800/90">
+        返済負担を軽くする方法を知りたい方向けです。繰り上げ返済、返済方式の見直し、長期返済のリスク理解に役立つ記事をまとめています。シミュレーター結果を踏まえて、次の行動を考える際の読み物としてご利用ください。
       </p>
       <ul className="mt-4 space-y-3">
         {articles.map((a) => (
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="block rounded-xl border border-gray-200 bg-white p-4 transition hover:bg-gray-50"
+              className="block rounded-xl border border-emerald-200 bg-white p-4 transition hover:bg-emerald-50/50"
             >
               <span className="text-sm font-bold text-gray-900">{a.title}</span>
               <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
@@ -776,22 +780,22 @@ return { ...prev, rateSteps: next };
               <h2 className="text-lg font-black text-gray-900">サマリー（A/B 比較）</h2>
               {/* 選択中タブの主要指標を数字の主役として表示 */}
               {result.ok && (
-                <div className="mt-4 grid grid-cols-2 gap-3 rounded-xl border border-gray-200 bg-gray-50/80 p-4">
+                <div className="mt-4 grid grid-cols-2 gap-4 rounded-2xl border-2 border-gray-900/15 bg-gray-50 p-6 shadow-sm">
                   <div>
-                    <div className="text-xs font-bold text-gray-500">毎月返済額</div>
-                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
+                    <div className="text-xs font-bold uppercase tracking-wide text-gray-500">毎月返済額</div>
+                    <div className="mt-1 text-2xl font-black text-gray-900 md:text-3xl">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-gray-500">総返済額</div>
-                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.totalPayment + result.totalBonus)}</div>
+                    <div className="text-xs font-bold uppercase tracking-wide text-gray-500">総返済額</div>
+                    <div className="mt-1 text-2xl font-black text-gray-900 md:text-3xl">{formatYen(result.totalPayment + result.totalBonus)}</div>
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-gray-500">利息合計</div>
-                    <div className="mt-0.5 text-lg font-black text-gray-900">{formatYen(result.totalInterest)}</div>
+                    <div className="text-xs font-bold uppercase tracking-wide text-gray-500">利息合計</div>
+                    <div className="mt-1 text-xl font-black text-amber-700 md:text-2xl">{formatYen(result.totalInterest)}</div>
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-gray-500">完済</div>
-                    <div className="mt-0.5 text-base font-black text-gray-900">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
+                    <div className="text-xs font-bold uppercase tracking-wide text-gray-500">完済</div>
+                    <div className="mt-1 text-lg font-black text-gray-900 md:text-xl">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
                   </div>
                 </div>
               )}
@@ -849,7 +853,7 @@ return { ...prev, rateSteps: next };
               <button
                 type="button"
                 onClick={() => downloadCsv(result, activeTab)}
-                className="rounded-xl bg-gray-900 px-5 py-2.5 text-sm font-bold text-white hover:opacity-90"
+                className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-gray-600 hover:bg-gray-50"
               >
                 CSVダウンロード
               </button>
@@ -936,7 +940,11 @@ return { ...prev, rateSteps: next };
 
       <SimulatorRepaymentImprovementBlock />
 
-      <section className="rounded-xl border border-gray-200 bg-gray-50/80 p-5">
+      <p className="mt-6 text-sm text-gray-600 leading-relaxed">
+        気になる条件が見つかったら、関連記事で考え方を整理し、自分の条件で再度試算してください。条件別の記事とあわせて確認すると、返済負担の違いがよりわかりやすくなります。
+      </p>
+
+      <section className="mt-6 rounded-xl border border-gray-200 bg-gray-50/80 p-5">
         <div className="text-sm font-bold text-gray-700">注意点</div>
         <ul className="mt-2 list-disc pl-5 text-xs text-gray-600 leading-relaxed space-y-1">
           <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>

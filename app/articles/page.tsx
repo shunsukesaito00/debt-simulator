@@ -10,9 +10,9 @@ import {
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
 export const metadata: Metadata = {
-  title: "知っておきたいこと｜借入返済の知識とシミュレーション記事一覧",
+  title: "知っておきたいこと｜条件別に学ぶ借入返済の比較記事一覧",
   description:
-    "借入返済、利息、返済期間、返済計画に関する解説記事一覧です。借入返済シミュレーターとあわせてご活用ください。",
+    "借入額、返済方式、リボ払い、繰り上げ返済、逆算・返済計画など、返済負担を条件別に整理した記事一覧です。シミュレーターとあわせてご活用ください。",
   alternates: { canonical: `${BASE}/articles` },
 };
 
@@ -52,7 +52,7 @@ export default function ArticlesListPage() {
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">知っておきたいこと</h1>
         <p className="mt-5 text-sm text-gray-700 leading-relaxed">
-          借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。気になるテーマからご覧ください。
+          借入返済の一般論ではなく、条件別の違いを理解するための記事です。借入額別・返済方式別・逆算別など、気になる条件から読み、最後はシミュレーターで自分の条件を確認できます。記事とシミュレーターを行き来しながら判断する前提で整理しています。
         </p>
 
         <div className="mt-10 space-y-12">
@@ -82,6 +82,11 @@ export default function ArticlesListPage() {
                           <span className="rounded-full border border-gray-300 bg-gray-50 px-2.5 py-0.5 text-xs font-bold text-gray-700">
                             {label}
                           </span>
+                          {(article.order === 0) && (
+                            <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-bold text-white">
+                              おすすめ
+                            </span>
+                          )}
                           {article.badge && (
                             <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">
                               {article.badge}
@@ -103,7 +108,7 @@ export default function ArticlesListPage() {
         <section className="mt-12 rounded-2xl border-2 border-gray-200 bg-white p-6">
           <h2 className="text-lg font-black text-gray-900">自分の条件で試算する</h2>
           <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-            借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
+            記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力して、月々返済額・総利息・完済時期を比較してください。
           </p>
           <Link
             href="/simulator/cardloan"

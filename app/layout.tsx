@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | 借入返済シミュレーター",
   },
   description:
-    "カードローン等の借入返済を、金利・返済方式・ボーナス返済を加味して試算できます。サマリー/グラフ/返済表/比較/CSVに対応。",
+    "借入額・金利・返済方式・返済期間をもとに、月々返済額・総利息・完済時期を比較できる返済シミュレーター。条件別の記事とあわせて判断材料を提供します。",
   robots: { index: true, follow: true },
   verification: {
     google: "068cd6d5bb52c21b",

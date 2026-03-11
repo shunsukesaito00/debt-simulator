@@ -1,3 +1,5 @@
+import { SupplementPageFooterLogic } from "@/app/components/SupplementPageFooter";
+
 export const metadata = { title: "計算ロジック" };
 
 export default function Page() {
@@ -68,6 +70,8 @@ export default function Page() {
             本ツールは意思決定の参考情報であり、正確性を保証するものではありません。
           </p>
         </section>
+
+        <SupplementPageFooterLogic />
       </div>
     </div>
   );

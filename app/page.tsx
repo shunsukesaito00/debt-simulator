@@ -3,9 +3,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "トップ",
+  title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
   description:
-    "カードローン等の借入返済を、金利・返済方式・ボーナス返済を加味して試算できます。サマリー/グラフ/返済表/比較/CSVに対応。",
+    "借入額、金利、返済方式、返済期間、追加返済条件をもとに、月々返済額・総利息・完済時期を比較できる返済シミュレーターです。条件別の記事もあわせて確認できます。",
 };
 
 function Card({
@@ -43,7 +43,7 @@ export default function Page() {
             借入返済シミュレーター
           </h1>
           <p className="mt-5 text-base text-gray-700 leading-relaxed md:text-lg">
-            カードローン等の返済を、金利・返済方式・ボーナス返済を加味して試算できます。
+            借入額・金利・返済方式・返済期間を変えて、月々返済額・総利息・完済時期の違いを比較できます。条件別の記事とあわせて、判断しやすく整理しています。
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -68,11 +68,11 @@ export default function Page() {
             </div>
             <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
               <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">できること</div>
-              <div className="mt-1.5 text-sm font-bold text-gray-900">総利息を確認</div>
+              <div className="mt-1.5 text-sm font-bold text-gray-900">総利息と完済時期を確認</div>
             </div>
             <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
               <div className="text-xs font-bold text-gray-500 uppercase tracking-wide">できること</div>
-              <div className="mt-1.5 text-sm font-bold text-gray-900">返済方式を比較</div>
+              <div className="mt-1.5 text-sm font-bold text-gray-900">返済方式・追加返済の差を理解</div>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function Page() {
       <section className="grid gap-5 md:grid-cols-2">
         <Card
           title="カードローン返済シミュレーター"
-          desc="金利・返済方式・ボーナス返済を入力して、完済までの推移（残高/利息/支払）を確認できます。A/B比較、CSV出力に対応。"
+          desc="借入額・金利・返済方式を入力し、条件別に月々返済額・総利息・完済時期を比較できます。A/B比較・CSV出力に対応。"
           href="/simulator/cardloan"
           cta="シミュレーターへ"
         />
@@ -94,11 +94,11 @@ export default function Page() {
         />
       </section>
 
-      {/* 知っておきたいこと（記事一覧） */}
+      {/* 知っておきたいこと（条件別・比較別の記事入口） */}
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h2 className="text-xl font-black text-gray-900 md:text-2xl">知っておきたいこと</h2>
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-          借入返済、利息、返済方式、リボ払い、繰り上げ返済など、返済計画に役立つ記事をカテゴリ別にまとめています。
+          借入額別・返済方式別・逆算別など、条件ごとに返済負担の違いを整理した記事です。気になる条件から読み、シミュレーターで自分の条件を試算すると判断しやすくなります。
         </p>
         <ul className="mt-6 space-y-3">
           <li>

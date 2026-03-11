@@ -1,3 +1,5 @@
+import { SupplementPageFooterHowTo } from "@/app/components/SupplementPageFooter";
+
 export const metadata = { title: "使い方" };
 
 export default function Page() {
@@ -40,6 +42,8 @@ export default function Page() {
             返済表はCSVでダウンロードできます。家計簿やスプレッドシートでの分析に利用できます。
           </p>
         </section>
+
+        <SupplementPageFooterHowTo />
       </div>
     </div>
   );

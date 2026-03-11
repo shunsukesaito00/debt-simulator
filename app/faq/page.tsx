@@ -1,5 +1,6 @@
 // app/faq/page.tsx
 import type { Metadata } from "next";
+import { SupplementPageFooterFaq } from "@/app/components/SupplementPageFooter";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -184,6 +185,8 @@ export default function Page() {
           追加してほしい質問があれば「お問い合わせ」からご連絡ください。
         </p>
       </section>
+
+      <SupplementPageFooterFaq />
     </div>
   );
 }

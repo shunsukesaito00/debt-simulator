@@ -1,0 +1,373 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArticleFooter } from "@/app/components/ArticleFooter";
+import {
+  comparisonTableRows,
+  InterestComparisonBarChart,
+  MonthsComparisonBarChart,
+  PaymentBreakdownCards,
+} from "./EarlyRepayment100kCharts";
+
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+const ARTICLE_URL = `${BASE}/articles/early-repayment-100k-effect`;
+const ARTICLE_TITLE =
+  "繰り上げ返済10万円の効果は？利息はいくら減る？完済時期の違いも解説";
+
+export const metadata: Metadata = {
+  title: ARTICLE_TITLE,
+  description:
+    "10万円の繰り上げ返済で、総利息や完済時期がどれだけ変わるのかを、具体例・比較表・グラフでわかりやすく解説します。",
+  alternates: { canonical: ARTICLE_URL },
+  openGraph: {
+    title: ARTICLE_TITLE,
+    description:
+      "10万円の繰り上げ返済で、総利息や完済時期がどれだけ変わるのかを、具体例・比較表・グラフでわかりやすく解説します。",
+    url: ARTICLE_URL,
+    type: "article",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: ARTICLE_TITLE,
+  description:
+    "10万円の繰り上げ返済で、総利息や完済時期がどれだけ変わるのかを、具体例・比較表・グラフでわかりやすく解説します。",
+  url: ARTICLE_URL,
+  datePublished: "2025-03-08",
+  dateModified: "2025-03-08",
+  author: { "@type": "Organization", name: "借入返済シミュレーター" },
+  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+};
+
+const tocItems = [
+  { id: "conclusion", label: "結論｜繰り上げ返済10万円でも利息と完済時期はちゃんと変わる" },
+  { id: "why", label: "なぜ10万円の繰り上げ返済で利息が減るのか" },
+  { id: "no-extra", label: "繰り上げ返済なしだとどうなるか" },
+  { id: "with-extra", label: "12か月後に10万円繰り上げ返済するとどうなるか" },
+  { id: "compare-table", label: "比較表で見ると効果がわかりやすい" },
+  { id: "chart", label: "グラフで見ると何が変わるか" },
+  { id: "total-payment-note", label: "総支払額の見え方に注意" },
+  { id: "who", label: "10万円の繰り上げ返済が向いている人" },
+  { id: "category", label: "返済改善の中で見るとどういう位置づけか" },
+  { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
+  { id: "notice", label: "注意点" },
+  { id: "faq", label: "よくある質問" },
+  { id: "summary", label: "まとめ" },
+];
+
+export default function Page() {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <article className="mx-auto max-w-3xl">
+        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
+          <ol className="flex flex-wrap items-center gap-1">
+            <li>
+              <Link href="/" className="hover:underline">トップ</Link>
+            </li>
+            <li aria-hidden>/</li>
+            <li>
+              <Link href="/articles" className="hover:underline">知っておきたいこと</Link>
+            </li>
+            <li aria-hidden>/</li>
+            <li className="font-bold text-gray-900" aria-current="page">
+              {ARTICLE_TITLE}
+            </li>
+          </ol>
+        </nav>
+
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
+            {ARTICLE_TITLE}
+          </h1>
+          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+            本記事の比較は、200万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
+          </p>
+
+          <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-sm">
+              {tocItems.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+            <p>
+              繰り上げ返済をした方がよいとはよく言われますが、実際に10万円だけ追加で返済した場合、どれくらいの効果があるのかは気になるところです。まとまったお金を入れても、何がどれだけ変わるのかが見えないと判断しにくいからです。
+            </p>
+            <p>
+              この記事では、200万円・年利15%・5年返済の近似例を使って、返済開始から12か月後に10万円を繰り上げ返済した場合、完済時期、総利息、総支払額がどう変わるかを整理します。最後に、実際の条件を入力して確認できる
+              <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                返済シミュレーター
+              </Link>
+              への導線も用意しています。
+            </p>
+
+            <section id="conclusion">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                結論｜繰り上げ返済10万円でも利息と完済時期はちゃんと変わる
+              </h2>
+              <p className="mt-3">
+                結論から言うと、繰り上げ返済10万円でも効果は十分あります。今回の近似例では、200万円を年利15%で5年返済するケースで、12か月後に10万円を追加返済すると、完済までの期間は約4か月短縮され、総利息は約129,546円減ります。
+              </p>
+              <p className="mt-3">
+                つまり、10万円を前倒しで元本返済に回すことで、その後に発生する利息を減らせるということです。少額に見えても、条件によっては効果は無視できません。
+              </p>
+            </section>
+
+            <section id="why">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                なぜ10万円の繰り上げ返済で利息が減るのか
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済の効果は、元本を早く減らせることにあります。利息は残高に対して発生するため、途中で元本を10万円減らせば、その後の残高が小さくなり、将来発生する利息も減ります。
+              </p>
+              <p className="mt-3">
+                つまり、10万円を払うことで10万円そのものが得になるわけではなく、10万円を早く返したことで「本来払うはずだった利息」を減らせるのが本質です。
+              </p>
+            </section>
+
+            <section id="no-extra">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                繰り上げ返済なしだとどうなるか
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済をしない場合、今回の近似例では毎月返済額は約47,580円、完済までの目安は60か月、総利息は約854,792円です。
+              </p>
+              <p className="mt-3">
+                5年で返し切る設計ですが、利息負担は80万円を超えます。まずはこの通常ケースを基準に見ることで、10万円追加返済の効果がわかりやすくなります。
+              </p>
+            </section>
+
+            <section id="with-extra">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                12か月後に10万円繰り上げ返済するとどうなるか
+              </h2>
+              <p className="mt-3">
+                返済開始から12か月後に10万円を追加返済し、その後も毎月返済額を約47,580円のまま維持すると、完済までの目安は約56か月、総利息は約725,246円になります。
+              </p>
+              <p className="mt-3">
+                通常ケースと比べると、完済まで約4か月短縮され、総利息は約129,546円減ります。10万円の追加返済でも、タイミング次第では十分な改善効果があります。
+              </p>
+            </section>
+
+            <section id="compare-table">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                比較表で見ると効果がわかりやすい
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済なしと、12か月後に10万円繰り上げ返済したケースを比較表で整理します。
+              </p>
+              <div className="mt-4 overflow-x-auto">
+                <table className="w-full min-w-[640px] border-collapse text-sm">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200 bg-gray-50 text-left">
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">条件</th>
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">毎月返済額</th>
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">追加返済</th>
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">完済目安</th>
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">総支払額</th>
+                      <th className="py-2.5 pr-3 font-bold text-gray-900">総利息</th>
+                      <th className="py-2.5 font-bold text-gray-900">効果</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonTableRows.map((row, i) => (
+                      <tr key={i} className="border-b border-gray-100">
+                        <td className="py-2.5 pr-3">{row.condition}</td>
+                        <td className="py-2.5 pr-3">{row.monthly}</td>
+                        <td className="py-2.5 pr-3">{row.extra}</td>
+                        <td className="py-2.5 pr-3">{row.months}</td>
+                        <td className="py-2.5 pr-3">{row.totalPayment}</td>
+                        <td className="py-2.5 pr-3">{row.totalInterest}</td>
+                        <td className="py-2.5">{row.effect}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section id="chart">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                グラフで見ると何が変わるか
+              </h2>
+              <p className="mt-3">
+                数字だけでも違いはわかりますが、グラフにすると、繰り上げ返済10万円の効果がより直感的にわかります。
+              </p>
+              <div className="mt-6 space-y-8">
+                <InterestComparisonBarChart />
+                <MonthsComparisonBarChart />
+                <div>
+                  <p className="mb-2 text-sm font-bold text-gray-700">総支払額の内訳比較</p>
+                  <PaymentBreakdownCards />
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-gray-600">
+                10万円の追加返済は、元本を早く減らすことで、その後に払う利息を減らす効果があります。
+              </p>
+            </section>
+
+            <section id="total-payment-note">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                総支払額の見え方に注意
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済では、途中で追加で10万円を払うため、「支払額が増えたのでは」と感じることがあります。ただし重要なのは、追加返済によってその後の利息が減る点です。
+              </p>
+              <p className="mt-3">
+                つまり、途中でお金を前倒しして払う代わりに、将来払う利息を減らしている構造です。支払タイミングが前に寄るだけで、長期的には利息負担を抑えられます。
+              </p>
+            </section>
+
+            <section id="who">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                10万円の繰り上げ返済が向いている人
+              </h2>
+              <p className="mt-3">
+                10万円程度のまとまった資金があり、すぐに使う予定がない場合は、繰り上げ返済の効果を検討する価値があります。特に、金利が高めで、残高がまだ大きい段階では効果が出やすいです。
+              </p>
+              <p className="mt-3">
+                一方で、手元資金を減らしすぎると生活防衛資金が不足する恐れもあります。繰り上げ返済は有効ですが、無理のない範囲で考えることが重要です。
+              </p>
+            </section>
+
+            <section id="category">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                返済改善の中で見るとどういう位置づけか
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済は、返済改善策の中でも「総利息を減らしたい」「完済を早めたい」場合に特に有効です。詳しい全体像は
+                <Link
+                  href="/articles/repayment-improvement-guide"
+                  className="font-bold text-gray-900 hover:underline"
+                >
+                  返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説
+                </Link>
+                へ自然にリンクしてください。
+              </p>
+              <p className="mt-3">
+                また、長期返済のリスクを理解したい場合は
+                <Link
+                  href="/articles/100man-100months-risk-at-15percent"
+                  className="font-bold text-gray-900 hover:underline"
+                >
+                  金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説
+                </Link>
+                、毎月返済額と総利息の関係を知りたい場合は
+                <Link
+                  href="/articles/monthly-50000-interest-at-15percent"
+                  className="font-bold text-gray-900 hover:underline"
+                >
+                  借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較
+                </Link>
+                をご覧ください。
+              </p>
+            </section>
+
+            <section id="simulator">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                自分の条件で確認するならシミュレーターが早い
+              </h2>
+              <p className="mt-3">
+                ここまでの数値は、あくまで「200万円・年利15%・5年返済・12か月後に10万円追加返済」という固定条件の近似例です。実際には、借入額、金利、返済方式、追加返済のタイミングによって効果は変わります。
+              </p>
+              <p className="mt-3">
+                そのため、最終的には自分の条件を入れて確認するのが一番確実です。次の返済シミュレーターでは、追加返済をONにして、完済時期や総利息の変化を比較できます。
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/simulator/cardloan"
+                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                >
+                  借入返済シミュレーターで比較する →
+                </Link>
+              </div>
+            </section>
+
+            <section id="notice">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                注意点
+              </h2>
+              <p className="mt-3">
+                本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、手数料、商品ごとの返済仕様などが影響する場合があります。
+              </p>
+              <p className="mt-3">
+                正確な条件は、契約中または検討中の金融商品の説明書や公式情報を確認してください。
+              </p>
+            </section>
+
+            <section id="faq">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                よくある質問
+              </h2>
+              <div className="mt-4 space-y-6">
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    繰り上げ返済10万円でも効果はありますか？
+                  </h3>
+                  <p className="mt-2">
+                    あります。今回の近似例では、完済まで約4か月短縮、総利息は約129,546円減ります。条件によって効果は変わります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    10万円の追加返済で得する金額は10万円ですか？
+                  </h3>
+                  <p className="mt-2">
+                    10万円そのものが得になるわけではありません。元本を早く減らすことで、その後に払うはずだった利息を減らせるのが本質です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    繰り上げ返済はいつやると効果が大きいですか？
+                  </h3>
+                  <p className="mt-2">
+                    一般的には、残高が大きい早い時期ほど効果が出やすいです。返済初期ほど、その後の利息を減らせる期間が長くなるためです。
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section id="summary">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+                まとめ
+              </h2>
+              <p className="mt-3">
+                繰り上げ返済10万円でも、完済時期や総利息には十分な変化が出ます。今回の近似例では、200万円・年利15%・5年返済の条件で、12か月後に10万円追加返済すると、完済まで約4か月短縮、総利息は約129,546円減ります。
+              </p>
+              <p className="mt-3">
+                大切なのは、繰り上げ返済は「元本を早く減らして、将来の利息を減らす手段」だと理解することです。自分の条件で試算したい場合は、
+                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                  返済シミュレーター
+                </Link>
+                で確認できます。
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/simulator/cardloan"
+                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                >
+                  借入返済シミュレーターで比較する →
+                </Link>
+              </div>
+            </section>
+          </div>
+
+          <ArticleFooter articleSlug="early-repayment-100k-effect" />
+        </div>
+      </article>
+    </>
+  );
+}
