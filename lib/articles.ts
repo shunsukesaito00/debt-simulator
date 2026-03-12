@@ -98,14 +98,15 @@ const articlesData: ArticleItem[] = [
   },
   {
     slug: "borrow-300-monthly-payment",
-    title: "借金300万円の月々返済はいくら？年利15%で3年・5年・7年返済を比較",
+    title: "借金300万円の月々返済はいくら？年利15%で3年・5年・月5万円返済を比較",
     summary:
-      "借金300万円を年利15%で借りた場合の月々返済額・総利息・完済期間を、3年・5年・7年返済で比較して解説します。自分の条件は返済シミュレーターで試算できます。",
+      "借入300万円を年利15%で返済する場合の月々返済額、総利息、完済までの期間を、3年返済・5年返済・月5万円返済の比較でわかりやすく解説します。",
     category: "loan-amount",
     relatedLinks: [
-      { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を詳しく見る" },
       { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を見る" },
+      { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "返済額から借入額を逆算する" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
     ],
   },
@@ -279,6 +280,22 @@ export type ArticleSlug = (typeof articlesList)[number]["slug"];
 /** slug から記事を取得 */
 export function getArticle(slug: string): ArticleItem | undefined {
   return articlesData.find((a) => a.slug === slug);
+}
+
+/** トップページ「よくある悩みから探す」用。具体悩みに近い記事を表示優先順で返す（存在するもののみ） */
+const FEATURED_PROBLEM_SLUGS: string[] = [
+  "borrow-100-interest",
+  "borrow-200-monthly-payment",
+  "fixed-payment-principal-interest-cannot-payoff",
+  "monthly-50000-interest-at-15percent",
+  "early-repayment-100k-effect",
+  "borrow-300-monthly-payment",
+];
+
+export function getFeaturedProblemArticles(): ArticleItem[] {
+  return FEATURED_PROBLEM_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
 }
 
 /** カテゴリ別に記事をグループ化（表示順はカテゴリ定義順・同一カテゴリ内は order 昇順→登録順） */

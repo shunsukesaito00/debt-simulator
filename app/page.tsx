@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getArticle } from "@/lib/articles";
+import { getFeaturedProblemArticles, CATEGORY_LABELS } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
@@ -42,20 +42,8 @@ function MainCard({
   );
 }
 
-/** よくある悩みから探す — 代表記事を静的に列挙 */
-const FEATURED_SLUGS = [
-  "loan-amount-guide",
-  "borrow-100-interest",
-  "borrow-300-monthly-payment",
-  "monthly-50000-interest-at-15percent",
-  "early-repayment-100k-effect",
-  "revo-100man-30k-years",
-] as const;
-
 export default function Page() {
-  const featuredArticles = FEATURED_SLUGS.map((slug) => getArticle(slug)).filter(
-    (a): a is NonNullable<ReturnType<typeof getArticle>> => a != null
-  );
+  const featuredArticles = getFeaturedProblemArticles();
 
   return (
     <div className="grid gap-8 md:gap-12">
@@ -118,11 +106,11 @@ export default function Page() {
         />
       </section>
 
-      {/* ── よくある悩みから探す ─────────────────────────── */}
+      {/* ── よくある悩みから探す（具体悩みの入口） ───────── */}
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
         <h2 className="text-xl font-black text-gray-900 md:text-2xl">よくある悩みから探す</h2>
         <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-          条件が近い記事から読むと、シミュレーター結果が理解しやすくなります。
+          条件が近い記事から読むと、シミュレーター結果が理解しやすくなります。気になる条件に近い記事から読み、自分のケースはシミュレーターで確認してください。
         </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
           {featuredArticles.map((a) => (
@@ -131,8 +119,12 @@ export default function Page() {
                 href={`/articles/${a.slug}`}
                 className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900/10"
               >
-                <span className="text-sm font-bold text-gray-900 leading-snug">{a.title}</span>
+                <span className="rounded-full border border-gray-200 bg-white px-2 py-0.5 text-xs font-bold text-gray-600">
+                  {CATEGORY_LABELS[a.category]}
+                </span>
+                <span className="mt-2 block text-sm font-bold text-gray-900 leading-snug">{a.title}</span>
                 <p className="mt-1.5 text-xs text-gray-500 leading-relaxed line-clamp-2">{a.summary}</p>
+                <span className="mt-2 inline-block text-xs font-bold text-gray-700">記事を読む →</span>
               </Link>
             </li>
           ))}
