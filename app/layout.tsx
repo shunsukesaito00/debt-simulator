@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import HeaderNav from "./components/HeaderNav";
 import FooterNav from "./components/FooterNav";
+import { GoogleAnalytics } from "./components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-dvh bg-gray-50 text-gray-900">
+        <GoogleAnalytics />
         {/* 上段固定ヘッダ（ナビをここに固定） */}
         <HeaderNav />
 

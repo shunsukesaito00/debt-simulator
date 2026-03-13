@@ -7,6 +7,7 @@ import {
   getArticlesForRepaymentImprovement,
   type SimulatorContext,
 } from "@/lib/articles";
+import { trackEvent } from "@/lib/analytics";
 import {
   calcLoan,
   type CalcInput,
@@ -35,6 +36,12 @@ function formatNum(value: number) {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function getPrincipalBucket(man: number): "<=120" | "121-250" | "251+" {
+  if (man <= 120) return "<=120";
+  if (man <= 250) return "121-250";
+  return "251+";
+}
+
 type SimulatorRelatedArticlesProps = SimulatorContext;
 
 function SimulatorRelatedArticles({
@@ -58,6 +65,7 @@ function SimulatorRelatedArticles({
     [principalMan, method, extraEnabled, years, monthlyPayment, monthlyPrincipal]
   );
   if (articles.length === 0) return null;
+  const principalBucket = getPrincipalBucket(principalMan);
   return (
     <section className="rounded-xl border-2 border-gray-200 bg-white p-5">
       <h2 className="text-lg font-black text-gray-900">あわせて読みたい</h2>
@@ -68,6 +76,19 @@ function SimulatorRelatedArticles({
             <Link
               href={`/articles/${a.slug}`}
               className={`block rounded-xl p-4 transition hover:bg-gray-50 ${i === 0 ? "border-2 border-gray-900 bg-gray-100 shadow-md ring-2 ring-gray-900/10" : "border border-gray-100 bg-gray-50/50"}`}
+              onClick={() =>
+                trackEvent({
+                  action: "click_simulator_related_article",
+                  location: "simulator_related_articles",
+                  target: `/articles/${a.slug}`,
+                  link_type: "contextual_article",
+                  article_slug: a.slug,
+                  category_key: a.category,
+                  method_group: method as "equal_payment" | "equal_principal" | "fixed_payment" | "fixed_principal",
+                  principal_bucket: principalBucket,
+                  extra_enabled: extraEnabled,
+                })
+              }
             >
               {i === 0 && <span className="mb-1.5 inline-block rounded bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">おすすめ</span>}
               <span className={`font-bold text-gray-900 block ${i === 0 ? "text-base md:text-lg leading-snug" : "text-sm"}`}>{a.title}</span>
@@ -79,6 +100,17 @@ function SimulatorRelatedArticles({
       <Link
         href="/articles"
         className="mt-4 inline-block text-sm font-bold text-gray-700 hover:underline"
+        onClick={() =>
+          trackEvent({
+            action: "click_simulator_related_article",
+            location: "simulator_related_articles",
+            target: "/articles",
+            link_type: "contextual_article",
+            method_group: method as "equal_payment" | "equal_principal" | "fixed_payment" | "fixed_principal",
+            principal_bucket: principalBucket,
+            extra_enabled: extraEnabled,
+          })
+        }
       >
         記事一覧を見る →
       </Link>
@@ -105,6 +137,16 @@ function SimulatorRepaymentImprovementBlock() {
             <Link
               href={`/articles/${a.slug}`}
               className="block rounded-xl border border-emerald-200 bg-white p-4 transition hover:bg-emerald-50/50"
+              onClick={() =>
+                trackEvent({
+                  action: "click_simulator_improvement_article",
+                  location: "simulator_repayment_improvement",
+                  target: `/articles/${a.slug}`,
+                  link_type: "improvement_article",
+                  article_slug: a.slug,
+                  category_key: a.category,
+                })
+              }
             >
               <span className="text-sm font-bold text-gray-900">{a.title}</span>
               <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
@@ -115,6 +157,14 @@ function SimulatorRepaymentImprovementBlock() {
       <Link
         href="/articles"
         className="mt-4 inline-block text-sm font-bold text-gray-700 hover:underline"
+        onClick={() =>
+          trackEvent({
+            action: "click_simulator_improvement_article",
+            location: "simulator_repayment_improvement",
+            target: "/articles",
+            link_type: "improvement_article",
+          })
+        }
       >
         記事一覧を見る →
       </Link>
@@ -329,7 +379,11 @@ export default function Page() {
     <div className="grid gap-5">
       <section className="rounded-xl border border-gray-200 bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">カードローン返済シミュレーター</h1>
+          <div>
+            <h1 className="text-2xl font-black text-gray-900 md:text-3xl">カードローン返済シミュレーター</h1>
+            <p className="mt-1 text-xs text-gray-500">入力値はサーバーに送信されません。ブラウザ内だけで計算しています。</p>
+            <p className="mt-1.5 text-sm text-gray-600">4つの返済方式・A/B比較・入力に連動したおすすめ記事で、条件の違いをすぐ比較できます。</p>
+          </div>
           <div className="flex gap-2">
           <button
             type="button"
@@ -504,6 +558,11 @@ onChange={(e) => updateForm({ monthlyPrincipal: Number(e.target.value) })}
               </div>
             </div>
             )}
+            {(form.method === "fixed_payment" || form.method === "fixed_principal") && (
+              <p className="text-xs text-gray-600 rounded-lg bg-gray-50 border border-gray-100 px-3 py-2">
+                <span className="font-bold text-gray-700">逆算モード：</span>「月々○円ならいくら借りられる？」を試せます。詳しくは<Link href="/articles/monthly-50000-how-much-can-borrow" className="font-bold text-gray-800 underline hover:no-underline">月5万でいくら借りられる</Link>や<Link href="/articles#repayment-planning" className="font-bold text-gray-800 underline hover:no-underline">逆算・返済計画</Link>の記事もご覧ください。
+              </p>
+            )}
           </div>
 
           <div className="space-y-2 pt-1 border-t border-gray-100">
@@ -592,6 +651,9 @@ return { ...prev, rateSteps: next };
             </div>
             {form.extraEnabled && (
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+                <p className="mb-2 text-xs text-gray-600">
+                  繰上返済には<strong className="text-gray-700">返済額軽減型</strong>（月々の返済額を下げる）と<strong className="text-gray-700">期間短縮型</strong>（期間を短くする）があります。本ツールでは追加で返す分が元金に充当され、完済が早まる「期間短縮型」の効果を試算します。詳しくは<Link href="/articles/early-repayment-100k-effect" className="font-bold text-gray-800 underline hover:no-underline">繰り上げ返済10万円の効果</Link>の記事もご覧ください。
+                </p>
                 <div className="flex gap-2 border-b border-gray-200 pb-2">
                   {(["monthly", "oneTime", "bonus"] as const).map((t) => (
                     <button
@@ -951,9 +1013,48 @@ return { ...prev, rateSteps: next };
           <li>計算は一般的な月次の近似です。金融機関の計算と差が出る場合があります。</li>
         </ul>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
-          <Link href="/logic" className="font-bold text-gray-700 hover:underline">計算ロジック</Link>
-          <Link href="/faq" className="font-bold text-gray-700 hover:underline">FAQ</Link>
-          <Link href="/how-to" className="font-bold text-gray-700 hover:underline">使い方</Link>
+          <Link
+            href="/logic"
+            className="font-bold text-gray-700 hover:underline"
+            onClick={() =>
+              trackEvent({
+                action: "click_simulator_support_link",
+                location: "simulator_footer",
+                target: "/logic",
+                link_type: "support_link",
+              })
+            }
+          >
+            計算ロジック
+          </Link>
+          <Link
+            href="/faq"
+            className="font-bold text-gray-700 hover:underline"
+            onClick={() =>
+              trackEvent({
+                action: "click_simulator_support_link",
+                location: "simulator_footer",
+                target: "/faq",
+                link_type: "support_link",
+              })
+            }
+          >
+            FAQ
+          </Link>
+          <Link
+            href="/how-to"
+            className="font-bold text-gray-700 hover:underline"
+            onClick={() =>
+              trackEvent({
+                action: "click_simulator_support_link",
+                location: "simulator_footer",
+                target: "/how-to",
+                link_type: "support_link",
+              })
+            }
+          >
+            使い方
+          </Link>
         </div>
       </section>
     </div>

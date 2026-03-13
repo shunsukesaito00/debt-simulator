@@ -6,6 +6,9 @@ export default function Page() {
   return (
     <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
       <h1 className="text-2xl font-black">使い方</h1>
+      <p className="mt-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-600">
+        すべての計算はお使いのブラウザ内だけで行われます。入力したデータが外部に送信されることはありません。
+      </p>
 
       <div className="mt-5 grid gap-5 text-sm text-gray-700 leading-relaxed">
         <section>

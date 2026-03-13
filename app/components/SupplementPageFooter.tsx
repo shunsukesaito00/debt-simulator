@@ -1,10 +1,10 @@
-import Link from "next/link";
 import {
   getArticle,
   getArticlesByCategory,
   ARTICLE_CATEGORIES,
   CATEGORY_LABELS,
 } from "@/lib/articles";
+import { TrackedLink } from "@/app/components/TrackedLink";
 
 const SIMULATOR_HREF = "/simulator/cardloan";
 const SIMULATOR_LABEL = "借入返済シミュレーターで試す";
@@ -12,15 +12,15 @@ const SIMULATOR_LABEL = "借入返済シミュレーターで試す";
 /** FAQ 用: カテゴリ別の代表記事＋シミュレーターCTA */
 export function SupplementPageFooterFaq() {
   const byCategory = getArticlesByCategory();
-  const featured: { href: string; label: string }[] = [];
+  const featured: { href: string; label: string; slug?: string }[] = [];
   for (const cat of ARTICLE_CATEGORIES) {
     const items = byCategory.get(cat);
     if (!items || items.length === 0) continue;
     const label = CATEGORY_LABELS[cat];
     const a = items[0];
-    featured.push({ href: `/articles/${a.slug}`, label: `${label}: ${a.title}` });
+    featured.push({ href: `/articles/${a.slug}`, label: `${label}: ${a.title}`, slug: a.slug });
     if (items.length >= 2) {
-      featured.push({ href: `/articles/${items[1].slug}`, label: items[1].title });
+      featured.push({ href: `/articles/${items[1].slug}`, label: items[1].title, slug: items[1].slug });
     }
   }
 
@@ -33,25 +33,50 @@ export function SupplementPageFooterFaq() {
       <ul className="mt-4 flex flex-col gap-2">
         {featured.slice(0, 8).map((item) => (
           <li key={item.href}>
-            <Link href={item.href} className="text-sm font-bold text-gray-700 hover:underline">
+            <TrackedLink
+              href={item.href}
+              className="text-sm font-bold text-gray-700 hover:underline"
+              event={{
+                action: "click_supplement_article_link",
+                location: "supplement_footer_faq",
+                target: item.href,
+                link_type: "related_article",
+                article_slug: item.slug,
+              }}
+            >
               {item.label}
-            </Link>
+            </TrackedLink>
           </li>
         ))}
         <li>
-          <Link href="/articles" className="text-sm font-bold text-gray-700 hover:underline">
+          <TrackedLink
+            href="/articles"
+            className="text-sm font-bold text-gray-700 hover:underline"
+            event={{
+              action: "click_supplement_back_to_articles",
+              location: "supplement_footer_faq",
+              target: "/articles",
+              link_type: "articles_index_link",
+            }}
+          >
             記事一覧を見る →
-          </Link>
+          </TrackedLink>
         </li>
       </ul>
       <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
         <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
-        <Link
+        <TrackedLink
           href={SIMULATOR_HREF}
           className="mt-3 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          event={{
+            action: "click_supplement_simulator_cta",
+            location: "supplement_footer_faq",
+            target: SIMULATOR_HREF,
+            link_type: "simulator_cta",
+          }}
         >
           {SIMULATOR_LABEL} →
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );
@@ -66,10 +91,10 @@ const LOGIC_RELATED_SLUGS = [
 ];
 
 export function SupplementPageFooterLogic() {
-  const links: { href: string; label: string }[] = [];
+  const links: { href: string; label: string; slug?: string }[] = [];
   for (const slug of LOGIC_RELATED_SLUGS) {
     const a = getArticle(slug);
-    if (a) links.push({ href: `/articles/${a.slug}`, label: a.title });
+    if (a) links.push({ href: `/articles/${a.slug}`, label: a.title, slug: a.slug });
   }
   links.push({ href: "/articles", label: "記事一覧を見る" });
 
@@ -82,20 +107,51 @@ export function SupplementPageFooterLogic() {
       <ul className="mt-4 flex flex-col gap-2">
         {links.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} className="text-sm font-bold text-gray-700 hover:underline">
-              {item.label}
-            </Link>
+            {item.slug ? (
+              <TrackedLink
+                href={item.href}
+                className="text-sm font-bold text-gray-700 hover:underline"
+                event={{
+                  action: "click_supplement_article_link",
+                  location: "supplement_footer_logic",
+                  target: item.href,
+                  link_type: "related_article",
+                  article_slug: item.slug,
+                }}
+              >
+                {item.label}
+              </TrackedLink>
+            ) : (
+              <TrackedLink
+                href={item.href}
+                className="text-sm font-bold text-gray-700 hover:underline"
+                event={{
+                  action: "click_supplement_back_to_articles",
+                  location: "supplement_footer_logic",
+                  target: "/articles",
+                  link_type: "articles_index_link",
+                }}
+              >
+                {item.label}
+              </TrackedLink>
+            )}
           </li>
         ))}
       </ul>
       <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
         <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
-        <Link
+        <TrackedLink
           href={SIMULATOR_HREF}
           className="mt-3 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          event={{
+            action: "click_supplement_simulator_cta",
+            location: "supplement_footer_logic",
+            target: SIMULATOR_HREF,
+            link_type: "simulator_cta",
+          }}
         >
           {SIMULATOR_LABEL} →
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );
@@ -109,16 +165,31 @@ export function SupplementPageFooterHowTo() {
       <p className="mt-2 text-sm text-gray-700 leading-relaxed">
         借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
       </p>
-      <Link
+      <TrackedLink
         href={SIMULATOR_HREF}
         className="mt-4 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+        event={{
+          action: "click_supplement_simulator_cta",
+          location: "supplement_footer_how_to",
+          target: SIMULATOR_HREF,
+          link_type: "simulator_cta",
+        }}
       >
         {SIMULATOR_LABEL} →
-      </Link>
+      </TrackedLink>
       <p className="mt-6 text-sm font-bold text-gray-900">条件別の記事も読む</p>
-      <Link href="/articles" className="mt-2 inline-block text-sm font-bold text-gray-700 hover:underline">
+      <TrackedLink
+        href="/articles"
+        className="mt-2 inline-block text-sm font-bold text-gray-700 hover:underline"
+        event={{
+          action: "click_supplement_back_to_articles",
+          location: "supplement_footer_how_to",
+          target: "/articles",
+          link_type: "articles_index_link",
+        }}
+      >
         記事一覧を見る →
-      </Link>
+      </TrackedLink>
     </section>
   );
 }

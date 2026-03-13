@@ -54,6 +54,9 @@ export default function ArticlesListPage() {
         <p className="mt-5 text-sm text-gray-700 leading-relaxed">
           借入返済の一般論ではなく、条件別の違いを理解するための記事です。借入額別・返済方式別・逆算別など、気になる条件から読み、最後はシミュレーターで自分の条件を確認できます。記事とシミュレーターを行き来しながら判断する前提で整理しています。
         </p>
+        <p className="mt-3 text-sm text-gray-600">
+          返済額の目安を表で見る：<Link href="/quick-reference" className="font-bold text-gray-800 underline hover:no-underline">早見表（100万・200万・300万・年利15%・3年/5年）</Link>
+        </p>
 
         <div className="mt-10 space-y-12">
           {ARTICLE_CATEGORIES.map((cat) => {

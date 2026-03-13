@@ -202,6 +202,19 @@ const articlesData: ArticleItem[] = [
     ],
   },
   {
+    slug: "monthly-30000-how-much-can-borrow",
+    title: "月3万円返済ならいくらまで借りられる？年利15%で3年・5年・7年の目安を解説",
+    summary:
+      "毎月3万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較でわかりやすく解説します。",
+    category: "repayment-planning",
+    relatedLinks: [
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられるかを見る" },
+      { href: "/articles/fixed-monthly-payment-borrowing-reverse-calculator", label: "返済額から借入額を逆算する考え方を見る" },
+      { href: "/articles/borrow-100-interest", label: "借金100万円の利息を見る" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
+    ],
+  },
+  {
     slug: "fixed-monthly-payment-borrowing-reverse-calculator",
     title: "月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説",
     summary:
