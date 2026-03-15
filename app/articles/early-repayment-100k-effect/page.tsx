@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import {
   comparisonTableRows,
   InterestComparisonBarChart,
@@ -88,6 +89,14 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、200万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
+
+          <ArticlePagePremise
+            comparisonConditions={[
+              "借入額200万円・年利15%・元利均等・5年返済（60回）",
+              "繰り上げ返済なし vs 返済開始12か月後に10万円を1回追加返済",
+            ]}
+            reasonForConditions="200万・5年返済は多くの人が検討する水準。12か月後は返済初期で残高がまだ大きいタイミングなので、10万円繰り上げの効果が出やすい例として選んだ。"
+          />
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -217,6 +226,23 @@ export default function Page() {
               <p className="mt-4 text-sm text-gray-600">
                 10万円の追加返済は、元本を早く減らすことで、その後に払う利息を減らす効果があります。
               </p>
+
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "この記事で最も見てほしい数字",
+                    body: "比較表の「総利息」（なし約85.5万 vs 10万繰り上げ約72.5万）と「完済目安」（60か月 vs 56か月）。10万円の追加で利息約13万円減・完済4か月短縮という効果の大きさ。",
+                  },
+                  {
+                    label: "グラフの見方",
+                    body: "棒グラフは総利息と完済か月数を「繰り上げなし」と「12か月後に10万」で並べている。内訳カードは総支払額の元本・利息の割合を比較。追加返済すると利息部分が減る。",
+                  },
+                ]}
+                misconceptions={[
+                  "「10万を余計に払うから損では」と思いがち。追加返済は将来の利息を減らすので、総支払額に占める利息が減り、結果として負担が軽くなる。",
+                  "「少額だから効果は小さい」と誤解しやすい。この例では約13万円の利息削減・4か月短縮と、10万円に対して十分な効果が出ている。",
+                ]}
+              />
             </section>
 
             <section id="total-payment-note">
@@ -255,7 +281,7 @@ export default function Page() {
                 >
                   返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説
                 </Link>
-                へ自然にリンクしてください。
+                をご覧ください。
               </p>
               <p className="mt-3">
                 また、長期返済のリスクを理解したい場合は
@@ -364,6 +390,12 @@ export default function Page() {
               </div>
             </section>
           </div>
+
+          <ArticleEditorMemo
+            purpose="10万円の繰り上げ返済で、利息と完済時期がどれだけ変わるかの判断材料。少額でも効果があること、総支払額の見え方（前倒しで払う代わりに利息が減る）を押さえてもらう。"
+            reasonAxis="「10万の繰り上げで何が変わるか」は検索されやすい。200万・5年・12か月後は返済初期で効果が出やすい典型例として比較。"
+            memo="シミュレーターで追加返済タブから自分の条件で試せることを案内。"
+          />
 
           <ArticleFooter articleSlug="early-repayment-100k-effect" />
         </div>

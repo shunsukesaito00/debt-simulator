@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import {
   TotalInterestBarChart,
   PayoffMonthsBarChart,
@@ -77,6 +78,16 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
+
+          <ArticlePagePremise
+            comparisonConditions={[
+              "毎月返済額5万円（固定）",
+              "年利15%",
+              "定額元利の考え方",
+              "借入額100万円・200万円・300万円で比較",
+            ]}
+            reasonForConditions="「月5万なら返せる」という前提で、借入額を変えたときの総利息・完済期間の差を見たい読者向け。同じ月5万でも借入額が増えると負担が急増するため、100・200・300万の3段階で比較している。"
+          />
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -226,6 +237,23 @@ export default function Page() {
                   毎月返済額が同じでも、借入額が増えると完済までの期間が延び、そのぶん利息負担も急増します。
                 </p>
               </div>
+
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "この記事で最も見てほしい数字",
+                    body: "総利息の差（100万約15.8万・200万約79万・300万約257.9万）と完済目安（24か月・56か月・112か月）。同じ月5万でも借入額が増えると利息が非線形に増える。",
+                  },
+                  {
+                    label: "比較表・グラフの見方",
+                    body: "表は借入額・毎月返済額・完済目安・総支払額・総利息の5列。棒グラフは総利息と完済期間を借入額別に比較。積み上げは総支払額の元本と利息の内訳。",
+                  },
+                ]}
+                misconceptions={[
+                  "「月5万払えるから借入額を増やしても大丈夫」と思いがち。300万では総利息が約258万円になり、完済まで約9年かかる。",
+                  "借入額が2倍・3倍になっても総利息は比例しない。期間が延びる分、利息が膨らむ。",
+                ]}
+              />
             </section>
 
             <section id="not-safe">
@@ -322,6 +350,12 @@ export default function Page() {
               </div>
             </section>
           </div>
+
+          <ArticleEditorMemo
+            purpose="月5万円返済できる前提で、借入額をどこまでにするかの判断材料。借入額が増えると総利息・完済期間が急増するので、月々の額だけでなく総額を見て決めてもらう。"
+            reasonAxis="「月5万なら返せる」はよくある前提。同じ返済額でも借入額で結果が大きく変わるため、100・200・300万の3段階で比較。定額元利の考え方で試算。"
+            memo="シミュレーターで定額元利・毎月返済額を変えて自分の条件を試せることを案内。"
+          />
 
           <ArticleFooter articleSlug="monthly-50000-interest-at-15percent" />
         </div>

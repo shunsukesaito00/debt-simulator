@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import {
   CannotPayoffWarningCard,
   PayoffMonthsBarChart,
@@ -79,6 +80,15 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
           </p>
+
+          <ArticlePagePremise
+            comparisonConditions={[
+              "借入額100万円・年利15%",
+              "定額元利返済（毎月の支払額を固定）",
+              "毎月1万円・1万5千円・3万円の3パターンで比較",
+            ]}
+            reasonForConditions="定額元利で「完済できない」と言われる典型は、返済額が利息以下になるケース。100万・年利15%では初月利息が約1.25万円なので、1万・1.5万・3万の3段階で比較すると理解しやすい。"
+          />
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -249,6 +259,23 @@ export default function Page() {
                   返済額を少し上げるだけでも、完済までの期間と総利息は大きく変わります。
                 </p>
               </div>
+
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "この記事で最も見てほしい数字",
+                    body: "比較表の「初月利息」（約12,500円）と「初月元本充当」。返済額が利息を上回っているか、元本が十分減る水準か。毎月1万円は利息に届かず、1万5千円でも完済まで約154か月・総利息約131万円と重い。",
+                  },
+                  {
+                    label: "グラフの見方",
+                    body: "「毎月1万円のケース」は完済不可に近い注意カード。棒グラフは完済目安（か月）と総利息を1.5万 vs 3万で比較。3万円にすると約50か月・総利息約47.5万円と現実的になる。",
+                  },
+                ]}
+                misconceptions={[
+                  "「毎月払っているから大丈夫」と思いがち。定額元利は払い額が固定でも、その中身が利息ばかりだと元本が減らない。",
+                  "「1万5千円なら利息を上回っている」は正しいが、元本の減りが遅く、総利息が借入額を超える（約131万円）。少し上げるだけでは不十分な例として示している。",
+                ]}
+              />
             </section>
 
             <section id="suit">
@@ -345,6 +372,12 @@ export default function Page() {
               </div>
             </section>
           </div>
+
+          <ArticleEditorMemo
+            purpose="定額元利を選ぶときに、返済額が「利息を上回っているか」「元本を十分減らせる水準か」を確認する判断材料。完済できない・遅すぎる設定を避けてもらう。"
+            reasonAxis="定額元利は家計管理しやすいが、返済額設定を誤ると危険。100万・15%で初月利息約1.25万という具体数値で、1万・1.5万・3万の差を見せる。"
+            memo="シミュレーターの定額元利で自分の借入額・金利・返済額を入れて試せることを案内。"
+          />
 
           <ArticleFooter articleSlug="fixed-payment-principal-interest-cannot-payoff" />
         </div>

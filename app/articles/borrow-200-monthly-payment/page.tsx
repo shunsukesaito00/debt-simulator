@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { MonthlyAndInterestBarCharts200, TotalPaymentStackedChart200 } from "./InterestCharts200";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -72,6 +73,16 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の計算は、一般的な固定金利・毎月返済の近似例です。実際の返済条件は契約内容により異なります。
           </p>
+
+          <ArticlePagePremise
+            comparisonConditions={[
+              "借入額200万円",
+              "年利15%（固定）",
+              "元利均等返済",
+              "3年返済（36回）と5年返済（60回）で比較",
+            ]}
+            reasonForConditions="200万円は住宅以外の借入で現実的にあり得る水準。年利15%はカードローンでよく見る金利なので、この条件で月々返済額の目安を出している。"
+          />
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -198,6 +209,23 @@ export default function Page() {
                   5年返済は毎月の負担を抑えられる一方で、利息負担の比率が大きくなります。
                 </p>
               </div>
+
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "この記事で最も見てほしい数字",
+                    body: "毎月返済額（3年約6.9万円 vs 5年約4.8万円）と総利息の差（約49.6万円 vs 約85.5万円、差額約36万円）。200万ではこの差が家計に効く。",
+                  },
+                  {
+                    label: "比較表・グラフの見方",
+                    body: "表の4列（返済期間・毎月返済額・総支払額・総利息）を3年と5年で並べている。棒グラフで毎月額と総利息を比較、積み上げで元本と利息の内訳を確認。",
+                  },
+                ]}
+                misconceptions={[
+                  "「月々4.8万円なら払える」だけで選ぶと、総利息が約36万円多くかかる。払える額と、払い終わるまでの総額は別。",
+                  "借入100万の記事と比べると単純に2倍ではない。返済期間が長いほど利息の重さが効くので、200万・5年は負担が目立つ。",
+                ]}
+              />
             </section>
 
             <section id="balance">
@@ -297,6 +325,12 @@ export default function Page() {
               </p>
             </section>
           </div>
+
+          <ArticleEditorMemo
+            purpose="借入200万円で3年と5年、どちらを現実的な返済計画として選ぶかの判断材料。月々6.9万と4.8万の差と、総利息約36万円の差を押さえてもらう。"
+            reasonAxis="200万円は100万より返済額の絶対値が大きく、期間選択の影響も大きい。検索意図「200万の月々返済」に応えるためこの比較軸にした。"
+            memo="シミュレーターで金利・期間・借入額を変えて試せることを本文とフッターで案内。"
+          />
 
           <ArticleFooter articleSlug="borrow-200-monthly-payment" />
         </div>

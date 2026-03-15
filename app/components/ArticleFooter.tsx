@@ -1,4 +1,4 @@
-import { getArticle, CATEGORY_LABELS } from "@/lib/articles";
+import { getArticle, CATEGORY_LABELS, getArticleListSectionIdForCategory } from "@/lib/articles";
 import { TrackedLink } from "@/app/components/TrackedLink";
 
 const SIMULATOR_HREF = "/simulator/cardloan";
@@ -23,7 +23,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
 
   const relatedLinks = article.relatedLinks ?? [];
   const categoryLabel = CATEGORY_LABELS[article.category];
-  const categoryAnchor = `/articles#${article.category}`;
+  const categoryAnchor = `/articles#${getArticleListSectionIdForCategory(article.category)}`;
 
   return (
     <section className="mt-10 border-t border-gray-200 pt-8">

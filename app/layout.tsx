@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | 借入返済シミュレーター",
   },
   description:
-    "借入額・金利・返済方式・返済期間をもとに、月々返済額・総利息・完済時期を比較できる返済シミュレーター。条件別の記事とあわせて判断材料を提供します。",
+    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・返済計画を中心に、月々負担の違いを具体条件で確認し、記事とツールを往復して判断材料を提供します。",
   robots: { index: true, follow: true },
   verification: {
     google: "068cd6d5bb52c21b",

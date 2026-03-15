@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { MonthlyAndInterestBarCharts, TotalPaymentStackedChart } from "./InterestCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -74,6 +75,16 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の計算は、一般的な元利均等返済の近似例です。実際の返済条件は契約内容により異なります。
           </p>
+
+          <ArticlePagePremise
+            comparisonConditions={[
+              "借入額100万円",
+              "年利15%（固定）",
+              "元利均等返済",
+              "3年返済（36回）と5年返済（60回）で比較",
+            ]}
+            reasonForConditions="年利15%前後はカードローン・フリーローンでよく見かける水準です。100万円は借入額の目安として検索されやすいため、この条件で比較しています。"
+          />
 
           {/* 簡易目次 */}
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
@@ -205,6 +216,23 @@ export default function Page() {
                   5年返済は毎月の負担が軽い一方で、利息の占める割合が大きくなります。
                 </p>
               </div>
+
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "この記事で最も見てほしい数字",
+                    body: "総利息の差（3年約24.8万円 vs 5年約42.7万円、差額約18万円）と、毎月返済額の差（約34,665円 vs 約23,790円）。月々を軽くすると総支払額は増えるトレードオフを押さえておく。",
+                  },
+                  {
+                    label: "比較表・グラフの見方",
+                    body: "表は「返済期間」「毎月返済額」「総支払額」「総利息」の4列。棒グラフは毎月返済額と総利息を並べて、期間延長で利息がどう増えるかを比較。積み上げグラフは総支払額のうち元本と利息の内訳。",
+                  },
+                ]}
+                misconceptions={[
+                  "「毎月の返済額が安い方が得」と誤解しやすい。5年返済は月々は軽いが、総支払額・総利息は3年より大きい。",
+                  "「100万円なら利息は少ない」と思いがち。年利15%では5年で約42.7万円の利息がかかるため、借入額の4割以上になる。",
+                ]}
+              />
             </section>
 
             <section id="balance">
@@ -302,6 +330,12 @@ export default function Page() {
               </p>
             </section>
           </div>
+
+          <ArticleEditorMemo
+            purpose="3年返済と5年返済のどちらを選ぶかの判断材料。月々の負担と総支払額は両立しないので、家計の余力に応じて選べるようにする。"
+            reasonAxis="借入100万円・年利15%は検索意図として多く、カードローンでよくある条件。元利均等のみに絞り、返済期間の違いに集中して比較できるようにした。"
+            memo="シミュレーターでは金利・期間・追加返済を変えて試せることを本文とフッターで案内。"
+          />
 
           <ArticleFooter articleSlug="borrow-100-interest" />
         </div>

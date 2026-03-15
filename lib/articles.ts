@@ -7,6 +7,8 @@
  */
 
 export const ARTICLE_CATEGORIES = [
+  "fixed-cost",
+  "improvement-effect",
   "loan-amount",
   "repayment-method",
   "revolving",
@@ -17,6 +19,8 @@ export const ARTICLE_CATEGORIES = [
 export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number];
 
 export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
+  "fixed-cost": "固定費見直し",
+  "improvement-effect": "改善効果の試算",
   "loan-amount": "借入額別",
   "repayment-method": "返済方式",
   revolving: "リボ払い",
@@ -29,6 +33,10 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
  * 方針: 条件別・比較別・逆算別の返済シミュレーション辞典として一貫させる
  */
 export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
+  "fixed-cost":
+    "通信費・サブスク・保険など、毎月の固定負担を見直したい方のためのカテゴリです。何から手をつけるべきか、改善効果を比較できる記事を順次追加していきます。",
+  "improvement-effect":
+    "月5,000円・1万円の見直しで何がどう変わるかを、具体条件で比較するカテゴリです。一般論ではなく数字で効果を確認できます。",
   "loan-amount":
     "借入額が変わると、毎月返済額・総利息・完済までの期間がどう変わるかを整理するカテゴリです。",
   "repayment-method":
@@ -40,6 +48,72 @@ export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   "repayment-planning":
     "借入額から考えるのではなく、毎月いくら返せるかから無理のない条件を逆算するカテゴリです。",
 };
+
+/**
+ * 記事一覧ページ（/articles）のセクション構成。
+ * 生活改善・固定負担比較の入口として6セクションを表示する。
+ * articleCategories が空のセクションは「準備中」表示になる。
+ */
+export type ArticleListSection = {
+  id: string;
+  label: string;
+  description: string;
+  articleCategories: ArticleCategory[];
+};
+
+export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
+  {
+    id: "fixed-cost",
+    label: "固定費見直し",
+    description:
+      "通信費・サブスク・保険など、毎月の固定負担を見直したい方のための記事です。何から手をつけるべきか整理し、改善効果を比較できるように順次記事を追加していきます。",
+    articleCategories: ["fixed-cost"],
+  },
+  {
+    id: "household",
+    label: "家計管理",
+    description:
+      "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理する記事です。自分に合うやり方を選ぶための材料としてご利用ください。",
+    articleCategories: [],
+  },
+  {
+    id: "improvement-effect",
+    label: "改善効果の試算",
+    description:
+      "月5,000円・1万円の見直しで何がどう変わるかを、具体条件で比較する記事です。一般論ではなく数字で効果を確認できます。",
+    articleCategories: ["improvement-effect"],
+  },
+  {
+    id: "loan-comparison",
+    label: "借入返済比較",
+    description:
+      "借入額・返済方式・追加返済の違いを、条件別に試算・比較する記事です。借入額別・返済方式別・リボ払いの内容をまとめています。",
+    articleCategories: ["loan-amount", "repayment-method", "revolving"],
+  },
+  {
+    id: "repayment-improvement",
+    label: "返済改善",
+    description:
+      "繰り上げ返済や返済方式の見直しで、負担がどう変わるかを整理する記事です。改善の効果を具体条件で確認できます。",
+    articleCategories: ["repayment-improvement"],
+  },
+  {
+    id: "repayment-planning",
+    label: "逆算・計画",
+    description:
+      "毎月いくらなら無理がないかを逆算し、借入額や返済期間を考える記事です。返せる額から条件を決めたい方の判断材料としてご利用ください。",
+    articleCategories: ["repayment-planning"],
+  },
+];
+
+/** 記事カテゴリから記事一覧ページのセクション id へ（ArticleFooter のアンカー用） */
+export function getArticleListSectionIdForCategory(cat: ArticleCategory): string {
+  if (cat === "fixed-cost") return "fixed-cost";
+  if (cat === "improvement-effect") return "improvement-effect";
+  if (cat === "loan-amount" || cat === "repayment-method" || cat === "revolving") return "loan-comparison";
+  if (cat === "repayment-improvement") return "repayment-improvement";
+  return "repayment-planning";
+}
 
 export type ArticleRelatedLink = { href: string; label: string };
 
@@ -54,6 +128,50 @@ export interface ArticleItem {
 }
 
 const articlesData: ArticleItem[] = [
+  {
+    slug: "fixed-cost-guide",
+    title: "固定費見直しの進め方｜何から手をつけるか・改善効果の比較",
+    summary:
+      "通信費・サブスク・保険など、毎月の固定負担を見直したい方向けに、何から手をつけるべきかと改善効果を比較する考え方を整理します。記事とシミュレーターを往復して判断材料にしてください。",
+    category: "fixed-cost",
+    order: 0,
+    badge: "おすすめ",
+    relatedLinks: [
+      { href: "/articles", label: "記事一覧で他のカテゴリも見る" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+    ],
+  },
+  {
+    slug: "fixed-cost-checklist",
+    title: "固定費見直しチェックリスト｜何から削るか順番で解説",
+    summary:
+      "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリスト記事です。見直しやすさ・削減額・生活への影響の3軸で比較します。",
+    category: "fixed-cost",
+    order: 1,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "月々返済額から借入額を逆算する" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-5000-impact",
+    title: "固定費を月5,000円見直すとどう変わる？1年・3年・5年の改善効果を比較",
+    summary:
+      "月5,000円の固定費改善で、1年・3年・5年にどれくらい差が出るかを具体的に整理した記事です。固定費改善は月額ではなく継続で見るべきことを解説します。",
+    category: "improvement-effect",
+    order: 0,
+    badge: "おすすめ",
+    relatedLinks: [
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
   {
     slug: "loan-amount-guide",
     title: "借入額別に見る返済負担の違い｜100万・200万・300万で比較",
