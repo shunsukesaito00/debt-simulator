@@ -3,11 +3,32 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import {
-  comparisonTableRows,
   InterestComparisonBarChart,
   MonthsComparisonBarChart,
   PaymentBreakdownCards,
 } from "./EarlyRepayment100kCharts";
+
+/** 比較表用データ（SSRで使うためクライアントモジュール外で定義） */
+const comparisonTableRows = [
+  {
+    condition: "繰り上げ返済なし",
+    monthly: "約47,580円",
+    extra: "ー",
+    months: "60か月",
+    totalPayment: "約2,854,792円",
+    totalInterest: "約854,792円",
+    effect: "基準",
+  },
+  {
+    condition: "12か月後に10万円繰り上げ返済",
+    monthly: "約47,580円",
+    extra: "100,000円",
+    months: "約56か月",
+    totalPayment: "約2,825,246円",
+    totalInterest: "約725,246円",
+    effect: "約4か月短縮 / 利息約129,546円減",
+  },
+];
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/early-repayment-100k-effect`;

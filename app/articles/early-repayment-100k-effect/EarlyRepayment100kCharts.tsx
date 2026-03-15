@@ -14,28 +14,6 @@ const GRAY_900 = "#111827";
 const GRAY_600 = "#4b5563";
 const GRAY_500 = "#6b7280";
 
-/** 比較表用データ */
-export const comparisonTableRows = [
-  {
-    condition: "繰り上げ返済なし",
-    monthly: "約47,580円",
-    extra: "ー",
-    months: "60か月",
-    totalPayment: "約2,854,792円",
-    totalInterest: "約854,792円",
-    effect: "基準",
-  },
-  {
-    condition: "12か月後に10万円繰り上げ返済",
-    monthly: "約47,580円",
-    extra: "100,000円",
-    months: "約56か月",
-    totalPayment: "約2,825,246円",
-    totalInterest: "約725,246円",
-    effect: "約4か月短縮 / 利息約129,546円減",
-  },
-];
-
 /** 総利息比較（棒グラフ） */
 const interestChartData = [
   { case: "繰り上げ返済なし", value: 854792 },
