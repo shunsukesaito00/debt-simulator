@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   PrincipalByPaymentBarChart,
   InterestByPaymentBarChart,
@@ -38,8 +40,40 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "月々返済額を固定すると借入額はどう決まりますか？",
+    answer:
+      "金利と返済期間を前提にして、毎月返済額から逆算した借入額の目安を求めます。返済年数が長いほど借入額の目安は増えやすいです。",
+  },
+  {
+    question: "月々5万円ならいくらまで借りられますか？",
+    answer: "年利15%の近似例では、3年返済で約144万円、5年返済で約210万円が目安です。実際の条件によって変わります。",
+  },
+  {
+    question: "借入額を増やすには返済年数を延ばせばいいですか？",
+    answer:
+      "借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく、最終的な総支払額まで含めて考えることが重要です。",
+  },
+  {
+    question: "月3万円と月5万円では、借入可能額にどれくらい差がありますか？",
+    answer:
+      "年利15%・5年返済の近似例では、月3万円なら約126万円、月5万円なら約210万円が目安です。毎月返済額を2万円増やすだけで借入額の目安は約84万円広がりますが、総支払額もそのぶん増えます。",
+  },
+  {
+    question: "逆算で出した借入額は、そのまま借りて安全ですか？",
+    answer:
+      "逆算の結果はあくまで返済計画上の目安です。実際には生活費、他の固定費、緊急時の備えなども考慮し、余裕をもった借入額にすることが重要です。目安の上限ぎりぎりで借りるのはリスクが高くなります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
+  { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜月々返済額を固定すると借入額の目安は金利と年数で決まる" },
+  { id: "reading-points", label: "読み方のポイント" },
   { id: "reverse-idea", label: "月々返済額から借入額を逆算する考え方" },
   { id: "30k", label: "毎月3万円固定ならいくらまでが目安か" },
   { id: "50k", label: "毎月5万円固定ならいくらまでが目安か" },
@@ -49,6 +83,7 @@ const tocItems = [
   { id: "merit", label: "逆算で借入額を考えるメリット" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
+  { id: "editor-memo", label: "編集メモ" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -60,6 +95,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -77,6 +122,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事で扱う借入額は返済計画上の目安であり、審査上の借入可能額や与信枠を示すものではありません。一般的な固定金利・毎月返済の近似例です。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "月々の返済額を固定（3万円・5万円・7万円）し、借入額を逆算する",
+                "年利15%・3年返済・5年返済で比較する",
+                "一般的な固定金利・毎月返済の近似例で整理する",
+              ]}
+              reasonForConditions="「毎月いくら返せるか」を先に決め、金利と返済年数から借入額の目安を逆算する考え方です。返済額ごとに、返済年数で借入額と総利息がどう変わるかを比較しています。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -109,6 +165,29 @@ export default function Page() {
               <p className="mt-3">
                 つまり、毎月返済額を上げるか、返済期間を延ばすかで、借入額の目安は増えます。ただし、返済期間を長くすると総利息も増えるため、借入額だけで判断しないことが大切です。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "総支払額まで見る",
+                    body: "借入額の目安が増えても、返済年数が長いと総利息もかなり増えます。借入額だけでなく総支払額まで確認することが大切です。",
+                  },
+                  {
+                    label: "返済年数を延ばすほど利息は増える",
+                    body: "同じ月々返済額でも、返済年数を延ばすと借入額は増えますが、そのぶん総利息も増えます。",
+                  },
+                  {
+                    label: "シミュレーターで自分の条件を試す",
+                    body: "ここでの数値はあくまで近似例です。自分の金利・返済額・期間で試算するには、シミュレーターを活用してください。",
+                  },
+                ]}
+                misconceptions={[
+                  "「返済年数を延ばせばたくさん借りられるから得」と思いがちですが、そのぶん総利息は大幅に増えます。",
+                  "「月々の返済額が同じなら負担は同じ」と考えがちですが、返済年数が違えば総支払額はまったく異なります。",
+                ]}
+              />
             </section>
 
             <section id="reverse-idea">
@@ -299,6 +378,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="月々返済額を先に決めて借入額を逆算する考え方を整理し、無理のない返済計画の立て方を提案する記事です。"
+                reasonAxis="返済額（3万円・5万円・7万円）×返済年数（3年・5年）の組み合わせで、借入額の目安と総利息がどう変わるかを比較軸にしています。"
+                memo="借入額を最大化するのではなく、家計の許容範囲から安全な借入を考えるための逆算アプローチを主役にしています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -318,6 +405,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">借入額を増やすには返済年数を延ばせばいいですか？</h3>
                   <p className="mt-2">
                     借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく、最終的な総支払額まで含めて考えることが重要です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">月3万円と月5万円では、借入可能額にどれくらい差がありますか？</h3>
+                  <p className="mt-2">
+                    年利15%・5年返済の近似例では、月3万円なら約126万円、月5万円なら約210万円が目安です。毎月返済額を2万円増やすだけで借入額の目安は約84万円広がりますが、総支払額もそのぶん増えます。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">逆算で出した借入額は、そのまま借りて安全ですか？</h3>
+                  <p className="mt-2">
+                    逆算の結果はあくまで返済計画上の目安です。実際には生活費、他の固定費、緊急時の備えなども考慮し、余裕をもった借入額にすることが重要です。目安の上限ぎりぎりで借りるのはリスクが高くなります。
                   </p>
                 </div>
               </div>

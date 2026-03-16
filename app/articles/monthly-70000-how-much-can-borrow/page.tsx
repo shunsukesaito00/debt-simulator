@@ -3,25 +3,20 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
-import {
-  PrincipalBarChart,
-  TotalInterestBarChart,
-  TotalPaymentStackedChart,
-} from "./Monthly50kCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
-const ARTICLE_URL = `${BASE}/articles/monthly-50000-how-much-can-borrow`;
-const ARTICLE_TITLE = "借金返済が月5万円ならいくらまで借りられる？返済額から逆算する目安を解説";
+const ARTICLE_URL = `${BASE}/articles/monthly-70000-how-much-can-borrow`;
+const ARTICLE_TITLE = "月7万円返済ならいくらまで借りられる？年利15%で3年・5年・7年の目安を解説";
 
 export const metadata: Metadata = {
   title: ARTICLE_TITLE,
   description:
-    "毎月5万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表とグラフでわかりやすく解説します。",
+    "毎月7万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表でわかりやすく解説します。",
   alternates: { canonical: ARTICLE_URL },
   openGraph: {
     title: ARTICLE_TITLE,
     description:
-      "毎月5万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表とグラフでわかりやすく解説します。",
+      "毎月7万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表でわかりやすく解説します。",
     url: ARTICLE_URL,
     type: "article",
   },
@@ -32,39 +27,39 @@ const jsonLd = {
   "@type": "Article",
   headline: ARTICLE_TITLE,
   description:
-    "毎月5万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表とグラフでわかりやすく解説します。",
+    "毎月7万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較表でわかりやすく解説します。",
   url: ARTICLE_URL,
-  datePublished: "2025-03-08",
-  dateModified: "2025-03-08",
+  datePublished: "2026-03-16",
+  dateModified: "2026-03-16",
   author: { "@type": "Organization", name: "借入返済シミュレーター" },
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
 const faqItems = [
   {
-    question: "月5万円返済なら何万円くらいまで借りられますか？",
+    question: "月7万円返済なら何万円くらいまで借りられますか？",
     answer:
-      "年利15%の近似例では、3年返済で約144万円、5年返済で約210万円、7年返済で約255万円が目安です。実際の条件によって変わります。",
+      "年利15%の近似例では、3年返済で約206万円、5年返済で約294万円、7年返済で約359万円が目安です。実際の条件によって変わります。",
   },
   {
-    question: "月5万円返済なら200万円借りても大丈夫ですか？",
+    question: "月7万円返済なら300万円借りても大丈夫ですか？",
     answer:
-      "年利15%の近似例では、5年返済前後を前提にすると200万円台前半が一つの目安になります。ただし、生活費や他の支出も踏まえて無理のない返済計画かを確認する必要があります。",
+      "年利15%の近似例では、5年返済で約294万円が目安なので、300万円はほぼ上限に近い水準です。生活費や他の支出も踏まえて無理のない返済計画かを確認する必要があります。",
   },
   {
-    question: "月5万円返済で借入額を増やす方法はありますか？",
+    question: "月7万円返済で借入額を増やす方法はありますか？",
     answer:
       "返済期間を延ばせば借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく総支払額とのバランスを見ることが重要です。",
   },
   {
-    question: "月5万円返済で安全に借りられる目安はどのくらいですか？",
+    question: "月5万円と月7万円では借入可能額はどのくらい違いますか？",
     answer:
-      "一概には言えませんが、生活費や他の固定費を差し引いたうえで無理なく返せる範囲が前提です。年利15%の場合、3年返済の約144万円は比較的総利息を抑えやすい目安になります。",
+      "年利15%・5年返済の場合、月5万円では約210万円、月7万円では約294万円が目安です。月2万円の差で借入可能額は約84万円変わりますが、総利息も増える点に注意が必要です。",
   },
   {
     question: "返済期間を長くすると、借入額以外に何が変わりますか？",
     answer:
-      "返済期間が長くなると、総利息が大幅に増えます。たとえば3年返済と7年返済では、借入額の目安は約111万円の差ですが、総利息は約129万円も差が出ます。完済までに払う総額が大きく変わる点に注意が必要です。",
+      "返済期間が長くなると、総利息が大幅に増えます。たとえば3年返済と7年返済では、借入額の目安は約153万円の差ですが、総利息は約183万円も差が出ます。完済までに払う総額が大きく変わる点に注意が必要です。",
   },
 ];
 
@@ -72,13 +67,13 @@ const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
 const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 const tocItems = [
-  { id: "conclusion", label: "結論｜月5万円返済なら借入額の目安は返済年数で大きく変わる" },
-  { id: "point", label: "「月5万円ならいくらまで借りられる？」を考えるときのポイント" },
+  { id: "conclusion", label: "結論｜月7万円返済なら借入額の目安は返済年数で大きく変わる" },
+  { id: "point", label: "「月7万円ならいくらまで借りられる？」を考えるときのポイント" },
   { id: "3years", label: "3年返済ならいくらまでが目安か" },
   { id: "5years", label: "5年返済ならいくらまでが目安か" },
   { id: "7years", label: "7年返済ならいくらまでが目安か" },
   { id: "compare", label: "3年・5年・7年返済を比較するとどう違うか" },
-  { id: "choose", label: "月5万円返済ならどの返済期間を選ぶべきか" },
+  { id: "choose", label: "月7万円返済ならどの返済期間を選ぶべきか" },
   { id: "reason", label: "借入額を決めるときに毎月返済額だけで判断しない方がよい理由" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
@@ -124,11 +119,11 @@ export default function Page() {
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
-                "このページでは「毎月5万円返済」を基準に借入可能額を逆算する",
+                "このページでは「毎月7万円返済」を基準に借入可能額を逆算する",
                 "年利15%を前提に、3年・5年・7年の返済期間で比較する",
                 "一般的な固定金利・毎月返済の近似例で整理する",
               ]}
-              reasonForConditions="毎月5万円という返済額を固定し、金利と返済期間の違いによって借入額の目安がどう変わるかを見るための条件設定です。実際の借入可能額は審査や商品仕様によって異なります。"
+              reasonForConditions="毎月7万円という返済額を固定し、金利と返済期間の違いによって借入額の目安がどう変わるかを見るための条件設定です。実際の借入可能額は審査や商品仕様によって異なります。"
             />
           </section>
 
@@ -147,18 +142,18 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
             <p>
-              毎月5万円までなら返済できそうだと考えたとき、逆に「それならいくらまで借りると現実的なのか」が気になる方は多いはずです。借入額だけを先に決めてしまうと、あとから毎月の返済負担が重く感じることがあります。
+              毎月7万円までなら返済できそうだと考えたとき、逆に「それならいくらまで借りると現実的なのか」が気になる方は多いはずです。借入額だけを先に決めてしまうと、あとから毎月の返済負担が重く感じることがあります。
             </p>
             <p>
-              この記事では、毎月5万円返済できるケースを前提に、年利15%で3年・5年・7年返済した場合、それぞれどれくらいの借入額が目安になるのかをわかりやすく整理します。最後に、
+              この記事では、毎月7万円返済できるケースを前提に、年利15%で3年・5年・7年返済した場合、それぞれどれくらいの借入額が目安になるのかをわかりやすく整理します。最後に、
               <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">返済シミュレーター</Link>
               への導線も用意しています。
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">結論｜月5万円返済なら借入額の目安は返済年数で大きく変わる</h2>
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">結論｜月7万円返済なら借入額の目安は返済年数で大きく変わる</h2>
               <p className="mt-3">
-                結論から言うと、毎月5万円返済できるとしても、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年返済なら約144万円、5年返済なら約210万円、7年返済なら約255万円が目安です。
+                結論から言うと、毎月7万円返済できるとしても、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年返済なら約206万円、5年返済なら約294万円、7年返済なら約359万円が目安です。
               </p>
               <p className="mt-3">
                 ただし、返済期間を長くすると借入可能額は大きく見える一方で、総利息も大きく増えます。毎月返済額だけを見て借入額を決めると、総支払額が想像以上に膨らむ点には注意が必要です。
@@ -170,74 +165,74 @@ export default function Page() {
                 points={[
                   {
                     label: "金利が高いほど借入可能額の目安は小さくなる",
-                    body: "同じ月5万円でも、金利が高いと利息に回る割合が増えるため、元本として借りられる額は減ります。",
+                    body: "同じ月7万円でも、金利が高いと利息に回る割合が増えるため、元本として借りられる額は減ります。",
                   },
                   {
                     label: "返済期間を延ばすと借入額は増えるが総利息も増える",
-                    body: "7年返済なら約255万円まで借りられる目安ですが、総利息は3年返済の約4.6倍になります。",
+                    body: "7年返済なら約359万円まで借りられる目安ですが、総利息は3年返済の約5倍になります。",
                   },
                   {
                     label: "毎月返済額だけでなく総支払額まで見ることが重要",
-                    body: "「月5万円で返せる」だけで判断すると、最終的に支払う総額が想像以上に膨らむことがあります。",
+                    body: "「月7万円で返せる」だけで判断すると、最終的に支払う総額が想像以上に膨らむことがあります。",
                   },
                 ]}
                 misconceptions={[
-                  "「月5万円返せるなら200万円以上借りても問題ない」と考えがちですが、返済期間によっては総利息だけで100万円を超えることもあります。",
+                  "「月7万円返せるなら300万円以上借りても問題ない」と考えがちですが、返済期間によっては総利息だけで100万円を超えることもあります。",
                   "「返済期間を長くした方が有利」とは限りません。借入額の目安は増えますが、総支払額は大きくなります。",
                 ]}
               />
             </section>
 
             <section id="point">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">「月5万円ならいくらまで借りられる？」を考えるときのポイント</h2>
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">「月7万円ならいくらまで借りられる？」を考えるときのポイント</h2>
               <p className="mt-3">
-                この問いに対して重要なのは、「金融機関が審査上いくら貸してくれるか」と「返済計画上、毎月5万円で無理なく返せる借入額」は別だということです。
+                この問いに対して重要なのは、「金融機関が審査上いくら貸してくれるか」と「返済計画上、毎月7万円で無理なく返せる借入額」は別だということです。
               </p>
               <p className="mt-3">
-                本記事で扱うのは後者です。つまり、毎月5万円返済する前提で、金利と返済期間から逆算したときに、どの程度の借入額なら収まりやすいか、という目安を示します。
+                本記事で扱うのは後者です。つまり、毎月7万円返済する前提で、金利と返済期間から逆算したときに、どの程度の借入額なら収まりやすいか、という目安を示します。
               </p>
             </section>
 
             <section id="3years">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">3年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
-                年利15%で毎月5万円返済し、3年で完済したい場合、借入額の目安は約144.2万円です。総支払額は約180万円、総利息は約35.8万円になります。
+                年利15%で毎月7万円返済し、3年で完済したい場合、借入額の目安は約206万円です。総支払額は約252万円、総利息は約46万円になります。
               </p>
               <p className="mt-3">
-                3年返済は借入可能額の目安こそ小さめですが、その分だけ利息負担は抑えやすいのが特徴です。毎月5万円をしっかり返済に回せるなら、総支払額を小さくしやすい選択肢です。
+                3年返済は借入可能額の目安こそ200万円台前半にとどまりますが、その分だけ利息負担は抑えやすいのが特徴です。毎月7万円をしっかり返済に回せるなら、総支払額を小さくしやすい選択肢です。
               </p>
             </section>
 
             <section id="5years">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">5年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
-                同じく年利15%・毎月5万円返済で、5年返済を前提にすると、借入額の目安は約210.1万円です。総支払額は約300万円、総利息は約89.9万円になります。
+                同じく年利15%・毎月7万円返済で、5年返済を前提にすると、借入額の目安は約294万円です。総支払額は約420万円、総利息は約126万円になります。
               </p>
               <p className="mt-3">
-                3年返済より毎月の負担は同じでも、返済期間を延ばすことで借入可能額の目安は増えます。ただし、その代わりに利息負担は大きくなります。借入額と総利息のバランスを取りたい人向けの考え方です。
+                3年返済より毎月の負担は同じでも、返済期間を延ばすことで借入可能額の目安は約88万円増えます。ただし、その代わりに総利息は約80万円増える計算です。借入額と総利息のバランスを取りたい人向けの考え方です。
               </p>
             </section>
 
             <section id="7years">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">7年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
-                さらに7年返済まで延ばすと、毎月5万円返済で借入額の目安は約255.3万円になります。総支払額は約420万円、総利息は約164.7万円です。
+                さらに7年返済まで延ばすと、毎月7万円返済で借入額の目安は約359万円になります。総支払額は約588万円、総利息は約229万円です。
               </p>
               <p className="mt-3">
-                借入額の目安は大きくなりますが、総利息もかなり増えます。毎月5万円で返せるからといって、長期返済を前提に借入額を増やしすぎると、最終的な支払総額が重くなりやすい点には注意が必要です。
+                借入額の目安は大きくなりますが、総利息もかなり増えます。毎月7万円で返せるからといって、長期返済を前提に借入額を増やしすぎると、最終的な支払総額が重くなりやすい点には注意が必要です。
               </p>
             </section>
 
             <section id="compare">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">3年・5年・7年返済を比較するとどう違うか</h2>
-              <p className="mt-3">毎月5万円返済という条件は同じでも、返済期間が違うだけで、借入額の目安と総利息はかなり変わります。</p>
+              <p className="mt-3">毎月7万円返済という条件は同じでも、返済期間が違うだけで、借入額の目安と総利息はかなり変わります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
-                <li>3年返済: 借入額目安約1,442,000円 / 総利息約358,000円</li>
-                <li>5年返済: 借入額目安約2,101,000円 / 総利息約899,000円</li>
-                <li>7年返済: 借入額目安約2,553,000円 / 総利息約1,647,000円</li>
+                <li>3年返済: 借入額目安約2,060,000円 / 総利息約460,000円</li>
+                <li>5年返済: 借入額目安約2,940,000円 / 総利息約1,260,000円</li>
+                <li>7年返済: 借入額目安約3,590,000円 / 総利息約2,290,000円</li>
               </ul>
               <p className="mt-3">
-                借入額だけを見ると7年返済が有利に見えますが、総利息は3年返済より約129万円も多くなります。借入可能額の目安だけでなく、最終的にいくら払うかまで含めて考えることが重要です。
+                借入額だけを見ると7年返済が有利に見えますが、総利息は3年返済より約183万円も多くなります。借入可能額の目安だけでなく、最終的にいくら払うかまで含めて考えることが重要です。
               </p>
 
               <div className="mt-6 overflow-x-auto">
@@ -254,24 +249,24 @@ export default function Page() {
                   <tbody className="text-gray-700">
                     <tr className="border-b border-gray-200">
                       <td className="py-3 pr-4">3年返済</td>
-                      <td className="py-3 pr-4">約1,442,000円</td>
-                      <td className="py-3 pr-4">約50,000円</td>
-                      <td className="py-3 pr-4">約1,800,000円</td>
-                      <td className="py-3">約358,000円</td>
+                      <td className="py-3 pr-4">約2,060,000円</td>
+                      <td className="py-3 pr-4">約70,000円</td>
+                      <td className="py-3 pr-4">約2,520,000円</td>
+                      <td className="py-3">約460,000円</td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-3 pr-4">5年返済</td>
-                      <td className="py-3 pr-4">約2,101,000円</td>
-                      <td className="py-3 pr-4">約50,000円</td>
-                      <td className="py-3 pr-4">約3,000,000円</td>
-                      <td className="py-3">約899,000円</td>
+                      <td className="py-3 pr-4">約2,940,000円</td>
+                      <td className="py-3 pr-4">約70,000円</td>
+                      <td className="py-3 pr-4">約4,200,000円</td>
+                      <td className="py-3">約1,260,000円</td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-3 pr-4">7年返済</td>
-                      <td className="py-3 pr-4">約2,553,000円</td>
-                      <td className="py-3 pr-4">約50,000円</td>
-                      <td className="py-3 pr-4">約4,200,000円</td>
-                      <td className="py-3">約1,647,000円</td>
+                      <td className="py-3 pr-4">約3,590,000円</td>
+                      <td className="py-3 pr-4">約70,000円</td>
+                      <td className="py-3 pr-4">約5,880,000円</td>
+                      <td className="py-3">約2,290,000円</td>
                     </tr>
                   </tbody>
                 </table>
@@ -279,46 +274,22 @@ export default function Page() {
                   返済期間を延ばすと借入額の目安は増えますが、総支払額と総利息も大きくなります。
                 </p>
               </div>
-
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
-                <h3 className="text-base font-black text-gray-900">返済期間別の借入額目安</h3>
-                <div className="mt-4">
-                  <PrincipalBarChart />
-                </div>
-              </div>
-
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
-                <h3 className="text-base font-black text-gray-900">総利息の比較</h3>
-                <div className="mt-4">
-                  <TotalInterestBarChart />
-                </div>
-              </div>
-
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
-                <h3 className="text-base font-black text-gray-900">総支払額の内訳（元本と利息）</h3>
-                <div className="mt-4">
-                  <TotalPaymentStackedChart />
-                </div>
-                <p className="mt-4 text-xs text-gray-600">
-                  返済期間を延ばすと借入額の目安は増えますが、そのぶん総支払額と総利息も大きくなります。
-                </p>
-              </div>
             </section>
 
             <section id="choose">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">月5万円返済ならどの返済期間を選ぶべきか</h2>
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">月7万円返済ならどの返済期間を選ぶべきか</h2>
               <p className="mt-3">
-                どれが向いているかは、何を優先するかで変わります。総支払額を抑えたいなら3年返済、借入額と返済負担のバランスを取りたいなら5年返済、毎月5万円の中でより大きな借入額を確保したいなら7年返済という考え方になります。
+                どれが向いているかは、何を優先するかで変わります。総支払額を抑えたいなら3年返済、借入額と返済負担のバランスを取りたいなら5年返済、毎月7万円の中でより大きな借入額を確保したいなら7年返済という考え方になります。
               </p>
               <p className="mt-3">
-                ただし、返済期間を長くするほど利息負担は重くなります。毎月5万円返せるからといって、単純に長期返済で借入額を増やすのが最適とは限りません。
+                ただし、返済期間を長くするほど利息負担は重くなります。毎月7万円返せるからといって、単純に長期返済で借入額を増やすのが最適とは限りません。
               </p>
             </section>
 
             <section id="reason">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">借入額を決めるときに毎月返済額だけで判断しない方がよい理由</h2>
               <p className="mt-3">
-                毎月5万円という数字だけを見ると、返済できそうに感じるかもしれません。しかし実際には、生活費、他の固定費、突発的な支出、生活防衛資金の確保なども考える必要があります。
+                毎月7万円という数字だけを見ると、返済できそうに感じるかもしれません。しかし実際には、生活費、他の固定費、突発的な支出、生活防衛資金の確保なども考える必要があります。
               </p>
               <p className="mt-3">
                 また、返済額が同じでも、返済期間が長いと総支払額は大きく増えます。そのため、借入額を決めるときは「毎月いくら払えるか」だけでなく、「総額でいくら払うことになるか」も見ることが重要です。
@@ -328,7 +299,7 @@ export default function Page() {
             <section id="simulator">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
-                ここまでの数値は、あくまで「毎月5万円・年利15%」という固定条件の近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
+                ここまでの数値は、あくまで「毎月7万円・年利15%」という固定条件の近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
               </p>
               <p className="mt-3">
                 そのため、最終的には自分の条件を入れて確認するのが一番確実です。
@@ -357,9 +328,9 @@ export default function Page() {
 
             <section id="editor-memo">
               <ArticleEditorMemo
-                purpose="「月5万円なら安全に借りられる額はいくらか」という逆算の疑問に、具体的な数字で答えることを目的にしています。"
+                purpose="「月7万円なら安全に借りられる額はいくらか」という逆算の疑問に、具体的な数字で答えることを目的にしています。"
                 reasonAxis="返済期間（3年・5年・7年）を軸に、借入額の目安と総利息の違いを比較できる構成にしています。"
-                memo="毎月返済額から逆算する記事の一つとして、月5万円を基準にしています。借入額だけでなく総支払額まで含めて判断する重要性を伝えています。"
+                memo="毎月返済額から逆算する記事の一つとして、月7万円を基準にしています。月5万円の記事とセットで、返済額の違いによる借入可能額の変化を把握しやすくしています。"
               />
             </section>
 
@@ -367,33 +338,33 @@ export default function Page() {
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">月5万円返済なら何万円くらいまで借りられますか？</h3>
+                  <h3 className="text-base font-black text-gray-900">月7万円返済なら何万円くらいまで借りられますか？</h3>
                   <p className="mt-2">
-                    年利15%の近似例では、3年返済で約144万円、5年返済で約210万円、7年返済で約255万円が目安です。実際の条件によって変わります。
+                    年利15%の近似例では、3年返済で約206万円、5年返済で約294万円、7年返済で約359万円が目安です。実際の条件によって変わります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">月5万円返済なら200万円借りても大丈夫ですか？</h3>
+                  <h3 className="text-base font-black text-gray-900">月7万円返済なら300万円借りても大丈夫ですか？</h3>
                   <p className="mt-2">
-                    年利15%の近似例では、5年返済前後を前提にすると200万円台前半が一つの目安になります。ただし、生活費や他の支出も踏まえて無理のない返済計画かを確認する必要があります。
+                    年利15%の近似例では、5年返済で約294万円が目安なので、300万円はほぼ上限に近い水準です。生活費や他の支出も踏まえて無理のない返済計画かを確認する必要があります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">月5万円返済で借入額を増やす方法はありますか？</h3>
+                  <h3 className="text-base font-black text-gray-900">月7万円返済で借入額を増やす方法はありますか？</h3>
                   <p className="mt-2">
                     返済期間を延ばせば借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく総支払額とのバランスを見ることが重要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">月5万円返済で安全に借りられる目安はどのくらいですか？</h3>
+                  <h3 className="text-base font-black text-gray-900">月5万円と月7万円では借入可能額はどのくらい違いますか？</h3>
                   <p className="mt-2">
-                    一概には言えませんが、生活費や他の固定費を差し引いたうえで無理なく返せる範囲が前提です。年利15%の場合、3年返済の約144万円は比較的総利息を抑えやすい目安になります。
+                    年利15%・5年返済の場合、月5万円では約210万円、月7万円では約294万円が目安です。月2万円の差で借入可能額は約84万円変わりますが、総利息も増える点に注意が必要です。
                   </p>
                 </div>
                 <div>
                   <h3 className="text-base font-black text-gray-900">返済期間を長くすると、借入額以外に何が変わりますか？</h3>
                   <p className="mt-2">
-                    返済期間が長くなると、総利息が大幅に増えます。たとえば3年返済と7年返済では、借入額の目安は約111万円の差ですが、総利息は約129万円も差が出ます。完済までに払う総額が大きく変わる点に注意が必要です。
+                    返済期間が長くなると、総利息が大幅に増えます。たとえば3年返済と7年返済では、借入額の目安は約153万円の差ですが、総利息は約183万円も差が出ます。完済までに払う総額が大きく変わる点に注意が必要です。
                   </p>
                 </div>
               </div>
@@ -402,25 +373,36 @@ export default function Page() {
             <section id="summary">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
-                毎月5万円返済できる場合でも、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年で約144万円、5年で約210万円、7年で約255万円が目安です。
+                毎月7万円返済できる場合でも、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年で約206万円、5年で約294万円、7年で約359万円が目安です。
               </p>
               <p className="mt-3">
-                ただし、返済期間を長くすると借入額の目安は増える一方で、総利息も大きく増えます。借入額を考えるときは、毎月返済額だけでなく、総支払額まで含めて判断することが大切です。自分の条件で試算したい場合は、
+                ただし、返済期間を長くすると借入額の目安は増える一方で、総利息も大きく増えます。借入額を考えるときは、毎月返済額だけでなく、総支払額まで含めて判断することが大切です。
+              </p>
+              <p className="mt-3">
+                月5万円の返済で考えたい方は
+                <Link href="/articles/monthly-50000-how-much-can-borrow" className="font-bold text-gray-900 hover:underline">月5万円ならいくらまで借りられる？</Link>
+                も参考にしてください。自分の条件で試算したい場合は、
                 <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">返済シミュレーター</Link>
                 で確認できます。
               </p>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/simulator/cardloan"
                   className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
                 >
                   借入返済シミュレーターで計算する →
                 </Link>
+                <Link
+                  href="/articles"
+                  className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-3 text-sm font-black text-gray-900 hover:bg-gray-50"
+                >
+                  記事一覧へ →
+                </Link>
               </div>
             </section>
           </div>
 
-          <ArticleFooter articleSlug="monthly-50000-how-much-can-borrow" />
+          <ArticleFooter articleSlug="monthly-70000-how-much-can-borrow" />
         </div>
       </article>
     </>

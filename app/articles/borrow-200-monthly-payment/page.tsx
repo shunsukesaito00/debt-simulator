@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { MonthlyAndInterestBarCharts200, TotalPaymentStackedChart200 } from "./InterestCharts200";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -35,6 +36,37 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "借金200万円の月々返済額はどれくらいですか？",
+    answer:
+      "年利15%の目安では、3年返済なら約69,329円、5年返済なら約47,580円です。実際には商品条件により変動します。",
+  },
+  {
+    question: "借金200万円の利息はどれくらいかかりますか？",
+    answer:
+      "年利15%で3年返済なら総利息は約49.6万円、5年返済なら約85.5万円が目安です。返済期間が長くなると利息は大きくなります。",
+  },
+  {
+    question: "借金200万円を早く返す方法はありますか？",
+    answer:
+      "返済期間を短くする、追加返済を行う、金利条件を見直す、の3つが基本です。無理のない範囲で毎月の返済額を上げられると、総利息は下がりやすくなります。",
+  },
+  {
+    question: "借金200万円と100万円では利息の負担はどれくらい違いますか？",
+    answer:
+      "年利15%・5年返済の場合、100万円なら総利息は約42.7万円ですが、200万円では約85.5万円と単純に2倍になります。借入額が増えると利息の絶対額も大きくなるため、返済期間の選択がより重要になります。",
+  },
+  {
+    question: "月々5万円以下で200万円を返済することはできますか？",
+    answer:
+      "年利15%・5年返済なら月々約47,580円で返済できる計算です。ただし返済期間が長くなると総利息も増えるため、月々の負担と総支払額のバランスを確認して判断してください。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜借金200万円の月々返済はいくらか" },
   { id: "reason", label: "借入200万円で返済額が重くなりやすい理由" },
@@ -56,6 +88,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -308,6 +350,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">借金200万円を早く返す方法はありますか？</h3>
                   <p className="mt-2">
                     返済期間を短くする、追加返済を行う、金利条件を見直す、の3つが基本です。無理のない範囲で毎月の返済額を上げられると、総利息は下がりやすくなります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">借金200万円と100万円では利息の負担はどれくらい違いますか？</h3>
+                  <p className="mt-2">
+                    年利15%・5年返済の場合、100万円なら総利息は約42.7万円ですが、200万円では約85.5万円と単純に2倍になります。借入額が増えると利息の絶対額も大きくなるため、返済期間の選択がより重要になります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">月々5万円以下で200万円を返済することはできますか？</h3>
+                  <p className="mt-2">
+                    年利15%・5年返済なら月々約47,580円で返済できる計算です。ただし返済期間が長くなると総利息も増えるため、月々の負担と総支払額のバランスを確認して判断してください。
                   </p>
                 </div>
               </div>

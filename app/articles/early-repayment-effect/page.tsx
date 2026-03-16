@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { EarlyRepaymentInterestBarChart, EarlyRepaymentEffectCards } from "./EarlyRepaymentCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -34,6 +36,36 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "繰り上げ返済をすると利息は必ず減りますか？",
+    answer:
+      "一般的には、元本を早く減らせるため、その後に発生する利息は減りやすくなります。ただし、手数料や商品仕様によって実際の効果は異なる場合があります。",
+  },
+  {
+    question: "繰り上げ返済は期間短縮型と返済額軽減型のどちらが得ですか？",
+    answer:
+      "利息軽減の効果を重視するなら、一般には期間短縮型の方が有利に見えやすいです。一方、毎月の返済負担を軽くしたい場合は返済額軽減型が考えやすいです。",
+  },
+  {
+    question: "繰り上げ返済はいつやると効果が大きいですか？",
+    answer: "一般には、残高が大きい早い段階で元本を減らせるほど、その後の利息軽減効果は出やすくなります。",
+  },
+  {
+    question: "繰り上げ返済は返済期間の短縮と毎月返済額の軽減、どちらを選ぶべきですか？",
+    answer:
+      "総利息をできるだけ減らしたいなら期間短縮型、毎月の家計に余裕を作りたいなら返済額軽減型が向いています。どちらが正解というものではなく、自分の優先度に合わせて選ぶのが基本です。",
+  },
+  {
+    question: "繰り上げ返済にデメリットはありますか？",
+    answer:
+      "手元資金が減るため、急な出費に備える生活防衛資金が不足するリスクがあります。また、商品によっては繰り上げ返済に手数料がかかる場合もあるため、実行前に契約内容を確認することが大切です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜繰り上げ返済は利息軽減と完済前倒しに効果がある" },
   { id: "what-is", label: "繰り上げ返済とは" },
@@ -57,6 +89,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -74,6 +116,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、100万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "このページでは「100万円・年利15%・5年返済」を前提に繰り上げ返済の効果を比較する",
+                "1年後に10万円を追加返済したケースを例にする",
+                "期間短縮型と返済額軽減型の2パターンで整理する",
+              ]}
+              reasonForConditions="繰り上げ返済の効果は条件によって変わるため、具体的な数字を固定して比較しています。ここでの試算は概算であり、実際の商品仕様や手数料によって結果は異なります。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -106,6 +159,29 @@ export default function Page() {
               <p className="mt-3">
                 一方で、返済期間をそのままにして毎月の返済額を軽くする考え方もあります。この場合は家計の毎月負担を下げやすい反面、利息軽減効果は期間短縮型ほど大きくなりにくいです。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "繰り上げ返済は総利息を減らしやすい",
+                    body: "元本を早く減らすことで、その後に発生する利息が軽くなります。追加返済額が小さくても効果は出やすいです。",
+                  },
+                  {
+                    label: "少額の追加返済でも差が出る",
+                    body: "10万円の追加返済でも、利息は数万円単位で変わることがあります。まとまった金額でなくても始める価値があります。",
+                  },
+                  {
+                    label: "期間短縮型と返済額軽減型で効果が異なる",
+                    body: "利息軽減を重視するなら期間短縮型、毎月の負担を軽くしたいなら返済額軽減型と、目的で選び方が変わります。",
+                  },
+                ]}
+                misconceptions={[
+                  "「繰り上げ返済はまとまったお金がないと意味がない」と思われがちですが、少額でも元本が減れば利息軽減の効果は出ます。",
+                  "「期間短縮型の方が常に得」とは限りません。家計の安定を優先するなら返済額軽減型が適切な場合もあります。",
+                ]}
+              />
             </section>
 
             <section id="what-is">
@@ -275,6 +351,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="繰り上げ返済の効果を具体的な数字で示すことで、「追加返済にはどれくらい意味があるのか」を判断できるようにすることを目的にしています。"
+                reasonAxis="期間短縮型と返済額軽減型の比較を軸に、利息軽減と家計負担のバランスを読者が選べる構成にしています。"
+                memo="返済改善カテゴリの中心記事の一つとして、繰り上げ返済の基本的な効果を整理しています。個別の金額シミュレーション記事への導線としても機能します。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -294,6 +378,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">繰り上げ返済はいつやると効果が大きいですか？</h3>
                   <p className="mt-2">
                     一般には、残高が大きい早い段階で元本を減らせるほど、その後の利息軽減効果は出やすくなります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">繰り上げ返済は返済期間の短縮と毎月返済額の軽減、どちらを選ぶべきですか？</h3>
+                  <p className="mt-2">
+                    総利息をできるだけ減らしたいなら期間短縮型、毎月の家計に余裕を作りたいなら返済額軽減型が向いています。どちらが正解というものではなく、自分の優先度に合わせて選ぶのが基本です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">繰り上げ返済にデメリットはありますか？</h3>
+                  <p className="mt-2">
+                    手元資金が減るため、急な出費に備える生活防衛資金が不足するリスクがあります。また、商品によっては繰り上げ返済に手数料がかかる場合もあるため、実行前に契約内容を確認することが大切です。
                   </p>
                 </div>
               </div>

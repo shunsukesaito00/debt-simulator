@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   MonthlyPaymentBarChart,
   TotalInterestBarChart,
@@ -38,8 +40,39 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "100万円を100ヶ月で返すと毎月いくらですか？",
+    answer: "年利15%の近似例では、毎月約16,135円が目安です。実際の条件によって変わります。",
+  },
+  {
+    question: "100万円を100ヶ月返済すると利息はいくらですか？",
+    answer: "年利15%の近似例では、総利息は約613,500円が目安です。返済期間が長いため、利息負担はかなり重くなります。",
+  },
+  {
+    question: "100ヶ月返済は危険ですか？",
+    answer:
+      "危険と断定はできませんが、毎月返済額が低く見える一方で、総利息と返済期間の長さが大きな負担になります。総支払額まで確認して判断することが重要です。",
+  },
+  {
+    question: "100ヶ月より長い返済期間にするとどうなりますか？",
+    answer:
+      "返済期間をさらに延ばすと毎月返済額はわずかに下がりますが、総利息は加速度的に増えます。たとえば120ヶ月にすると総利息は100ヶ月の場合よりさらに数万〜十数万円増える可能性があり、完済まで10年かかる計算になります。",
+  },
+  {
+    question: "返済期間を短くするにはどうすればいいですか？",
+    answer:
+      "毎月の返済額を増やす、繰り上げ返済を活用する、ボーナス月に追加返済をするなどの方法があります。たとえば100ヶ月を60ヶ月に短縮すると総利息は約18.6万円減る近似例になります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
+  { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜100ヶ月返済のリスクは「毎月は軽いが、総利息が重い」こと" },
+  { id: "reading-points", label: "読み方のポイント" },
   { id: "why-danger", label: "なぜ100ヶ月返済は危険と言われやすいのか" },
   { id: "compare", label: "36ヶ月・60ヶ月・100ヶ月でどう違うか" },
   { id: "problem", label: "100ヶ月返済の何が問題なのか" },
@@ -50,6 +83,7 @@ const tocItems = [
   { id: "reduce-risk", label: "リスクを下げるためにできること" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
+  { id: "editor-memo", label: "編集メモ" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -61,6 +95,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -78,6 +122,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "借入額100万円・年利15%・100ヶ月返済を中心に比較する",
+                "36ヶ月・60ヶ月・100ヶ月の3パターンで返済期間の違いを見る",
+                "一般的な固定金利・毎月返済の近似例で整理する",
+              ]}
+              reasonForConditions="100ヶ月（約8年4か月）は長期返済の典型例として取り上げています。36ヶ月・60ヶ月との比較で、返済期間が長くなると毎月返済額は下がる一方、総利息がどれだけ増えるかを示すためです。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -110,6 +165,29 @@ export default function Page() {
               <p className="mt-3">
                 つまり、毎月の負担を軽くした代わりに、返済が8年以上続き、利息だけで60万円超を支払う構造です。100万円を借りて、最終的な総支払額が約161.4万円になる点が、長期返済の大きなリスクです。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "長期返済は総利息が大きく増える",
+                    body: "100ヶ月返済では毎月返済額は低く見えますが、総利息は約61.4万円まで膨らみます。返済期間の長さが利息負担に直結します。",
+                  },
+                  {
+                    label: "毎月返済額が低い＝負担が軽いとは限らない",
+                    body: "月1.6万円で済むように見えても、8年以上返済が続き、総支払額は約161.4万円になります。月額だけで判断しないことが大切です。",
+                  },
+                  {
+                    label: "短い返済期間も検討する",
+                    body: "36ヶ月なら総利息は約24.8万円に抑えられます。毎月返済額は上がりますが、完済までの期間と総支払額は大きく改善します。",
+                  },
+                ]}
+                misconceptions={[
+                  "「毎月返済額が低ければ安心」と思いがちですが、返済期間が長くなるほど総利息と総支払額は大幅に増えます。",
+                  "「100ヶ月は長いが少しずつ返せるからいい」と感じがちですが、利息だけで60万円超を支払う構造になります。",
+                ]}
+              />
             </section>
 
             <section id="why-danger">
@@ -289,6 +367,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="100万円を100ヶ月かけて返済するリスクを具体的な数字で示し、長期返済の「見えにくいコスト」を意識してもらう記事です。"
+                reasonAxis="返済期間（36ヶ月・60ヶ月・100ヶ月）を比較軸にして、毎月返済額と総利息のトレードオフを可視化しています。"
+                memo="毎月返済額が低いことのメリットだけでなく、総利息と返済期間の長さが生むリスクをバランスよく伝えることを重視しています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -308,6 +394,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">100ヶ月返済は危険ですか？</h3>
                   <p className="mt-2">
                     危険と断定はできませんが、毎月返済額が低く見える一方で、総利息と返済期間の長さが大きな負担になります。総支払額まで確認して判断することが重要です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">100ヶ月より長い返済期間にするとどうなりますか？</h3>
+                  <p className="mt-2">
+                    返済期間をさらに延ばすと毎月返済額はわずかに下がりますが、総利息は加速度的に増えます。たとえば120ヶ月にすると総利息は100ヶ月の場合よりさらに数万〜十数万円増える可能性があり、完済まで10年かかる計算になります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">返済期間を短くするにはどうすればいいですか？</h3>
+                  <p className="mt-2">
+                    毎月の返済額を増やす、繰り上げ返済を活用する、ボーナス月に追加返済をするなどの方法があります。たとえば100ヶ月を60ヶ月に短縮すると総利息は約18.6万円減る近似例になります。
                   </p>
                 </div>
               </div>

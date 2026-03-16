@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   TotalInterestBarChart,
   PayoffMonthsBarChart,
@@ -39,6 +40,35 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "月5万円返済・金利15%なら100万円の利息はいくらですか？",
+    answer: "近似例では、完済まで約24か月、総利息は約157,947円です。条件によって変わります。",
+  },
+  {
+    question: "月5万円返済で200万円借りると総利息はいくらですか？",
+    answer: "近似例では、完済まで約56か月、総利息は約789,932円です。借入額が増えると利息も大きく増えます。",
+  },
+  {
+    question: "月5万円返済で300万円借りるのは危険ですか？",
+    answer:
+      "危険と断定はできませんが、近似例では完済まで約112か月、総利息は約257.9万円となり、負担はかなり重くなります。毎月返済額だけでなく、完済時期と総支払額まで見るべきです。",
+  },
+  {
+    question: "月5万円返済の場合、元本と利息の内訳はどう変わりますか？",
+    answer:
+      "返済初期は利息の占める割合が大きく、元本がなかなか減りません。返済が進むにつれて利息分が減り、元本への充当割合が増えていきます。借入額が大きいほどこの初期の利息割合が高い期間が長く続きます。",
+  },
+  {
+    question: "金利が10%なら、月5万円返済の総利息はどれくらい変わりますか？",
+    answer:
+      "金利が下がると総利息はかなり減ります。たとえば借入200万円・月5万円返済の場合、年利15%では総利息が約79万円ですが、年利10%なら総利息は大幅に軽くなります。金利の違いは長期返済ほど大きな差になります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜月5万円・金利15%でも借入額が増えると総利息は急増する" },
   { id: "why", label: "なぜ毎月返済額が同じでも総利息が大きく変わるのか" },
@@ -61,6 +91,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -325,6 +365,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">月5万円返済で300万円借りるのは危険ですか？</h3>
                   <p className="mt-2">
                     危険と断定はできませんが、近似例では完済まで約112か月、総利息は約257.9万円となり、負担はかなり重くなります。毎月返済額だけでなく、完済時期と総支払額まで見るべきです。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">月5万円返済の場合、元本と利息の内訳はどう変わりますか？</h3>
+                  <p className="mt-2">
+                    返済初期は利息の占める割合が大きく、元本がなかなか減りません。返済が進むにつれて利息分が減り、元本への充当割合が増えていきます。借入額が大きいほどこの初期の利息割合が高い期間が長く続きます。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">金利が10%なら、月5万円返済の総利息はどれくらい変わりますか？</h3>
+                  <p className="mt-2">
+                    金利が下がると総利息はかなり減ります。たとえば借入200万円・月5万円返済の場合、年利15%では総利息が約79万円ですが、年利10%なら総利息は大幅に軽くなります。金利の違いは長期返済ほど大きな差になります。
                   </p>
                 </div>
               </div>

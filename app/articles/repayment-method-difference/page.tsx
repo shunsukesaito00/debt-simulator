@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { TotalInterestBarChart, RepaymentBurdenComparisonChart } from "./RepaymentMethodCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -34,6 +36,35 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "元利均等返済と元金均等返済はどっちが得ですか？",
+    answer:
+      "総利息だけを見ると元金均等返済の方が有利になりやすいですが、返済開始当初の負担は重くなります。どちらが適切かは家計の余力によります。",
+  },
+  {
+    question: "毎月の返済額が一定なのはどれですか？",
+    answer: "一般的には元利均等返済と定額元利が、毎月の支払額を一定に近い形で管理しやすい方式です。",
+  },
+  {
+    question: "返済方式は後から変えられますか？",
+    answer: "商品によって異なります。後から変更できない場合もあるため、契約前に確認が必要です。",
+  },
+  {
+    question: "返済途中で返済方式を切り替えるとどうなりますか？",
+    answer:
+      "切り替えが可能な商品の場合、残高や残り返済回数をもとに再計算されます。切り替え前後で毎月返済額や総利息が変わるため、事前にシミュレーションで確認することをおすすめします。",
+  },
+  {
+    question: "カードローンやリボ払いにはどの返済方式が多いですか？",
+    answer:
+      "カードローンやリボ払いでは、毎月の支払額が一定の定額元利方式が多く採用されています。毎月の負担が安定する反面、返済額が低いと元本がなかなか減らず、完済が長引く場合があります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜元利均等と元金均等の一番大きな違い" },
   { id: "equal-payment", label: "元利均等返済とは" },
@@ -55,6 +86,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -72,6 +113,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "借入額100万円・年利15%を共通条件として4つの返済方式を比較する",
+                "元利均等・元金均等は36回返済、定額元利は月35,000円、定額元金は月30,000円で試算する",
+                "固定金利・毎月返済の考え方に基づく概算値を使用する",
+              ]}
+              reasonForConditions="同じ借入条件で返済方式だけを変えることで、方式ごとの「毎月の返済額の出方」「総利息」「完済期間」の違いを純粋に比較できるようにしています。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -104,6 +156,29 @@ export default function Page() {
               <p className="mt-3">
                 つまり、毎月の支出を安定させたい人には元利均等返済、総支払額を少しでも減らしたい人には元金均等返済が向いています。ただし、どちらが絶対に正解というわけではなく、家計の余力や返済計画によって向き不向きが変わります。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "元利均等 = 毎月一定で管理しやすいが総利息はやや多め",
+                    body: "毎月の返済額がほぼ一定なので家計管理がしやすい反面、同条件なら元金均等より総利息が多くなる傾向があります。",
+                  },
+                  {
+                    label: "元金均等 = 総利息を抑えやすいが初期負担が重い",
+                    body: "毎月返す元本が一定で残高の減りが早いため総利息は抑えやすいですが、返済開始当初の負担は大きくなります。",
+                  },
+                  {
+                    label: "どちらが正解ではなく、優先するものによって選ぶ",
+                    body: "毎月の支出を安定させたいか、総支払額を抑えたいかで向いている方式が変わります。定額元利・定額元金も含め、状況に合った選び方を整理しています。",
+                  },
+                ]}
+                misconceptions={[
+                  "「元金均等の方が必ず得」と思いがちですが、初期の返済負担に耐えられないと家計を圧迫し逆効果になることがあります。",
+                  "「返済方式はどれも同じようなもの」と思いがちですが、同じ条件でも総利息に数万円の差が出ることがあります。",
+                ]}
+              />
             </section>
 
             <section id="equal-payment">
@@ -353,6 +428,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="返済方式ごとの違いを整理し、読者が自分の状況に合った方式を選べるようにする比較記事です。"
+                reasonAxis="「毎月の負担を安定させたいか」「総支払額を抑えたいか」という判断軸で4つの方式を整理しています。"
+                memo="元利均等と元金均等の2方式比較を軸に、定額元利・定額元金も加えた4方式比較へ自然に広げる構成にしています。シミュレーターで方式を切り替えて試算できることへの導線も意識しています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -372,6 +455,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">返済方式は後から変えられますか？</h3>
                   <p className="mt-2">
                     商品によって異なります。後から変更できない場合もあるため、契約前に確認が必要です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">返済途中で返済方式を切り替えるとどうなりますか？</h3>
+                  <p className="mt-2">
+                    切り替えが可能な商品の場合、残高や残り返済回数をもとに再計算されます。切り替え前後で毎月返済額や総利息が変わるため、事前にシミュレーションで確認することをおすすめします。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">カードローンやリボ払いにはどの返済方式が多いですか？</h3>
+                  <p className="mt-2">
+                    カードローンやリボ払いでは、毎月の支払額が一定の定額元利方式が多く採用されています。毎月の負担が安定する反面、返済額が低いと元本がなかなか減らず、完済が長引く場合があります。
                   </p>
                 </div>
               </div>

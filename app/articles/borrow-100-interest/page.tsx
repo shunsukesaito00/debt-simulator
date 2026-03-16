@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { MonthlyAndInterestBarCharts, TotalPaymentStackedChart } from "./InterestCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -35,6 +36,37 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "借金100万円の利息は毎月いくらですか？",
+    answer:
+      "毎月の利息額は残高に応じて減っていくため一定ではありません。ただし、年利15%で借りる場合、借入初期は利息負担が比較的大きく、返済が進むにつれて徐々に減っていきます。",
+  },
+  {
+    question: "借金100万円を返すには毎月いくら必要ですか？",
+    answer:
+      "年利15%で3年返済なら毎月約34,665円、5年返済なら約23,790円が目安です。実際には商品条件により変動します。",
+  },
+  {
+    question: "借金100万円を早く返すコツはありますか？",
+    answer:
+      "返済期間を短くする、追加返済を行う、金利条件を見直す、の3つが基本です。毎月の返済額を少し上げるだけでも総利息は下がりやすくなります。",
+  },
+  {
+    question: "年利10%と年利15%では利息にどれくらい差が出ますか？",
+    answer:
+      "借金100万円を5年返済する場合、年利15%なら総利息は約42.7万円ですが、年利10%なら約27.5万円程度が目安です。金利が5%違うだけで総利息に約15万円の差が出ます。",
+  },
+  {
+    question: "借金100万円の総利息を減らすにはどうすればいいですか？",
+    answer:
+      "最も効果的なのは返済期間を短くすることです。3年返済なら5年返済より総利息が約18万円少なくなります。余裕がある月に追加返済するのも有効です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜借金100万円を年利15%で借りると利息はどれくらいか" },
   { id: "how-interest", label: "そもそも利息はどう計算されるのか" },
@@ -56,6 +88,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         {/* パンくず */}
@@ -313,6 +355,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">借金100万円を早く返すコツはありますか？</h3>
                   <p className="mt-2">
                     返済期間を短くする、追加返済を行う、金利条件を見直す、の3つが基本です。毎月の返済額を少し上げるだけでも総利息は下がりやすくなります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">年利10%と年利15%では利息にどれくらい差が出ますか？</h3>
+                  <p className="mt-2">
+                    借金100万円を5年返済する場合、年利15%なら総利息は約42.7万円ですが、年利10%なら約27.5万円程度が目安です。金利が5%違うだけで総利息に約15万円の差が出ます。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">借金100万円の総利息を減らすにはどうすればいいですか？</h3>
+                  <p className="mt-2">
+                    最も効果的なのは返済期間を短くすることです。3年返済なら5年返済より総利息が約18万円少なくなります。余裕がある月に追加返済するのも有効です。
                   </p>
                 </div>
               </div>

@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/privacy",
     "/disclaimer",
+    "/quick-reference",
+    "/tools/fixed-cost-impact",
   ];
 
   const articleRoutes = articlesList.map((a) => `/articles/${a.slug}`);

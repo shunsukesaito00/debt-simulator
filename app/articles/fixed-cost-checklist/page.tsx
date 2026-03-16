@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-checklist`;
@@ -34,6 +35,37 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "固定費見直しは何から始めるべきですか？",
+    answer:
+      "このページでは、すぐ変えやすい「サブスク」から始めることをおすすめしています。使っていないものの解約や一時停止は手軽にでき、小さくても改善を実感しやすいため、その後の通信費・保険などの見直しにもつなげやすくなります。",
+  },
+  {
+    question: "固定費はどれくらい削れますか？",
+    answer:
+      "人によって異なりますが、サブスク・通信費・保険・光熱費などを総合的に見直すと、月5,000円〜1万円程度の削減が見込めるケースも少なくありません。削減額は固定費削減インパクト計算で、1年・3年・5年でいくらになるかを確認できます。",
+  },
+  {
+    question: "家賃や保険を先に見直すべきですか？",
+    answer:
+      "金額は大きいですが、家賃は転居、保険は保障内容の理解が必要で、すぐには変えにくいです。このページでは、挫折しにくい順番として「サブスク → 通信費 → 保険 → 電気・ガス等 → 家賃・車」の順を推奨しています。まず着手しやすい項目で成功体験を積んでから、家賃・保険などの大物に進むと続けやすくなります。",
+  },
+  {
+    question: "固定費の見直しにはどれくらい時間がかかりますか？",
+    answer:
+      "サブスクの整理なら30分〜1時間程度で一通り確認できます。通信費のプラン変更は手続き含めて数日、保険の見直しは内容確認に1〜2週間かかることもあります。一度にすべてやる必要はなく、着手しやすいものから順番に進めるのがおすすめです。",
+  },
+  {
+    question: "チェックリストを一通り終えたら次は何をすればいいですか？",
+    answer:
+      "見直し後は、実際にいくら改善できたかを1〜2か月後に確認するのがおすすめです。改善額の累計は固定費削減インパクト計算で試算できます。また、浮いたお金を返済や貯蓄に回す場合は、借入返済シミュレーターで具体的な効果を確認するのも有効です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜固定費見直しは「すぐ変えやすいもの」から始める" },
@@ -63,6 +95,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -313,6 +355,18 @@ export default function Page() {
                   <dt className="font-bold text-gray-900">家賃や保険を先に見直すべきですか？</dt>
                   <dd className="mt-1 text-gray-700">
                     金額は大きいですが、家賃は転居、保険は保障内容の理解が必要で、すぐには変えにくいです。このページでは、挫折しにくい順番として「サブスク → 通信費 → 保険 → 電気・ガス等 → 家賃・車」の順を推奨しています。まず着手しやすい項目で成功体験を積んでから、家賃・保険などの大物に進むと続けやすくなります。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-bold text-gray-900">固定費の見直しにはどれくらい時間がかかりますか？</dt>
+                  <dd className="mt-1 text-gray-700">
+                    サブスクの整理なら30分〜1時間程度で一通り確認できます。通信費のプラン変更は手続き含めて数日、保険の見直しは内容確認に1〜2週間かかることもあります。一度にすべてやる必要はなく、着手しやすいものから順番に進めるのがおすすめです。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-bold text-gray-900">チェックリストを一通り終えたら次は何をすればいいですか？</dt>
+                  <dd className="mt-1 text-gray-700">
+                    見直し後は、実際にいくら改善できたかを1〜2か月後に確認するのがおすすめです。改善額の累計は固定費削減インパクト計算で試算できます。また、浮いたお金を返済や貯蓄に回す場合は、借入返済シミュレーターで具体的な効果を確認するのも有効です。
                   </dd>
                 </div>
               </dl>

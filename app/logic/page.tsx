@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import { SupplementPageFooterLogic } from "@/app/components/SupplementPageFooter";
 
-export const metadata = { title: "計算ロジック" };
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
+export const metadata: Metadata = {
+  title: "計算ロジック",
+  description:
+    "借入返済シミュレーターの計算前提・端数処理・返済方式の違い。月次計算・利息の求め方・元利均等・元金均等・定額返済の考え方を説明します。",
+  alternates: { canonical: `${BASE}/logic` },
+  openGraph: { title: "計算ロジック", description: "借入返済シミュレーターの計算前提と返済方式の違い。", url: `${BASE}/logic`, type: "website" },
+};
 
 export default function Page() {
   return (

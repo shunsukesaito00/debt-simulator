@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -35,17 +37,51 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "借入額が増えると何が一番重くなりますか？",
+    answer:
+      "毎月返済額、総利息、完済までの期間のすべてが重くなります。特に返済期間が長引くと利息負担が増えやすくなります。",
+  },
+  {
+    question: "100万円と200万円では返済負担はどれくらい違いますか？",
+    answer:
+      "年利15%・5年返済の近似例では、毎月返済額は約23,790円と約47,580円、総利息は約427,396円と約854,792円です。",
+  },
+  {
+    question: "借入額はどう決めるのが安全ですか？",
+    answer:
+      "借りたい額からではなく、毎月いくら返せるかから逆算して考える方が安全です。総支払額と完済までの期間まで含めて確認することが重要です。",
+  },
+  {
+    question: "借入額を決めるときに、金利の違いはどれくらい影響しますか？",
+    answer:
+      "金利が高いほど利息に回る割合が増え、同じ借入額でも総支払額が大きくなります。たとえば年利10%と15%では、借入額が同じでも総利息に数十万円の差が出ることがあります。",
+  },
+  {
+    question: "借入額100万円と300万円で迷ったら、どう判断すればよいですか？",
+    answer:
+      "まず毎月無理なく返済できる額を確認し、そこから逆算して借入額を決めるのが基本です。必要最低限の額に抑え、総利息と完済期間まで比較して判断することが大切です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
+  { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜借入額が増えるほど返済負担は重くなる" },
   { id: "monthly-vs-total", label: "まず確認したいのは「月々」と「総額」の両方" },
   { id: "100man", label: "借入100万円の返済負担" },
   { id: "200man", label: "借入200万円の返済負担" },
   { id: "300man", label: "借入300万円の返済負担" },
+  { id: "reading-points", label: "読み方のポイント" },
   { id: "compare-table", label: "借入額別に比較すると何が違うか" },
   { id: "reverse", label: "借入額を決めるときに大事なのは「逆算」" },
   { id: "category-read", label: "このカテゴリで読むべき記事" },
   { id: "simulator", label: "迷ったらシミュレーターで比較するのが早い" },
   { id: "notice", label: "注意点" },
+  { id: "editor-memo", label: "編集メモ" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -108,6 +144,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -137,6 +183,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際の商品や契約条件によって異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "年利15%・元利均等返済の近似例で比較している",
+                "借入額100万円・200万円・300万円の3パターンで整理している",
+                "5年返済と毎月5万円返済固定の2パターンで比較している",
+              ]}
+              reasonForConditions="年利15%はカードローンやリボ払いの一般的な水準です。100万・200万・300万は借入額として相談の多い金額帯であり、比較単位として選んでいます。概算値であり、実際の商品や契約条件によって異なります。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -245,6 +302,29 @@ export default function Page() {
                 </Link>
                 をご覧ください。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "月々返済額と総支払額の両方を見る",
+                    body: "月々だけ見ると長期返済の利息を見落としやすく、総額だけ見ると家計に収まるか判断できません。両方セットで確認してください。",
+                  },
+                  {
+                    label: "借入額が増えるほど利息負担は重くなりやすい",
+                    body: "元本が2倍になると利息も比例して増えます。さらに返済期間が長引くと利息が加速度的に膨らむケースがあります。",
+                  },
+                  {
+                    label: "借りたい額ではなく返せる額から逆算する",
+                    body: "「いくら借りられるか」より「毎月いくら返せるか」から考える方が、無理のない借入額を見つけやすくなります。",
+                  },
+                ]}
+                misconceptions={[
+                  "「借入額が2倍なら返済額も2倍で済む」と思いがちですが、返済期間が長くなると利息が上乗せされ、2倍以上に重く感じやすくなります。",
+                  "「月々返済額が小さければ安心」と考えがちですが、返済期間が長いほど総利息は大きくなるため、総額まで確認することが重要です。",
+                ]}
+              />
             </section>
 
             <section id="compare-table">
@@ -368,6 +448,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="借入額100万・200万・300万の返済負担を横並びで比較し、借入額選びの判断材料を提供するために書いています。"
+                reasonAxis="年利15%・5年返済と毎月5万円返済固定の2パターンで比較しているのは、返済期間固定と返済額固定の両面から負担の違いを見せるためです。"
+                memo="借入額別カテゴリのピラー記事として、個別記事（100万・200万・300万）や逆算記事への導線を担っています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">
                 よくある質問
@@ -395,6 +483,22 @@ export default function Page() {
                   </h3>
                   <p className="mt-2">
                     借りたい額からではなく、毎月いくら返せるかから逆算して考える方が安全です。総支払額と完済までの期間まで含めて確認することが重要です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    借入額を決めるときに、金利の違いはどれくらい影響しますか？
+                  </h3>
+                  <p className="mt-2">
+                    金利が高いほど利息に回る割合が増え、同じ借入額でも総支払額が大きくなります。たとえば年利10%と15%では、借入額が同じでも総利息に数十万円の差が出ることがあります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    借入額100万円と300万円で迷ったら、どう判断すればよいですか？
+                  </h3>
+                  <p className="mt-2">
+                    まず毎月無理なく返済できる額を確認し、そこから逆算して借入額を決めるのが基本です。必要最低限の額に抑え、総利息と完済期間まで比較して判断することが大切です。
                   </p>
                 </div>
               </div>

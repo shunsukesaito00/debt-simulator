@@ -8,6 +8,7 @@
 
 export const ARTICLE_CATEGORIES = [
   "fixed-cost",
+  "household",
   "improvement-effect",
   "loan-amount",
   "repayment-method",
@@ -20,6 +21,7 @@ export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number];
 
 export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
   "fixed-cost": "固定費見直し",
+  household: "家計管理",
   "improvement-effect": "改善効果の試算",
   "loan-amount": "借入額別",
   "repayment-method": "返済方式",
@@ -35,6 +37,8 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
 export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   "fixed-cost":
     "通信費・サブスク・保険など、毎月の固定負担を見直したい方のためのカテゴリです。何から手をつけるべきか、改善効果を比較できる記事を順次追加していきます。",
+  household:
+    "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理するカテゴリです。自分に合うやり方を選ぶための材料としてご利用ください。",
   "improvement-effect":
     "月5,000円・1万円の見直しで何がどう変わるかを、具体条件で比較するカテゴリです。一般論ではなく数字で効果を確認できます。",
   "loan-amount":
@@ -74,7 +78,7 @@ export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
     label: "家計管理",
     description:
       "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理する記事です。自分に合うやり方を選ぶための材料としてご利用ください。",
-    articleCategories: [],
+    articleCategories: ["household"],
   },
   {
     id: "improvement-effect",
@@ -109,6 +113,7 @@ export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
 /** 記事カテゴリから記事一覧ページのセクション id へ（ArticleFooter のアンカー用） */
 export function getArticleListSectionIdForCategory(cat: ArticleCategory): string {
   if (cat === "fixed-cost") return "fixed-cost";
+  if (cat === "household") return "household";
   if (cat === "improvement-effect") return "improvement-effect";
   if (cat === "loan-amount" || cat === "repayment-method" || cat === "revolving") return "loan-comparison";
   if (cat === "repayment-improvement") return "repayment-improvement";
@@ -157,6 +162,102 @@ const articlesData: ArticleItem[] = [
     ],
   },
   {
+    slug: "fixed-cost-mobile-comparison",
+    title: "スマホ料金プラン見直しの考え方｜格安プランに変えるとどれくらい変わる？",
+    summary:
+      "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。固定費チェックリストの「通信費」を深掘りする記事です。",
+    category: "fixed-cost",
+    order: 2,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-subscription-audit",
+    title: "サブスク整理の進め方｜見落としやすい月額課金を洗い出す方法",
+    summary:
+      "サブスク・月額課金を見直したい方向けに、見落としがちな契約の洗い出し方と、やめる・減らすときの判断のポイントを整理します。",
+    category: "fixed-cost",
+    order: 3,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-insurance-review",
+    title: "保険見直しの考え方｜何を確認すべきか・削ってよいもの/ダメなもの",
+    summary:
+      "保険の見直しで確認すべきポイントと、削ってよい保障・慎重にすべき保障の考え方を整理します。重複保障や過剰保障の見直しの参考に。",
+    category: "fixed-cost",
+    order: 4,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-utility-switch",
+    title: "電気・ガス乗り換えの効果は？契約見直しで月いくら変わるか",
+    summary:
+      "電気・ガスなどの光熱系契約を見直すと、月々の支払いがどれくらい変わる可能性があるかを整理します。乗り換えやプラン変更の判断材料に。",
+    category: "fixed-cost",
+    order: 5,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "household-budget-starter",
+    title: "家計簿が続かない人のための最低限チェック｜記録せずに把握する方法",
+    summary:
+      "家計簿が続かない方向けに、記録せずに支出を把握する方法と、最低限チェックするポイントを整理します。",
+    category: "household",
+    order: 0,
+    relatedLinks: [
+      { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "household-fixed-vs-variable",
+    title: "固定費と変動費の分け方｜何が固定費で何が変動費か",
+    summary:
+      "家計を把握するときの「固定費」と「変動費」の分け方と、それぞれ何を入れるかを整理します。",
+    category: "household",
+    order: 1,
+    relatedLinks: [
+      { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "household-monthly-balance-check",
+    title: "月の収支をざっくり把握する方法｜手取りから逆算する考え方",
+    summary:
+      "家計簿をつけずに、月の収支をざっくり把握する方法と、手取りから逆算する考え方を整理します。",
+    category: "household",
+    order: 2,
+    relatedLinks: [
+      { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
+      { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
     slug: "fixed-cost-5000-impact",
     title: "固定費を月5,000円見直すとどう変わる？1年・3年・5年の改善効果を比較",
     summary:
@@ -169,6 +270,35 @@ const articlesData: ArticleItem[] = [
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
       { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-10000-impact",
+    title: "固定費を月1万円見直すとどう変わる？1年・3年・5年の改善効果を比較",
+    summary:
+      "月1万円の固定費改善で、1年・3年・5年にどれくらい差が出るかを具体的に整理した記事です。継続したときの累計効果を数字で確認できます。",
+    category: "improvement-effect",
+    order: 1,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-5000-impact", label: "月5,000円の効果比較を見る" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "fixed-cost-3000-impact",
+    title: "月3,000円の固定費見直しは意味がある？年間・3年・5年で検証",
+    summary:
+      "月3,000円の固定費見直しが年間・3年・5年でどれくらいの差になるかを具体的に整理した記事です。小さくても続ける効果を数字で確認できます。",
+    category: "improvement-effect",
+    order: 2,
+    relatedLinks: [
+      { href: "/articles/fixed-cost-5000-impact", label: "月5,000円の効果比較を見る" },
+      { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
       { href: "/articles", label: "記事一覧へ" },
     ],
   },
@@ -226,6 +356,20 @@ const articlesData: ArticleItem[] = [
       { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
       { href: "/articles/monthly-50000-how-much-can-borrow", label: "返済額から借入額を逆算する" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
+    ],
+  },
+  {
+    slug: "borrow-500-monthly-payment",
+    title: "借金500万円の月々返済はいくら？年利15%で比較",
+    summary:
+      "借金500万円を年利15%で借りた場合、3年・5年・7年で月々の返済額と総利息がどう変わるかを整理します。",
+    category: "loan-amount",
+    order: 4,
+    relatedLinks: [
+      { href: "/articles/loan-amount-guide", label: "借入額別に見る返済負担の違い" },
+      { href: "/articles/borrow-300-monthly-payment", label: "借金300万円の返済を見る" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
     ],
   },
   {
@@ -333,6 +477,20 @@ const articlesData: ArticleItem[] = [
     ],
   },
   {
+    slug: "monthly-70000-how-much-can-borrow",
+    title: "月7万円返済ならいくらまで借りられる？",
+    summary:
+      "月7万円の返済なら、年利15%でいくらまで借りられるかを3年・5年・7年で整理します。",
+    category: "repayment-planning",
+    order: 3,
+    relatedLinks: [
+      { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられる？" },
+      { href: "/articles/monthly-30000-how-much-can-borrow", label: "月3万円ならいくらまで借りられる？" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
     slug: "fixed-monthly-payment-borrowing-reverse-calculator",
     title: "月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説",
     summary:
@@ -394,6 +552,20 @@ const articlesData: ArticleItem[] = [
       { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息を詳しく見る" },
       { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
+    ],
+  },
+  {
+    slug: "revo-50man-simulation",
+    title: "リボ払い50万円の返済シミュレーション｜毎月の返済額でどう変わる？",
+    summary:
+      "リボ払い50万円を年利15%で返済する場合、月1万・2万・3万円でどう変わるかを比較します。",
+    category: "revolving",
+    order: 4,
+    relatedLinks: [
+      { href: "/articles/revo-100man-15percent-simulation", label: "リボ100万円のシミュレーション" },
+      { href: "/articles/revo-100-interest", label: "リボ100万円の利息" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
+      { href: "/articles", label: "記事一覧へ" },
     ],
   },
 ];

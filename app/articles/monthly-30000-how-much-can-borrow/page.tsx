@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleFaqJsonLd } from "@/lib/article-structured-data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/monthly-30000-how-much-can-borrow`;
@@ -35,15 +37,48 @@ const jsonLd = {
 };
 
 const tocItems = [
+  { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜月3万円返済なら借入額の目安" },
   { id: "3years", label: "3年返済ならいくらまでが目安か" },
   { id: "5years", label: "5年返済ならいくらまでが目安か" },
   { id: "7years", label: "7年返済ならいくらまでが目安か" },
+  { id: "reading-points", label: "読み方のポイント" },
   { id: "compare", label: "3年・5年・7年返済を比較するとどう違うか" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
+  { id: "editor-memo", label: "編集メモ" },
   { id: "summary", label: "まとめ" },
 ];
+
+const faqItems = [
+  {
+    question: "月3万円返済ならいくらまで借りられますか？",
+    answer:
+      "年利15%・元利均等の目安では、3年返済で約90万円、5年返済で約126万円、7年返済で約154万円が借入額の目安です。",
+  },
+  {
+    question: "返済期間を長くすると借入可能額はどう変わりますか？",
+    answer:
+      "返済期間を延ばすと借入可能額の目安は増えますが、総利息も大きく増えます。たとえば3年と7年では借入額目安は約64万円の差ですが、総利息は約80万円の差になります。",
+  },
+  {
+    question: "金利が違うと借入可能額はどれくらい変わりますか？",
+    answer:
+      "年利が下がると同じ月3万円返済でも借入可能額は増えます。たとえば年利10%なら年利15%より多く借りられる計算になりますが、正確な金額はシミュレーターで確認するのが確実です。",
+  },
+  {
+    question: "月3万円返済で総利息を抑えるにはどうすればいいですか？",
+    answer:
+      "返済期間をできるだけ短くするのが最も効果的です。3年返済なら総利息は約18万円ですが、7年返済では約98万円になります。余裕があれば追加返済も有効です。",
+  },
+  {
+    question: "月3万円返済の目安は審査上の借入限度額と同じですか？",
+    answer:
+      "いいえ、この記事の目安は返済計画上の逆算であり、審査上の借入可能額とは異なります。実際に借りられる額は、収入や他の借入状況などにより金融機関が判断します。",
+  },
+];
+
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 /** 年利15%・元利均等で月3万返済時の借入額目安（概算） */
 const TABLE_ROWS = [
@@ -59,6 +94,12 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -76,6 +117,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事で扱うのは返済計画上の目安であり、審査上の借入可能額を示すものではありません。年利15%・元利均等の近似例です。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "毎月3万円返済を前提に、借入可能額を逆算している",
+                "年利15%・元利均等返済の近似例で比較している",
+                "3年・5年・7年の3パターンの返済期間で整理している",
+              ]}
+              reasonForConditions="毎月3万円は家計から返済に充てやすい現実的なラインです。年利15%はカードローンの一般的な水準であり、返済期間による借入可能額と総利息の違いを比較するために3パターンを設定しています。審査上の借入限度額とは異なります。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -124,6 +176,29 @@ export default function Page() {
               <p className="mt-3">
                 毎月3万円を7年（84回）返済する場合、年利15%では借入額の目安は約154万円です。総利息は約98万円程度と、返済期間が長いほど利息が重くなります。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "借入可能額だけでなく総コストを見る",
+                    body: "返済期間を延ばすと借入額の目安は増えますが、総利息も大きく増えます。借りられる額だけでなく最終的にいくら払うかまで確認してください。",
+                  },
+                  {
+                    label: "金利の違いが結果に大きく影響する",
+                    body: "年利15%と年利10%では借入可能額も総利息も大きく変わります。自分の条件に近い金利でシミュレーターを使って確認するのが確実です。",
+                  },
+                  {
+                    label: "返済期間が長いほど利息負担は重くなる",
+                    body: "7年返済では借入額目安は約154万円ですが総利息は約98万円と、借入額の6割以上が利息になります。短期返済との差を意識してください。",
+                  },
+                ]}
+                misconceptions={[
+                  "「月3万円なら楽に返せる」と思いがちですが、返済期間が長くなると総利息が大きく膨らみ、実質的な負担は重くなります。",
+                  "「借りられる額＝借りてよい額」と考えがちですが、総支払額まで見て判断することが大切です。",
+                ]}
+              />
             </section>
 
             <section id="compare">
@@ -175,6 +250,26 @@ export default function Page() {
               <p className="mt-3">
                 本記事の数値は試算の目安です。実際の返済額・総利息は金融機関の計算方法（端数処理・約定日等）により異なります。重要な判断は契約内容を優先し、必要に応じて専門家にご相談ください。
               </p>
+            </section>
+
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="毎月3万円返済できる場合の借入可能額を逆算し、返済期間による違いを整理するために書いています。"
+                reasonAxis="月3万円を基準にしたのは、家計から捻出しやすい現実的な返済額だからです。3年・5年・7年で比較しているのは、返済期間と総利息のトレードオフを見せるためです。"
+                memo="逆算系記事のひとつです。自分の条件で試算したい場合は借入返済シミュレーターへの導線を設けています。月5万円版の記事とあわせてカテゴリを構成しています。"
+              />
+            </section>
+
+            <section id="faq">
+              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <div className="mt-4 space-y-6">
+                {faqItems.map((item, i) => (
+                  <div key={i}>
+                    <h3 className="text-base font-black text-gray-900">{item.question}</h3>
+                    <p className="mt-2">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
             </section>
 
             <section id="summary">

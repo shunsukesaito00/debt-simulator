@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-5000-impact`;
@@ -33,6 +34,37 @@ const jsonLd = {
   author: { "@type": "Organization", name: "借入返済シミュレーター" },
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
+
+const faqItems = [
+  {
+    question: "月5,000円の固定費見直しは意味がありますか？",
+    answer:
+      "はい。月額では小さく見えても、1年で6万円、3年で18万円、5年で30万円と、継続すると無視できない差になります。固定費改善は一度見直すと毎月効果が続くため、続けるほど累計は大きくなります。",
+  },
+  {
+    question: "固定費はどこから見直すと5,000円削減しやすいですか？",
+    answer:
+      "サブスクの整理・通信費プランの見直し・不要オプションの解約・保険内容の確認・光熱系契約の見直しなど、複数の項目を組み合わせると月5,000円程度の改善が見込めるケースがあります。何から手をつけるかは固定費見直しチェックリストで順番に整理できます。人によって差があるため、必ず削れると断定はできません。",
+  },
+  {
+    question: "固定費改善と変動費節約はどちらが大事ですか？",
+    answer:
+      "どちらも重要ですが、固定費は一度見直すと毎月効果が続きやすく、変動費の節約より再現しやすい場合があります。固定費を先に見直して土台を整え、そのうえで変動費も見る、という順番で考えると続けやすいです。",
+  },
+  {
+    question: "月5,000円の改善を他の節約と組み合わせるとどうなりますか？",
+    answer:
+      "固定費5,000円に加えて変動費の見直しや収入の工夫を組み合わせると、月の改善幅がさらに広がります。たとえば固定費5,000円＋変動費3,000円で月8,000円改善できれば、年間で約10万円近くの差になります。",
+  },
+  {
+    question: "月5,000円の固定費改善を長期間続けるコツはありますか？",
+    answer:
+      "生活満足度を大きく下げない範囲で見直すことが最も重要です。無理に削りすぎると元に戻りやすいため、「なくても困らないもの」から優先して見直すと、負担感なく継続しやすくなります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 const tocItems = [
   { id: "premise", label: "このページの前提" },
@@ -68,6 +100,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -303,6 +345,18 @@ export default function Page() {
                   <dt className="font-bold text-gray-900">固定費改善と変動費節約はどちらが大事ですか？</dt>
                   <dd className="mt-1 text-gray-700">
                     どちらも重要ですが、固定費は一度見直すと毎月効果が続きやすく、変動費の節約より再現しやすい場合があります。固定費を先に見直して土台を整え、そのうえで変動費も見る、という順番で考えると続けやすいです。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-bold text-gray-900">月5,000円の改善を他の節約と組み合わせるとどうなりますか？</dt>
+                  <dd className="mt-1 text-gray-700">
+                    固定費5,000円に加えて変動費の見直しや収入の工夫を組み合わせると、月の改善幅がさらに広がります。たとえば固定費5,000円＋変動費3,000円で月8,000円改善できれば、年間で約10万円近くの差になります。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-bold text-gray-900">月5,000円の固定費改善を長期間続けるコツはありますか？</dt>
+                  <dd className="mt-1 text-gray-700">
+                    生活満足度を大きく下げない範囲で見直すことが最も重要です。無理に削りすぎると元に戻りやすいため、「なくても困らないもの」から優先して見直すと、負担感なく継続しやすくなります。
                   </dd>
                 </div>
               </dl>

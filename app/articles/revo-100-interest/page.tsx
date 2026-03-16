@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { RevoMonthsAndInterestBarCharts, RevoTotalPaymentStackedChart } from "./RevoCharts";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -34,6 +36,36 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "リボ払い100万円の利息はいくらですか？",
+    answer:
+      "年利15%を目安にすると、毎月3万円返済では総利息約47.5万円、毎月5万円返済では約18.5万円が目安です。返済額が低いほど利息は増えやすくなります。",
+  },
+  {
+    question: "リボ払い100万円は何年で終わりますか？",
+    answer: "毎月3万円返済なら約50か月、毎月5万円返済なら約24か月が目安です。返済条件によって変わります。",
+  },
+  {
+    question: "リボ払いの利息を減らす方法はありますか？",
+    answer:
+      "毎月の返済額を増やす、追加返済を行う、金利や返済条件を見直す、の3つが基本です。特に返済額を増やす効果は大きいです。",
+  },
+  {
+    question: "リボ払いの利息はどうやって計算されていますか？",
+    answer:
+      "一般的には、利用残高に対して年利を日割りで計算し、毎月の支払日に請求されます。残高が大きいほど利息額も大きくなるため、元本を早く減らすことが利息軽減の鍵になります。",
+  },
+  {
+    question: "リボ払いの利息負担を一括返済以外で大きく減らす方法はありますか？",
+    answer:
+      "毎月の返済額を現状より1〜2万円でも上げるだけで、完済期間の短縮と利息の削減効果は大きくなります。また、ボーナス月などに追加返済をまとめて行う方法も有効です。低金利のローンへ借り換えできる場合は、利息そのものを減らせる可能性もあります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜リボ払い100万円の利息はかなり大きくなりやすい" },
   { id: "reason", label: "リボ払いで利息が増えやすい理由" },
@@ -55,6 +87,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -72,6 +114,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の計算は、一般的な固定金利・毎月返済の近似例です。実際のリボ払いの条件は商品により異なります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "リボ払い残高100万円・年利15%を前提に試算する",
+                "毎月3万円返済と毎月5万円返済の2パターンで利息を比較する",
+                "固定金利・毎月一定額返済（定額元利方式）の近似で計算する",
+              ]}
+              reasonForConditions="年利15%はリボ払いの一般的な金利水準です。返済額を変えたときに利息がどれだけ変わるかを比較することで、返済額の設定が総コストに与える影響を具体的に示しています。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -104,6 +157,29 @@ export default function Page() {
               <p className="mt-3">
                 毎月の返済額を下げると家計の負担は軽く見えますが、その代わりに完済までの期間が長くなり、総支払額が大きく増えます。リボ払いの怖さは、毎月の支払額が一定でも、元本が思ったほど減らない点にあります。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "利息は残高に対して毎月発生する",
+                    body: "リボ払いの利息は利用残高に対して計算されるため、残高が大きいほど・返済期間が長いほど利息総額は増えます。",
+                  },
+                  {
+                    label: "返済額が低いと利息の割合が高くなる",
+                    body: "月3万円返済では総利息約47.5万円、月5万円では約18.5万円と、返済額の差で総利息が約29万円変わります。",
+                  },
+                  {
+                    label: "最低返済額のまま放置すると総コストが膨らむ",
+                    body: "毎月の支払いが一定でラクに見えても、元本がなかなか減らず、支払い総額が借入額の1.5倍近くになることがあります。",
+                  },
+                ]}
+                misconceptions={[
+                  "「毎月ちゃんと払っているから大丈夫」と思いがちですが、返済額が低いと元本がほとんど減らず利息を払い続ける状態になります。",
+                  "「利息はそこまで大きくない」と思いがちですが、100万円・年利15%・月3万円返済だと利息だけで約47.5万円に達します。",
+                ]}
+              />
             </section>
 
             <section id="reason">
@@ -259,6 +335,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="リボ払い100万円の利息がどれだけかかるかを具体的に示し、返済額の設定が総コストに与える影響を伝える記事です。"
+                reasonAxis="「利息の総額」を主軸に、返済額の違い（月3万円 vs 月5万円）で総利息・完済期間がどう変わるかを比較しています。"
+                memo="リボ払いの利息コストにフォーカスした記事として、完済期間よりも「いくら余分に払うことになるか」を前面に出しています。利息を減らす現実的な方法も併記し、行動につなげやすい構成にしています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -278,6 +362,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">リボ払いの利息を減らす方法はありますか？</h3>
                   <p className="mt-2">
                     毎月の返済額を増やす、追加返済を行う、金利や返済条件を見直す、の3つが基本です。特に返済額を増やす効果は大きいです。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">リボ払いの利息はどうやって計算されていますか？</h3>
+                  <p className="mt-2">
+                    一般的には、利用残高に対して年利を日割りで計算し、毎月の支払日に請求されます。残高が大きいほど利息額も大きくなるため、元本を早く減らすことが利息軽減の鍵になります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">リボ払いの利息負担を一括返済以外で大きく減らす方法はありますか？</h3>
+                  <p className="mt-2">
+                    毎月の返済額を現状より1〜2万円でも上げるだけで、完済期間の短縮と利息の削減効果は大きくなります。また、ボーナス月などに追加返済をまとめて行う方法も有効です。低金利のローンへ借り換えできる場合は、利息そのものを減らせる可能性もあります。
                   </p>
                 </div>
               </div>

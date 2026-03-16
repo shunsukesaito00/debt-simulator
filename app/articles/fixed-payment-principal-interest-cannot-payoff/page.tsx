@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   CannotPayoffWarningCard,
   PayoffMonthsBarChart,
@@ -39,6 +40,37 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "定額元利で完済できないことは本当にありますか？",
+    answer:
+      "毎月返済額が利息以下だと、少なくとも一般的な考え方では元本が減らず、完済できない条件に近くなります。返済額設定が重要です。",
+  },
+  {
+    question: "利息より返済額が少ないとどうなりますか？",
+    answer:
+      "その月の返済が利息に吸収され、元本が減りません。条件次第では、返済しているつもりでも借金がほとんど減らない状態になります。",
+  },
+  {
+    question: "定額元利でも完済しやすくする方法はありますか？",
+    answer:
+      "毎月返済額を引き上げる、追加返済を行う、金利条件を見直す、といった方法が有効です。特に返済額が低すぎる場合は見直しが重要です。",
+  },
+  {
+    question: "完済できない状態に近づいている兆候はありますか？",
+    answer:
+      "毎月返済しているのに残高がほとんど減らない、または明細の元本充当額が極端に小さい場合は注意が必要です。返済額の大部分が利息に消えている可能性があるため、明細で元本と利息の内訳を確認してみてください。",
+  },
+  {
+    question: "返済が追いつかないと感じたらどうすればいいですか？",
+    answer:
+      "まずは現状の返済額が利息を上回っているかを確認し、可能であれば返済額の引き上げや追加返済を検討してください。それでも難しい場合は、金融機関への相談や、公的な相談窓口（消費生活センターなど）への早めの相談が重要です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜定額元利で完済できないのは返済額が利息に負けるから" },
   { id: "what-is", label: "定額元利とは何か" },
@@ -63,6 +95,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -347,6 +389,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">定額元利でも完済しやすくする方法はありますか？</h3>
                   <p className="mt-2">
                     毎月返済額を引き上げる、追加返済を行う、金利条件を見直す、といった方法が有効です。特に返済額が低すぎる場合は見直しが重要です。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">完済できない状態に近づいている兆候はありますか？</h3>
+                  <p className="mt-2">
+                    毎月返済しているのに残高がほとんど減らない、または明細の元本充当額が極端に小さい場合は注意が必要です。返済額の大部分が利息に消えている可能性があるため、明細で元本と利息の内訳を確認してみてください。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">返済が追いつかないと感じたらどうすればいいですか？</h3>
+                  <p className="mt-2">
+                    まずは現状の返済額が利息を上回っているかを確認し、可能であれば返済額の引き上げや追加返済を検討してください。それでも難しい場合は、金融機関への相談や、公的な相談窓口（消費生活センターなど）への早めの相談が重要です。
                   </p>
                 </div>
               </div>

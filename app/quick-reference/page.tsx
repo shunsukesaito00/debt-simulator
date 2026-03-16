@@ -2,10 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { calcLoan } from "@/lib/loan-calc";
 
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
 export const metadata: Metadata = {
   title: "返済額の早見表｜借入100万・200万・300万・年利15%・3年/5年",
   description:
     "借入額100万円・200万円・300万円を年利15%で3年返済・5年返済した場合の月々返済額・総利息の早見表です。シミュレーターで自分の条件を試せます。",
+  alternates: { canonical: `${BASE}/quick-reference` },
+  openGraph: {
+    title: "返済額の早見表｜借入100万・200万・300万・年利15%・3年/5年",
+    description: "借入額100万・200万・300万円を年利15%で3年/5年返済した場合の月々返済額・総利息の早見表。",
+    url: `${BASE}/quick-reference`,
+    type: "website",
+  },
 };
 
 function formatYen(n: number): string {

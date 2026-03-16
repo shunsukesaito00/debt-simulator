@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   PayoffMonthsBarChart,
   TotalInterestBarChart,
@@ -38,8 +40,40 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "リボ払い100万円・金利15%だと利息はいくらですか？",
+    answer:
+      "近似例では、毎月3万円返済なら約47.5万円、毎月5万円返済なら約18.5万円、毎月7万円返済なら約11.1万円が目安です。返済額が低いほど利息は増えやすいです。",
+  },
+  {
+    question: "リボ払い100万円は何年で終わりますか？",
+    answer: "近似例では、毎月3万円返済なら約50か月、毎月5万円返済なら約24か月、毎月7万円返済なら約16か月が目安です。",
+  },
+  {
+    question: "リボ払いの負担を軽くするにはどうすればいいですか？",
+    answer:
+      "毎月返済額を増やす、追加返済をする、金利や返済条件を見直す、の3つが基本です。特に返済額を引き上げる効果は大きいです。",
+  },
+  {
+    question: "リボ払いの最低返済額だけ払い続けるとどうなりますか？",
+    answer:
+      "最低返済額は利息に近い金額に設定されていることが多く、元本がほとんど減りません。その結果、完済まで非常に長い年数がかかり、最終的な総利息が元本に匹敵するほど膨らむケースもあります。",
+  },
+  {
+    question: "リボ払い100万円を早く完済するための具体的な戦略はありますか？",
+    answer:
+      "まず毎月の返済額をできる限り引き上げることが最も効果的です。加えて、ボーナスや臨時収入を追加返済に回す、不要なサブスクや固定費を削って返済原資を増やす、低金利ローンへの借り換えを検討するなどの方法があります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
+  { id: "premise", label: "このページの前提" },
   { id: "conclusion", label: "結論｜リボ払い100万円・金利15%は返済額しだいで重さが大きく変わる" },
+  { id: "reading-points", label: "読み方のポイント" },
   { id: "why", label: "なぜリボ払いは返済額しだいで差が大きくなるのか" },
   { id: "30k", label: "毎月3万円返済ならどうなるか" },
   { id: "50k", label: "毎月5万円返済ならどうなるか" },
@@ -50,6 +84,7 @@ const tocItems = [
   { id: "point", label: "どの返済額が現実的かを考えるポイント" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
+  { id: "editor-memo", label: "編集メモ" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -61,6 +96,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -78,6 +123,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・一定返済額の近似例です。実際のリボ払い商品では条件により異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "リボ払い残高100万円・年利15%を前提に比較する",
+                "毎月返済額を3万円・5万円・7万円の3パターンで比較する",
+                "一般的な固定金利・一定返済額の近似例で整理する",
+              ]}
+              reasonForConditions="リボ払いでは毎月の返済額が完済期間と総利息に大きく影響します。3万円・5万円・7万円の3段階で、返済額の差がどれだけ結果を変えるかを比較しています。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -110,6 +166,29 @@ export default function Page() {
               <p className="mt-3">
                 つまり、毎月の返済額を上げるだけで、完済までの期間と総利息はかなり改善します。逆に、返済額を低く抑えすぎると、完済が長引いて利息負担が重くなりやすいです。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "返済額を上げると完済期間と利息が大きく改善する",
+                    body: "毎月3万円では約50か月・利息約47.5万円ですが、7万円にすると約16か月・利息約11.1万円まで改善します。",
+                  },
+                  {
+                    label: "最低限の返済額では長期化しやすい",
+                    body: "返済額が低いと元本の減りが遅く、利息を長く払い続ける構造になります。",
+                  },
+                  {
+                    label: "月額だけでなく総利息と完済時期を確認する",
+                    body: "毎月の支払いが低くても、完済まで何か月かかり最終的にいくら払うかまで見ることが重要です。",
+                  },
+                ]}
+                misconceptions={[
+                  "「毎月3万円で払えているから問題ない」と思いがちですが、完済まで4年以上かかり利息だけで約47.5万円になります。",
+                  "「リボ払いの利息は大したことない」と感じがちですが、残高が大きいほど利息の影響は大きくなります。",
+                ]}
+              />
             </section>
 
             <section id="why">
@@ -284,6 +363,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="リボ払い100万円・年利15%という条件で、毎月の返済額の違いが完済期間と総利息にどう影響するかを具体的に示す記事です。"
+                reasonAxis="毎月返済額（3万円・5万円・7万円）を比較軸にして、返済額を上げることの効果を可視化しています。"
+                memo="リボ払いの仕組み上、返済額が低いと元本が減りにくく利息が膨らみやすい構造を、数字で実感できるようにしています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
@@ -303,6 +390,18 @@ export default function Page() {
                   <h3 className="text-base font-black text-gray-900">リボ払いの負担を軽くするにはどうすればいいですか？</h3>
                   <p className="mt-2">
                     毎月返済額を増やす、追加返済をする、金利や返済条件を見直す、の3つが基本です。特に返済額を引き上げる効果は大きいです。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">リボ払いの最低返済額だけ払い続けるとどうなりますか？</h3>
+                  <p className="mt-2">
+                    最低返済額は利息に近い金額に設定されていることが多く、元本がほとんど減りません。その結果、完済まで非常に長い年数がかかり、最終的な総利息が元本に匹敵するほど膨らむケースもあります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">リボ払い100万円を早く完済するための具体的な戦略はありますか？</h3>
+                  <p className="mt-2">
+                    まず毎月の返済額をできる限り引き上げることが最も効果的です。加えて、ボーナスや臨時収入を追加返済に回す、不要なサブスクや固定費を削って返済原資を増やす、低金利ローンへの借り換えを検討するなどの方法があります。
                   </p>
                 </div>
               </div>

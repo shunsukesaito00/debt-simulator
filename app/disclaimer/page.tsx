@@ -1,4 +1,14 @@
-export const metadata = { title: "免責事項" };
+import type { Metadata } from "next";
+
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
+export const metadata: Metadata = {
+  title: "免責事項",
+  description:
+    "借入返済シミュレーターの免責事項。シミュレーション結果は参考情報であり、実際の返済条件は契約内容をご確認ください。",
+  alternates: { canonical: `${BASE}/disclaimer` },
+  openGraph: { title: "免責事項", description: "借入返済シミュレーターの免責事項。", url: `${BASE}/disclaimer`, type: "website" },
+};
 
 export default function Page() {
   return (

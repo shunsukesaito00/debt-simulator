@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import { SupplementPageFooterHowTo } from "@/app/components/SupplementPageFooter";
 
-export const metadata = { title: "使い方" };
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
+export const metadata: Metadata = {
+  title: "使い方",
+  description:
+    "借入返済シミュレーターと条件別記事の使い方。借入条件の入力、ボーナス返済、結果の見方、記事とシミュの往復で判断に役立てる方法を説明します。",
+  alternates: { canonical: `${BASE}/how-to` },
+  openGraph: { title: "使い方", description: "借入返済シミュレーターと条件別記事の使い方。", url: `${BASE}/how-to`, type: "website" },
+};
 
 export default function Page() {
   return (

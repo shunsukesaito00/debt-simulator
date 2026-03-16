@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/revo-100man-30k-years`;
@@ -34,6 +36,35 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "リボ100万円を月3万円で返すと何年かかりますか？",
+    answer: "年利15%の目安では、完済まで約50か月（約4年2か月）です。",
+  },
+  {
+    question: "月3万円返済だと総利息はいくらになりますか？",
+    answer:
+      "100万円・年利15%で毎月3万円返済の場合、総利息の目安は約47.5万円です。毎月5万円にすると約18.5万円まで減らせます。",
+  },
+  {
+    question: "早く完済するにはどうすればいいですか？",
+    answer: "毎月の返済額を増やす、あるいは繰り上げ返済をすると、完済が早まり総利息も減りやすくなります。",
+  },
+  {
+    question: "月3万円から月5万円に増やすと総利息はどれくらい変わりますか？",
+    answer:
+      "100万円・年利15%の場合、月3万円では総利息約47.5万円ですが、月5万円にすると約18.5万円まで減ります。月2万円の増額で総利息が約29万円も減り、完済も約2年早まります。",
+  },
+  {
+    question: "途中で返済額を増やした場合、効果はありますか？",
+    answer:
+      "途中からでも返済額を増やせば、その時点から元本の減りが早くなるため効果はあります。残高が大きい時期ほど利息への影響が大きいため、できるだけ早い段階で増額するほど総利息を抑えやすくなります。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜月3万円返済だと約4年2か月・総利息は約47.5万円" },
   { id: "why", label: "なぜ月3万円だと完済まで時間がかかるのか" },
@@ -53,6 +84,17 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
           <ol className="flex flex-wrap items-center gap-1">
@@ -68,6 +110,18 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の計算は、一般的な固定金利・毎月一定額返済の近似例です。実際のリボ払い商品では条件により異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "リボ払い残高100万円・年利15%・毎月3万円返済を前提に計算する",
+                "固定金利・毎月一定額返済（定額元利方式）の近似で試算する",
+                "比較対象として毎月5万円返済のケースも併記する",
+              ]}
+              reasonForConditions="年利15%はリボ払いで一般的な水準であり、月3万円は最低返済額に近い設定として選んでいます。月5万円との比較で、返済額の違いが完済期間・総利息にどう影響するかを示します。"
+            />
+          </section>
+
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
@@ -96,6 +150,30 @@ export default function Page() {
                 つまり、月3万円の返済では、元本100万円を返し終えるまでに4年以上かかり、その間に約47.5万円の利息を支払うことになります。毎月の負担は抑えられますが、完済が長引く分、利息負担は重くなりやすいです。
               </p>
             </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "月3万円だと完済まで約4年2か月かかる",
+                    body: "毎月の返済額が低いと、元本の減りが遅く完済まで長引きます。月3万円では約50か月・総利息約47.5万円が目安です。",
+                  },
+                  {
+                    label: "返済初期ほど利息の割合が大きい",
+                    body: "残高が大きい初期は、返済額のうち利息が占める割合が高く、元本に充当される金額が少なくなります。",
+                  },
+                  {
+                    label: "返済額を月2万円上げるだけで総利息が約29万円減る",
+                    body: "月5万円に引き上げると、完済は約24か月に短縮され、総利息は約18.5万円まで下がります。",
+                  },
+                ]}
+                misconceptions={[
+                  "「月3万円返していれば問題ない」と思いがちですが、完済まで4年以上かかり総利息は約47.5万円に達します。",
+                  "「利息はそこまで大きくならない」と思いがちですが、リボ払いでは返済期間が長いほど利息が累積します。",
+                ]}
+              />
+            </section>
+
             <section id="why">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">なぜ月3万円だと完済まで時間がかかるのか</h2>
               <p className="mt-3">
@@ -162,12 +240,22 @@ export default function Page() {
               <h2 className="text-lg font-black text-gray-900 md:text-xl">注意点</h2>
               <p className="mt-3">本記事の試算は、一般的な固定金利・毎月一定額返済の考え方に基づく概算です。実際のリボ払いでは、最低支払額のルール、金利の変動、手数料などが影響する場合があります。正確な返済条件は、利用中のカードやローン商品の約款・明細を確認してください。</p>
             </section>
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="リボ払い100万円を月3万円で返す場合の完済期間と総利息を具体的に示し、返済額の設定が結果にどう影響するかを伝える記事です。"
+                reasonAxis="月3万円という最低返済額に近い設定をメインに据え、月5万円との比較で返済額の違いによるインパクトを可視化しています。"
+                memo="「毎月いくら返しているか」だけでなく「いつ終わるか・総利息はいくらか」まで把握することの重要性を伝えるシナリオ記事として位置づけています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div><h3 className="text-base font-black text-gray-900">リボ100万円を月3万円で返すと何年かかりますか？</h3><p className="mt-2">年利15%の目安では、完済まで約50か月（約4年2か月）です。</p></div>
                 <div><h3 className="text-base font-black text-gray-900">月3万円返済だと総利息はいくらになりますか？</h3><p className="mt-2">100万円・年利15%で毎月3万円返済の場合、総利息の目安は約47.5万円です。毎月5万円にすると約18.5万円まで減らせます。</p></div>
                 <div><h3 className="text-base font-black text-gray-900">早く完済するにはどうすればいいですか？</h3><p className="mt-2">毎月の返済額を増やす、あるいは繰り上げ返済をすると、完済が早まり総利息も減りやすくなります。</p></div>
+                <div><h3 className="text-base font-black text-gray-900">月3万円から月5万円に増やすと総利息はどれくらい変わりますか？</h3><p className="mt-2">100万円・年利15%の場合、月3万円では総利息約47.5万円ですが、月5万円にすると約18.5万円まで減ります。月2万円の増額で総利息が約29万円も減り、完済も約2年早まります。</p></div>
+                <div><h3 className="text-base font-black text-gray-900">途中で返済額を増やした場合、効果はありますか？</h3><p className="mt-2">途中からでも返済額を増やせば、その時点から元本の減りが早くなるため効果はあります。残高が大きい時期ほど利息への影響が大きいため、できるだけ早い段階で増額するほど総利息を抑えやすくなります。</p></div>
               </div>
             </section>
             <section id="summary">

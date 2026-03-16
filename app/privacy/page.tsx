@@ -1,4 +1,14 @@
-export const metadata = { title: "プライバシーポリシー" };
+import type { Metadata } from "next";
+
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
+export const metadata: Metadata = {
+  title: "プライバシーポリシー",
+  description:
+    "借入返済シミュレーターのプライバシーポリシー。入力データの取扱い、Cookie・広告、アクセス解析について説明します。",
+  alternates: { canonical: `${BASE}/privacy` },
+  openGraph: { title: "プライバシーポリシー", description: "借入返済シミュレーターのプライバシーポリシー。", url: `${BASE}/privacy`, type: "website" },
+};
 
 export default function Page() {
   return (

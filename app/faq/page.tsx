@@ -2,10 +2,19 @@
 import type { Metadata } from "next";
 import { SupplementPageFooterFaq } from "@/app/components/SupplementPageFooter";
 
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
 export const metadata: Metadata = {
   title: "FAQ",
   description:
     "借入返済シミュレーターのよくある質問。金利、元利均等/元金均等、ボーナス返済、繰上返済、端数処理など。",
+  alternates: { canonical: `${BASE}/faq` },
+  openGraph: {
+    title: "FAQ",
+    description: "借入返済シミュレーターのよくある質問。金利、返済方式、ボーナス返済、繰上返済など。",
+    url: `${BASE}/faq`,
+    type: "website",
+  },
 };
 
 function Item({

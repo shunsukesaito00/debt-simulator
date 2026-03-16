@@ -4,10 +4,20 @@ import { getFeaturedProblemArticles, CATEGORY_LABELS } from "@/lib/articles";
 import { TrackedLink } from "./components/TrackedLink";
 import type { TrackEventParams } from "@/lib/analytics";
 
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
 export const metadata: Metadata = {
   title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
   description:
     "毎月の固定負担を条件別に比較・試算するシミュレーター。借入返済を中心に、月々返済額・総利息・完済時期を具体条件で確認でき、記事とツールを往復して判断材料を提供します。",
+  alternates: { canonical: BASE },
+  openGraph: {
+    title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
+    description:
+      "毎月の固定負担を条件別に比較・試算するシミュレーター。借入返済を中心に、月々返済額・総利息・完済時期を具体条件で確認でき、記事とツールを往復して判断材料を提供します。",
+    url: BASE,
+    type: "website",
+  },
 };
 
 const MAIN_CARD_CLASS =
@@ -54,11 +64,34 @@ function MainCard({
   return <Link href={href} className={MAIN_CARD_CLASS}>{content}</Link>;
 }
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "借入返済シミュレーター",
+  url: BASE,
+  description:
+    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・返済計画を中心に、月々負担の違いを具体条件で確認し、記事とツールを往復して判断材料を提供します。",
+  publisher: { "@id": `${BASE}/#organization` },
+  logo: { "@type": "ImageObject", url: `${BASE}/favicon.ico` },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${BASE}/#organization`,
+  name: "借入返済シミュレーター",
+  url: BASE,
+  description:
+    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・固定費見直し・返済計画の判断材料を提供します。",
+};
+
 export default function Page() {
   const featuredArticles = getFeaturedProblemArticles();
 
   return (
     <div className="grid gap-8 md:gap-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       {/* ── Hero ────────────────────────────────────────── */}
       <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-10">
         <div className="max-w-3xl">

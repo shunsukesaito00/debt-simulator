@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
@@ -34,6 +36,37 @@ const jsonLd = {
   author: { "@type": "Organization", name: "借入返済シミュレーター" },
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
+
+const faqItems = [
+  {
+    question: "返済を軽くする一番いい方法は何ですか？",
+    answer:
+      "一番いい方法は1つに決まりません。毎月の負担を軽くしたいのか、総支払額を減らしたいのかで最適な方法は変わります。",
+  },
+  {
+    question: "繰り上げ返済は本当に効果がありますか？",
+    answer:
+      "一般的には、元本を早く減らせるため、総利息を減らしやすい方法です。ただし、手元資金を減らしすぎないことが重要です。",
+  },
+  {
+    question: "毎月返済額を下げると楽になりますか？",
+    answer:
+      "毎月は楽になりやすいですが、その代わり返済期間が長くなり、総利息が増えることがあります。月額だけでなく総額も見る必要があります。",
+  },
+  {
+    question: "複数の改善策を同時に実行してもよいですか？",
+    answer:
+      "可能であれば組み合わせると効果的です。たとえば毎月返済額を少し上げつつ、余裕があるときに繰り上げ返済をするなど、小さな改善を重ねることで総利息の軽減効果が大きくなります。",
+  },
+  {
+    question: "おまとめローン（借り換え）を検討すべきタイミングはいつですか？",
+    answer:
+      "複数の借入があり、それぞれの金利が高い場合や、返済日の管理が負担になっている場合は検討の余地があります。ただし、借り換え先の金利や手数料、返済期間を含めた総支払額を比較してから判断することが大切です。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 const tocItems = [
   { id: "conclusion", label: "結論｜返済を軽くする方法は1つではない" },
@@ -127,6 +160,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -156,6 +199,17 @@ export default function Page() {
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事で紹介する改善策は、一般的な返済の考え方に基づくものです。実際の商品や契約条件によって異なる場合があります。
           </p>
+
+          <section id="premise" className="mt-6">
+            <ArticlePagePremise
+              comparisonConditions={[
+                "このページでは返済改善の4つの方法（繰り上げ返済・返済期間・毎月返済額・返済方式）を整理する",
+                "「毎月の負担」と「総支払額」の両面から比較する",
+                "具体的な試算は各個別記事に委ね、ここでは全体像と優先順位の考え方を扱う",
+              ]}
+              reasonForConditions="返済改善は方法が複数あり、何を優先するかで最適解が変わります。まず全体像を整理し、自分に合う方法を選ぶ起点にしてもらうための構成です。"
+            />
+          </section>
 
           <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
@@ -188,6 +242,29 @@ export default function Page() {
               <p className="mt-3">
                 つまり、「何を軽くしたいのか」を先に決めることが大切です。毎月の支払額を軽くしたいのか、総支払額を減らしたいのか、完済を早めたいのかで、選ぶべき改善策は変わります。
               </p>
+            </section>
+
+            <section id="reading-points">
+              <ArticleReadingPoints
+                points={[
+                  {
+                    label: "小さな改善でも積み重ねると差が出る",
+                    body: "毎月返済額を少し上げる、繰り上げ返済を少額でも行うなど、小さな見直しが総利息の軽減につながります。",
+                  },
+                  {
+                    label: "金利が高い借入から優先的に見直す",
+                    body: "複数の借入がある場合、金利が高いものから改善すると、同じ努力でも利息軽減効果が出やすくなります。",
+                  },
+                  {
+                    label: "シミュレーターで比較すると判断しやすい",
+                    body: "方法ごとに効果が違うため、自分の条件で試算して数字で比較するのが一番確実です。",
+                  },
+                ]}
+                misconceptions={[
+                  "「返済を軽くする＝毎月の支払額を減らす」とだけ考えがちですが、毎月を下げると総利息が増える場合があります。",
+                  "「返済改善は大きくやらないと意味がない」と思いがちですが、少しの改善でも長期的には大きな差になります。",
+                ]}
+              />
             </section>
 
             <section id="monthly-vs-total">
@@ -375,6 +452,14 @@ export default function Page() {
               </p>
             </section>
 
+            <section id="editor-memo">
+              <ArticleEditorMemo
+                purpose="返済改善の全体像を整理し、読者が自分の状況に合う改善策を選べるようにすることを目的にしています。"
+                reasonAxis="「毎月の負担」と「総支払額」の2軸で4つの方法を比較し、優先順位の考え方を示す構成にしています。"
+                memo="返済改善カテゴリのピラー記事（親記事）として、個別の改善記事への導線を担っています。全体像の整理と各記事への接続を主役にしています。"
+              />
+            </section>
+
             <section id="faq">
               <h2 className="text-lg font-black text-gray-900 md:text-xl">
                 よくある質問
@@ -402,6 +487,22 @@ export default function Page() {
                   </h3>
                   <p className="mt-2">
                     毎月は楽になりやすいですが、その代わり返済期間が長くなり、総利息が増えることがあります。月額だけでなく総額も見る必要があります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    複数の改善策を同時に実行してもよいですか？
+                  </h3>
+                  <p className="mt-2">
+                    可能であれば組み合わせると効果的です。たとえば毎月返済額を少し上げつつ、余裕があるときに繰り上げ返済をするなど、小さな改善を重ねることで総利息の軽減効果が大きくなります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    おまとめローン（借り換え）を検討すべきタイミングはいつですか？
+                  </h3>
+                  <p className="mt-2">
+                    複数の借入があり、それぞれの金利が高い場合や、返済日の管理が負担になっている場合は検討の余地があります。ただし、借り換え先の金利や手数料、返済期間を含めた総支払額を比較してから判断することが大切です。
                   </p>
                 </div>
               </div>

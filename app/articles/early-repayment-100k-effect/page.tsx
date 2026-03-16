@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import {
   InterestComparisonBarChart,
   MonthsComparisonBarChart,
@@ -62,6 +63,37 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
 };
 
+const faqItems = [
+  {
+    question: "繰り上げ返済10万円でも効果はありますか？",
+    answer:
+      "あります。今回の近似例では、完済まで約4か月短縮、総利息は約129,546円減ります。条件によって効果は変わります。",
+  },
+  {
+    question: "10万円の追加返済で得する金額は10万円ですか？",
+    answer:
+      "10万円そのものが得になるわけではありません。元本を早く減らすことで、その後に払うはずだった利息を減らせるのが本質です。",
+  },
+  {
+    question: "繰り上げ返済はいつやると効果が大きいですか？",
+    answer:
+      "一般的には、残高が大きい早い時期ほど効果が出やすいです。返済初期ほど、その後の利息を減らせる期間が長くなるためです。",
+  },
+  {
+    question: "繰り上げ返済のタイミングは1年後と3年後でどれくらい差がありますか？",
+    answer:
+      "同じ10万円でも、返済初期（残高が大きい時期）に追加返済する方が、その後に減らせる利息の総額は大きくなりやすいです。3年後より1年後の方が効果が出やすい傾向があります。",
+  },
+  {
+    question: "10万円ではなく5万円や20万円の繰り上げ返済だと効果はどう変わりますか？",
+    answer:
+      "追加返済額が大きいほど元本が早く減るため、利息軽減・完済短縮の効果も大きくなります。逆に5万円でも効果はゼロではなく、少額でも元本を前倒しで減らす意味はあります。自分の条件で比較したい場合はシミュレーターで試算できます。",
+  },
+];
+
+const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
+const faqJsonLd = getArticleFaqJsonLd(faqItems);
+
 const tocItems = [
   { id: "conclusion", label: "結論｜繰り上げ返済10万円でも利息と完済時期はちゃんと変わる" },
   { id: "why", label: "なぜ10万円の繰り上げ返済で利息が減るのか" },
@@ -85,6 +117,16 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl">
         <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
@@ -382,6 +424,22 @@ export default function Page() {
                   </h3>
                   <p className="mt-2">
                     一般的には、残高が大きい早い時期ほど効果が出やすいです。返済初期ほど、その後の利息を減らせる期間が長くなるためです。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    繰り上げ返済のタイミングは1年後と3年後でどれくらい差がありますか？
+                  </h3>
+                  <p className="mt-2">
+                    同じ10万円でも、返済初期（残高が大きい時期）に追加返済する方が、その後に減らせる利息の総額は大きくなりやすいです。3年後より1年後の方が効果が出やすい傾向があります。
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-gray-900">
+                    10万円ではなく5万円や20万円の繰り上げ返済だと効果はどう変わりますか？
+                  </h3>
+                  <p className="mt-2">
+                    追加返済額が大きいほど元本が早く減るため、利息軽減・完済短縮の効果も大きくなります。逆に5万円でも効果はゼロではなく、少額でも元本を前倒しで減らす意味はあります。自分の条件で比較したい場合はシミュレーターで試算できます。
                   </p>
                 </div>
               </div>

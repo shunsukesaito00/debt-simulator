@@ -1,6 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
-export const metadata = { title: "お問い合わせ" };
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+
+export const metadata: Metadata = {
+  title: "お問い合わせ",
+  description: "借入返済シミュレーターへのご意見・不具合報告はフォームまたはGitHub Issuesからお願いします。",
+  alternates: { canonical: `${BASE}/contact` },
+  openGraph: { title: "お問い合わせ", description: "借入返済シミュレーターへのお問い合わせ。", url: `${BASE}/contact`, type: "website" },
+};
 
 const GOOGLE_FORM_EMBED_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLScWadaWnfDBfgPON86hPFdVW7r2PBinahpKo2TH4qTpH51Vcg/viewform?embedded=true";
