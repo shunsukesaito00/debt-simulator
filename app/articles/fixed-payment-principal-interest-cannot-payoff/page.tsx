@@ -117,7 +117,7 @@ export default function Page() {
           </ol>
         </nav>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
@@ -132,7 +132,7 @@ export default function Page() {
             reasonForConditions="定額元利で「完済できない」と言われる典型は、返済額が利息以下になるケース。100万・年利15%では初月利息が約1.25万円なので、1万・1.5万・3万の3段階で比較すると理解しやすい。"
           />
 
-          <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <section className="mt-6 ds-subcard p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
@@ -278,21 +278,21 @@ export default function Page() {
                 </p>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">毎月1万円のケース（注意）</h3>
                 <div className="mt-4">
                   <CannotPayoffWarningCard />
                 </div>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">完済目安の比較（毎月1万5千円 vs 毎月3万円）</h3>
                 <div className="mt-4">
                   <PayoffMonthsBarChart />
                 </div>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">総利息の比較</h3>
                 <div className="mt-4">
                   <TotalInterestBarChart />
@@ -353,7 +353,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで計算する →
                 </Link>
@@ -419,7 +419,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで計算する →
                 </Link>

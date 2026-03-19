@@ -70,7 +70,7 @@ export function MonthsComparisonBarChart() {
 export function PaymentBreakdownCards() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+      <div className="ds-subcard p-4">
         <div className="text-xs font-black text-gray-600">繰り上げ返済なし</div>
         <div className="mt-2 flex justify-between text-sm">
           <span className="text-gray-600">元本</span>
@@ -81,7 +81,7 @@ export function PaymentBreakdownCards() {
           <span className="font-bold text-gray-900">¥854,792</span>
         </div>
       </div>
-      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+      <div className="ds-subcard p-4">
         <div className="text-xs font-black text-gray-600">10万円繰り上げ返済あり</div>
         <div className="mt-2 flex justify-between text-sm">
           <span className="text-gray-600">元本</span>

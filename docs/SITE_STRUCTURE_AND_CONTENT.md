@@ -92,8 +92,8 @@
   | セクション id | ラベル           | 説明の方向性                                                                 | 表示される記事カテゴリ（内部）                    |
   |---------------|------------------|------------------------------------------------------------------------------|---------------------------------------------------|
   | fixed-cost    | 固定費見直し     | 通信費・サブスク・保険など毎月の固定負担を見直す。何から手をつけるか整理。   | fixed-cost                                        |
-  | household     | 家計管理         | 家計簿が続かない・支出が見えない悩みを条件別に整理。                          | （なし＝準備中）                                  |
-  | improvement-effect | 改善効果の試算 | 月5,000円・1万円の見直しで何が変わるか具体条件で比較。                       | （なし＝準備中）                                  |
+  | household     | 家計管理         | 家計簿が続かない・支出が見えない悩みを条件別に整理。                          | household                                         |
+  | improvement-effect | 改善効果の試算 | 月5,000円・1万円の見直しで何が変わるか具体条件で比較。                       | improvement-effect                                |
   | loan-comparison | 借入返済比較   | 借入額・返済方式・追加返済の違いを条件別に試算。借入額別・返済方式・リボをまとめ。 | loan-amount, repayment-method, revolving          |
   | repayment-improvement | 返済改善 | 繰り上げ・返済方式の見直しで負担がどう変わるか。                             | repayment-improvement                             |
   | repayment-planning | 逆算・計画   | 毎月いくらなら無理がないか逆算し借入額・返済期間を考える。                   | repayment-planning                               |
@@ -112,13 +112,28 @@
 
 ### 固定費見直し（fixed-cost）
 - **fixed-cost-guide** … 固定費見直しの進め方｜何から手をつけるか・改善効果の比較（おすすめ）
+- **fixed-cost-checklist** … 固定費見直しチェックリスト｜何から削るか順番で解説
+- **fixed-cost-mobile-comparison** … スマホ料金プラン見直しの考え方｜格安プランに変えるとどれくらい変わる？
+- **fixed-cost-subscription-audit** … サブスク整理の進め方｜見落としやすい月額課金を洗い出す方法
+- **fixed-cost-insurance-review** … 保険見直しの考え方｜何を確認すべきか・削ってよいもの/ダメなもの
+- **fixed-cost-utility-switch** … 電気・ガス乗り換えの効果は？契約見直しで月いくら変わるか
+
+### 家計管理（household）
+- **household-budget-starter** … 家計簿が続かない人のための最低限チェック｜記録せずに把握する方法
+- **household-fixed-vs-variable** … 固定費と変動費の分け方｜何が固定費で何が変動費か
+- **household-monthly-balance-check** … 月の収支をざっくり把握する方法｜手取りから逆算する考え方
+
+### 改善効果の試算（improvement-effect）
+- **fixed-cost-5000-impact** … 固定費を月5,000円見直すとどう変わる？1年・3年・5年の改善効果を比較（おすすめ）
+- **fixed-cost-10000-impact** … 固定費を月1万円見直すとどう変わる？1年・3年・5年の改善効果を比較
+- **fixed-cost-3000-impact** … 月3,000円の固定費見直しは意味がある？年間・3年・5年で検証
 
 ### 借入額別（loan-amount）
 - **loan-amount-guide** … 借入額別に見る返済負担の違い｜100万・200万・300万で比較（おすすめ）
 - **borrow-100-interest** … 借金100万円の利息はいくら？年利15%での返済額をシミュレーション
 - **borrow-200-monthly-payment** … 借金200万円の月々返済はいくら？年利15%で3年・5年返済を比較
 - **borrow-300-monthly-payment** … 借金300万円の月々返済はいくら？年利15%で3年・5年・月5万円返済を比較
-- **monthly-50000-interest-at-15percent** … 借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較
+- **borrow-500-monthly-payment** … 借金500万円の月々返済はいくら？年利15%で比較
 
 ### 返済方式（repayment-method）
 - **repayment-method-difference** … 元利均等返済と元金均等返済の違いは？4つの返済方式を比較して解説
@@ -128,6 +143,7 @@
 - **revo-100-interest** … リボ払い100万円の利息はいくら？完済までの総支払額をシミュレーション
 - **revo-100man-30k-years** … リボ払い100万円を月3万円で返すと何年かかる？完済までの期間と総利息を解説
 - **revo-100man-15percent-simulation** … リボ払い100万円・金利15%の返済シミュレーション｜毎月返済額でどう変わる？
+- **revo-50man-simulation** … リボ払い50万円の返済シミュレーション｜毎月の返済額でどう変わる？
 
 ### 返済改善（repayment-improvement）
 - **repayment-improvement-guide** … 返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説（おすすめ）
@@ -138,7 +154,9 @@
 ### 逆算・返済計画（repayment-planning）
 - **monthly-50000-how-much-can-borrow** … 借金返済が月5万円ならいくらまで借りられる？返済額から逆算する目安を解説
 - **monthly-30000-how-much-can-borrow** … 月3万円返済ならいくらまで借りられる？年利15%で3年・5年・7年の目安を解説
-- **fixed-monthly-payment-borrowing-reverse-calculator** … 月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説（新着）
+- **monthly-70000-how-much-can-borrow** … 月7万円返済ならいくらまで借りられる？
+- **fixed-monthly-payment-borrowing-reverse-calculator** … 月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説
+- **monthly-50000-interest-at-15percent** … 借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較
 
 ---
 
@@ -254,7 +272,7 @@ borrow-100-interest, borrow-200-monthly-payment, fixed-payment-principal-interes
 ## 12. 今後の拡張を想定している点
 
 - **記事**  
-  固定費見直し・家計管理・改善効果の試算は、現状は固定費のみ1本（fixed-cost-guide）＋「準備中」セクションあり。記事を増やすときは lib/articles に追加し、必要なら新カテゴリを ARTICLE_LIST_SECTIONS に紐づける。
+  固定費見直し・家計管理・改善効果の試算・借入返済比較・逆算・計画の各カテゴリに記事を揃え済み。記事を増やすときは lib/articles に追加し、必要なら新カテゴリを ARTICLE_LIST_SECTIONS に紐づける。戦略の継続は docs/SEO_STRATEGY_PHASE8-10.md および GROWTH_STRATEGY.md を参照。
 
 - **ツール**  
   借入返済シミュレーターは分割リファクタ済み（page + _components + _lib）。固定費インパクトは単一ページで軽量のまま。

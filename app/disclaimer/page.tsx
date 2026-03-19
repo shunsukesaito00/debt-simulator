@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+    <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">免責事項</h1>
 
       <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">

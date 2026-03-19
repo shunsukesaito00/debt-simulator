@@ -15,7 +15,7 @@ const GOOGLE_FORM_EMBED_URL =
 
 export default function Page() {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+    <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">お問い合わせ</h1>
 
       <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
@@ -26,7 +26,7 @@ export default function Page() {
           技術的な不具合の詳細共有はGitHub Issuesも利用できます（任意）。
         </p>
 
-        <div className="min-h-[900px] w-full overflow-hidden rounded-2xl border border-gray-200 bg-gray-50">
+        <div className="ds-subcard min-h-[900px] w-full overflow-hidden p-0">
           <iframe
             src={GOOGLE_FORM_EMBED_URL}
             width="100%"
@@ -41,7 +41,7 @@ export default function Page() {
           </iframe>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+        <div className="ds-subcard p-4">
           <div className="font-black text-gray-900">フォームが表示されない場合</div>
           <div className="mt-2">
             <Link
@@ -55,7 +55,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+        <div className="ds-subcard p-4">
           <div className="font-black text-gray-900">技術的な不具合報告（任意）</div>
           <div className="mt-2">
             <Link

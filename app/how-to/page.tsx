@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+    <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">使い方</h1>
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">
         このサイトでは、毎月の固定負担を条件別に比較・試算するために、借入返済シミュレーターと条件別の記事を用意しています。記事で条件の違いを理解し、シミュレーターで自分の数字を試算して、往復しながら判断に役立てる想定です。

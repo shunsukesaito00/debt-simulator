@@ -25,7 +25,7 @@ export function SupplementPageFooterFaq() {
   }
 
   return (
-    <section className="mt-10 rounded-2xl border-2 border-gray-200 bg-gray-50 p-6">
+    <section className="ds-subcard mt-10 p-6">
       <h2 className="text-base font-black text-gray-900">関連記事とシミュレーター</h2>
       <p className="mt-2 text-sm text-gray-700 leading-relaxed">
         条件別の記事で返済の考え方を整理し、シミュレーターで自分の条件を試算できます。
@@ -63,11 +63,11 @@ export function SupplementPageFooterFaq() {
           </TrackedLink>
         </li>
       </ul>
-      <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
+      <div className="ds-subcard mt-6 p-4">
         <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
         <TrackedLink
           href={SIMULATOR_HREF}
-          className="mt-3 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          className="ds-btn ds-btn-primary mt-3"
           event={{
             action: "click_supplement_simulator_cta",
             location: "supplement_footer_faq",
@@ -99,7 +99,7 @@ export function SupplementPageFooterLogic() {
   links.push({ href: "/articles", label: "記事一覧を見る" });
 
   return (
-    <section className="mt-10 rounded-2xl border-2 border-gray-200 bg-gray-50 p-6">
+    <section className="ds-subcard mt-10 p-6">
       <h2 className="text-base font-black text-gray-900">関連記事とシミュレーター</h2>
       <p className="mt-2 text-sm text-gray-700 leading-relaxed">
         返済方式の違いや借入額の逆算など、計算ロジックに近い記事をまとめています。
@@ -138,11 +138,11 @@ export function SupplementPageFooterLogic() {
           </li>
         ))}
       </ul>
-      <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
+      <div className="ds-subcard mt-6 p-4">
         <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
         <TrackedLink
           href={SIMULATOR_HREF}
-          className="mt-3 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          className="ds-btn ds-btn-primary mt-3"
           event={{
             action: "click_supplement_simulator_cta",
             location: "supplement_footer_logic",
@@ -160,14 +160,14 @@ export function SupplementPageFooterLogic() {
 /** how-to 用: シミュレーターCTA ＋ 記事一覧 */
 export function SupplementPageFooterHowTo() {
   return (
-    <section className="mt-10 rounded-2xl border-2 border-gray-200 bg-gray-50 p-6">
+    <section className="ds-subcard mt-10 p-6">
       <h2 className="text-base font-black text-gray-900">自分の条件で試算する</h2>
       <p className="mt-2 text-sm text-gray-700 leading-relaxed">
         借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
       </p>
       <TrackedLink
         href={SIMULATOR_HREF}
-        className="mt-4 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+        className="ds-btn ds-btn-primary mt-4"
         event={{
           action: "click_supplement_simulator_cta",
           location: "supplement_footer_how_to",

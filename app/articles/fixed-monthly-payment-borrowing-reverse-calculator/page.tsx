@@ -117,7 +117,7 @@ export default function Page() {
           </ol>
         </nav>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             本記事で扱う借入額は返済計画上の目安であり、審査上の借入可能額や与信枠を示すものではありません。一般的な固定金利・毎月返済の近似例です。
@@ -134,7 +134,7 @@ export default function Page() {
             />
           </section>
 
-          <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <section className="mt-6 ds-subcard p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
@@ -303,21 +303,21 @@ export default function Page() {
                 </p>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">月々返済額別の借入額目安</h3>
                 <div className="mt-4">
                   <PrincipalByPaymentBarChart />
                 </div>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">返済年数別の総利息</h3>
                 <div className="mt-4">
                   <InterestByPaymentBarChart />
                 </div>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-4">
+              <div className="mt-8 ds-subcard p-4">
                 <h3 className="text-base font-black text-gray-900">借入額目安と総利息のバランス</h3>
                 <div className="mt-4">
                   <BalanceCards />
@@ -361,7 +361,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで計算する →
                 </Link>
@@ -435,7 +435,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで計算する →
                 </Link>

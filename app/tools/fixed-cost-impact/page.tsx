@@ -27,27 +27,39 @@ export default function FixedCostImpactPage() {
     <div className="mx-auto max-w-2xl">
       <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
-          <li><Link href="/" className="hover:underline">トップ</Link></li>
-          <li aria-hidden>/</li>
-          <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-          <li aria-hidden>/</li>
-          <li className="font-bold text-gray-900" aria-current="page">固定費削減インパクト計算</li>
+          <li>
+            <Link href="/" className="font-medium text-gray-800 hover:underline">
+              トップ
+            </Link>
+          </li>
+          <li aria-hidden className="text-gray-400">
+            /
+          </li>
+          <li>
+            <Link href="/articles" className="font-medium text-gray-800 hover:underline">
+              知っておきたいこと
+            </Link>
+          </li>
+          <li aria-hidden className="text-gray-400">
+            /
+          </li>
+          <li className="font-bold text-gray-900" aria-current="page">
+            固定費削減インパクト計算
+          </li>
         </ol>
       </nav>
 
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
-        <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
-          固定費削減インパクト計算
-        </h1>
+      <div className="ds-card ds-card-pad">
+        <h1 className="ds-h1">固定費削減インパクト計算</h1>
         <p className="mt-2 text-xs text-gray-500">
           入力値は送信されません。ブラウザ内だけで計算しています。
         </p>
-        <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+        <p className="mt-2 text-sm text-slate-600 leading-relaxed">
           毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。通信費・サブスク・保険などの見直し効果を数字で把握するためのツールです。
         </p>
 
-        <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50/80 p-5">
-          <h2 className="text-base font-black text-gray-900">入力</h2>
+        <section className="ds-subcard mt-6 p-5">
+          <h2 className="text-base font-black text-slate-900">入力</h2>
           <div className="mt-4 space-y-4">
             <div>
               <label htmlFor="monthly" className="block text-sm font-bold text-gray-800">
@@ -85,9 +97,9 @@ export default function FixedCostImpactPage() {
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border-2 border-gray-200 bg-white p-5">
-          <h2 className="text-base font-black text-gray-900">削減効果の目安</h2>
-          <p className="mt-1 text-sm text-gray-600">
+        <section className="ds-subcard mt-6 p-5">
+          <h2 className="text-base font-black text-slate-900">削減効果の目安</h2>
+          <p className="mt-1 text-sm text-slate-600">
             毎月{formatYen(monthly)}の削減を続けた場合の累計です。
           </p>
           <div className="mt-4 overflow-x-auto">
@@ -122,28 +134,19 @@ export default function FixedCostImpactPage() {
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50/70 p-5">
-          <h2 className="text-sm font-bold text-gray-700">計算の考え方</h2>
-          <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+        <section className="ds-subcard mt-6 p-5">
+          <h2 className="text-sm font-bold text-slate-700">計算の考え方</h2>
+          <p className="mt-2 text-xs text-slate-600 leading-relaxed">
             毎月の削減額 × 継続月数で累計を出しています。実際の支出は収入やライフイベントで変動するため、あくまで目安としてご利用ください。
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href="/articles/fixed-cost-guide"
-              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50"
-            >
+            <Link href="/articles/fixed-cost-guide" className="ds-btn ds-btn-primary">
               固定費見直しの進め方
             </Link>
-            <Link
-              href="/simulator/cardloan"
-              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50"
-            >
+            <Link href="/simulator/cardloan" className="ds-btn ds-btn-secondary">
               借入返済シミュレーター
             </Link>
-            <Link
-              href="/articles"
-              className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-gray-700 hover:bg-gray-50"
-            >
+            <Link href="/articles" className="ds-btn ds-btn-secondary">
               記事一覧
             </Link>
           </div>

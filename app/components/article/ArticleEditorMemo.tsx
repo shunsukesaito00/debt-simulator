@@ -19,7 +19,7 @@ export function ArticleEditorMemo({
 
   return (
     <section
-      className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4 text-sm text-gray-600"
+      className="ds-subcard p-4 text-sm text-gray-600"
       aria-label="編集メモ"
     >
       <h2 className="text-xs font-black text-gray-500 uppercase tracking-wide">編集メモ</h2>

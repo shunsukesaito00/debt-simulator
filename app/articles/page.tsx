@@ -48,7 +48,7 @@ export default function ArticlesListPage() {
         </ol>
       </nav>
 
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <div className="ds-card ds-card-pad">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">知っておきたいこと</h1>
         <p className="mt-5 text-sm text-gray-700 leading-relaxed">
           生活の固定負担を条件別に比較し、判断材料にするための記事です。固定費見直し・借入返済・返済計画などを、一般論ではなく具体条件で整理しています。気になるカテゴリから読み、シミュレーターで自分の条件を試算し、記事とツールを往復して判断に役立ててください。
@@ -72,11 +72,11 @@ export default function ArticlesListPage() {
                 </p>
                 {items.length > 0 ? (
                   <ul className="mt-5 grid gap-5">
-                    {items.map((article, idx) => (
+                    {items.map((article) => (
                       <li key={article.slug}>
                         <Link
                           href={`/articles/${article.slug}`}
-                          className={`block rounded-2xl border p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10 ${idx === 0 ? "border-gray-300 bg-gray-50/50" : "border-gray-200 bg-white"}`}
+                          className="block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                         >
                           <div className="flex flex-wrap items-center gap-2">
                             <span className="rounded-full border border-gray-300 bg-gray-50 px-2.5 py-0.5 text-xs font-bold text-gray-700">
@@ -110,7 +110,7 @@ export default function ArticlesListPage() {
           })}
         </div>
 
-        <section className="mt-12 rounded-2xl border-2 border-gray-200 bg-white p-6">
+        <section className="ds-subcard mt-12 p-6">
           <h2 className="text-lg font-black text-gray-900">自分の条件で試算する</h2>
           <p className="mt-3 text-sm text-gray-700 leading-relaxed">
             記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力し、月々返済額・総利息・完済時期を条件別に比較して、記事とシミュレーターを往復して判断に役立ててください。
@@ -118,13 +118,13 @@ export default function ArticlesListPage() {
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/simulator/cardloan"
-              className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3.5 text-base font-black text-white hover:opacity-90"
+              className="ds-btn ds-btn-primary"
             >
               返済額を試算する（シミュレーター） →
             </Link>
             <Link
               href="/tools/fixed-cost-impact"
-              className="inline-flex items-center justify-center rounded-2xl border-2 border-gray-300 bg-white px-6 py-3.5 text-base font-bold text-gray-800 hover:bg-gray-50"
+              className="ds-btn ds-btn-secondary text-base"
             >
               固定費削減インパクトを計算する →
             </Link>

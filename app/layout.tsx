@@ -27,13 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-dvh bg-gray-50 text-gray-900">
+      <body className="ds-shell">
         <GoogleAnalytics />
         {/* 上段固定ヘッダ（ナビをここに固定） */}
         <HeaderNav />
 
         {/* ヘッダ固定分の余白 */}
-        <main className="mx-auto w-full max-w-5xl px-4 pb-12 pt-20 md:px-6">
+        <main className="ds-container pb-12 pt-20">
           {children}
         </main>
 

@@ -69,7 +69,7 @@ export default function QuickReferencePage() {
         </ol>
       </nav>
 
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <div className="ds-card ds-card-pad">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
           返済額の早見表（年利15%・元利均等）
         </h1>
@@ -119,16 +119,10 @@ export default function QuickReferencePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/simulator/cardloan"
-            className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
-          >
+          <Link href="/simulator/cardloan" className="ds-btn ds-btn-primary">
             シミュレーターで試す →
           </Link>
-          <Link
-            href="/articles"
-            className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50"
-          >
+          <Link href="/articles" className="ds-btn ds-btn-secondary">
             条件別の記事一覧
           </Link>
         </div>

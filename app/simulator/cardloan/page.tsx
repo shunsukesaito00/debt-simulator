@@ -77,7 +77,7 @@ export default function Page() {
 
   return (
     <div className="grid gap-5">
-      <section className="rounded-xl border border-gray-200 bg-white p-5">
+      <section className="ds-card ds-card-pad">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h1 className="text-2xl font-black text-gray-900 md:text-3xl">カードローン返済シミュレーター</h1>
@@ -88,14 +88,14 @@ export default function Page() {
             <button
               type="button"
               onClick={() => setActiveTab("A")}
-              className={`rounded-xl px-4 py-2 text-base font-bold ${activeTab === "A" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+              className={`ds-btn px-4 py-2 text-base font-bold ${activeTab === "A" ? "ds-btn-primary" : "ds-btn-secondary"}`}
             >
               A
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("B")}
-              className={`rounded-xl px-4 py-2 text-base font-bold ${activeTab === "B" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}
+              className={`ds-btn px-4 py-2 text-base font-bold ${activeTab === "B" ? "ds-btn-primary" : "ds-btn-secondary"}`}
             >
               B
             </button>
@@ -119,7 +119,7 @@ export default function Page() {
       </section>
 
       {(resultA.ok || resultB.ok) && (
-        <>
+        <section className="ds-card ds-card-pad space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <SimulatorSummarySection
               result={result}
@@ -135,7 +135,7 @@ export default function Page() {
           {resultA.ok && resultB.ok && (
             <SimulatorAbCompareSection resultA={resultA} resultB={resultB} />
           )}
-        </>
+        </section>
       )}
 
       <SimulatorRelatedArticlesSection
@@ -153,7 +153,7 @@ export default function Page() {
         気になる条件が見つかったら、関連記事で考え方を整理し、自分の条件で再度試算してください。条件別の記事とあわせて確認すると、返済負担の違いがよりわかりやすくなります。
       </p>
 
-      <section className="mt-6 rounded-xl border border-gray-200 bg-gray-50/80 p-5">
+      <section className="ds-subcard mt-6 p-5">
         <div className="text-sm font-bold text-gray-700">注意点</div>
         <ul className="mt-2 list-disc pl-5 text-xs text-gray-600 leading-relaxed space-y-1">
           <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>

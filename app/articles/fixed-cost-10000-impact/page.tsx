@@ -120,7 +120,7 @@ export default function Page() {
           </ol>
         </nav>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
@@ -138,7 +138,7 @@ export default function Page() {
             />
           </section>
 
-          <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <section className="mt-6 ds-subcard p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
@@ -208,7 +208,7 @@ export default function Page() {
                   </tbody>
                 </table>
               </div>
-              <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
+              <div className="mt-6 ds-subcard p-4">
                 <h3 className="text-sm font-black text-gray-900">累計改善額のイメージ（月1万円×継続月数）</h3>
                 <div className="mt-3 space-y-3" aria-hidden>
                   {impactRows.map((row, i) => (
@@ -257,11 +257,11 @@ export default function Page() {
                 <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
                 で試算できます。
               </p>
-              <div className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-6">
+              <div className="mt-6 ds-subcard p-6">
                 <h3 className="text-base font-black text-gray-900">固定費削減インパクトを計算する</h3>
                 <Link
                   href="/tools/fixed-cost-impact"
-                  className="mt-4 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary mt-4"
                 >
                   固定費削減インパクトを計算する →
                 </Link>

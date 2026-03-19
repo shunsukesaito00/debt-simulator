@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+    <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">運営者情報</h1>
 
       <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
@@ -34,6 +34,21 @@ export default function Page() {
         <div>
           <div className="font-black text-gray-900">運営者</div>
           <div>個人運営（氏名・住所の公開は行っていません）</div>
+        </div>
+
+        <div>
+          <div className="font-black text-gray-900">運営者プロフィール（概要）</div>
+          <div className="space-y-2">
+            <p>
+              20代後半の会社員。株式投資・FXの失敗をきっかけに、最大で約300万円の借金を抱えた経験があります。
+            </p>
+            <p>
+              このサイトは「借入返済の見え方が変わると、判断が変わる」という実体験をもとに、数字で確認できる判断材料をまとめる目的で作っています。
+            </p>
+            <p className="text-xs text-gray-600">
+              ※運営者の属性・経験はサイトの背景説明であり、特定の投資行動や借入を推奨するものではありません。
+            </p>
+          </div>
         </div>
 
         <div>
@@ -60,6 +75,13 @@ export default function Page() {
             <div className="font-black text-gray-900">サイトの方針</div>
             <div>
               借入返済・固定費見直し・家計管理を、一般論ではなく<strong>具体的な条件で比較できる</strong>形で整理することを重視しています。金額・金利・期間などの条件を変えて比較し、読者が自分の状況に合った判断材料を得られるようにしています。
+            </div>
+          </div>
+
+          <div>
+            <div className="font-black text-gray-900">利益相反（広告・収益）</div>
+            <div>
+              現時点では、返済の試算や条件比較の理解を目的としたコンテンツを中心にしています。広告等を掲載する場合でも、特定の金融商品の申込みを促すことや、審査・商品選定の推奨を目的とした記事は扱いません。
             </div>
           </div>
 

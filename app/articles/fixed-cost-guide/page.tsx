@@ -96,7 +96,7 @@ export default function Page() {
           </ol>
         </nav>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-gray-600 leading-relaxed">
             このカテゴリでは、毎月の固定負担を見直すための記事を、条件別に「いくら変わるか」が比較できる形で整理していきます。
@@ -163,22 +163,13 @@ export default function Page() {
                 から探せます。
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
-                <Link
-                  href="/tools/fixed-cost-impact"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-2.5 text-sm font-black text-white hover:opacity-90"
-                >
+                <Link href="/tools/fixed-cost-impact" className="ds-btn ds-btn-primary">
                   固定費削減インパクトを計算する →
                 </Link>
-                <Link
-                  href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-700 hover:bg-gray-50"
-                >
+                <Link href="/simulator/cardloan" className="ds-btn ds-btn-secondary">
                   借入返済シミュレーター
                 </Link>
-                <Link
-                  href="/articles"
-                  className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-bold text-gray-700 hover:bg-gray-50"
-                >
+                <Link href="/articles" className="ds-btn ds-btn-secondary">
                   記事一覧を見る
                 </Link>
               </div>

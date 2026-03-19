@@ -25,7 +25,7 @@ function Item({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-3xl border border-gray-200 bg-white p-5 shadow-soft">
+    <section className="ds-card p-5">
       <h2 className="text-base font-black text-gray-900">{q}</h2>
       <div className="mt-3 text-sm text-gray-700 leading-relaxed">{children}</div>
     </section>
@@ -35,7 +35,7 @@ function Item({
 export default function Page() {
   return (
     <div className="grid gap-6">
-      <header className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
+      <header className="ds-card ds-card-pad">
         <h1 className="text-2xl font-black text-gray-900 md:text-3xl">FAQ（よくある質問）</h1>
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
           借入返済シミュレーターの使い方・計算結果の見方・金利や返済方式の考え方について、よくある質問をまとめています。
@@ -187,7 +187,7 @@ export default function Page() {
         </p>
       </Item>
 
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft">
+      <section className="ds-card ds-card-pad">
         <h2 className="text-base font-black text-gray-900">補足</h2>
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
           使い方の詳細は「使い方」ページ、計算の考え方は「計算ロジック」ページにまとめています。

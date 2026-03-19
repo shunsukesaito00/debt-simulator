@@ -11,7 +11,7 @@ export function ArticlePagePremise({
   reasonForConditions,
 }: ArticlePagePremiseProps) {
   return (
-    <section className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4" aria-label="このページの前提">
+    <section className="ds-subcard p-4" aria-label="このページの前提">
       <h2 className="text-sm font-black text-gray-900">このページの前提</h2>
       <ul className="mt-2 list-disc pl-5 space-y-1 text-sm text-gray-700 leading-relaxed">
         {comparisonConditions.map((item, i) => (

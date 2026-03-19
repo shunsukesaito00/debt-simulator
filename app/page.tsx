@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 const MAIN_CARD_CLASS =
-  "block rounded-3xl border border-gray-200 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10 md:p-6";
+  "block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-[var(--ds-shadow-md)] focus:outline-none focus:ring-2 focus:ring-slate-900/10 md:p-6";
 
 /** 主カード（シミュレーター・記事一覧）。計測用に event を渡すと TrackedLink でラップする */
 function MainCard({
@@ -93,19 +93,19 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       {/* ── Hero ────────────────────────────────────────── */}
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-10">
+      <section className="ds-card p-6 md:p-10">
         <div className="max-w-3xl">
           <h1 className="text-3xl font-black tracking-tight text-gray-900 md:text-4xl">
             借入返済シミュレーター
           </h1>
-          <p className="mt-4 text-base text-gray-700 leading-relaxed md:text-lg">
+          <p className="mt-4 text-base text-slate-700 leading-relaxed md:text-lg">
             毎月の固定負担を条件別に比較・試算するためのツールです。借入返済では、数字を入れるだけで月々返済・総利息・完済時期がすぐ出ます。<strong className="font-bold text-gray-900">4つの返済方式</strong>（元利均等・元金均等・定額元利・定額元金）と<strong className="font-bold text-gray-900">A/B比較</strong>で条件の差を試せます。記事とシミュを往復しながら、気になる条件から試して判断に使えます。入力値は送信されず、ブラウザ内だけで計算します。
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
             <TrackedLink
               href="/simulator/cardloan"
-              className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3.5 text-base font-black text-white hover:opacity-90"
+              className="ds-btn ds-btn-primary px-6 py-3.5 text-base"
               event={{
                 action: "click_top_primary_cta",
                 location: "top_hero",
@@ -117,7 +117,7 @@ export default function Page() {
             </TrackedLink>
             <TrackedLink
               href="/how-to"
-              className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50"
+              className="ds-btn ds-btn-secondary"
               event={{
                 action: "click_top_secondary_cta",
                 location: "top_hero",
@@ -130,15 +130,15 @@ export default function Page() {
           </div>
 
           <div className="mt-7 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
+            <div className="ds-subcard p-4">
               <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
               <div className="mt-1.5 text-sm font-bold text-gray-900">月々の固定負担を条件別に比較</div>
             </div>
-            <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
+            <div className="ds-subcard p-4">
               <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
               <div className="mt-1.5 text-sm font-bold text-gray-900">総利息・完済時期を確認</div>
             </div>
-            <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4">
+            <div className="ds-subcard p-4">
               <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
               <div className="mt-1.5 text-sm font-bold text-gray-900">返済方式・追加返済の違いを理解</div>
             </div>
@@ -181,14 +181,14 @@ export default function Page() {
       </section>
 
       {/* ── その他のツール ───────────────────────────────── */}
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <section className="ds-card ds-card-pad">
         <h2 className="text-xl font-black text-gray-900 md:text-2xl">その他のツール</h2>
         <p className="mt-2 text-sm text-gray-600 leading-relaxed">
           借入返済以外にも、固定負担の見直し効果を試算するツールを用意しています。
         </p>
         <TrackedLink
           href="/tools/fixed-cost-impact"
-          className="mt-4 block rounded-2xl border border-gray-200 bg-gray-50/50 p-5 transition hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+          className="mt-4 block ds-subcard p-5 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
           event={{
             action: "click_top_tool",
             location: "top_other_tools",
@@ -208,7 +208,7 @@ export default function Page() {
       </section>
 
       {/* ── よくある悩みから探す（具体悩みの入口） ───────── */}
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <section className="ds-card ds-card-pad">
         <h2 className="text-xl font-black text-gray-900 md:text-2xl">よくある悩みから探す</h2>
         <p className="mt-2 text-sm text-gray-600 leading-relaxed">
           一般論ではなく具体条件で違いを確認する前提で記事を整理しています。気になる条件に近い記事から読み、自分のケースはシミュレーターで試算し、記事とツールを往復して判断してください。
@@ -218,7 +218,7 @@ export default function Page() {
             <li key={a.slug}>
               <TrackedLink
                 href={`/articles/${a.slug}`}
-                className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                 event={{
                   action: "click_top_problem_article",
                   location: "top_problem_articles",
@@ -256,7 +256,7 @@ export default function Page() {
       </section>
 
       {/* ── 知っておきたいこと（カテゴリ入口） ─────────────── */}
-      <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+      <section className="ds-card ds-card-pad">
         <h2 className="text-xl font-black text-gray-900 md:text-2xl">知っておきたいこと</h2>
         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
           固定負担の見直し・借入返済・返済計画などを、カテゴリ別に条件ごとの違いとして整理しています。気になるカテゴリから読み、シミュレーターで自分の条件を試算し、記事とツールを往復して判断材料にしてください。
@@ -265,7 +265,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/articles#fixed-cost"
-              className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:bg-gray-50 hover:border-gray-300"
+              className="block ds-subcard p-4 transition hover:shadow-md"
               event={{
                 action: "click_top_category_entry",
                 location: "top_categories",
@@ -281,7 +281,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/articles#household"
-              className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:bg-gray-50 hover:border-gray-300"
+              className="block ds-subcard p-4 transition hover:shadow-md"
               event={{
                 action: "click_top_category_entry",
                 location: "top_categories",
@@ -297,7 +297,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/articles#improvement-effect"
-              className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:bg-gray-50 hover:border-gray-300"
+              className="block ds-subcard p-4 transition hover:shadow-md"
               event={{
                 action: "click_top_category_entry",
                 location: "top_categories",
@@ -313,7 +313,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/articles#loan-comparison"
-              className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:bg-gray-50 hover:border-gray-300"
+              className="block ds-subcard p-4 transition hover:shadow-md"
               event={{
                 action: "click_top_category_entry",
                 location: "top_categories",
@@ -329,7 +329,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/articles#repayment-planning"
-              className="block rounded-2xl border border-gray-200 bg-gray-50/50 p-4 transition hover:bg-gray-50 hover:border-gray-300"
+              className="block ds-subcard p-4 transition hover:shadow-md"
               event={{
                 action: "click_top_category_entry",
                 location: "top_categories",
@@ -345,7 +345,7 @@ export default function Page() {
         </ul>
         <TrackedLink
           href="/articles"
-          className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+          className="ds-btn ds-btn-primary mt-6"
           event={{
             action: "click_top_category_entry",
             location: "top_categories",
@@ -358,7 +358,7 @@ export default function Page() {
       </section>
 
       {/* ── 注意事項・補助導線 ──────────────────────────── */}
-      <section className="rounded-3xl border border-gray-200 bg-gray-50/70 p-6">
+      <section className="ds-subcard p-6">
         <h2 className="text-sm font-bold text-gray-700">注意事項</h2>
         <ul className="mt-3 space-y-1.5 text-xs text-gray-500 leading-relaxed">
           <li>・本ツールは参考情報です。実際の返済条件は契約内容（適用金利、端数処理、約定日等）を優先してください。</li>
@@ -369,42 +369,42 @@ export default function Page() {
         <div className="mt-5 flex flex-wrap gap-2">
           <TrackedLink
             href="/about"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/about", link_type: "support_link" }}
           >
             このサイトについて
           </TrackedLink>
           <TrackedLink
             href="/how-to"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/how-to", link_type: "support_link" }}
           >
             使い方
           </TrackedLink>
           <TrackedLink
             href="/logic"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/logic", link_type: "support_link" }}
           >
             計算ロジック
           </TrackedLink>
           <TrackedLink
             href="/faq"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/faq", link_type: "support_link" }}
           >
             FAQ
           </TrackedLink>
           <TrackedLink
             href="/privacy"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/privacy", link_type: "support_link" }}
           >
             プライバシーポリシー
           </TrackedLink>
           <TrackedLink
             href="/contact"
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-600 hover:bg-gray-100"
+            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
             event={{ action: "click_top_support_link", location: "top_footer_support", target: "/contact", link_type: "support_link" }}
           >
             お問い合わせ

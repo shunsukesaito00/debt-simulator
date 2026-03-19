@@ -11,7 +11,7 @@ export function ArticleReadingPoints({
   misconceptions,
 }: ArticleReadingPointsProps) {
   return (
-    <section className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4" aria-label="読み方のポイント">
+    <section className="ds-subcard p-4" aria-label="読み方のポイント">
       <h2 className="text-sm font-black text-gray-900">読み方のポイント</h2>
       <ul className="mt-3 space-y-3">
         {points.map((p, i) => (

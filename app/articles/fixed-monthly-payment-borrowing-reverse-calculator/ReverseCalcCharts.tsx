@@ -79,13 +79,13 @@ export function InterestByPaymentBarChart() {
 export function BalanceCards() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+      <div className="ds-subcard p-4">
         <div className="text-xs font-black text-gray-600">借入額目安を増やすには</div>
         <p className="mt-2 text-sm text-gray-700">
           月々返済額を上げるか、返済年数を延ばすと借入額の目安は増えます。ただし返済年数を延ばすほど総利息も増えます。
         </p>
       </div>
-      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+      <div className="ds-subcard p-4">
         <div className="text-xs font-black text-gray-600">返済年数を延ばすと</div>
         <p className="mt-2 text-sm text-gray-700">
           毎月の負担は同じでも、総支払額は重くなります。借入額だけでなく総利息・総支払額まで見て判断することが重要です。

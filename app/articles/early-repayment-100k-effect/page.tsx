@@ -145,7 +145,7 @@ export default function Page() {
           </ol>
         </nav>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-soft md:p-8">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
@@ -161,7 +161,7 @@ export default function Page() {
             reasonForConditions="200万・5年返済は多くの人が検討する水準。12か月後は返済初期で残高がまだ大きいタイミングなので、10万円繰り上げの効果が出やすい例として選んだ。"
           />
 
-          <section className="mt-6 rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <section className="mt-6 ds-subcard p-4">
             <h2 className="text-sm font-black text-gray-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
@@ -378,7 +378,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで比較する →
                 </Link>
@@ -462,7 +462,7 @@ export default function Page() {
               <div className="mt-6">
                 <Link
                   href="/simulator/cardloan"
-                  className="inline-flex items-center justify-center rounded-2xl bg-gray-900 px-6 py-3 text-sm font-black text-white hover:opacity-90"
+                  className="ds-btn ds-btn-primary"
                 >
                   借入返済シミュレーターで比較する →
                 </Link>

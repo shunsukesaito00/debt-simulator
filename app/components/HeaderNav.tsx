@@ -18,9 +18,9 @@ export default function HeaderNav() {
   const path = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-3 py-2 md:px-4">
-        <Link href="/" className="shrink-0 font-black text-gray-900">
+    <header className="ds-header fixed inset-x-0 top-0 z-50">
+      <div className="ds-container flex items-center justify-between gap-4 py-3">
+        <Link href="/" className="shrink-0 font-black tracking-tight text-slate-900">
           借入返済シミュレーター
         </Link>
 
@@ -34,7 +34,9 @@ export default function HeaderNav() {
                 href={it.href}
                 className={[
                   "rounded-2xl px-3 py-2 text-sm font-black transition",
-                  active ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800 hover:bg-gray-200",
+                  active
+                    ? "bg-slate-900 text-white"
+                    : "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
                 ].join(" ")}
               >
                 {it.label}

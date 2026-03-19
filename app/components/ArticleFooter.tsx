@@ -28,14 +28,14 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
   return (
     <section className="mt-10 border-t border-gray-200 pt-8">
       {showCta && (
-        <div className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
-          <h2 className="text-base font-black text-gray-900">自分の条件で試算する</h2>
+        <div className="ds-subcard mb-8 p-6">
+          <h2 className="text-base font-black text-slate-900">自分の条件で試算する</h2>
           <p className="mt-2 text-sm text-gray-700 leading-relaxed">
             借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
           </p>
           <TrackedLink
             href={SIMULATOR_HREF}
-            className="mt-4 inline-flex items-center justify-center rounded-2xl bg-gray-900 px-5 py-3 text-sm font-black text-white hover:opacity-90"
+            className="ds-btn ds-btn-primary mt-4"
             event={{
               action: "click_article_simulator_cta",
               location: "article_cta",
@@ -51,7 +51,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
 
       {relatedLinks.length > 0 && (
         <>
-          <h2 className="text-base font-black text-gray-900">関連記事</h2>
+          <h2 className="text-base font-black text-slate-900">関連記事</h2>
           <ul className="mt-3 flex flex-col gap-2">
             {relatedLinks.map((link) => {
               const targetSlug = slugFromHref(link.href);
@@ -61,7 +61,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
                   {isSimulator ? (
                     <TrackedLink
                       href={link.href}
-                      className="text-sm font-bold text-gray-700 hover:underline"
+                      className="text-sm font-bold text-slate-700 hover:underline"
                       event={{
                         action: "click_article_simulator_cta",
                         location: "article_related_articles",
@@ -75,7 +75,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
                   ) : (
                     <TrackedLink
                       href={link.href}
-                      className="text-sm font-bold text-gray-700 hover:underline"
+                      className="text-sm font-bold text-slate-700 hover:underline"
                       event={{
                         action: "click_article_related_article",
                         location: "article_related_articles",
@@ -94,7 +94,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
             <li>
               <TrackedLink
                 href={categoryAnchor}
-                className="text-sm font-bold text-gray-700 hover:underline"
+                className="text-sm font-bold text-slate-700 hover:underline"
                 event={{
                   action: "click_article_related_article",
                   location: "article_related_articles",
@@ -110,7 +110,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
             <li>
               <TrackedLink
                 href="/articles"
-                className="text-sm font-bold text-gray-700 hover:underline"
+                className="text-sm font-bold text-slate-700 hover:underline"
                 event={{
                   action: "click_article_back_to_articles",
                   location: "article_footer",
