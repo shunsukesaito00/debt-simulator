@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ARTICLE_LIST_SECTIONS, getArticlesByCategory } from "@/lib/articles";
-import { SITE_NAME } from "@/lib/site-config";
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
 const siteLinks = [
   { href: "/welcome", label: "はじめての方へ" },
@@ -75,7 +75,7 @@ export default function FooterNav() {
 
         <div className="mt-10 border-t border-stone-100 pt-6">
           <p className="text-sm font-medium text-stone-500 leading-relaxed">
-            体験・数字・暮らしの工夫で、返済を一緒に考えていきましょう。
+            {SITE_TAGLINE}
           </p>
           <p className="mt-2 text-xs text-stone-400">
             &copy; {new Date().getFullYear()} {SITE_NAME}

@@ -118,7 +118,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-5000-impact")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             月5,000円の固定費見直しは、月額だけ見ると小さく感じがちです。しかし固定費改善は一度見直すと毎月積み上がるため、続けるほど差が大きくなります。月額だけを見ていると効果を軽く見積もりやすいので、このページでは<strong>1年・3年・5年でどう変わるか</strong>を数字で整理します。
@@ -136,7 +136,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -150,7 +150,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜月5,000円の見直しでも、続くと差は大きい
               </h2>
               <p className="mt-3">
@@ -189,7 +189,7 @@ export default function Page() {
             </section>
 
             <section id="comparison-table">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 月5,000円改善で、1年・3年・5年にいくら差が出るか
               </h2>
               <p className="mt-3">
@@ -200,9 +200,9 @@ export default function Page() {
                 <table className="w-full min-w-[320px] border-collapse text-sm">
                   <thead>
                     <tr className="border-b-2 border-stone-300 bg-stone-100">
-                      <th className="py-2 px-3 text-left font-black text-stone-900">期間</th>
-                      <th className="py-2 px-3 text-right font-black text-stone-900">累計改善額</th>
-                      <th className="py-2 px-3 text-left font-black text-stone-900">見え方の例</th>
+                      <th className="py-2 px-3 text-left font-semibold text-stone-900">期間</th>
+                      <th className="py-2 px-3 text-right font-semibold text-stone-900">累計改善額</th>
+                      <th className="py-2 px-3 text-left font-semibold text-stone-900">見え方の例</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -218,7 +218,7 @@ export default function Page() {
               </div>
 
               <div className="mt-6 ds-subcard p-4">
-                <h3 className="text-sm font-black text-stone-900">累計改善額のイメージ（月5,000円×継続月数）</h3>
+                <h3 className="text-sm font-semibold text-stone-900">累計改善額のイメージ（月5,000円×継続月数）</h3>
                 <div className="mt-3 space-y-3" aria-hidden>
                   {impactRows.map((row, i) => (
                     <div key={i}>
@@ -243,7 +243,7 @@ export default function Page() {
             </section>
 
             <section id="where-to-cut">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 月5,000円はどこを見直せば出しやすいか
               </h2>
               <p className="mt-3">
@@ -266,7 +266,7 @@ export default function Page() {
             </section>
 
             <section id="continuation">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 固定費改善は「1回の達成」より「続くかどうか」が重要
               </h2>
               <p className="mt-3">
@@ -278,7 +278,7 @@ export default function Page() {
             </section>
 
             <section id="tool-cta">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 固定費削減インパクト計算ツールで確認する
               </h2>
               <p className="mt-3">
@@ -287,7 +287,7 @@ export default function Page() {
                 でその場で試算できます。自分の想定する削減額を入力すると、累計がすぐ確認できるので、判断材料にしてください。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
                 <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
@@ -301,7 +301,7 @@ export default function Page() {
             </section>
 
             <section id="loan-savings">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入返済や貯蓄にもつながる補足
               </h2>
               <p className="mt-3">
@@ -320,7 +320,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 <div>
                   <dt className="font-bold text-stone-900">月5,000円の固定費見直しは意味がありますか？</dt>
@@ -358,7 +358,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>月5,000円の固定費改善は、月額だと小さく見えますが、<strong>1年・3年・5年で見ると差が大きい</strong>です（1年6万円・3年18万円・5年30万円）。</li>
                 <li>固定費改善の価値は<strong>継続効果</strong>にあります。一度見直せば毎月効果が続くので、まずは見直しやすい項目から始めるのがおすすめです。</li>

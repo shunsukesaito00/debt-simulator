@@ -26,7 +26,7 @@ export function SupplementPageFooterFaq() {
 
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-stone-900">関連記事とシミュレーター</h2>
+      <h2 className="text-base font-semibold text-stone-900">関連記事とシミュレーター</h2>
       <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         条件別の記事で返済の考え方を整理し、シミュレーターで自分の条件を試算できます。
       </p>
@@ -100,7 +100,7 @@ export function SupplementPageFooterLogic() {
 
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-stone-900">関連記事とシミュレーター</h2>
+      <h2 className="text-base font-semibold text-stone-900">関連記事とシミュレーター</h2>
       <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         返済方式の違いや借入額の逆算など、計算ロジックに近い記事をまとめています。
       </p>
@@ -161,7 +161,7 @@ export function SupplementPageFooterLogic() {
 export function SupplementPageFooterHowTo() {
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-stone-900">自分の条件で試算する</h2>
+      <h2 className="text-base font-semibold text-stone-900">自分の条件で試算する</h2>
       <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
       </p>

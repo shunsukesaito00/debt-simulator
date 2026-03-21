@@ -92,7 +92,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-guide")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             このカテゴリでは、毎月の固定負担を見直すための記事を、条件別に「いくら変わるか」が比較できる形で整理していきます。
           </p>
@@ -110,14 +110,14 @@ export default function Page() {
 
           <section className="mt-8 space-y-6 text-sm text-stone-700 leading-relaxed">
             <section>
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">このカテゴリの役割</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">このカテゴリの役割</h2>
               <p className="mt-3">
                 通信費・サブスク・保険など、毎月決まった支出は「固定費」としてまとめて見直すと、何から手をつけるべきか整理しやすくなります。一般論ではなく、具体条件で「月いくら変わるか」「年間でどれくらいの改善効果か」を比較できる記事を、順次追加していく方針です。
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">何から手をつけるか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">何から手をつけるか</h2>
               <p className="mt-3">
                 見直しの優先順位は、削減しやすさ・効果の大きさ・自分の状況によって変わります。このカテゴリでは、項目別に「どの程度の改善が見込めるか」を条件付きで示し、判断材料にしてもらえるようにします。
               </p>
@@ -147,7 +147,7 @@ export default function Page() {
             </section>
 
             <section>
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">ツール・記事一覧</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">ツール・記事一覧</h2>
               <p className="mt-3">
                 毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかは、
                 <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
@@ -178,11 +178,11 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <h3 className="text-base font-black text-stone-900">{item.question}</h3>
+                    <h3 className="text-base font-semibold text-stone-900">{item.question}</h3>
                     <p className="mt-2">{item.answer}</p>
                   </div>
                 ))}

@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("revo-100man-30k-years")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の計算は、一般的な固定金利・毎月一定額返済の近似例です。実際のリボ払い商品では条件により異なる場合があります。
           </p>
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -138,7 +138,7 @@ export default function Page() {
               で試算できます。
             </p>
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜月3万円返済だと約4年2か月・総利息は約47.5万円</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜月3万円返済だと約4年2か月・総利息は約47.5万円</h2>
               <p className="mt-3">
                 結論から言うと、リボ払い100万円を年利15%で毎月3万円ずつ返済する場合、完済までの目安は約50か月（約4年2か月）、総支払額は約147.5万円、総利息は約47.5万円です。
               </p>
@@ -171,20 +171,20 @@ export default function Page() {
             </section>
 
             <section id="why">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">なぜ月3万円だと完済まで時間がかかるのか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">なぜ月3万円だと完済まで時間がかかるのか</h2>
               <p className="mt-3">
                 リボ払いでは、毎月の返済額のうち一部が利息に充てられ、残りが元本の返済に回ります。月3万円の場合、当初は残高が100万円と大きいため、利息の占める割合が高く、元本に回る金額が少なくなります。そのため、残高がなかなか減りにくく、完済までに約50か月かかります。
               </p>
             </section>
             <section id="numbers">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月3万円返済の具体的な数字</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月3万円返済の具体的な数字</h2>
               <p className="mt-3">リボ払い100万円・年利15%・毎月3万円返済の場合の目安は次の通りです。</p>
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[280px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">項目</th>
-                      <th className="py-3 font-black text-stone-900">目安</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">項目</th>
+                      <th className="py-3 font-semibold text-stone-900">目安</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -197,15 +197,15 @@ export default function Page() {
               </div>
             </section>
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月3万円と月5万円を比べるとどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月3万円と月5万円を比べるとどう違うか</h2>
               <p className="mt-3">同じ100万円・年利15%でも、毎月の返済額を5万円にすると、完済までの期間と総利息は大きく変わります。</p>
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[320px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">完済までの目安</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">完済までの目安</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -217,11 +217,11 @@ export default function Page() {
               <p className="mt-3">毎月の返済額を2万円上げる（3万円→5万円）だけで、完済は約24か月に短縮され、総利息は約18.5万円に減ります。月2万円多く返すことで、約29万円の利息を抑えられ、完済も約2年早まります。</p>
             </section>
             <section id="risk">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月3万円返済の注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月3万円返済の注意点</h2>
               <p className="mt-3">月3万円返済は、毎月の負担は軽い一方で、完済まで4年以上かかり、総利息も約47.5万円と大きくなります。可能であれば、毎月の返済額を少しでも上げる、あるいは繰り上げ返済を検討すると、総利息を抑えつつ完済を早めやすくなります。</p>
             </section>
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">ここまでの数値は「100万円・年利15%・毎月3万円返済」という条件での目安です。自分の条件で完済時期や総利息を確認したい場合は、
                 <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
                 で試算できます。
@@ -233,7 +233,7 @@ export default function Page() {
               </div>
             </section>
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">本記事の試算は、一般的な固定金利・毎月一定額返済の考え方に基づく概算です。実際のリボ払いでは、最低支払額のルール、金利の変動、手数料などが影響する場合があります。正確な返済条件は、利用中のカードやローン商品の約款・明細を確認してください。</p>
             </section>
             <section id="editor-memo">
@@ -245,17 +245,17 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
-                <div><h3 className="text-base font-black text-stone-900">リボ100万円を月3万円で返すと何年かかりますか？</h3><p className="mt-2">年利15%の目安では、完済まで約50か月（約4年2か月）です。</p></div>
-                <div><h3 className="text-base font-black text-stone-900">月3万円返済だと総利息はいくらになりますか？</h3><p className="mt-2">100万円・年利15%で毎月3万円返済の場合、総利息の目安は約47.5万円です。毎月5万円にすると約18.5万円まで減らせます。</p></div>
-                <div><h3 className="text-base font-black text-stone-900">早く完済するにはどうすればいいですか？</h3><p className="mt-2">毎月の返済額を増やす、あるいは繰り上げ返済をすると、完済が早まり総利息も減りやすくなります。</p></div>
-                <div><h3 className="text-base font-black text-stone-900">月3万円から月5万円に増やすと総利息はどれくらい変わりますか？</h3><p className="mt-2">100万円・年利15%の場合、月3万円では総利息約47.5万円ですが、月5万円にすると約18.5万円まで減ります。月2万円の増額で総利息が約29万円も減り、完済も約2年早まります。</p></div>
-                <div><h3 className="text-base font-black text-stone-900">途中で返済額を増やした場合、効果はありますか？</h3><p className="mt-2">途中からでも返済額を増やせば、その時点から元本の減りが早くなるため効果はあります。残高が大きい時期ほど利息への影響が大きいため、できるだけ早い段階で増額するほど総利息を抑えやすくなります。</p></div>
+                <div><h3 className="text-base font-semibold text-stone-900">リボ100万円を月3万円で返すと何年かかりますか？</h3><p className="mt-2">年利15%の目安では、完済まで約50か月（約4年2か月）です。</p></div>
+                <div><h3 className="text-base font-semibold text-stone-900">月3万円返済だと総利息はいくらになりますか？</h3><p className="mt-2">100万円・年利15%で毎月3万円返済の場合、総利息の目安は約47.5万円です。毎月5万円にすると約18.5万円まで減らせます。</p></div>
+                <div><h3 className="text-base font-semibold text-stone-900">早く完済するにはどうすればいいですか？</h3><p className="mt-2">毎月の返済額を増やす、あるいは繰り上げ返済をすると、完済が早まり総利息も減りやすくなります。</p></div>
+                <div><h3 className="text-base font-semibold text-stone-900">月3万円から月5万円に増やすと総利息はどれくらい変わりますか？</h3><p className="mt-2">100万円・年利15%の場合、月3万円では総利息約47.5万円ですが、月5万円にすると約18.5万円まで減ります。月2万円の増額で総利息が約29万円も減り、完済も約2年早まります。</p></div>
+                <div><h3 className="text-base font-semibold text-stone-900">途中で返済額を増やした場合、効果はありますか？</h3><p className="mt-2">途中からでも返済額を増やせば、その時点から元本の減りが早くなるため効果はあります。残高が大きい時期ほど利息への影響が大きいため、できるだけ早い段階で増額するほど総利息を抑えやすくなります。</p></div>
               </div>
             </section>
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">リボ払い100万円を毎月3万円で返す場合、年利15%では完済まで約4年2か月、総利息は約47.5万円が目安です。可能であれば返済額を上げるか繰り上げ返済を検討すると、総利息を抑えつつ完済を早めやすくなります。自分の条件で試算したい場合は<Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>で確認できます。</p>
             </section>
           </div>

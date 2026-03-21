@@ -104,7 +104,7 @@ function CategoryReadBlock() {
   if (articles.length === 0) return null;
   return (
     <section id="category-read">
-      <h2 className="text-lg font-black text-stone-900 md:text-xl">
+      <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
         このカテゴリで読むべき記事
       </h2>
       <p className="mt-3 text-sm text-stone-700 leading-relaxed">
@@ -162,7 +162,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("loan-amount-guide")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
@@ -181,7 +181,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -202,7 +202,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜借入額が増えるほど返済負担は重くなる
               </h2>
               <p className="mt-3">
@@ -214,7 +214,7 @@ export default function Page() {
             </section>
 
             <section id="monthly-vs-total">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 まず確認したいのは「月々」と「総額」の両方
               </h2>
               <p className="mt-3">
@@ -233,7 +233,7 @@ export default function Page() {
             </section>
 
             <section id="100man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入100万円の返済負担
               </h2>
               <p className="mt-3">
@@ -252,7 +252,7 @@ export default function Page() {
             </section>
 
             <section id="200man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入200万円の返済負担
               </h2>
               <p className="mt-3">
@@ -271,7 +271,7 @@ export default function Page() {
             </section>
 
             <section id="300man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入300万円の返済負担
               </h2>
               <p className="mt-3">
@@ -313,22 +313,22 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入額別に比較すると何が違うか
               </h2>
               <p className="mt-3">
                 借入額別の返済負担を、5年返済と毎月5万円返済固定の2パターンで整理しました。いずれも年利15%・元利均等の近似例です。
               </p>
 
-              <h3 className="mt-6 text-base font-black text-stone-900">5年返済での比較</h3>
+              <h3 className="mt-6 text-base font-semibold text-stone-900">5年返済での比較</h3>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
-                      <th className="py-3 font-black text-stone-900">特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">借入額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息</th>
+                      <th className="py-3 font-semibold text-stone-900">特徴</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -344,15 +344,15 @@ export default function Page() {
                 </table>
               </div>
 
-              <h3 className="mt-8 text-base font-black text-stone-900">毎月5万円返済固定での比較</h3>
+              <h3 className="mt-8 text-base font-semibold text-stone-900">毎月5万円返済固定での比較</h3>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">完済までの目安</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
-                      <th className="py-3 font-black text-stone-900">特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">借入額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">完済までの目安</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息</th>
+                      <th className="py-3 font-semibold text-stone-900">特徴</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -370,7 +370,7 @@ export default function Page() {
             </section>
 
             <section id="reverse">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 借入額を決めるときに大事なのは「逆算」
               </h2>
               <p className="mt-3">
@@ -398,7 +398,7 @@ export default function Page() {
             <CategoryReadBlock />
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 迷ったらシミュレーターで比較するのが早い
               </h2>
               <p className="mt-3">
@@ -422,7 +422,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 注意点
               </h2>
               <p className="mt-3">
@@ -442,12 +442,12 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 よくある質問
               </h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     借入額が増えると何が一番重くなりますか？
                   </h3>
                   <p className="mt-2">
@@ -455,7 +455,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     100万円と200万円では返済負担はどれくらい違いますか？
                   </h3>
                   <p className="mt-2">
@@ -463,7 +463,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     借入額はどう決めるのが安全ですか？
                   </h3>
                   <p className="mt-2">
@@ -471,7 +471,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     借入額を決めるときに、金利の違いはどれくらい影響しますか？
                   </h3>
                   <p className="mt-2">
@@ -479,7 +479,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     借入額100万円と300万円で迷ったら、どう判断すればよいですか？
                   </h3>
                   <p className="mt-2">
@@ -490,7 +490,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 まとめ
               </h2>
               <p className="mt-3">

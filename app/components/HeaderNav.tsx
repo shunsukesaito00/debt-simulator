@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SITE_TAGLINE } from "@/lib/site-config";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -116,8 +117,8 @@ export default function HeaderNav() {
     <header className="fixed inset-x-0 top-0 z-50">
       {/* タグライン帯 */}
       <div className="bg-emerald-950 text-center">
-        <p className="py-1.5 text-[11px] font-medium tracking-wide text-emerald-100/90">
-          体験・数字・暮らしの工夫で、返済を一緒に考えていきましょう。
+        <p className="py-1 text-[10px] font-normal leading-snug tracking-wide text-emerald-100/85 md:text-[11px]">
+          {SITE_TAGLINE}
         </p>
       </div>
       <div className="ds-header">
@@ -126,10 +127,7 @@ export default function HeaderNav() {
           href="/"
           className={`min-w-0 shrink text-sm font-bold leading-snug tracking-tight text-stone-900 sm:text-base ${navFocus} rounded-sm`}
         >
-          <span className="flex flex-col leading-tight sm:flex-row sm:items-baseline sm:gap-2">
-            <span className="line-clamp-2 sm:line-clamp-1">借金と暮らしの記録</span>
-            <span className="hidden text-[10px] font-semibold text-stone-500 sm:inline">返済シミュレーター付き</span>
-          </span>
+          <span className="line-clamp-2 sm:line-clamp-1">借金と暮らしの記録</span>
         </Link>
 
         {/* デスクトップ：プライマリ（テキストリンク＋アクティブは下線） */}

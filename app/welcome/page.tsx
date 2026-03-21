@@ -53,30 +53,29 @@ export default function WelcomePage() {
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="font-bold text-stone-900" aria-current="page">
+          <li className="font-semibold text-stone-900" aria-current="page">
             はじめての方へ
           </li>
         </ol>
       </nav>
 
       <div className="ds-card ds-card-pad">
-        <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ</p>
+        <p className="text-sm font-normal text-stone-600">サイトの案内</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">
           はじめての方へ
         </h1>
         <p className="mt-4 text-sm text-stone-700 leading-relaxed">
-          返済や金欠で気持ちが沈んでいるときは、いきなり細かい数字より「自分と近い話」と「いまの負担の目安」から始めて大丈夫です。このページでは、
-          <strong>おすすめの読む順</strong>と<strong>ツールへの入口</strong>だけに絞っています。
+          このページでは、おすすめの読む順とツールへの入口をまとめています。
         </p>
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="recommended">
-          <h2 className="ds-page-serif text-lg font-bold text-stone-900">まず読む記事（おすすめ順）</h2>
+          <h2 className="ds-page-serif text-lg font-semibold text-stone-900">まず読む記事（おすすめ順）</h2>
           <ol className="mt-4 list-decimal space-y-4 pl-5 text-sm text-stone-700 leading-relaxed">
             {recommended.map((a) => (
               <li key={a.slug}>
                 <Link
                   href={`/articles/${a.slug}`}
-                  className="font-bold text-stone-900 underline decoration-stone-300 hover:decoration-stone-800"
+                  className="font-medium text-stone-900 underline decoration-stone-300 hover:decoration-stone-800"
                 >
                   {a.title}
                 </Link>
@@ -91,22 +90,22 @@ export default function WelcomePage() {
         </section>
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="tools">
-          <h2 className="ds-page-serif text-lg font-bold text-stone-900">数字を試す（ツール）</h2>
+          <h2 className="ds-page-serif text-lg font-semibold text-stone-900">数字を試す（ツール）</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-stone-700">
             <li>
-              <Link href="/simulator/cardloan" className="font-bold text-stone-900 underline hover:no-underline">
+              <Link href="/simulator/cardloan" className="font-medium text-stone-900 underline hover:no-underline">
                 借入返済シミュレーター
               </Link>
               … 借入額・金利・返済方式を変えて、月々・総利息・完済時期の目安をブラウザ内で計算（入力は送信されません）。
             </li>
             <li>
-              <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 underline hover:no-underline">
+              <Link href="/tools/fixed-cost-impact" className="font-medium text-stone-900 underline hover:no-underline">
                 固定費削減インパクト計算
               </Link>
               … 毎月いくら削ると、1年・3年・5年でいくらになるかの目安。
             </li>
             <li>
-              <Link href="/quick-reference" className="font-bold text-stone-900 underline hover:no-underline">
+              <Link href="/quick-reference" className="font-medium text-stone-900 underline hover:no-underline">
                 早見表
               </Link>
               … 100万・200万・300万・3年/5年など、すぐ返済額のイメージを掴みたいとき向け。
@@ -115,10 +114,10 @@ export default function WelcomePage() {
         </section>
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="can-cannot">
-          <h2 className="ds-page-serif text-lg font-bold text-stone-900">このサイトでできること・できないこと</h2>
+          <h2 className="ds-page-serif text-lg font-semibold text-stone-900">このサイトでできること・できないこと</h2>
           <div className="mt-3 space-y-3 text-sm text-stone-700 leading-relaxed">
             <div className="ds-subcard p-4">
-              <div className="font-bold text-stone-900">できること</div>
+              <div className="font-semibold text-stone-900">できること</div>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>条件を変えたときの返済の目安を、シミュレーターで試す</li>
                 <li>固定費を削ったときの累計効果のイメージをつかむ</li>
@@ -127,7 +126,7 @@ export default function WelcomePage() {
               </ul>
             </div>
             <div className="ds-subcard p-4 border-amber-200/80 bg-amber-50/40">
-              <div className="font-bold text-stone-900">できないこと・していないこと</div>
+              <div className="font-semibold text-stone-900">できないこと・していないこと</div>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>個別の投資助言・銘柄推奨・「やるべき取引」の指示</li>
                 <li>法律・税務の専門的なアドバイス（契約内容は必ず各社の公式情報で確認してください）</li>

@@ -44,7 +44,7 @@ const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
 
 const premise = {
   comparisonConditions: ["個人の体験・整理記事（一般論の正解を示すものではありません）"],
-  reasonForConditions: "借入・返済・生活の悩みは人それぞれです。契約内容・税務・労務は専門家・公的機関の説明を優先してください。",
+  reasonForConditions: "借入・返済・生活の状況は人それぞれです。契約内容・税務・労務は専門家・公的機関の説明を優先してください。",
 };
 
 const readingPoints = {
@@ -92,15 +92,15 @@ export default function Page() {
             <section>
               <h2 className="ds-page-serif text-lg font-bold text-stone-900">本文</h2>
               <p className="mt-3">
-                返済や家計の見直しは、数字と生活の両方を見ながら進める必要があります。このページでは、当時の気持ちと、あとから振り返って整理したポイントを短くまとめています。
+                返済や家計の見直しは、数字と生活の両方を見ながら進める必要があります。このページでは、当時の状況と、あとから振り返って整理したポイントを短くまとめています。
                 詳細な数値比較は関連記事やシミュレーターもあわせてご利用ください。
               </p>
               <p className="mt-3">
-                同じ状況の方の参考になれば幸いです。つらいときは一人で抱え込まず、
+                状況が近い場合の参考情報として読んでください。必要に応じて
                 <a href="/resources/consultation-guide" className="font-semibold text-emerald-900 underline">
                   相談先・公的支援の一覧
                 </a>
-                もご確認ください。
+                をご確認ください。
               </p>
             </section>
           </section>

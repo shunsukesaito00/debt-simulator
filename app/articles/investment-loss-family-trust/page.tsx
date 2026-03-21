@@ -81,7 +81,7 @@ export default function Page() {
           </p>
 
           <section id="notice" className="mt-6 ds-subcard p-4 border-l-4 border-stone-400">
-            <h2 className="text-sm font-black text-stone-900">この記事について</h2>
+            <h2 className="text-sm font-semibold text-stone-900">この記事について</h2>
             <ul className="mt-2 list-disc pl-5 text-sm text-stone-700 space-y-1">
               <li>銘柄・サービス名の推奨や、取引のやり方の指南は書いていません。</li>
               <li>金額は記憶と感覚に基づく概算です（生涯収支はおおよそ1,000万円を超える規模の負け、と自己認識しています）。</li>
@@ -90,7 +90,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -104,7 +104,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="start">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">投資を始めたきっかけ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">投資を始めたきっかけ</h2>
               <p className="mt-3">
                 私が投資を始めた理由は、派手な野心ではありませんでした。
                 <strong>少しでも今より豊かな生活ができればいいな</strong>、という程度の動機でした。
@@ -112,7 +112,7 @@ export default function Page() {
             </section>
 
             <section id="stocks">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">現物株で焦りが生まれた</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">現物株で焦りが生まれた</h2>
               <p className="mt-3">
                 最初は株式の現物投資から始めました。素人ながら、SNSで話題になっている銘柄などを売買していました。
                 話題に乗る形は、いわゆる後乗りになりやすく、負けが重なりました。
@@ -123,7 +123,7 @@ export default function Page() {
             </section>
 
             <section id="margin">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">信用取引に切り替えた</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">信用取引に切り替えた</h2>
               <p className="mt-3">
                 焦った私は、<strong>信用取引で取り返そう</strong>としました。投資対象の銘柄は変えず、そのまま信用取引に切り替えたのです。
                 レバレッジは最大でおおよそ3.3倍程度。やり方は現物のときと大きく変わらないつもりでした。
@@ -134,7 +134,7 @@ export default function Page() {
             </section>
 
             <section id="fx">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">FXと海外の取引</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">FXと海外の取引</h2>
               <p className="mt-3">
                 資金が尽きたあと、私はFXに移りました。レバレッジはおおよそ25倍。とにかく給料のほとんどを入金し、
                 少し増えては大きくやられる、を繰り返しました。
@@ -146,7 +146,7 @@ export default function Page() {
             </section>
 
             <section id="loop">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">振り返りなしのループ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">振り返りなしのループ</h2>
               <p className="mt-3">
                 取引の振り返りはほとんど行いませんでした。頭の中では、<strong>次はいける</strong>、
                 <strong>最後の入金</strong>、そして<strong>いつもの「あと1回」入金</strong>が繰り返されていました。
@@ -161,7 +161,7 @@ export default function Page() {
             </section>
 
             <section id="turning">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">転機になった週</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">転機になった週</h2>
               <p className="mt-3">
                 転機は、ライフイベントで大きな出費が重なったときでした。あわせて、クレジットカードのキャッシングの引き落とし日と生活の支払いが重なり、
                 口座の中では「あと一押し」だったのに、銀行口座の現実は別のカレンダーで動いていました。
@@ -172,7 +172,7 @@ export default function Page() {
             </section>
 
             <section id="now">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">今、取り返しているもの</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">今、取り返しているもの</h2>
               <p className="mt-3">
                 昔、私が取り返そうとしていたのは、口座の数字でした。今、取り返したいのは、<strong>妻や両親への信用</strong>です。
                 金額は時間をかければ減らしていけるかもしれません。でも信頼のほうは、別のカレンダーで動くと感じています。
@@ -196,7 +196,7 @@ export default function Page() {
                     body: "口座上の目標と、引き落とし日・生活費の山がズレると、返せているように見えても詰みやすい、というのが私の教訓でした。",
                   },
                   {
-                    label: "同じ悩みの人へ",
+                    label: "関連リンク",
                     body: "相談が怖いときは、恥だけでなく「物語を壊したくない」怖さもあると思います。話す材料を数字で整理するのも一案です。",
                   },
                 ]}
@@ -208,7 +208,7 @@ export default function Page() {
             </section>
 
             <section id="tools">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">数字で状況を整理する（任意）</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">数字で状況を整理する（任意）</h2>
               <p className="mt-3">
                 私がこのサイトでシミュレーターを作ったのは、返済や固定費の「見え方」を、条件ごとに試したかったからです。
                 投資の話とは別に、借入の返済や固定費の削減効果を数字で押さえたい方は、次のツールも参考にしてください。

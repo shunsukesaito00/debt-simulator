@@ -44,13 +44,13 @@ export function EarlyRepaymentEffectCards() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="ds-subcard p-4">
-        <div className="text-xs font-black text-stone-600">期間短縮型イメージ</div>
-        <div className="mt-2 text-lg font-black text-stone-900">完済約5か月短縮</div>
+        <div className="text-xs font-semibold text-stone-600">期間短縮型イメージ</div>
+        <div className="mt-2 text-lg font-semibold text-stone-900">完済約5か月短縮</div>
         <p className="mt-1 text-sm text-stone-600">利息約4.5万円減</p>
       </div>
       <div className="ds-subcard p-4">
-        <div className="text-xs font-black text-stone-600">返済額軽減型イメージ</div>
-        <div className="mt-2 text-lg font-black text-stone-900">毎月約1,920円軽減</div>
+        <div className="text-xs font-semibold text-stone-600">返済額軽減型イメージ</div>
+        <div className="mt-2 text-lg font-semibold text-stone-900">毎月約1,920円軽減</div>
         <p className="mt-1 text-sm text-stone-600">利息約3.5万円減</p>
       </div>
     </div>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="ds-card ds-card-pad">
-      <h1 className="text-2xl font-black">免責事項</h1>
+      <h1 className="text-2xl font-semibold">免責事項</h1>
 
       <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
         <p>

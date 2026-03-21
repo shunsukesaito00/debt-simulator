@@ -17,8 +17,8 @@ const STONE_600 = "#57534e";
 export function CannotPayoffWarningCard() {
   return (
     <div className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-4">
-      <div className="text-xs font-black text-amber-800">毎月1万円のケース</div>
-      <div className="mt-2 text-base font-black text-stone-900">完済不可に近い</div>
+      <div className="text-xs font-semibold text-amber-800">毎月1万円のケース</div>
+      <div className="mt-2 text-base font-semibold text-stone-900">完済不可に近い</div>
       <p className="mt-1 text-sm text-stone-700">
         返済額が初月利息（約12,500円）を下回るため、元本が減らず完済できない条件に近いです。
       </p>

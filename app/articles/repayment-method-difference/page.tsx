@@ -104,7 +104,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("repayment-method-difference")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
           </p>
@@ -121,7 +121,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -144,7 +144,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜元利均等と元金均等の一番大きな違い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜元利均等と元金均等の一番大きな違い</h2>
               <p className="mt-3">
                 結論から言うと、元利均等返済は毎月の返済額がほぼ一定で家計管理がしやすく、元金均等返済は返済開始当初の負担が重い代わりに、総利息を抑えやすい方式です。
               </p>
@@ -180,7 +180,7 @@ export default function Page() {
             </section>
 
             <section id="equal-payment">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">元利均等返済とは</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">元利均等返済とは</h2>
               <p className="mt-3">
                 元利均等返済は、毎月支払う返済額の合計がほぼ一定になる方式です。毎月の返済額が固定に近いため、家計管理がしやすく、将来の支出計画を立てやすいのが大きな特徴です。
               </p>
@@ -190,7 +190,7 @@ export default function Page() {
             </section>
 
             <section id="equal-principal">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">元金均等返済とは</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">元金均等返済とは</h2>
               <p className="mt-3">
                 元金均等返済は、毎月返す元本の額が一定になる方式です。借入残高が減るにつれて利息も減るため、毎月の返済総額は返済開始当初が最も大きく、徐々に軽くなっていきます。
               </p>
@@ -200,7 +200,7 @@ export default function Page() {
             </section>
 
             <section id="compare-two">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">元利均等返済と元金均等返済の違いを比較</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">元利均等返済と元金均等返済の違いを比較</h2>
               <p className="mt-3">両者の違いを端的にまとめると次の通りです。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>元利均等返済: 毎月返済額がほぼ一定 / 家計管理しやすい / 総利息はやや多め</li>
@@ -211,10 +211,10 @@ export default function Page() {
                 <table className="w-full min-w-[400px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済方式</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額の特徴</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息の傾向</th>
-                      <th className="py-3 font-black text-stone-900">向いている人</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済方式</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額の特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息の傾向</th>
+                      <th className="py-3 font-semibold text-stone-900">向いている人</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -239,10 +239,10 @@ export default function Page() {
                 <table className="w-full min-w-[360px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済方式</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">初回または毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済方式</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">初回または毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -267,7 +267,7 @@ export default function Page() {
             </section>
 
             <section id="four-methods">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">4つの返済方式を一覧で比較</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">4つの返済方式を一覧で比較</h2>
               <p className="mt-3">
                 当サイトのシミュレーターでは、元利均等、元金均等、定額元利、定額元金の4方式を比較できます。返済方式ごとに、返済額の決まり方と向いている使い方が異なります。
               </p>
@@ -275,10 +275,10 @@ export default function Page() {
                 <table className="w-full min-w-[420px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済方式</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">返済額の特徴</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">利息の傾向</th>
-                      <th className="py-3 font-black text-stone-900">向いているケース</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済方式</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済額の特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">利息の傾向</th>
+                      <th className="py-3 font-semibold text-stone-900">向いているケース</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -315,7 +315,7 @@ export default function Page() {
             </section>
 
             <section id="numeric">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">数値で比較するとどれがどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">数値で比較するとどれがどう違うか</h2>
               <p className="mt-3">
                 同じ100万円・年利15%でも、返済方式が違うと、毎月の負担の出方や総利息は変わります。概算比較では次のようになります。
               </p>
@@ -333,10 +333,10 @@ export default function Page() {
                 <table className="w-full min-w-[380px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済方式</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">返済額の特徴</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">完済目安</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済方式</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済額の特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">完済目安</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -369,14 +369,14 @@ export default function Page() {
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">総利息の比較</h3>
+                <h3 className="text-base font-semibold text-stone-900">総利息の比較</h3>
                 <div className="mt-4">
                   <TotalInterestBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">返済負担のイメージ（初回 vs 最終回）</h3>
+                <h3 className="text-base font-semibold text-stone-900">返済負担のイメージ（初回 vs 最終回）</h3>
                 <div className="mt-4">
                   <RepaymentBurdenComparisonChart />
                 </div>
@@ -387,7 +387,7 @@ export default function Page() {
             </section>
 
             <section id="suit">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どの返済方式が向いているか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どの返済方式が向いているか</h2>
               <p className="mt-3">
                 毎月の家計管理をしやすくしたいなら、元利均等返済や定額元利が向いています。毎月の支払額が把握しやすく、予算を立てやすいからです。
               </p>
@@ -397,7 +397,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">迷ったらシミュレーターで比較するのが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">迷ったらシミュレーターで比較するのが早い</h2>
               <p className="mt-3">
                 返済方式の違いは、言葉だけで理解するより、実際に数値を入れて比較した方が圧倒的にわかりやすいです。借入額、金利、返済期間を変えるだけでも結果は大きく動きます。
               </p>
@@ -417,7 +417,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際の金融商品では、日割り計算、最低返済額ルール、初回返済日、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -435,34 +435,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">元利均等返済と元金均等返済はどっちが得ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">元利均等返済と元金均等返済はどっちが得ですか？</h3>
                   <p className="mt-2">
                     総利息だけを見ると元金均等返済の方が有利になりやすいですが、返済開始当初の負担は重くなります。どちらが適切かは家計の余力によります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">毎月の返済額が一定なのはどれですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">毎月の返済額が一定なのはどれですか？</h3>
                   <p className="mt-2">
                     一般的には元利均等返済と定額元利が、毎月の支払額を一定に近い形で管理しやすい方式です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済方式は後から変えられますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済方式は後から変えられますか？</h3>
                   <p className="mt-2">
                     商品によって異なります。後から変更できない場合もあるため、契約前に確認が必要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済途中で返済方式を切り替えるとどうなりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済途中で返済方式を切り替えるとどうなりますか？</h3>
                   <p className="mt-2">
                     切り替えが可能な商品の場合、残高や残り返済回数をもとに再計算されます。切り替え前後で毎月返済額や総利息が変わるため、事前にシミュレーションで確認することをおすすめします。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">カードローンやリボ払いにはどの返済方式が多いですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">カードローンやリボ払いにはどの返済方式が多いですか？</h3>
                   <p className="mt-2">
                     カードローンやリボ払いでは、毎月の支払額が一定の定額元利方式が多く採用されています。毎月の負担が安定する反面、返済額が低いと元本がなかなか減らず、完済が長引く場合があります。
                   </p>
@@ -471,7 +471,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 元利均等返済は毎月の負担を安定させやすく、元金均等返済は総利息を抑えやすいのが大きな違いです。さらに、定額元利や定額元金も含めると、返済方式ごとに向いている人が変わります。
               </p>

@@ -109,7 +109,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("monthly-50000-interest-at-15percent")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
@@ -125,7 +125,7 @@ export default function Page() {
           />
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -148,7 +148,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜月5万円・金利15%でも借入額が増えると総利息は急増する</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜月5万円・金利15%でも借入額が増えると総利息は急増する</h2>
               <p className="mt-3">
                 結論から言うと、毎月5万円返済・年利15%という同じ条件でも、借入額が増えると総利息は大きく増えます。100万円なら総利息は約15.8万円ですが、200万円では約79.0万円、300万円では約257.9万円が目安です。
               </p>
@@ -158,7 +158,7 @@ export default function Page() {
             </section>
 
             <section id="why">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">なぜ毎月返済額が同じでも総利息が大きく変わるのか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">なぜ毎月返済額が同じでも総利息が大きく変わるのか</h2>
               <p className="mt-3">
                 毎月返済額が同じでも、借入額が大きくなると元本の残高が長く残りやすくなります。残高が大きい期間が長いほど、その間に発生する利息も増えます。
               </p>
@@ -168,7 +168,7 @@ export default function Page() {
             </section>
 
             <section id="100man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入100万円なら総利息はいくらか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入100万円なら総利息はいくらか</h2>
               <p className="mt-3">
                 借入100万円を年利15%で借りて、毎月5万円ずつ返済する場合、完済までの目安は24か月、総支払額は約115.8万円、総利息は約15.8万円です。
               </p>
@@ -178,7 +178,7 @@ export default function Page() {
             </section>
 
             <section id="200man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入200万円なら総利息はいくらか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入200万円なら総利息はいくらか</h2>
               <p className="mt-3">
                 借入200万円を年利15%で借りて、毎月5万円ずつ返済する場合、完済までの目安は56か月、総支払額は約279.0万円、総利息は約79.0万円です。
               </p>
@@ -188,7 +188,7 @@ export default function Page() {
             </section>
 
             <section id="300man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入300万円なら総利息はいくらか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入300万円なら総利息はいくらか</h2>
               <p className="mt-3">
                 借入300万円を年利15%で借りて、毎月5万円ずつ返済する場合、完済までの目安は112か月、総支払額は約558.0万円、総利息は約257.9万円です。
               </p>
@@ -198,7 +198,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">100万円・200万円・300万円を比較するとどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">100万円・200万円・300万円を比較するとどう違うか</h2>
               <p className="mt-3">同じ毎月5万円返済・年利15%でも、借入額の違いで結果はかなり変わります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>100万円: 約24か月 / 総利息約157,947円</li>
@@ -213,11 +213,11 @@ export default function Page() {
                 <table className="w-full min-w-[480px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">完済目安</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">借入額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">完済目安</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -250,21 +250,21 @@ export default function Page() {
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">借入額別の総利息</h3>
+                <h3 className="text-base font-semibold text-stone-900">借入額別の総利息</h3>
                 <div className="mt-4">
                   <TotalInterestBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">借入額別の完済期間</h3>
+                <h3 className="text-base font-semibold text-stone-900">借入額別の完済期間</h3>
                 <div className="mt-4">
                   <PayoffMonthsBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">総支払額の内訳（元本と利息）</h3>
+                <h3 className="text-base font-semibold text-stone-900">総支払額の内訳（元本と利息）</h3>
                 <div className="mt-4">
                   <TotalPaymentStackedChart />
                 </div>
@@ -292,7 +292,7 @@ export default function Page() {
             </section>
 
             <section id="not-safe">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月5万円返済なら安心とは言い切れない理由</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月5万円返済なら安心とは言い切れない理由</h2>
               <p className="mt-3">
                 毎月5万円返済できるという条件だけを見ると、返済可能に感じるかもしれません。しかし、借入額が大きいと返済期間が長くなり、総支払額はかなり重くなります。
               </p>
@@ -302,7 +302,7 @@ export default function Page() {
             </section>
 
             <section id="point">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どの借入額が現実的かを考えるポイント</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どの借入額が現実的かを考えるポイント</h2>
               <p className="mt-3">
                 どの借入額が現実的かは、毎月5万円返済できるかどうかだけでは決まりません。生活費、他の固定費、緊急時の備え、家計の余力なども考える必要があります。
               </p>
@@ -312,7 +312,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「毎月5万円・年利15%」という固定条件の近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
               </p>
@@ -332,7 +332,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、最低返済額ルール、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -342,34 +342,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月5万円返済・金利15%なら100万円の利息はいくらですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月5万円返済・金利15%なら100万円の利息はいくらですか？</h3>
                   <p className="mt-2">
                     近似例では、完済まで約24か月、総利息は約157,947円です。条件によって変わります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月5万円返済で200万円借りると総利息はいくらですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月5万円返済で200万円借りると総利息はいくらですか？</h3>
                   <p className="mt-2">
                     近似例では、完済まで約56か月、総利息は約789,932円です。借入額が増えると利息も大きく増えます。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月5万円返済で300万円借りるのは危険ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月5万円返済で300万円借りるのは危険ですか？</h3>
                   <p className="mt-2">
                     危険と断定はできませんが、近似例では完済まで約112か月、総利息は約257.9万円となり、負担はかなり重くなります。毎月返済額だけでなく、完済時期と総支払額まで見るべきです。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月5万円返済の場合、元本と利息の内訳はどう変わりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月5万円返済の場合、元本と利息の内訳はどう変わりますか？</h3>
                   <p className="mt-2">
                     返済初期は利息の占める割合が大きく、元本がなかなか減りません。返済が進むにつれて利息分が減り、元本への充当割合が増えていきます。借入額が大きいほどこの初期の利息割合が高い期間が長く続きます。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">金利が10%なら、月5万円返済の総利息はどれくらい変わりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">金利が10%なら、月5万円返済の総利息はどれくらい変わりますか？</h3>
                   <p className="mt-2">
                     金利が下がると総利息はかなり減ります。たとえば借入200万円・月5万円返済の場合、年利15%では総利息が約79万円ですが、年利10%なら総利息は大幅に軽くなります。金利の違いは長期返済ほど大きな差になります。
                   </p>
@@ -378,7 +378,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 毎月5万円返済・年利15%という同じ条件でも、借入額が100万円・200万円・300万円と増えるにつれて、完済期間と総利息は大きく増えます。特に300万円では、利息負担がかなり重くなります。
               </p>

@@ -42,7 +42,7 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
  */
 export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   story:
-    "借金や返済にまつわる当事者の体験記・日記。数字だけでは伝わらない気持ちの揺れや、試行錯誤の記録を置いています。",
+    "借金や返済に関する個人の体験記・日記。状況や試行錯誤の記録を置いています。",
   "side-income":
     "返済のために副業や収入の柱を増やした経験、選び方、確定申告まで。一般論ではなく「返済とつなげた」視点で整理します。",
   saving:
@@ -50,7 +50,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   "fixed-cost":
     "通信費・サブスク・保険など、毎月の固定負担を見直したい方のためのカテゴリ。何から手をつけるべきか、改善効果を比較できる記事を順次追加しています。",
   household:
-    "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理。自分に合うやり方を選ぶときの参考にしてください。",
+    "家計簿が続かない、支出が見えないといった場面を、条件別の考え方で整理します。自分に合うやり方を選ぶときの参考にしてください。",
   "improvement-effect":
     "月5,000円・1万円の見直しで何がどう変わるか、具体条件で比較。数字で効果を確認できます。",
   "loan-amount":
@@ -82,7 +82,7 @@ export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
     id: "story",
     label: "体験記・返済日記",
     description:
-      "借金に気づいたとき、家族に話したとき、返済計画を立てたとき——当事者の一次体験を読めるコーナーです。",
+      "借金に気づいたとき、家族に話したとき、返済計画を立てたとき——個人の体験記を読めるコーナーです。",
     articleCategories: ["story"],
   },
   {

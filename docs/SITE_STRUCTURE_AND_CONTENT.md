@@ -317,4 +317,10 @@ borrow-100-interest, borrow-200-monthly-payment, fixed-payment-principal-interes
 
 ---
 
+## タイポグラフィ（運用メモ）
+
+見出しの太さ・本文ラッパー（`.ds-blog-prose`）・リンクの扱いは、別紙 [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) にまとめています。
+
+---
+
 以上が、現時点までのサイト構造と記事・ツールの内容を文字で書き起こした要約です。外部の方や他 AI に渡してアドバイスを得る際の前提資料として使えます。

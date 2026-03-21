@@ -107,7 +107,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("early-repayment-effect")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、100万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
@@ -124,7 +124,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -147,7 +147,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜繰り上げ返済は利息軽減と完済前倒しに効果がある</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜繰り上げ返済は利息軽減と完済前倒しに効果がある</h2>
               <p className="mt-3">
                 結論から言うと、繰り上げ返済は総利息を減らし、完済時期を早める効果が期待できます。特に、追加返済後も毎月の返済額を変えずに返済期間を短くする考え方では、利息軽減効果が見えやすくなります。
               </p>
@@ -180,7 +180,7 @@ export default function Page() {
             </section>
 
             <section id="what-is">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">繰り上げ返済とは</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">繰り上げ返済とは</h2>
               <p className="mt-3">
                 繰り上げ返済とは、毎月の通常返済とは別に、まとまった金額を前倒しで返済することです。追加で返済した金額は元本の圧縮に効きやすいため、その後に発生する利息も減りやすくなります。
               </p>
@@ -190,7 +190,7 @@ export default function Page() {
             </section>
 
             <section id="base-case">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まずは追加返済しない場合の基準を確認する</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まずは追加返済しない場合の基準を確認する</h2>
               <p className="mt-3">
                 比較の基準として、100万円を年利15%で5年返済するケースを見ておきます。この場合、毎月返済額は約23,790円、総支払額は約142万7千円、総利息は約42.7万円が目安です。
               </p>
@@ -200,7 +200,7 @@ export default function Page() {
             </section>
 
             <section id="effect-10man">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">1年後に10万円を追加返済した場合の効果</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">1年後に10万円を追加返済した場合の効果</h2>
               <p className="mt-3">
                 返済開始から1年後に10万円を追加返済すると、元本がそのぶん早く減るため、その後に発生する利息が軽くなります。追加返済しない場合と比べると、利息軽減や完済前倒しの効果が見えやすくなります。
               </p>
@@ -210,7 +210,7 @@ export default function Page() {
             </section>
 
             <section id="period-short">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">期間短縮型の効果｜完済が早まり、利息軽減も大きい</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">期間短縮型の効果｜完済が早まり、利息軽減も大きい</h2>
               <p className="mt-3">
                 返済開始から1年後に10万円を追加返済し、その後も毎月返済額を約23,790円のまま維持する場合、完済時期は約5か月短縮され、総利息は約38.2万円になります。
               </p>
@@ -220,7 +220,7 @@ export default function Page() {
             </section>
 
             <section id="amount-reduce">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">返済額軽減型の効果｜毎月の負担を下げやすい</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">返済額軽減型の効果｜毎月の負担を下げやすい</h2>
               <p className="mt-3">
                 同じく1年後に10万円を追加返済しても、完済時期をほぼ5年のままにして、その後の毎月返済額を軽くする考え方もあります。この場合、毎月返済額は約21,870円まで下がり、総利息は約39.2万円が目安です。
               </p>
@@ -230,7 +230,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">繰り上げ返済の比較</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">繰り上げ返済の比較</h2>
               <p className="mt-3">3つのケースを比較すると、繰り上げ返済の効果がかなり見やすくなります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>追加返済なし: 毎月約23,790円 / 総利息約427,396円</li>
@@ -242,11 +242,11 @@ export default function Page() {
                 <table className="w-full min-w-[420px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">ケース</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
-                      <th className="py-3 font-black text-stone-900">効果</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">ケース</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息</th>
+                      <th className="py-3 font-semibold text-stone-900">効果</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -279,14 +279,14 @@ export default function Page() {
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">総利息の比較</h3>
+                <h3 className="text-base font-semibold text-stone-900">総利息の比較</h3>
                 <div className="mt-4">
                   <EarlyRepaymentInterestBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">効果の違い</h3>
+                <h3 className="text-base font-semibold text-stone-900">効果の違い</h3>
                 <div className="mt-4">
                   <EarlyRepaymentEffectCards />
                 </div>
@@ -297,7 +297,7 @@ export default function Page() {
             </section>
 
             <section id="priority">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どちらを優先すべきか｜期間短縮型と返済額軽減型の違い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どちらを優先すべきか｜期間短縮型と返済額軽減型の違い</h2>
               <p className="mt-3">
                 どちらが向いているかは、何を優先したいかで決まります。できるだけ総支払額を減らしたいなら、期間短縮型の方が向いています。毎月の返済額を維持するため負担感は変わりませんが、そのぶん早く終わりやすく、利息軽減効果も見えやすいです。
               </p>
@@ -307,7 +307,7 @@ export default function Page() {
             </section>
 
             <section id="before">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">繰り上げ返済をする前に考えたいこと</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">繰り上げ返済をする前に考えたいこと</h2>
               <p className="mt-3">
                 繰り上げ返済は有効な手段ですが、手元資金を減らしすぎると生活防衛資金が足りなくなることがあります。急な出費や収入減に備えるお金を残したうえで、無理のない範囲で行うことが重要です。
               </p>
@@ -317,7 +317,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「100万円・年利15%・5年返済・1年後に10万円追加返済」という固定条件で見た目安です。実際には、借入額、金利、返済方式、追加返済の金額やタイミングによって結果は変わります。
               </p>
@@ -337,7 +337,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、最低返済額ルール、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -355,34 +355,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">繰り上げ返済をすると利息は必ず減りますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">繰り上げ返済をすると利息は必ず減りますか？</h3>
                   <p className="mt-2">
                     一般的には、元本を早く減らせるため、その後に発生する利息は減りやすくなります。ただし、手数料や商品仕様によって実際の効果は異なる場合があります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">繰り上げ返済は期間短縮型と返済額軽減型のどちらが得ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">繰り上げ返済は期間短縮型と返済額軽減型のどちらが得ですか？</h3>
                   <p className="mt-2">
                     利息軽減の効果を重視するなら、一般には期間短縮型の方が有利に見えやすいです。一方、毎月の返済負担を軽くしたい場合は返済額軽減型が考えやすいです。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">繰り上げ返済はいつやると効果が大きいですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">繰り上げ返済はいつやると効果が大きいですか？</h3>
                   <p className="mt-2">
                     一般には、残高が大きい早い段階で元本を減らせるほど、その後の利息軽減効果は出やすくなります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">繰り上げ返済は返済期間の短縮と毎月返済額の軽減、どちらを選ぶべきですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">繰り上げ返済は返済期間の短縮と毎月返済額の軽減、どちらを選ぶべきですか？</h3>
                   <p className="mt-2">
                     総利息をできるだけ減らしたいなら期間短縮型、毎月の家計に余裕を作りたいなら返済額軽減型が向いています。どちらが正解というものではなく、自分の優先度に合わせて選ぶのが基本です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">繰り上げ返済にデメリットはありますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">繰り上げ返済にデメリットはありますか？</h3>
                   <p className="mt-2">
                     手元資金が減るため、急な出費に備える生活防衛資金が不足するリスクがあります。また、商品によっては繰り上げ返済に手数料がかかる場合もあるため、実行前に契約内容を確認することが大切です。
                   </p>
@@ -391,7 +391,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 繰り上げ返済は、総利息を減らし、完済を早めたり、毎月の負担を軽くしたりするのに役立ちます。利息軽減を優先するなら期間短縮型、家計の余裕を優先するなら返済額軽減型、という考え方が基本です。
               </p>

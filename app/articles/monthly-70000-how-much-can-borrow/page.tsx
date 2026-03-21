@@ -106,7 +106,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("monthly-70000-how-much-can-borrow")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事で扱うのは返済計画上の目安であり、審査上の借入可能額や与信枠を示すものではありません。一般的な固定金利・毎月返済の近似例です。
           </p>
@@ -123,7 +123,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -146,7 +146,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜月7万円返済なら借入額の目安は返済年数で大きく変わる</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜月7万円返済なら借入額の目安は返済年数で大きく変わる</h2>
               <p className="mt-3">
                 結論から言うと、毎月7万円返済できるとしても、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年返済なら約206万円、5年返済なら約294万円、7年返済なら約359万円が目安です。
               </p>
@@ -179,7 +179,7 @@ export default function Page() {
             </section>
 
             <section id="point">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">「月7万円ならいくらまで借りられる？」を考えるときのポイント</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">「月7万円ならいくらまで借りられる？」を考えるときのポイント</h2>
               <p className="mt-3">
                 この問いに対して重要なのは、「金融機関が審査上いくら貸してくれるか」と「返済計画上、毎月7万円で無理なく返せる借入額」は別だということです。
               </p>
@@ -189,7 +189,7 @@ export default function Page() {
             </section>
 
             <section id="3years">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">3年返済ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">3年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
                 年利15%で毎月7万円返済し、3年で完済したい場合、借入額の目安は約206万円です。総支払額は約252万円、総利息は約46万円になります。
               </p>
@@ -199,7 +199,7 @@ export default function Page() {
             </section>
 
             <section id="5years">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">5年返済ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">5年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
                 同じく年利15%・毎月7万円返済で、5年返済を前提にすると、借入額の目安は約294万円です。総支払額は約420万円、総利息は約126万円になります。
               </p>
@@ -209,7 +209,7 @@ export default function Page() {
             </section>
 
             <section id="7years">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">7年返済ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">7年返済ならいくらまでが目安か</h2>
               <p className="mt-3">
                 さらに7年返済まで延ばすと、毎月7万円返済で借入額の目安は約359万円になります。総支払額は約588万円、総利息は約229万円です。
               </p>
@@ -219,7 +219,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">3年・5年・7年返済を比較するとどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">3年・5年・7年返済を比較するとどう違うか</h2>
               <p className="mt-3">毎月7万円返済という条件は同じでも、返済期間が違うだけで、借入額の目安と総利息はかなり変わります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>3年返済: 借入額目安約2,060,000円 / 総利息約460,000円</li>
@@ -234,11 +234,11 @@ export default function Page() {
                 <table className="w-full min-w-[420px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済期間</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">借入額目安</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済期間</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">借入額目安</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -272,7 +272,7 @@ export default function Page() {
             </section>
 
             <section id="choose">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月7万円返済ならどの返済期間を選ぶべきか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月7万円返済ならどの返済期間を選ぶべきか</h2>
               <p className="mt-3">
                 どれが向いているかは、何を優先するかで変わります。総支払額を抑えたいなら3年返済、借入額と返済負担のバランスを取りたいなら5年返済、毎月7万円の中でより大きな借入額を確保したいなら7年返済という考え方になります。
               </p>
@@ -282,7 +282,7 @@ export default function Page() {
             </section>
 
             <section id="reason">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入額を決めるときに毎月返済額だけで判断しない方がよい理由</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入額を決めるときに毎月返済額だけで判断しない方がよい理由</h2>
               <p className="mt-3">
                 毎月7万円という数字だけを見ると、返済できそうに感じるかもしれません。しかし実際には、生活費、他の固定費、突発的な支出、生活防衛資金の確保なども考える必要があります。
               </p>
@@ -292,7 +292,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「毎月7万円・年利15%」という固定条件の近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
               </p>
@@ -312,7 +312,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、最低返済額ルール、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -330,34 +330,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月7万円返済なら何万円くらいまで借りられますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月7万円返済なら何万円くらいまで借りられますか？</h3>
                   <p className="mt-2">
                     年利15%の近似例では、3年返済で約206万円、5年返済で約294万円、7年返済で約359万円が目安です。実際の条件によって変わります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月7万円返済なら300万円借りても大丈夫ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月7万円返済なら300万円借りても大丈夫ですか？</h3>
                   <p className="mt-2">
                     年利15%の近似例では、5年返済で約294万円が目安なので、300万円はほぼ上限に近い水準です。生活費や他の支出も踏まえて無理のない返済計画かを確認する必要があります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月7万円返済で借入額を増やす方法はありますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月7万円返済で借入額を増やす方法はありますか？</h3>
                   <p className="mt-2">
                     返済期間を延ばせば借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく総支払額とのバランスを見ることが重要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月5万円と月7万円では借入可能額はどのくらい違いますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月5万円と月7万円では借入可能額はどのくらい違いますか？</h3>
                   <p className="mt-2">
                     年利15%・5年返済の場合、月5万円では約210万円、月7万円では約294万円が目安です。月2万円の差で借入可能額は約84万円変わりますが、総利息も増える点に注意が必要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済期間を長くすると、借入額以外に何が変わりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済期間を長くすると、借入額以外に何が変わりますか？</h3>
                   <p className="mt-2">
                     返済期間が長くなると、総利息が大幅に増えます。たとえば3年返済と7年返済では、借入額の目安は約153万円の差ですが、総利息は約183万円も差が出ます。完済までに払う総額が大きく変わる点に注意が必要です。
                   </p>
@@ -366,7 +366,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 毎月7万円返済できる場合でも、何年で返すかによって借入額の目安は大きく変わります。年利15%の近似例では、3年で約206万円、5年で約294万円、7年で約359万円が目安です。
               </p>

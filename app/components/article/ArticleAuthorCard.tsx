@@ -7,11 +7,11 @@ import { AUTHOR_NAME } from "@/lib/site-author";
  */
 export function ArticleAuthorCard() {
   return (
-    <div className="ds-subcard p-5">
+    <div className="ds-subcard border-stone-100 bg-stone-50/50 p-5">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <div className="text-xs font-black uppercase tracking-wide text-stone-500">この記事を書いた人</div>
-          <div className="mt-1 text-sm font-bold text-stone-900">{AUTHOR_NAME}</div>
+          <div className="ds-label">この記事を書いた人</div>
+          <div className="mt-1 text-sm font-semibold text-stone-900">{AUTHOR_NAME}</div>
         </div>
         <div className="text-sm text-stone-600">
           <Link href="/about" className="ds-link inline-flex items-center gap-1">

@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("household-budget-starter")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             家計簿をつけたいけれど続かない、という方は多いです。このページでは、<strong>記録を頑張らなくても</strong>支出を把握する方法と、最低限チェックするポイントを整理します。
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -133,7 +133,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜記録を減らして「見る」だけでも把握できる
               </h2>
               <p className="mt-3">
@@ -165,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="minimal-check">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">最低限チェックするポイント</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">最低限チェックするポイント</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>手取り（月の収入から税金・社会保険を引いたあと）</li>
                 <li>固定費の合計（家賃・通信費・保険・ローン・サブスクなど、毎月必ず出るもの）</li>
@@ -179,7 +179,7 @@ export default function Page() {
             </section>
 
             <section id="no-diary-method">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">記録せずに把握する方法</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">記録せずに把握する方法</h2>
               <p className="mt-3">
                 銀行口座・クレジットカード・キャリア決済・電子マネーの利用明細を、月1回程度確認します。費目がついている場合はそのまま、ついていなければ「食費」「日用品」「交際費」など自分でざっくりメモするだけでも構いません。細かい数字より「何に多く出ているか」の感覚がつかめれば、固定費の見直しや支出の調整の材料になります。
               </p>
@@ -201,7 +201,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
@@ -213,7 +213,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>家計簿が続かない場合は、<strong>「つける」より「見る」</strong>にすると負担が減ります。明細の確認だけでも支出の傾向は把握できます。</li>
                 <li>最低限、手取りと固定費の合計、その差（変動費に回せる額）をチェックすると、見直しの材料になります。</li>

@@ -11,9 +11,9 @@ import { ARTICLES_INDEX_CRUMB_LABEL } from "@/lib/article-breadcrumb";
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
 export const metadata: Metadata = {
-  title: "悩み別に読む（記事一覧）｜借入返済シミュレーター",
+  title: "テーマ別記事一覧｜借金と暮らしの記録",
   description:
-    "返済・固定費・家計で悩む方向けに、記事をテーマ別に並べています。条件別の数字や体験記から、自分に近いところから読めます。",
+    "返済・固定費・家計・体験記など、テーマ別に記事を並べています。条件別の解説や試算ツールへのリンクもあります。",
   alternates: { canonical: `${BASE}/articles` },
 };
 
@@ -60,25 +60,25 @@ export default function ArticlesListPage() {
 
       <div className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">
-          悩み別に読む（記事一覧）
+          テーマ別記事一覧
         </h1>
         <p className="mt-5 text-sm text-stone-700 leading-relaxed">
-          返済や固定費で「どこから読めばいいか分からない」とき向けに、悩み別に記事を並べています。体験記で気持ちの整理をしてから、条件別の解説やシミュレーターで数字を試す、という順でも大丈夫です。
+          返済・固定費・家計・体験記など、テーマ別に記事を並べています。関心のある見出しから開いてください。
         </p>
         <p className="mt-3 text-sm text-stone-600">
           返済額の目安を表で見る：
-          <Link href="/quick-reference" className="font-semibold text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
+          <Link href="/quick-reference" className="font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
             早見表（100万・200万・300万・年利15%・3年/5年）
           </Link>
         </p>
 
         {storyArticles.length > 0 && (
           <section className="mt-10 border-t border-stone-200 pt-10" aria-labelledby="articles-story-heading">
-            <h2 id="articles-story-heading" className="ds-page-serif text-lg font-bold text-stone-900 md:text-xl">
+            <h2 id="articles-story-heading" className="ds-page-serif text-lg font-semibold text-stone-900 md:text-xl">
               体験記・ストーリー
             </h2>
             <p className="mt-2 text-sm text-stone-600 leading-relaxed">
-              数字の前に「自分と近い文脈」を置きたい方向けの記事です。
+              体験記・ストーリー形式の記事です。
             </p>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {storyArticles.map((article) => {
@@ -104,7 +104,7 @@ export default function ArticlesListPage() {
                           </time>
                         )}
                       </div>
-                      <span className="mt-2 block text-sm font-bold text-stone-900 leading-snug">{article.title}</span>
+                      <span className="mt-2 block text-sm font-medium text-stone-900 leading-snug">{article.title}</span>
                       <p className="mt-1.5 text-xs text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
                       <span className="mt-2 inline-block text-xs font-semibold text-emerald-900">読む →</span>
                     </Link>
@@ -122,7 +122,7 @@ export default function ArticlesListPage() {
             );
             return (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="ds-page-serif flex items-center gap-2 text-xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2">
+                <h2 className="ds-page-serif flex items-center gap-2 text-xl font-semibold text-stone-900 border-b-2 border-stone-200 pb-2">
                   {section.label}
                   <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs font-semibold text-stone-500">
                     {items.length}
@@ -161,7 +161,7 @@ export default function ArticlesListPage() {
                               </time>
                             )}
                           </div>
-                          <h3 className="ds-page-serif mt-3 text-lg font-bold text-stone-900">{article.title}</h3>
+                          <h3 className="ds-page-serif mt-3 text-lg font-semibold text-stone-900">{article.title}</h3>
                           <p className="mt-2 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
                           <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">記事を読む →</span>
                         </Link>
@@ -180,7 +180,7 @@ export default function ArticlesListPage() {
         </div>
 
         <section className="ds-subcard mt-12 p-6">
-          <h2 className="text-lg font-black text-stone-900">自分の条件で試算する</h2>
+          <h2 className="text-lg font-semibold text-stone-900">自分の条件で試算する</h2>
           <p className="mt-3 text-sm text-stone-700 leading-relaxed">
             記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力し、月々返済額・総利息・完済時期を条件別に比較して、記事とシミュレーターを往復して判断に役立ててください。
           </p>

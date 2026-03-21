@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-utility-switch")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             電気・ガスなどの光熱費は、契約を見直すと月々の支払いが変わる可能性があります。乗り換えやプラン変更でどれくらい変わるか、何を確認すればよいかを整理します。
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -133,7 +133,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜一度見直すと効果が続きやすい
               </h2>
               <p className="mt-3">
@@ -167,7 +167,7 @@ export default function Page() {
             </section>
 
             <section id="what-to-check">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">何を確認するか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">何を確認するか</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>現在の基本料金・従量単価・割引の有無</li>
                 <li>直近の使用量（電気はkWh、ガスはm³）</li>
@@ -180,7 +180,7 @@ export default function Page() {
             </section>
 
             <section id="rough-amount">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どれくらい変わるか（目安）</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どれくらい変わるか（目安）</h2>
               <p className="mt-3">
                 使用量・地域・契約内容によりますが、現在の契約から最安プランや割引の多いプランに乗り換えると、月額で数百円〜2,000円程度の差が出るケースがあります。電気とガスをセットで見直すと、セット割でさらに安くなる場合もあります。月1,000円の削減なら1年で12,000円なので、継続すると差は大きくなります。
               </p>
@@ -190,7 +190,7 @@ export default function Page() {
                 で試算できます。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
                 <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
@@ -212,7 +212,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
@@ -224,7 +224,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>電気・ガスは<strong>一度見直すと毎月の支払いが続けて変わる</strong>分野です。乗り換えは供給停止なしで申込だけで完了することが多いです。</li>
                 <li>現在の契約内容と使用量を把握し、他社・他プランと比較すると、月数百円〜2,000円程度の差が出るケースがあります。</li>

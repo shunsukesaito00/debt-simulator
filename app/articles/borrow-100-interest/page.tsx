@@ -122,7 +122,7 @@ export default function Page() {
 
           {/* 簡易目次 */}
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -146,7 +146,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜借金100万円を年利15%で借りると利息はどれくらいか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜借金100万円を年利15%で借りると利息はどれくらいか</h2>
               <p className="mt-3">
                 結論から言うと、借金100万円を年利15%で借りた場合、返済期間が3年なら総利息は約24.8万円、5年なら約42.7万円が目安です。返済期間が長くなるほど毎月の負担は軽くなりますが、その分だけ利息総額は大きくなります。
               </p>
@@ -156,7 +156,7 @@ export default function Page() {
             </section>
 
             <section id="how-interest">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">そもそも利息はどう計算されるのか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">そもそも利息はどう計算されるのか</h2>
               <p className="mt-3">
                 借入の利息は、一般に「借入残高 × 金利 ÷ 365 × 経過日数」のような考え方で計算されます。実際の商品では日割り計算や最低返済額ルール、手数料、初回返済日などの条件が加わることがあります。
               </p>
@@ -166,7 +166,7 @@ export default function Page() {
             </section>
 
             <section id="3years">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借金100万円を3年で返す場合</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借金100万円を3年で返す場合</h2>
               <p className="mt-3">
                 借金100万円を年利15%で3年（36回）返済する場合、毎月の返済額は約34,665円、総支払額は約124万8千円、総利息は約24万8千円が目安です。
               </p>
@@ -176,7 +176,7 @@ export default function Page() {
             </section>
 
             <section id="5years">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借金100万円を5年で返す場合</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借金100万円を5年で返す場合</h2>
               <p className="mt-3">
                 借金100万円を年利15%で5年（60回）返済する場合、毎月の返済額は約23,790円、総支払額は約142万7千円、総利息は約42万7千円が目安です。
               </p>
@@ -186,7 +186,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">3年返済と5年返済の比較</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">3年返済と5年返済の比較</h2>
               <p className="mt-3">
                 同じ100万円を借りても、返済期間が違うだけで結果は大きく変わります。比較すると次の通りです。
               </p>
@@ -203,10 +203,10 @@ export default function Page() {
                 <table className="w-full min-w-[320px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済期間</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済期間</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -231,7 +231,7 @@ export default function Page() {
 
               {/* グラフ1: 毎月返済額・総利息の棒グラフ */}
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">返済期間別の比較</h3>
+                <h3 className="text-base font-semibold text-stone-900">返済期間別の比較</h3>
                 <div className="mt-4">
                   <MonthlyAndInterestBarCharts />
                 </div>
@@ -242,7 +242,7 @@ export default function Page() {
 
               {/* グラフ2: 総支払額の内訳 */}
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">総支払額の内訳（元本と利息）</h3>
+                <h3 className="text-base font-semibold text-stone-900">総支払額の内訳（元本と利息）</h3>
                 <div className="mt-4">
                   <TotalPaymentStackedChart />
                 </div>
@@ -270,7 +270,7 @@ export default function Page() {
             </section>
 
             <section id="balance">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どちらを選ぶべきか｜月々の負担と総支払額のバランス</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どちらを選ぶべきか｜月々の負担と総支払額のバランス</h2>
               <p className="mt-3">
                 どちらが正解かは、家計の余力によって変わります。毎月3万4千円台でも無理なく返済できるなら、3年返済の方が利息負担を抑えやすいです。逆に、月2万円台でないと生活が苦しい場合は、5年返済の方が現実的です。
               </p>
@@ -280,26 +280,26 @@ export default function Page() {
             </section>
 
             <section id="reduce-interest">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">利息を減らすための現実的な方法</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">利息を減らすための現実的な方法</h2>
               <p className="mt-3">利息を減らしたいなら、次の3つが有効です。</p>
               <div className="mt-4 space-y-4">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済期間を短くする</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済期間を短くする</h3>
                   <p className="mt-1">最も効果が大きい方法です。毎月の返済額を少し上げるだけでも、総利息は大きく下がることがあります。</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">追加返済・繰上返済を活用する</h3>
+                  <h3 className="text-base font-semibold text-stone-900">追加返済・繰上返済を活用する</h3>
                   <p className="mt-1">ボーナス月や臨時収入が入ったタイミングで追加返済ができれば、元本の減りが早くなり、その後の利息も軽くなります。</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">金利条件を見直す</h3>
+                  <h3 className="text-base font-semibold text-stone-900">金利条件を見直す</h3>
                   <p className="mt-1">借り換えや条件見直しが可能なら、年利が下がるだけで総支払額は変わります。特に借入額が大きい場合は影響が大きいです。</p>
                 </div>
               </div>
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「100万円・年利15%」という固定条件で見た目安です。実際には、借入額、金利、返済方式、返済開始時期、追加返済の有無によって結果は変わります。
               </p>
@@ -319,7 +319,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の試算は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のカードローンやローン商品では、初回返済日、日割り計算、遅延損害金、最低返済額ルール、手数料などが影響する場合があります。
               </p>
@@ -329,34 +329,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">借金100万円の利息は毎月いくらですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">借金100万円の利息は毎月いくらですか？</h3>
                   <p className="mt-2">
                     毎月の利息額は残高に応じて減っていくため一定ではありません。ただし、年利15%で借りる場合、借入初期は利息負担が比較的大きく、返済が進むにつれて徐々に減っていきます。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">借金100万円を返すには毎月いくら必要ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">借金100万円を返すには毎月いくら必要ですか？</h3>
                   <p className="mt-2">
                     年利15%で3年返済なら毎月約34,665円、5年返済なら約23,790円が目安です。実際には商品条件により変動します。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">借金100万円を早く返すコツはありますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">借金100万円を早く返すコツはありますか？</h3>
                   <p className="mt-2">
                     返済期間を短くする、追加返済を行う、金利条件を見直す、の3つが基本です。毎月の返済額を少し上げるだけでも総利息は下がりやすくなります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">年利10%と年利15%では利息にどれくらい差が出ますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">年利10%と年利15%では利息にどれくらい差が出ますか？</h3>
                   <p className="mt-2">
                     借金100万円を5年返済する場合、年利15%なら総利息は約42.7万円ですが、年利10%なら約27.5万円程度が目安です。金利が5%違うだけで総利息に約15万円の差が出ます。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">借金100万円の総利息を減らすにはどうすればいいですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">借金100万円の総利息を減らすにはどうすればいいですか？</h3>
                   <p className="mt-2">
                     最も効果的なのは返済期間を短くすることです。3年返済なら5年返済より総利息が約18万円少なくなります。余裕がある月に追加返済するのも有効です。
                   </p>
@@ -365,7 +365,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 借金100万円を年利15%で借りた場合、3年返済なら総利息は約24.8万円、5年返済なら約42.7万円が目安です。毎月の返済額を軽くすると、そのぶん総支払額は大きくなります。
               </p>

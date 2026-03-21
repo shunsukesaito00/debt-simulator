@@ -113,7 +113,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-checklist")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             私も固定費を見直したいと思ったものの、「どこから削るべきか」がわからず手が止まりました。一度見直せば効果が続きやすいのが固定費の強みなので、だからこそ<strong>何から・どういう順番で</strong>見直すかを「すぐ変えられて続く」順に整理したチェックリストで解説します。
@@ -130,7 +130,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -144,7 +144,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜固定費見直しは「すぐ変えやすいもの」から始める
               </h2>
               <p className="mt-3">
@@ -190,7 +190,7 @@ export default function Page() {
             </section>
 
             <section id="checklist">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">固定費見直しチェックリスト</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">固定費見直しチェックリスト</h2>
               <p className="mt-3">
                 以下は、<strong>取り組み順の判断</strong>をしやすくするための一覧です。金額順のランキングではなく、「何から手をつけるか」の目安として使ってください。詳しい進め方は
                 <Link href="/articles/fixed-cost-guide" className="font-bold text-stone-900 hover:underline">固定費見直しの進め方</Link>
@@ -201,11 +201,11 @@ export default function Page() {
                 <table className="w-full min-w-[420px] border-collapse text-sm">
                   <thead>
                     <tr className="border-b-2 border-stone-300 bg-stone-100">
-                      <th className="py-2 px-3 text-left font-black text-stone-900">項目</th>
-                      <th className="py-2 px-3 text-center font-black text-stone-900">見直しやすさ</th>
-                      <th className="py-2 px-3 text-center font-black text-stone-900">削減額の大きさ</th>
-                      <th className="py-2 px-3 text-center font-black text-stone-900">生活への影響</th>
-                      <th className="py-2 px-3 text-center font-black text-stone-900">先にやるべき度</th>
+                      <th className="py-2 px-3 text-left font-semibold text-stone-900">項目</th>
+                      <th className="py-2 px-3 text-center font-semibold text-stone-900">見直しやすさ</th>
+                      <th className="py-2 px-3 text-center font-semibold text-stone-900">削減額の大きさ</th>
+                      <th className="py-2 px-3 text-center font-semibold text-stone-900">生活への影響</th>
+                      <th className="py-2 px-3 text-center font-semibold text-stone-900">先にやるべき度</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -227,7 +227,7 @@ export default function Page() {
 
               <div className="mt-8 space-y-8">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">A. サブスク</h3>
+                  <h3 className="text-base font-semibold text-stone-900">A. サブスク</h3>
                   <ul className="mt-2 list-disc pl-5 space-y-1">
                     <li>使っていないものがないか</li>
                     <li>何となく続けているものがないか</li>
@@ -239,7 +239,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-black text-stone-900">B. スマホ・通信費</h3>
+                  <h3 className="text-base font-semibold text-stone-900">B. スマホ・通信費</h3>
                   <ul className="mt-2 list-disc pl-5 space-y-1">
                     <li>現在の料金プランが過剰でないか（データ量・通話）</li>
                     <li>格安プランへの切替余地</li>
@@ -251,7 +251,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-black text-stone-900">C. 保険</h3>
+                  <h3 className="text-base font-semibold text-stone-900">C. 保険</h3>
                   <ul className="mt-2 list-disc pl-5 space-y-1">
                     <li>内容を理解しないまま入っていないか</li>
                     <li>重複保障がないか（同じような補償が複数）</li>
@@ -262,7 +262,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-black text-stone-900">D. 電気・ガス・その他契約</h3>
+                  <h3 className="text-base font-semibold text-stone-900">D. 電気・ガス・その他契約</h3>
                   <ul className="mt-2 list-disc pl-5 space-y-1">
                     <li>契約会社やプランの見直し（乗り換え・従量制など）</li>
                     <li>使っていないオプションの解約</li>
@@ -273,7 +273,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-black text-stone-900">E. 家賃・車などの大物</h3>
+                  <h3 className="text-base font-semibold text-stone-900">E. 家賃・車などの大物</h3>
                   <p className="mt-2">
                     効果は大きいですが、<strong>すぐ動きにくく、難易度が高い</strong>ため、最初の一手としては負荷が重くなりがちです。転居・車の乗り換えや維持費の見直しは、上記のサブスク・通信費・保険などで「見直しの感覚」をつかんでから取り組むと、現実的に続きやすくなります。長期では非常に効く可能性があるので、タイミングが来たら検討するのがおすすめです。
                   </p>
@@ -282,14 +282,14 @@ export default function Page() {
             </section>
 
             <section id="order-reason">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">順番でやる理由</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">順番でやる理由</h2>
               <p className="mt-3">
                 固定費見直しは、<strong>いきなり大物から入ると止まりやすい</strong>傾向があります。家賃や車は変更のハードルが高く、検討しているうちに疲れてやめてしまうことも少なくありません。一方で、小さくてもすぐ改善できるものから始めると、「今月から変わった」と実感しやすく、次の項目にも手が伸びやすくなります。このページでは、読者が挫折しにくい順番を重視して並べています。
               </p>
             </section>
 
             <section id="impact-view">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月5,000円・1万円改善の見え方</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月5,000円・1万円改善の見え方</h2>
               <p className="mt-3">
                 固定費削減は、月額で見ると「数千円」と小さく感じがちです。しかし<strong>年間で見ると差が大きい</strong>です。月5,000円の削減なら1年で6万円、月1万円なら12万円になります。3年・5年続けたときの合計をイメージすると、見直しのモチベーションにもつながります。
               </p>
@@ -299,7 +299,7 @@ export default function Page() {
                 でその場で試算できます。数字で確認すると理解しやすいので、チェックリストで見直し項目を洗い出したあとに、ぜひ試してみてください。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
                 <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
@@ -313,7 +313,7 @@ export default function Page() {
             </section>
 
             <section id="loan-link">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入返済とつなげる補足</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入返済とつなげる補足</h2>
               <p className="mt-3">
                 固定費を見直して浮いたお金は、借入の返済や貯蓄にも回せます。生活改善と返済改善は別の話ではなく、<strong>つながっている</strong>と考えてよいです。無理のない月々の負担を考える視点として、
                 <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
@@ -330,7 +330,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 <div>
                   <dt className="font-bold text-stone-900">固定費見直しは何から始めるべきですか？</dt>
@@ -368,7 +368,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>固定費見直しは、金額だけでなく<strong>始めやすさ・続けやすさ</strong>で順番を決めるのがおすすめです。</li>
                 <li>最初はサブスクや通信費など、着手しやすいものから始めると、挫折しにくく改善が続きやすいです。</li>

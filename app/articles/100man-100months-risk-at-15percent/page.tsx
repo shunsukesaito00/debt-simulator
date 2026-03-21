@@ -113,7 +113,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("100man-100months-risk-at-15percent")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
@@ -130,7 +130,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -153,7 +153,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜100ヶ月返済のリスクは「毎月は軽いが、総利息が重い」こと</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜100ヶ月返済のリスクは「毎月は軽いが、総利息が重い」こと</h2>
               <p className="mt-3">
                 結論から言うと、年利15%で100万円を100ヶ月返済する場合、毎月返済額は約16,135円と低く見えますが、総利息は約613,500円まで増える近似例になります。
               </p>
@@ -186,7 +186,7 @@ export default function Page() {
             </section>
 
             <section id="why-danger">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">なぜ100ヶ月返済は危険と言われやすいのか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">なぜ100ヶ月返済は危険と言われやすいのか</h2>
               <p className="mt-3">
                 100ヶ月返済が危険と言われやすい理由は、毎月返済額が低く見えるため、負担感を過小評価しやすいからです。月1.6万円程度なら払えそうに見えても、その返済が8年以上続くこと、そしてその間ずっと利息を支払い続けることを見落としやすくなります。
               </p>
@@ -196,7 +196,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">36ヶ月・60ヶ月・100ヶ月でどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">36ヶ月・60ヶ月・100ヶ月でどう違うか</h2>
               <p className="mt-3">
                 同じ100万円・年利15%でも、返済期間によって毎月返済額と総利息は大きく変わります。
               </p>
@@ -211,7 +211,7 @@ export default function Page() {
             </section>
 
             <section id="problem">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">100ヶ月返済の何が問題なのか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">100ヶ月返済の何が問題なのか</h2>
               <p className="mt-3">
                 100ヶ月返済の問題は、毎月返済額が低いこと自体ではなく、その条件の裏で総利息が大きくなり、完済までの期間も非常に長くなることです。
               </p>
@@ -221,17 +221,17 @@ export default function Page() {
             </section>
 
             <section id="table">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">比較表で見ると違いがわかりやすい</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">比較表で見ると違いがわかりやすい</h2>
               <p className="mt-3">返済期間ごとの差を整理すると、長期返済の特徴が見えやすくなります。</p>
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">返済期間</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
-                      <th className="py-3 font-black text-stone-900">特徴</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済期間</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息</th>
+                      <th className="py-3 font-semibold text-stone-900">特徴</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -265,25 +265,25 @@ export default function Page() {
             </section>
 
             <section id="graph">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">グラフで見ると100ヶ月返済の重さがわかる</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">グラフで見ると100ヶ月返済の重さがわかる</h2>
               <p className="mt-3">数字だけでも違いはわかりますが、グラフにすると100ヶ月返済の特徴がさらに見えやすくなります。</p>
 
               <div className="mt-6 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">返済期間別の毎月返済額</h3>
+                <h3 className="text-base font-semibold text-stone-900">返済期間別の毎月返済額</h3>
                 <div className="mt-4">
                   <MonthlyPaymentBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">返済期間別の総利息</h3>
+                <h3 className="text-base font-semibold text-stone-900">返済期間別の総利息</h3>
                 <div className="mt-4">
                   <TotalInterestBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">総支払額の内訳（元本と利息）</h3>
+                <h3 className="text-base font-semibold text-stone-900">総支払額の内訳（元本と利息）</h3>
                 <div className="mt-4">
                   <TotalPaymentStackedChart />
                 </div>
@@ -294,7 +294,7 @@ export default function Page() {
             </section>
 
             <section id="dont-judge">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月返済額が低いことだけで判断してはいけない理由</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">毎月返済額が低いことだけで判断してはいけない理由</h2>
               <p className="mt-3">
                 毎月返済額が低いことは、一見メリットに見えます。しかし、その裏で返済期間が長くなり、総支払額が大きくなるなら、本当に家計に優しいとは言えません。
               </p>
@@ -304,7 +304,7 @@ export default function Page() {
             </section>
 
             <section id="suit">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">100ヶ月返済が向くケースはあるか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">100ヶ月返済が向くケースはあるか</h2>
               <p className="mt-3">
                 100ヶ月返済が常に不適切とは限りません。短期返済だと家計が持たず、まずは月々の返済を抑えないと現実的に回らないケースもあります。
               </p>
@@ -314,26 +314,26 @@ export default function Page() {
             </section>
 
             <section id="reduce-risk">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">リスクを下げるためにできること</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">リスクを下げるためにできること</h2>
               <p className="mt-3">長期返済のリスクを下げるには、次のような考え方が有効です。</p>
               <div className="mt-4 space-y-4">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済期間を必要以上に長くしない</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済期間を必要以上に長くしない</h3>
                   <p className="mt-2">返済期間を短くできるほど、総利息は抑えやすくなります。</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">追加返済・繰り上げ返済を活用する</h3>
+                  <h3 className="text-base font-semibold text-stone-900">追加返済・繰り上げ返済を活用する</h3>
                   <p className="mt-2">余裕がある月に元本を多めに返すと、その後の利息を減らしやすくなります。</p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">自分の条件で試算してから決める</h3>
+                  <h3 className="text-base font-semibold text-stone-900">自分の条件で試算してから決める</h3>
                   <p className="mt-2">「払えそう」という感覚ではなく、総利息と完済時期を数字で確認することが大切です。</p>
                 </div>
               </div>
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「100万円・年利15%・100ヶ月返済」という固定条件の近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
               </p>
@@ -353,7 +353,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、最低返済額ルール、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -371,34 +371,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">100万円を100ヶ月で返すと毎月いくらですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">100万円を100ヶ月で返すと毎月いくらですか？</h3>
                   <p className="mt-2">
                     年利15%の近似例では、毎月約16,135円が目安です。実際の条件によって変わります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">100万円を100ヶ月返済すると利息はいくらですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">100万円を100ヶ月返済すると利息はいくらですか？</h3>
                   <p className="mt-2">
                     年利15%の近似例では、総利息は約613,500円が目安です。返済期間が長いため、利息負担はかなり重くなります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">100ヶ月返済は危険ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">100ヶ月返済は危険ですか？</h3>
                   <p className="mt-2">
                     危険と断定はできませんが、毎月返済額が低く見える一方で、総利息と返済期間の長さが大きな負担になります。総支払額まで確認して判断することが重要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">100ヶ月より長い返済期間にするとどうなりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">100ヶ月より長い返済期間にするとどうなりますか？</h3>
                   <p className="mt-2">
                     返済期間をさらに延ばすと毎月返済額はわずかに下がりますが、総利息は加速度的に増えます。たとえば120ヶ月にすると総利息は100ヶ月の場合よりさらに数万〜十数万円増える可能性があり、完済まで10年かかる計算になります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">返済期間を短くするにはどうすればいいですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">返済期間を短くするにはどうすればいいですか？</h3>
                   <p className="mt-2">
                     毎月の返済額を増やす、繰り上げ返済を活用する、ボーナス月に追加返済をするなどの方法があります。たとえば100ヶ月を60ヶ月に短縮すると総利息は約18.6万円減る近似例になります。
                   </p>
@@ -407,7 +407,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 金利15%で100万円を100ヶ月返済すると、毎月返済額は約16,135円と低く見える一方で、総利息は約613,500円まで増える近似例になります。月額だけで見ると楽に感じても、長期返済には総利息の増加と完済までの長さというリスクがあります。
               </p>

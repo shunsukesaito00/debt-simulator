@@ -22,7 +22,7 @@ const GOOGLE_FORM_EMBED_URL =
 export default function Page() {
   return (
     <div className="ds-card ds-card-pad">
-      <h1 className="text-2xl font-black">お問い合わせ</h1>
+      <h1 className="text-2xl font-semibold">お問い合わせ</h1>
 
       <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
         <p>
@@ -45,11 +45,11 @@ export default function Page() {
         </div>
 
         <div className="ds-subcard p-4">
-          <div className="font-black text-stone-900">フォームが表示されない場合</div>
+          <div className="font-semibold text-stone-900">フォームが表示されない場合</div>
           <div className="mt-2">
             <Link
               href="https://forms.gle/aBARtVTxaKEMvQkr8"
-              className="font-black underline"
+              className="font-semibold underline"
               target="_blank"
               rel="noreferrer"
             >

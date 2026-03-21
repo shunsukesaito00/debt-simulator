@@ -13,7 +13,7 @@ import { getSiteBaseUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib
 const BASE = getSiteBaseUrl();
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME}｜体験記・副業・節約と返済シミュレーター`,
+  title: `${SITE_NAME}｜体験記・副業・節約と返済・固定費の試算`,
   description: SITE_DESCRIPTION,
   alternates: { canonical: BASE },
   openGraph: {
@@ -63,7 +63,7 @@ const THEME_PILLARS: Pillar[] = [
   {
     icon: "📖",
     title: "体験記・返済日記",
-    desc: "当事者の一次体験。数字の前に気持ちの揺れも記録しています",
+    desc: "個人の体験記・返済に関する日記の一覧です",
     href: "/articles#story",
     eventLocation: "top_theme_pillars",
     categoryKey: "story",
@@ -153,19 +153,16 @@ export default function Page() {
       {/* 1. ヒーロー */}
       <section className="ds-hero p-6 md:p-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">{SITE_TAGLINE}</p>
+          <p className="text-sm font-normal text-stone-600">{SITE_TAGLINE}</p>
           <h1 className="ds-page-serif mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
             {SITE_NAME}
           </h1>
           <p className="mt-3 text-base text-stone-700 leading-relaxed md:text-lg">
-            返済や金欠で気持ちが沈んでいるとき、数字だけが先に来るサイトだと負けます。このサイトでは
-            <strong className="text-stone-900">体験記・副業・節約の記録</strong>と
-            <strong className="text-stone-900">返済・固定費の試算ツール</strong>
-            の両方を置いています。まずは
-            <Link href="/welcome" className="font-semibold text-emerald-900 underline decoration-emerald-300 hover:no-underline">
+            体験記・副業・節約の記事と、返済・固定費の試算ツールを掲載しています。読み方の例は
+            <Link href="/welcome" className="ml-0.5 font-medium text-emerald-900 underline decoration-emerald-300 hover:no-underline">
               はじめての方へ
             </Link>
-            から読む順番を決めても大丈夫です。
+            を参照してください。
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <TrackedLink
@@ -195,7 +192,7 @@ export default function Page() {
           </div>
           <p className="mt-4 text-sm text-stone-600">
             早見表：
-            <Link href="/quick-reference" className="font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700">
+            <Link href="/quick-reference" className="font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700">
               100万・200万・300万・3年/5年
             </Link>
           </p>
@@ -204,19 +201,19 @@ export default function Page() {
 
       {/* 1b. 3本柱：体験記・副業・節約 */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">体験記・副業・節約の最新</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">体験記・副業・節約の最新</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
-          企業サイトとは違い、当事者の一次体験と暮らしの工夫を中心に発信しています。
+          カテゴリ別の新着記事です。
         </p>
         <div className="mt-6 grid gap-8 lg:grid-cols-3">
           <div>
-            <h3 className="text-sm font-bold text-emerald-900">体験記・返済日記</h3>
+            <h3 className="text-sm font-semibold text-emerald-900">体験記・返済日記</h3>
             <ul className="mt-3 space-y-2">
               {pillarStories.map((a) => (
                 <li key={a.slug}>
                   <TrackedLink
                     href={`/articles/${a.slug}`}
-                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    className="text-sm font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                     event={{
                       action: "click_top_pillar_story",
                       location: "top_three_pillars",
@@ -239,13 +236,13 @@ export default function Page() {
             </TrackedLink>
           </div>
           <div>
-            <h3 className="text-sm font-bold text-emerald-900">副業・収入改善</h3>
+            <h3 className="text-sm font-semibold text-emerald-900">副業・収入改善</h3>
             <ul className="mt-3 space-y-2">
               {pillarSide.map((a) => (
                 <li key={a.slug}>
                   <TrackedLink
                     href={`/articles/${a.slug}`}
-                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    className="text-sm font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                     event={{
                       action: "click_top_pillar_side",
                       location: "top_three_pillars",
@@ -268,13 +265,13 @@ export default function Page() {
             </TrackedLink>
           </div>
           <div>
-            <h3 className="text-sm font-bold text-emerald-900">節約・生活改善</h3>
+            <h3 className="text-sm font-semibold text-emerald-900">節約・生活改善</h3>
             <ul className="mt-3 space-y-2">
               {pillarSaving.map((a) => (
                 <li key={a.slug}>
                   <TrackedLink
                     href={`/articles/${a.slug}`}
-                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    className="text-sm font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                     event={{
                       action: "click_top_pillar_saving",
                       location: "top_three_pillars",
@@ -301,7 +298,7 @@ export default function Page() {
 
       {/* 2. おすすめ・スポットライト */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">おすすめの記事</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">おすすめの記事</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           体験記から条件別の記事まで、よく参照されるものを先に並べています。
         </p>
@@ -339,7 +336,7 @@ export default function Page() {
 
       {/* 2b. 最近の記事（日付順） */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">最近の記事</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">最近の記事</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           公開日が新しい記事です。「おすすめの記事」と重なる場合もあります。
         </p>
@@ -381,7 +378,7 @@ export default function Page() {
       {/* 3. 運営者一言 + 自己紹介 */}
       <section className="ds-section-alt border border-stone-200/90">
         <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">運営者より一言</p>
-        <blockquote className="ds-page-serif mt-3 text-base font-bold leading-relaxed text-stone-900 md:text-lg">
+        <blockquote className="ds-page-serif mt-3 text-base font-semibold leading-relaxed text-stone-900 md:text-lg">
           数字が先に来ると、もっとしんどくなることがあります。体験と試算の両方を置いて、自分のペースで比べられるようにしています。
         </blockquote>
         <p className="mt-4 text-sm text-stone-700 leading-relaxed">
@@ -404,7 +401,7 @@ export default function Page() {
 
       {/* 4. テーマ別ピラー */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">悩み別に読む</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">テーマ別に読む</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           記事一覧のセクションへジャンプするか、ツールでその場で試せます。
         </p>
@@ -425,7 +422,7 @@ export default function Page() {
                 <span className="text-2xl" aria-hidden>
                   {p.icon}
                 </span>
-                <span className="mt-2 block text-base font-semibold text-stone-900">{p.title}</span>
+                <span className="mt-2 block text-base font-medium text-stone-900">{p.title}</span>
                 <p className="mt-1.5 text-xs text-stone-600 leading-relaxed">{p.desc}</p>
                 <span className="mt-3 inline-block text-xs font-semibold text-emerald-900">開く →</span>
               </TrackedLink>
@@ -436,7 +433,7 @@ export default function Page() {
 
       {/* 5. よく読まれている */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">よく読まれている記事</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">よく読まれている記事</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           はじめに読む方におすすめの記事を、テーマ別に並べています。
         </p>
@@ -445,7 +442,7 @@ export default function Page() {
             <li key={a.slug}>
               <TrackedLink
                 href={`/articles/${a.slug}`}
-                className="font-semibold text-stone-900 underline decoration-stone-300 hover:decoration-emerald-700"
+                className="font-medium text-stone-900 underline decoration-stone-300 hover:decoration-emerald-700"
                 event={{
                   action: "click_top_popular_article",
                   location: "top_popular",
@@ -463,9 +460,9 @@ export default function Page() {
 
       {/* 6. はじめての方（3カード） */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">はじめての方へ</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">はじめての方へ</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
-          迷ったらこの順でどうぞ。
+          次の順で案内しています。
         </p>
         <ul className="mt-6 grid gap-4 md:grid-cols-3">
           <li>
@@ -533,7 +530,7 @@ export default function Page() {
 
       {/* 7. お問い合わせ */}
       <section className="ds-section-alt border border-stone-200/90">
-        <h2 className="ds-page-serif text-lg font-bold text-stone-900">ご相談・お問い合わせ</h2>
+        <h2 className="ds-page-serif text-lg font-semibold text-stone-900">ご相談・お問い合わせ</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           内容によっては返信にお時間がかかる場合があります。緊急の金融トラブルは取引先や専門窓口へご相談ください。
         </p>
@@ -556,7 +553,7 @@ export default function Page() {
               {noteUrl ? (
                 <TrackedLink
                   href={noteUrl}
-                  className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                  className="text-sm font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                   rel="noopener noreferrer"
                   target="_blank"
                   event={{
@@ -572,7 +569,7 @@ export default function Page() {
               {xUrl ? (
                 <TrackedLink
                   href={xUrl}
-                  className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                  className="text-sm font-medium text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                   rel="noopener noreferrer"
                   target="_blank"
                   event={{
@@ -592,7 +589,7 @@ export default function Page() {
 
       {/* 8. このサイトについて */}
       <section className="ds-card ds-card-pad border-stone-200/90 bg-gradient-to-br from-white to-emerald-50/30">
-        <h2 className="ds-page-serif text-lg font-bold text-stone-900">このサイトについて</h2>
+        <h2 className="ds-page-serif text-lg font-semibold text-stone-900">このサイトについて</h2>
         <p className="mt-3 text-sm text-stone-700 leading-relaxed">
           借入返済・固定費の見直し・返済計画を、一般論ではなく<strong>条件を変えたときの数字</strong>で確認できるようにしています。
           シミュレーターと記事を行き来しながら、自分の判断材料にしていただければ幸いです。
@@ -618,7 +615,7 @@ export default function Page() {
 
       {/* 注意事項 */}
       <section className="ds-subcard p-6">
-        <h2 className="text-sm font-bold text-stone-700">注意事項</h2>
+        <h2 className="text-sm font-semibold text-stone-700">注意事項</h2>
         <ul className="mt-3 space-y-1.5 text-xs text-stone-500 leading-relaxed">
           <li>・本ツールは参考情報です。実際の返済条件は契約内容を優先してください。</li>
           <li>・表示は入力に基づく試算であり、将来の金利変動等は反映されません。</li>

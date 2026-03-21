@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-insurance-review")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             保険は固定費のなかでも月額が大きくなりがちですが、安易に削るといざというときの備えが足りなくなるリスクがあります。このページでは、何を確認すべきか、削ってよい保障と慎重にすべき保障の考え方を整理します。
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -133,7 +133,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜内容を理解したうえで慎重に
               </h2>
               <p className="mt-3">
@@ -165,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="what-to-check">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">何を確認するか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">何を確認するか</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>契約している保険の一覧（生命保険・医療・がん・就業不能・火災など）と月額・年額</li>
                 <li>各保険の保障内容（死亡時・入院時・手術時など、何にいくら出るか）</li>
@@ -180,7 +180,7 @@ export default function Page() {
             </section>
 
             <section id="ok-to-reduce">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">削ってよいもの・慎重にすべきもの</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">削ってよいもの・慎重にすべきもの</h2>
               <p className="mt-3">
                 <strong>削ってよい・見直しの候補になりやすいもの</strong>：同じような補償が複数ある重複保障、子どもが独立した後の教育保険の過剰な部分、ライフステージで不要になった特約など。必要な額を超えている部分を整理すると、月額を下げられることがあります。
               </p>
@@ -193,7 +193,7 @@ export default function Page() {
                 で試算できます。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
                 <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
@@ -215,7 +215,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
@@ -227,7 +227,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>保険見直しは<strong>保障内容を理解したうえで</strong>、重複・過剰な部分から検討するのがおすすめです。</li>
                 <li>削ってよいのは重複保障や不要になった特約など。死亡・医療・火災などいざというときの備えは慎重に判断します。</li>

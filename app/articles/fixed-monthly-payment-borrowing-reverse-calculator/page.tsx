@@ -113,7 +113,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-monthly-payment-borrowing-reverse-calculator")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事で扱う借入額は返済計画上の目安であり、審査上の借入可能額や与信枠を示すものではありません。一般的な固定金利・毎月返済の近似例です。
           </p>
@@ -130,7 +130,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -153,7 +153,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜月々返済額を固定すると借入額の目安は金利と年数で決まる</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜月々返済額を固定すると借入額の目安は金利と年数で決まる</h2>
               <p className="mt-3">
                 結論から言うと、月々返済額を固定した場合の借入額の目安は、金利と返済期間で大きく変わります。年利15%の近似例では、毎月3万円なら3年で約86.5万円、5年で約126.1万円、毎月5万円なら3年で約144.2万円、5年で約210.1万円が目安です。
               </p>
@@ -186,7 +186,7 @@ export default function Page() {
             </section>
 
             <section id="reverse-idea">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月々返済額から借入額を逆算する考え方</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月々返済額から借入額を逆算する考え方</h2>
               <p className="mt-3">
                 借入額を逆算する考え方は単純で、「毎月いくらなら返済できるか」を先に決め、その条件で金利と返済期間を当てはめて、借入額の目安を求めます。
               </p>
@@ -196,7 +196,7 @@ export default function Page() {
             </section>
 
             <section id="30k">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月3万円固定ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">毎月3万円固定ならいくらまでが目安か</h2>
               <p className="mt-3">
                 年利15%の近似例では、毎月3万円返済に固定した場合、3年返済なら借入額の目安は約86.5万円、5年返済なら約126.1万円です。
               </p>
@@ -206,7 +206,7 @@ export default function Page() {
             </section>
 
             <section id="50k">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月5万円固定ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">毎月5万円固定ならいくらまでが目安か</h2>
               <p className="mt-3">
                 年利15%の近似例では、毎月5万円返済に固定した場合、3年返済なら借入額の目安は約144.2万円、5年返済なら約210.1万円です。
               </p>
@@ -216,7 +216,7 @@ export default function Page() {
             </section>
 
             <section id="70k">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月7万円固定ならいくらまでが目安か</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">毎月7万円固定ならいくらまでが目安か</h2>
               <p className="mt-3">
                 年利15%の近似例では、毎月7万円返済に固定した場合、3年返済なら借入額の目安は約201.9万円、5年返済なら約294.2万円です。
               </p>
@@ -226,7 +226,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">月額固定×返済年数で比較するとどう違うか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月額固定×返済年数で比較するとどう違うか</h2>
               <p className="mt-3">同じ金利でも、毎月返済額と返済年数の組み合わせ次第で、借入額の目安は大きく変わります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>毎月3万円 / 3年返済: 約865,000円</li>
@@ -241,11 +241,11 @@ export default function Page() {
                 <table className="w-full min-w-[480px] border-collapse text-left">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">返済年数</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">借入額目安</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
-                      <th className="py-3 font-black text-stone-900">総利息</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">返済年数</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">借入額目安</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総支払額</th>
+                      <th className="py-3 font-semibold text-stone-900">総利息</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -299,21 +299,21 @@ export default function Page() {
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">月々返済額別の借入額目安</h3>
+                <h3 className="text-base font-semibold text-stone-900">月々返済額別の借入額目安</h3>
                 <div className="mt-4">
                   <PrincipalByPaymentBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">返済年数別の総利息</h3>
+                <h3 className="text-base font-semibold text-stone-900">返済年数別の総利息</h3>
                 <div className="mt-4">
                   <InterestByPaymentBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-stone-900">借入額目安と総利息のバランス</h3>
+                <h3 className="text-base font-semibold text-stone-900">借入額目安と総利息のバランス</h3>
                 <div className="mt-4">
                   <BalanceCards />
                 </div>
@@ -324,7 +324,7 @@ export default function Page() {
             </section>
 
             <section id="suit">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">どの月額設定が向いているか</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どの月額設定が向いているか</h2>
               <p className="mt-3">
                 どの月額設定が向いているかは、家計の余力によって変わります。毎月3万円なら比較的安全寄りですが、借入額の目安は小さくなります。毎月5万円は借入額と返済負担のバランスが取りやすい中間的な考え方です。
               </p>
@@ -334,7 +334,7 @@ export default function Page() {
             </section>
 
             <section id="merit">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">逆算で借入額を考えるメリット</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">逆算で借入額を考えるメリット</h2>
               <p className="mt-3">
                 借入額から返済額を見る方法だと、後から「思ったより重い」と感じることがあります。一方、月々返済額を先に固定して逆算する方法なら、家計の許容範囲から借入額を考えやすくなります。
               </p>
@@ -344,7 +344,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「年利15%・月額固定」という近似例です。実際には、借入額、金利、返済期間、返済方式、追加返済の有無によって結果は変わります。
               </p>
@@ -364,7 +364,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際のローンやカードローンでは、日割り計算、約定返済日、最低返済額ルール、手数料、商品固有の返済仕様などが影響する場合があります。
               </p>
@@ -382,34 +382,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月々返済額を固定すると借入額はどう決まりますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月々返済額を固定すると借入額はどう決まりますか？</h3>
                   <p className="mt-2">
                     金利と返済期間を前提にして、毎月返済額から逆算した借入額の目安を求めます。返済年数が長いほど借入額の目安は増えやすいです。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月々5万円ならいくらまで借りられますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月々5万円ならいくらまで借りられますか？</h3>
                   <p className="mt-2">
                     年利15%の近似例では、3年返済で約144万円、5年返済で約210万円が目安です。実際の条件によって変わります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">借入額を増やすには返済年数を延ばせばいいですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">借入額を増やすには返済年数を延ばせばいいですか？</h3>
                   <p className="mt-2">
                     借入額の目安は増えますが、そのぶん総利息も増えます。借入額だけでなく、最終的な総支払額まで含めて考えることが重要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">月3万円と月5万円では、借入可能額にどれくらい差がありますか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">月3万円と月5万円では、借入可能額にどれくらい差がありますか？</h3>
                   <p className="mt-2">
                     年利15%・5年返済の近似例では、月3万円なら約126万円、月5万円なら約210万円が目安です。毎月返済額を2万円増やすだけで借入額の目安は約84万円広がりますが、総支払額もそのぶん増えます。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">逆算で出した借入額は、そのまま借りて安全ですか？</h3>
+                  <h3 className="text-base font-semibold text-stone-900">逆算で出した借入額は、そのまま借りて安全ですか？</h3>
                   <p className="mt-2">
                     逆算の結果はあくまで返済計画上の目安です。実際には生活費、他の固定費、緊急時の備えなども考慮し、余裕をもった借入額にすることが重要です。目安の上限ぎりぎりで借りるのはリスクが高くなります。
                   </p>
@@ -418,7 +418,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 月々返済額を固定して借入額を逆算すると、無理のない返済計画を立てやすくなります。年利15%の近似例では、毎月3万円・5万円・7万円といった違い、さらに3年返済・5年返済の違いによって、借入額の目安は大きく変わります。
               </p>

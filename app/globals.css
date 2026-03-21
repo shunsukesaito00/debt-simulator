@@ -121,12 +121,21 @@ textarea {
     @apply border-emerald-700 ring-2 ring-emerald-700/25 ring-offset-2 ring-offset-white;
   }
 
-  /* Typography helpers */
+  /*
+   * Typography scale（読みやすさ）
+   * - ページタイトル: .ds-h1 / .ds-page-serif + font-bold
+   * - セクション見出し: .ds-h2（semibold）／記事内 .ds-blog-prose h2,h3 も semibold で階層を揃える
+   * - ラベル・補助: .ds-label（medium + muted）
+   * 本文内リンクは .ds-link-prose（下線は hover で強調）
+   */
   .ds-h1 {
     @apply text-2xl font-bold tracking-tight text-stone-900 md:text-3xl;
   }
   .ds-h2 {
-    @apply text-lg font-bold tracking-tight text-stone-900 md:text-xl;
+    @apply text-lg font-semibold tracking-tight text-stone-900 md:text-xl;
+  }
+  .ds-label {
+    @apply text-xs font-medium tracking-wide text-stone-600;
   }
   .ds-muted {
     @apply text-stone-600;
@@ -134,11 +143,15 @@ textarea {
 
   /* Links & buttons */
   .ds-link {
-    @apply font-semibold;
+    @apply font-medium;
     color: rgb(var(--ds-accent-strong));
   }
   .ds-link:hover {
     @apply underline;
+  }
+  /** 記事本文・カード内のインラインリンク（強すぎない太さ） */
+  .ds-link-prose {
+    @apply font-medium text-emerald-900 underline decoration-emerald-200/80 underline-offset-2 transition hover:decoration-emerald-700;
   }
   .ds-btn {
     @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold transition;
@@ -190,17 +203,25 @@ textarea {
     @apply mt-4;
   }
   .ds-blog-prose h2 {
-    @apply mt-10 mb-3 text-xl font-bold tracking-tight text-stone-900;
+    @apply mt-10 mb-3 text-xl font-semibold tracking-tight text-stone-900;
     font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
   .ds-blog-prose h3 {
-    @apply mt-8 mb-2 text-lg font-bold text-stone-900;
+    @apply mt-8 mb-2 text-lg font-semibold text-stone-900;
     font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
 
-  /* 記事ページ：本文を読みやすい幅に（表・グラフは内側で max-w-none 等で調整可） */
+  /**
+   * 記事ページ：本文を読みやすい幅に（表・グラフは内側で max-w-none 等で調整可）
+   * 長文の段落は可能なら .ds-blog-prose でラップし、見出し階層を統一する（docs/TYPOGRAPHY.md）。
+   */
   .ds-article-shell {
     @apply mx-auto max-w-prose;
+  }
+
+  /** 記事末・補足ブロックの区切り（連続する ds-subcard のリズム用） */
+  .ds-section-gap {
+    @apply mb-6;
   }
 }
 

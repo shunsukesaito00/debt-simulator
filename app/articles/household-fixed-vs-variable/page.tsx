@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("household-fixed-vs-variable")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             家計を把握するとき、「固定費」と「変動費」に分けると見えやすくなります。このページでは、何を固定費・変動費に入れるかの分け方と、それぞれの特徴を整理します。
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -133,7 +133,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜固定費＝毎月ほぼ一定、変動費＝月で増減
               </h2>
               <p className="mt-3">
@@ -165,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="fixed">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">固定費に含めるもの</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">固定費に含めるもの</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>家賃・住宅ローン（持ち家の場合の返済）</li>
                 <li>通信費（スマホ・自宅回線・サブスクなど）</li>
@@ -178,7 +178,7 @@ export default function Page() {
             </section>
 
             <section id="variable">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">変動費に含めるもの</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">変動費に含めるもの</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>食費・日用品</li>
                 <li>交際費・娯楽</li>
@@ -204,7 +204,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
@@ -216,7 +216,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>固定費＝毎月ほぼ一定でかかる支出（家賃・通信費・保険・ローン・サブスク・光熱など）。変動費＝月で増減する支出（食費・日用品・交際費など）。</li>
                 <li>固定費の合計を把握すると、手取りとの差（変動費に回せる額）が見えやすくなります。</li>

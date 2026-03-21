@@ -23,17 +23,10 @@ export function ArticleEditorMemo({
       aria-label="編集メモ"
     >
       <div className="border-l-4 border-stone-200 pl-4">
-        <h2 className="text-xs font-black text-stone-500 uppercase tracking-wide">ひとことメモ</h2>
-        <div className="ds-hr my-3" />
-        <p className="mt-2 text-sm text-stone-700 leading-relaxed">
-          <span className="font-bold text-stone-800">この数字を見て、自分で決めるときのヒントにしてもらえたら：</span>
-          {purpose}
-        </p>
+        <h2 className="ds-label text-stone-500">メモ</h2>
+        <p className="mt-2 text-sm text-stone-700 leading-relaxed">{purpose}</p>
         {reasonAxis != null && reasonAxis !== "" && (
-          <p className="mt-2 text-sm text-stone-600 leading-relaxed">
-            <span className="font-bold text-stone-700">この比較を載せた理由：</span>
-            {reasonAxis}
-          </p>
+          <p className="mt-2 text-sm text-stone-600 leading-relaxed">{reasonAxis}</p>
         )}
         {memo != null && memo !== "" && (
           <p className="mt-2 text-sm text-stone-600 leading-relaxed italic">{memo}</p>

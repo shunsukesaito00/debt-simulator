@@ -102,7 +102,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("household-monthly-balance-check")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             家計簿をつけなくても、手取りと固定費がわかれば、月の収支はざっくり把握できます。このページでは、<strong>手取りから逆算する考え方</strong>と、記録を頑張らなくても収支を見る方法を整理します。
@@ -119,7 +119,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -133,7 +133,7 @@ export default function Page() {
 
           <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜手取り−固定費で残りが見える
               </h2>
               <p className="mt-3">
@@ -165,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="reverse-calc">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">手取りから逆算する考え方</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">手取りから逆算する考え方</h2>
               <p className="mt-3">
                 「今月いくら使ったか」を足し算するのではなく、<strong>「手取り − 固定費 ＝ 変動費に回せる額」</strong>で、先に残りを把握する考え方です。収入と固定費がわかっていれば、残りがいくらかは計算で出せます。残りが少ない場合は、固定費の見直しや収入の見直しを検討する材料になります。
               </p>
@@ -177,7 +177,7 @@ export default function Page() {
             </section>
 
             <section id="how-to-grasp">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">ざっくり把握する手順</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">ざっくり把握する手順</h2>
               <ol className="mt-3 list-decimal pl-5 space-y-1">
                 <li>手取り（月の収入−税金・社会保険）を確認する</li>
                 <li>固定費の一覧を書き、合計を出す（家賃・通信費・保険・ローン・サブスク・光熱など）</li>
@@ -204,7 +204,7 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
@@ -216,7 +216,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>月の収支は<strong>手取り − 固定費 ＝ 変動費に回せる額</strong>でざっくり把握できます。家計簿をつけなくても、固定費の合計がわかれば残りは計算できます。</li>
                 <li>固定費が手取りの何割かを知っておくと、見直しの材料になります。</li>

@@ -103,7 +103,7 @@ function CategoryReadBlock() {
   if (articles.length === 0) return null;
   return (
     <section id="category-read">
-      <h2 className="text-lg font-black text-stone-900 md:text-xl">
+      <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
         このカテゴリで読むべき記事
       </h2>
       <p className="mt-3 text-sm text-stone-700 leading-relaxed">
@@ -178,7 +178,7 @@ export default function Page() {
       
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("repayment-improvement-guide")}>
 <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
+          <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">
@@ -197,7 +197,7 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-stone-900">目次</h2>
+            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
@@ -218,7 +218,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜返済を軽くする方法は1つではない
               </h2>
               <p className="mt-3">
@@ -253,7 +253,7 @@ export default function Page() {
             </section>
 
             <section id="monthly-vs-total">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 まず確認したいのは「毎月」と「総額」のどちらを重視するか
               </h2>
               <p className="mt-3">
@@ -265,7 +265,7 @@ export default function Page() {
             </section>
 
             <section id="method-1">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 方法1｜繰り上げ返済・追加返済で総利息を減らす
               </h2>
               <p className="mt-3">
@@ -284,7 +284,7 @@ export default function Page() {
             </section>
 
             <section id="method-2">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 方法2｜返済期間を見直して総支払額を管理する
               </h2>
               <p className="mt-3">
@@ -303,7 +303,7 @@ export default function Page() {
             </section>
 
             <section id="method-3">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 方法3｜毎月返済額を見直して元本の減り方を改善する
               </h2>
               <p className="mt-3">
@@ -329,7 +329,7 @@ export default function Page() {
             </section>
 
             <section id="method-4">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 方法4｜返済方式を理解して、自分に合う返し方を選ぶ
               </h2>
               <p className="mt-3">
@@ -348,7 +348,7 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 返済改善の方法を一覧で比べる
               </h2>
               <p className="mt-3">
@@ -358,11 +358,11 @@ export default function Page() {
                 <table className="w-full min-w-[640px] border-collapse text-left text-sm">
                   <thead>
                     <tr className="border-b-2 border-stone-200">
-                      <th className="py-3 pr-4 font-black text-stone-900">方法</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">毎月の負担</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">総利息への効果</th>
-                      <th className="py-3 pr-4 font-black text-stone-900">向いている人</th>
-                      <th className="py-3 font-black text-stone-900">関連記事</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">方法</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">毎月の負担</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">総利息への効果</th>
+                      <th className="py-3 pr-4 font-semibold text-stone-900">向いている人</th>
+                      <th className="py-3 font-semibold text-stone-900">関連記事</th>
                     </tr>
                   </thead>
                   <tbody className="text-stone-700">
@@ -388,7 +388,7 @@ export default function Page() {
             </section>
 
             <section id="priority">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 どの改善策を優先すべきか
               </h2>
               <p className="mt-3">
@@ -402,7 +402,7 @@ export default function Page() {
             <CategoryReadBlock />
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 迷ったらシミュレーターで比較するのが早い
               </h2>
               <p className="mt-3">
@@ -426,7 +426,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 注意点
               </h2>
               <p className="mt-3">
@@ -446,12 +446,12 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 よくある質問
               </h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     返済を軽くする一番いい方法は何ですか？
                   </h3>
                   <p className="mt-2">
@@ -459,7 +459,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     繰り上げ返済は本当に効果がありますか？
                   </h3>
                   <p className="mt-2">
@@ -467,7 +467,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     毎月返済額を下げると楽になりますか？
                   </h3>
                   <p className="mt-2">
@@ -475,7 +475,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     複数の改善策を同時に実行してもよいですか？
                   </h3>
                   <p className="mt-2">
@@ -483,7 +483,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-stone-900">
+                  <h3 className="text-base font-semibold text-stone-900">
                     おまとめローン（借り換え）を検討すべきタイミングはいつですか？
                   </h3>
                   <p className="mt-2">
@@ -494,7 +494,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-stone-900 md:text-xl">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 まとめ
               </h2>
               <p className="mt-3">

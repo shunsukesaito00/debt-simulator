@@ -60,7 +60,7 @@ export default function FixedCostImpactPage() {
         </p>
 
         <section className="ds-subcard mt-6 p-5">
-          <h2 className="text-base font-black text-stone-900">入力</h2>
+          <h2 className="text-base font-semibold text-stone-900">入力</h2>
           <div className="mt-4 space-y-4">
             <div>
               <label htmlFor="monthly" className="block text-sm font-bold text-stone-800">
@@ -99,7 +99,7 @@ export default function FixedCostImpactPage() {
         </section>
 
         <section className="ds-subcard mt-6 p-5">
-          <h2 className="text-base font-black text-stone-900">削減効果の目安</h2>
+          <h2 className="text-base font-semibold text-stone-900">削減効果の目安</h2>
           <p className="mt-1 text-sm text-stone-600">
             毎月{formatYen(monthly)}の削減を続けた場合の累計です。
           </p>

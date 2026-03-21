@@ -70,7 +70,7 @@ export default function QuickReferencePage() {
       </nav>
 
       <div className="ds-card ds-card-pad">
-        <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
+        <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">
           返済額の早見表（年利15%・元利均等）
         </h1>
         <p className="mt-3 text-sm text-stone-600 leading-relaxed">
@@ -85,11 +85,11 @@ export default function QuickReferencePage() {
           <table className="w-full min-w-[400px] text-sm">
             <thead>
               <tr className="border-b-2 border-stone-200 text-left">
-                <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
-                <th className="py-3 pr-4 font-black text-stone-900">3年返済</th>
-                <th className="py-3 pr-4 font-black text-stone-900">3年 総利息</th>
-                <th className="py-3 pr-4 font-black text-stone-900">5年返済</th>
-                <th className="py-3 font-black text-stone-900">5年 総利息</th>
+                <th className="py-3 pr-4 font-semibold text-stone-900">借入額</th>
+                <th className="py-3 pr-4 font-semibold text-stone-900">3年返済</th>
+                <th className="py-3 pr-4 font-semibold text-stone-900">3年 総利息</th>
+                <th className="py-3 pr-4 font-semibold text-stone-900">5年返済</th>
+                <th className="py-3 font-semibold text-stone-900">5年 総利息</th>
               </tr>
             </thead>
             <tbody>

@@ -71,7 +71,7 @@ export function PaymentBreakdownCards() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="ds-subcard p-4">
-        <div className="text-xs font-black text-stone-600">繰り上げ返済なし</div>
+        <div className="text-xs font-semibold text-stone-600">繰り上げ返済なし</div>
         <div className="mt-2 flex justify-between text-sm">
           <span className="text-stone-600">元本</span>
           <span className="font-bold text-stone-900">¥2,000,000</span>
@@ -82,7 +82,7 @@ export function PaymentBreakdownCards() {
         </div>
       </div>
       <div className="ds-subcard p-4">
-        <div className="text-xs font-black text-stone-600">10万円繰り上げ返済あり</div>
+        <div className="text-xs font-semibold text-stone-600">10万円繰り上げ返済あり</div>
         <div className="mt-2 flex justify-between text-sm">
           <span className="text-stone-600">元本</span>
           <span className="font-bold text-stone-900">¥2,000,000</span>
