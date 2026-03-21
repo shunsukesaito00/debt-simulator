@@ -15,7 +15,7 @@ export default function Page() {
     <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">免責事項</h1>
 
-      <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
+      <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
         <p>
           当サイトのシミュレーション結果は参考情報です。正確性・完全性を保証するものではありません。
           実際の返済条件は契約内容（金融機関の約定）をご確認ください。

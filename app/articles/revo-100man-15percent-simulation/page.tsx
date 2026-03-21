@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 import {
   PayoffMonthsBarChart,
   TotalInterestBarChart,
@@ -36,8 +40,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-08",
   dateModified: "2025-03-08",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -107,20 +111,11 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="text-gray-900 font-bold" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("revo-100man-15percent-simulation")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・一定返済額の近似例です。実際のリボ払い商品では条件により異なる場合があります。
           </p>
 
@@ -136,11 +131,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -148,18 +143,18 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <p>
               リボ払いで100万円を利用した場合、毎月の返済額をいくらに設定するかで、完済までの期間も総利息も大きく変わります。毎月の支払いが低いと一見ラクに見えますが、そのぶん元本の減りが遅くなり、利息を長く払い続けることになります。
             </p>
             <p>
               この記事では、リボ払い100万円・年利15%という条件を前提に、毎月3万円・5万円・7万円返済で何がどれだけ変わるのかを比較します。最後に、
-              <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">返済シミュレーター</Link>
+              <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
               への導線も用意しています。
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">結論｜リボ払い100万円・金利15%は返済額しだいで重さが大きく変わる</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論｜リボ払い100万円・金利15%は返済額しだいで重さが大きく変わる</h2>
               <p className="mt-3">
                 結論から言うと、リボ払い100万円を年利15%で利用した場合、毎月3万円返済では総利息は約47.5万円、毎月5万円返済では約18.5万円、毎月7万円返済では約11.1万円が目安です。
               </p>
@@ -192,7 +187,7 @@ export default function Page() {
             </section>
 
             <section id="why">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">なぜリボ払いは返済額しだいで差が大きくなるのか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">なぜリボ払いは返済額しだいで差が大きくなるのか</h2>
               <p className="mt-3">
                 リボ払いでは、毎月の返済額の中に利息も含まれています。そのため、返済額が低いと元本に回る金額が小さくなり、残高が減りにくくなります。
               </p>
@@ -202,7 +197,7 @@ export default function Page() {
             </section>
 
             <section id="30k">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">毎月3万円返済ならどうなるか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月3万円返済ならどうなるか</h2>
               <p className="mt-3">
                 リボ払い100万円を年利15%で毎月3万円ずつ返済する場合、完済までの目安は50か月、総支払額は約147.5万円、総利息は約47.5万円です。
               </p>
@@ -212,7 +207,7 @@ export default function Page() {
             </section>
 
             <section id="50k">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">毎月5万円返済ならどうなるか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月5万円返済ならどうなるか</h2>
               <p className="mt-3">
                 同じ100万円・年利15%でも、毎月5万円返済なら完済までの目安は24か月、総支払額は約118.5万円、総利息は約18.5万円です。
               </p>
@@ -222,7 +217,7 @@ export default function Page() {
             </section>
 
             <section id="70k">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">毎月7万円返済ならどうなるか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">毎月7万円返済ならどうなるか</h2>
               <p className="mt-3">
                 毎月7万円返済にすると、完済までの目安は16か月、総支払額は約111.1万円、総利息は約11.1万円です。
               </p>
@@ -232,7 +227,7 @@ export default function Page() {
             </section>
 
             <section id="compare">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">3万円・5万円・7万円を比較するとどう違うか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">3万円・5万円・7万円を比較するとどう違うか</h2>
               <p className="mt-3">同じ100万円・年利15%でも、毎月返済額の違いで結果はかなり変わります。</p>
               <ul className="mt-2 list-disc pl-5 space-y-1">
                 <li>毎月3万円: 約50か月 / 総利息約475,166円</li>
@@ -246,30 +241,30 @@ export default function Page() {
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left">
                   <thead>
-                    <tr className="border-b-2 border-gray-200">
-                      <th className="py-3 pr-4 font-black text-gray-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">完済までの目安</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総支払額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総利息</th>
-                      <th className="py-3 font-black text-gray-900">特徴</th>
+                    <tr className="border-b-2 border-stone-200">
+                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">完済までの目安</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
+                      <th className="py-3 font-black text-stone-900">特徴</th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
-                    <tr className="border-b border-gray-200">
+                  <tbody className="text-stone-700">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">約30,000円</td>
                       <td className="py-3 pr-4">約50か月</td>
                       <td className="py-3 pr-4">約1,475,166円</td>
                       <td className="py-3 pr-4">約475,166円</td>
                       <td className="py-3 text-xs">毎月は軽いが長期化しやすい</td>
                     </tr>
-                    <tr className="border-b border-gray-200">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">約50,000円</td>
                       <td className="py-3 pr-4">約24か月</td>
                       <td className="py-3 pr-4">約1,185,022円</td>
                       <td className="py-3 pr-4">約185,022円</td>
                       <td className="py-3 text-xs">バランス型</td>
                     </tr>
-                    <tr className="border-b border-gray-200">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">約70,000円</td>
                       <td className="py-3 pr-4">約16か月</td>
                       <td className="py-3 pr-4">約1,111,009円</td>
@@ -278,43 +273,43 @@ export default function Page() {
                     </tr>
                   </tbody>
                 </table>
-                <p className="mt-2 text-xs text-gray-600">
+                <p className="mt-2 text-xs text-stone-600">
                   毎月返済額が上がるほど、完済期間も総利息も大きく改善します。3万円・5万円・7万円の差は特に大きくなります。
                 </p>
               </div>
             </section>
 
             <section id="graph">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">グラフで見ると差がわかりやすい</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">グラフで見ると差がわかりやすい</h2>
               <p className="mt-3">数字だけでも違いはわかりますが、グラフにすると、返済額の差が完済期間と総利息にどう効いてくるかが見えやすくなります。</p>
 
               <div className="mt-6 ds-subcard p-4">
-                <h3 className="text-base font-black text-gray-900">毎月返済額別の完済期間</h3>
+                <h3 className="text-base font-black text-stone-900">毎月返済額別の完済期間</h3>
                 <div className="mt-4">
                   <PayoffMonthsBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-gray-900">毎月返済額別の総利息</h3>
+                <h3 className="text-base font-black text-stone-900">毎月返済額別の総利息</h3>
                 <div className="mt-4">
                   <TotalInterestBarChart />
                 </div>
               </div>
 
               <div className="mt-8 ds-subcard p-4">
-                <h3 className="text-base font-black text-gray-900">総支払額の内訳（元本と利息）</h3>
+                <h3 className="text-base font-black text-stone-900">総支払額の内訳（元本と利息）</h3>
                 <div className="mt-4">
                   <TotalPaymentStackedChart />
                 </div>
-                <p className="mt-4 text-xs text-gray-600">
+                <p className="mt-4 text-xs text-stone-600">
                   毎月返済額が低いと元本が減りにくく、結果的に利息負担が大きくなります。
                 </p>
               </div>
             </section>
 
             <section id="risk">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">返済額を低くしすぎるリスク</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">返済額を低くしすぎるリスク</h2>
               <p className="mt-3">
                 毎月返済額を低くすると、月々の負担は軽く見えます。しかしそのぶん、元本の減りが遅くなり、完済までの期間が長引きます。
               </p>
@@ -324,7 +319,7 @@ export default function Page() {
             </section>
 
             <section id="point">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">どの返済額が現実的かを考えるポイント</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">どの返済額が現実的かを考えるポイント</h2>
               <p className="mt-3">
                 どの返済額が現実的かは、家計の余力によって変わります。毎月3万円は見た目の負担は軽いですが、長期化しやすく、利息も重くなります。
               </p>
@@ -334,13 +329,13 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
               <p className="mt-3">
                 ここまでの数値は、あくまで「リボ払い100万円・年利15%」という固定条件の近似例です。実際には、利用残高、金利、返済方式、最低返済額ルール、追加返済の有無によって結果は変わります。
               </p>
               <p className="mt-3">
                 そのため、最終的には自分の条件を入れて確認するのが一番確実です。
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">返済シミュレーター</Link>
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
                 では、借入額や金利、返済期間を入力して、月々の返済額や総利息を試算できます。
               </p>
               <div className="mt-6">
@@ -354,7 +349,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">注意点</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意点</h2>
               <p className="mt-3">
                 本記事の比較は、一般的な固定金利・一定返済額の考え方に基づく概算です。実際のリボ払い商品では、元金定額方式、残高スライド方式、締日、支払日、手数料計算、遅延損害金などが影響する場合があります。
               </p>
@@ -372,34 +367,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">リボ払い100万円・金利15%だと利息はいくらですか？</h3>
+                  <h3 className="text-base font-black text-stone-900">リボ払い100万円・金利15%だと利息はいくらですか？</h3>
                   <p className="mt-2">
                     近似例では、毎月3万円返済なら約47.5万円、毎月5万円返済なら約18.5万円、毎月7万円返済なら約11.1万円が目安です。返済額が低いほど利息は増えやすいです。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">リボ払い100万円は何年で終わりますか？</h3>
+                  <h3 className="text-base font-black text-stone-900">リボ払い100万円は何年で終わりますか？</h3>
                   <p className="mt-2">
                     近似例では、毎月3万円返済なら約50か月、毎月5万円返済なら約24か月、毎月7万円返済なら約16か月が目安です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">リボ払いの負担を軽くするにはどうすればいいですか？</h3>
+                  <h3 className="text-base font-black text-stone-900">リボ払いの負担を軽くするにはどうすればいいですか？</h3>
                   <p className="mt-2">
                     毎月返済額を増やす、追加返済をする、金利や返済条件を見直す、の3つが基本です。特に返済額を引き上げる効果は大きいです。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">リボ払いの最低返済額だけ払い続けるとどうなりますか？</h3>
+                  <h3 className="text-base font-black text-stone-900">リボ払いの最低返済額だけ払い続けるとどうなりますか？</h3>
                   <p className="mt-2">
                     最低返済額は利息に近い金額に設定されていることが多く、元本がほとんど減りません。その結果、完済まで非常に長い年数がかかり、最終的な総利息が元本に匹敵するほど膨らむケースもあります。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">リボ払い100万円を早く完済するための具体的な戦略はありますか？</h3>
+                  <h3 className="text-base font-black text-stone-900">リボ払い100万円を早く完済するための具体的な戦略はありますか？</h3>
                   <p className="mt-2">
                     まず毎月の返済額をできる限り引き上げることが最も効果的です。加えて、ボーナスや臨時収入を追加返済に回す、不要なサブスクや固定費を削って返済原資を増やす、低金利ローンへの借り換えを検討するなどの方法があります。
                   </p>
@@ -408,13 +403,13 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 リボ払い100万円・金利15%という条件でも、毎月返済額が3万円・5万円・7万円で完済期間と総利息は大きく変わります。毎月の返済額を低くすると、そのぶん元本が減りにくくなり、総利息は重くなります。
               </p>
               <p className="mt-3">
                 大切なのは、毎月いくら払うかだけでなく、何か月かかるか、最終的にいくら払うかまで見ることです。自分の条件で試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">返済シミュレーター</Link>
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
                 で確認できます。
               </p>
               <div className="mt-6">
@@ -430,7 +425,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="revo-100man-15percent-simulation" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

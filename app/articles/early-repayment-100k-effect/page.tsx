@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 import {
   InterestComparisonBarChart,
   MonthsComparisonBarChart,
@@ -59,8 +63,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-08",
   dateModified: "2025-03-08",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -128,28 +132,13 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li>
-              <Link href="/" className="hover:underline">トップ</Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li>
-              <Link href="/articles" className="hover:underline">知っておきたいこと</Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">
-              {ARTICLE_TITLE}
-            </li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("early-repayment-100k-effect")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、200万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
 
@@ -162,11 +151,11 @@ export default function Page() {
           />
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -174,20 +163,20 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <p>
               繰り上げ返済をした方がよいとはよく言われますが、実際に10万円だけ追加で返済した場合、どれくらいの効果があるのかは気になるところです。まとまったお金を入れても、何がどれだけ変わるのかが見えないと判断しにくいからです。
             </p>
             <p>
               この記事では、200万円・年利15%・5年返済の近似例を使って、返済開始から12か月後に10万円を繰り上げ返済した場合、完済時期、総利息、総支払額がどう変わるかを整理します。最後に、実際の条件を入力して確認できる
-              <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+              <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                 返済シミュレーター
               </Link>
               への導線も用意しています。
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜繰り上げ返済10万円でも利息と完済時期はちゃんと変わる
               </h2>
               <p className="mt-3">
@@ -199,7 +188,7 @@ export default function Page() {
             </section>
 
             <section id="why">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 なぜ10万円の繰り上げ返済で利息が減るのか
               </h2>
               <p className="mt-3">
@@ -211,7 +200,7 @@ export default function Page() {
             </section>
 
             <section id="no-extra">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 繰り上げ返済なしだとどうなるか
               </h2>
               <p className="mt-3">
@@ -223,7 +212,7 @@ export default function Page() {
             </section>
 
             <section id="with-extra">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 12か月後に10万円繰り上げ返済するとどうなるか
               </h2>
               <p className="mt-3">
@@ -235,7 +224,7 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 比較表で見ると効果がわかりやすい
               </h2>
               <p className="mt-3">
@@ -244,19 +233,19 @@ export default function Page() {
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full min-w-[640px] border-collapse text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-200 bg-gray-50 text-left">
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">条件</th>
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">毎月返済額</th>
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">追加返済</th>
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">完済目安</th>
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">総支払額</th>
-                      <th className="py-2.5 pr-3 font-bold text-gray-900">総利息</th>
-                      <th className="py-2.5 font-bold text-gray-900">効果</th>
+                    <tr className="border-b-2 border-stone-200 bg-stone-50 text-left">
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">条件</th>
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">毎月返済額</th>
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">追加返済</th>
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">完済目安</th>
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">総支払額</th>
+                      <th className="py-2.5 pr-3 font-bold text-stone-900">総利息</th>
+                      <th className="py-2.5 font-bold text-stone-900">効果</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparisonTableRows.map((row, i) => (
-                      <tr key={i} className="border-b border-gray-100">
+                      <tr key={i} className="border-b border-stone-100">
                         <td className="py-2.5 pr-3">{row.condition}</td>
                         <td className="py-2.5 pr-3">{row.monthly}</td>
                         <td className="py-2.5 pr-3">{row.extra}</td>
@@ -272,7 +261,7 @@ export default function Page() {
             </section>
 
             <section id="chart">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 グラフで見ると何が変わるか
               </h2>
               <p className="mt-3">
@@ -282,11 +271,11 @@ export default function Page() {
                 <InterestComparisonBarChart />
                 <MonthsComparisonBarChart />
                 <div>
-                  <p className="mb-2 text-sm font-bold text-gray-700">総支払額の内訳比較</p>
+                  <p className="mb-2 text-sm font-bold text-stone-700">総支払額の内訳比較</p>
                   <PaymentBreakdownCards />
                 </div>
               </div>
-              <p className="mt-4 text-sm text-gray-600">
+              <p className="mt-4 text-sm text-stone-600">
                 10万円の追加返済は、元本を早く減らすことで、その後に払う利息を減らす効果があります。
               </p>
 
@@ -309,7 +298,7 @@ export default function Page() {
             </section>
 
             <section id="total-payment-note">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 総支払額の見え方に注意
               </h2>
               <p className="mt-3">
@@ -321,7 +310,7 @@ export default function Page() {
             </section>
 
             <section id="who">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 10万円の繰り上げ返済が向いている人
               </h2>
               <p className="mt-3">
@@ -333,14 +322,14 @@ export default function Page() {
             </section>
 
             <section id="category">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 返済改善の中で見るとどういう位置づけか
               </h2>
               <p className="mt-3">
                 繰り上げ返済は、返済改善策の中でも「総利息を減らしたい」「完済を早めたい」場合に特に有効です。詳しい全体像は
                 <Link
                   href="/articles/repayment-improvement-guide"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説
                 </Link>
@@ -350,14 +339,14 @@ export default function Page() {
                 また、長期返済のリスクを理解したい場合は
                 <Link
                   href="/articles/100man-100months-risk-at-15percent"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説
                 </Link>
                 、毎月返済額と総利息の関係を知りたい場合は
                 <Link
                   href="/articles/monthly-50000-interest-at-15percent"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較
                 </Link>
@@ -366,7 +355,7 @@ export default function Page() {
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 自分の条件で確認するならシミュレーターが早い
               </h2>
               <p className="mt-3">
@@ -386,7 +375,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 注意点
               </h2>
               <p className="mt-3">
@@ -398,12 +387,12 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 よくある質問
               </h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     繰り上げ返済10万円でも効果はありますか？
                   </h3>
                   <p className="mt-2">
@@ -411,7 +400,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     10万円の追加返済で得する金額は10万円ですか？
                   </h3>
                   <p className="mt-2">
@@ -419,7 +408,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     繰り上げ返済はいつやると効果が大きいですか？
                   </h3>
                   <p className="mt-2">
@@ -427,7 +416,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     繰り上げ返済のタイミングは1年後と3年後でどれくらい差がありますか？
                   </h3>
                   <p className="mt-2">
@@ -435,7 +424,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     10万円ではなく5万円や20万円の繰り上げ返済だと効果はどう変わりますか？
                   </h3>
                   <p className="mt-2">
@@ -446,7 +435,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 まとめ
               </h2>
               <p className="mt-3">
@@ -454,7 +443,7 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 大切なのは、繰り上げ返済は「元本を早く減らして、将来の利息を減らす手段」だと理解することです。自分の条件で試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                   返済シミュレーター
                 </Link>
                 で確認できます。
@@ -478,7 +467,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="early-repayment-100k-effect" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

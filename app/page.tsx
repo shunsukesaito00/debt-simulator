@@ -1,68 +1,28 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getFeaturedProblemArticles, CATEGORY_LABELS } from "@/lib/articles";
+import {
+  getHomeSpotlightArticles,
+  getPopularArticles,
+  getRecentArticles,
+  CATEGORY_LABELS,
+} from "@/lib/articles";
 import { TrackedLink } from "./components/TrackedLink";
-import type { TrackEventParams } from "@/lib/analytics";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
 export const metadata: Metadata = {
   title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
   description:
-    "毎月の固定負担を条件別に比較・試算するシミュレーター。借入返済を中心に、月々返済額・総利息・完済時期を具体条件で確認でき、記事とツールを往復して判断材料を提供します。",
+    "金欠や返済で悩む方向けに、体験記と数字のツールを並べています。借入返済シミュレーターで条件別に月々・総利息・完済時期を試算できます。",
   alternates: { canonical: BASE },
   openGraph: {
     title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
     description:
-      "毎月の固定負担を条件別に比較・試算するシミュレーター。借入返済を中心に、月々返済額・総利息・完済時期を具体条件で確認でき、記事とツールを往復して判断材料を提供します。",
+      "体験記とシミュレーターで、返済と固定費の見え方を整理するサイトです。",
     url: BASE,
     type: "website",
   },
 };
-
-const MAIN_CARD_CLASS =
-  "block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-[var(--ds-shadow-md)] focus:outline-none focus:ring-2 focus:ring-slate-900/10 md:p-6";
-
-/** 主カード（シミュレーター・記事一覧）。計測用に event を渡すと TrackedLink でラップする */
-function MainCard({
-  title,
-  desc,
-  href,
-  cta,
-  primary = false,
-  event,
-}: {
-  title: string;
-  desc: string;
-  href: string;
-  cta: string;
-  primary?: boolean;
-  event?: TrackEventParams;
-}) {
-  const content = (
-    <>
-      <div className="text-lg font-black text-gray-900">{title}</div>
-      <div className="mt-2 text-sm text-gray-600 leading-relaxed">{desc}</div>
-      <div
-        className={`mt-4 inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-black ${
-          primary
-            ? "bg-gray-900 text-white"
-            : "border border-gray-300 bg-gray-50 text-gray-800"
-        }`}
-      >
-        {cta} <span aria-hidden>→</span>
-      </div>
-    </>
-  );
-  if (event) {
-    return (
-      <TrackedLink href={href} className={MAIN_CARD_CLASS} event={event}>
-        {content}
-      </TrackedLink>
-    );
-  }
-  return <Link href={href} className={MAIN_CARD_CLASS}>{content}</Link>;
-}
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -70,7 +30,7 @@ const websiteJsonLd = {
   name: "借入返済シミュレーター",
   url: BASE,
   description:
-    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・返済計画を中心に、月々負担の違いを具体条件で確認し、記事とツールを往復して判断材料を提供します。",
+    "借入返済の試算シミュレーターと、固定費・返済まわりの記事。金欠や返済で悩む方の判断材料になります。",
   publisher: { "@id": `${BASE}/#organization` },
   logo: { "@type": "ImageObject", url: `${BASE}/favicon.ico` },
 };
@@ -82,334 +42,464 @@ const organizationJsonLd = {
   name: "借入返済シミュレーター",
   url: BASE,
   description:
-    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・固定費見直し・返済計画の判断材料を提供します。",
+    "返済・固定費の数字を試せるツールと、条件別の記事・体験記を載せています。投資助言や借入の勧誘は行いません。",
 };
 
+type Pillar = {
+  icon: string;
+  title: string;
+  desc: string;
+  href: string;
+  eventLocation: string;
+  categoryKey: string;
+};
+
+function formatPublishedAt(iso?: string): string | null {
+  if (!iso) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) return iso;
+  return `${m[1]}年${m[2]}月${m[3]}日`;
+}
+
+const THEME_PILLARS: Pillar[] = [
+  {
+    icon: "💳",
+    title: "リボ・借入の負担の見え方",
+    desc: "借入額別・返済方式・リボ払いなど、条件ごとに月々や利息がどう変わるか読む",
+    href: "/articles#loan-comparison",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "loan-comparison",
+  },
+  {
+    icon: "🏠",
+    title: "固定費・節約の効果",
+    desc: "通信費・サブスク・保険など、毎月の固定費をどう見直すか",
+    href: "/articles#fixed-cost",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "fixed-cost",
+  },
+  {
+    icon: "📖",
+    title: "体験記・家計の話",
+    desc: "運営者の体験や、家計簿・収支の整理の考え方",
+    href: "/articles#household",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "household",
+  },
+  {
+    icon: "📈",
+    title: "返済を軽くする・繰り上げ",
+    desc: "繰り上げ返済や返済方式の見直しで負担がどう変わるか",
+    href: "/articles#repayment-improvement",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "repayment-improvement",
+  },
+  {
+    icon: "🔢",
+    title: "返済シミュレーター",
+    desc: "4つの返済方式・A/B比較で、自分の条件に近い数字を試す（入力は送信されません）",
+    href: "/simulator/cardloan",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "simulator",
+  },
+  {
+    icon: "📊",
+    title: "固定費削減インパクト",
+    desc: "月いくら削ると1年・3年・5年でいくらになるか、さっと試す",
+    href: "/tools/fixed-cost-impact",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "fixed-cost-tool",
+  },
+];
+
 export default function Page() {
-  const featuredArticles = getFeaturedProblemArticles();
+  const spotlight = getHomeSpotlightArticles();
+  const popular = getPopularArticles();
+  const recent = getRecentArticles(5);
+  const noteUrl = (process.env.NEXT_PUBLIC_NOTE_URL ?? "").trim();
+  const xUrl = (process.env.NEXT_PUBLIC_X_URL ?? "").trim();
 
   return (
     <div className="grid gap-8 md:gap-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
-      {/* ── Hero ────────────────────────────────────────── */}
+
+      {/* 1. ヒーロー */}
       <section className="ds-card p-6 md:p-10">
         <div className="max-w-3xl">
-          <h1 className="text-3xl font-black tracking-tight text-gray-900 md:text-4xl">
+          <p className="text-sm font-bold text-stone-600">悩んでいる方へ</p>
+          <h1 className="ds-page-serif mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
             借入返済シミュレーター
           </h1>
-          <p className="mt-4 text-base text-slate-700 leading-relaxed md:text-lg">
-            毎月の固定負担を条件別に比較・試算するためのツールです。借入返済では、数字を入れるだけで月々返済・総利息・完済時期がすぐ出ます。<strong className="font-bold text-gray-900">4つの返済方式</strong>（元利均等・元金均等・定額元利・定額元金）と<strong className="font-bold text-gray-900">A/B比較</strong>で条件の差を試せます。記事とシミュを往復しながら、気になる条件から試して判断に使えます。入力値は送信されず、ブラウザ内だけで計算します。
+          <p className="mt-3 text-base text-stone-700 leading-relaxed md:text-lg">
+            返済や金欠で気持ちが沈んでいるとき、数字だけが先に来るサイトだと負けます。このサイトでは
+            <strong className="text-stone-900">体験の記録</strong>と
+            <strong className="text-stone-900">試算できるツール</strong>
+            の両方を置いています。まずは
+            <Link href="/welcome" className="font-bold text-stone-900 underline decoration-stone-400 hover:no-underline">
+              はじめての方へ
+            </Link>
+            から読む順番を決めても大丈夫です。
           </p>
-
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <TrackedLink
-              href="/simulator/cardloan"
+              href="/welcome"
               className="ds-btn ds-btn-primary px-6 py-3.5 text-base"
               event={{
                 action: "click_top_primary_cta",
+                location: "top_hero",
+                target: "/welcome",
+                link_type: "welcome_cta",
+              }}
+            >
+              はじめての方へ →
+            </TrackedLink>
+            <TrackedLink
+              href="/simulator/cardloan"
+              className="ds-btn ds-btn-secondary px-6 py-3.5 text-base"
+              event={{
+                action: "click_top_secondary_cta",
                 location: "top_hero",
                 target: "/simulator/cardloan",
                 link_type: "simulator_cta",
               }}
             >
-              カードローン返済を試算する →
-            </TrackedLink>
-            <TrackedLink
-              href="/how-to"
-              className="ds-btn ds-btn-secondary"
-              event={{
-                action: "click_top_secondary_cta",
-                location: "top_hero",
-                target: "/how-to",
-                link_type: "support_cta",
-              }}
-            >
-              使い方を見る
+              返済を試算する
             </TrackedLink>
           </div>
-
-          <div className="mt-7 grid gap-3 sm:grid-cols-3">
-            <div className="ds-subcard p-4">
-              <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
-              <div className="mt-1.5 text-sm font-bold text-gray-900">月々の固定負担を条件別に比較</div>
-            </div>
-            <div className="ds-subcard p-4">
-              <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
-              <div className="mt-1.5 text-sm font-bold text-gray-900">総利息・完済時期を確認</div>
-            </div>
-            <div className="ds-subcard p-4">
-              <div className="text-xs font-bold uppercase tracking-wide text-gray-500">できること</div>
-              <div className="mt-1.5 text-sm font-bold text-gray-900">返済方式・追加返済の違いを理解</div>
-            </div>
-          </div>
-          <p className="mt-4 text-sm text-gray-600">
-            返済額の目安をすぐ見る：<Link href="/quick-reference" className="font-bold text-gray-800 underline hover:no-underline">早見表（100万・200万・300万・3年/5年）</Link>
+          <p className="mt-4 text-sm text-stone-600">
+            早見表：
+            <Link href="/quick-reference" className="font-bold text-stone-800 underline hover:no-underline">
+              100万・200万・300万・3年/5年
+            </Link>
           </p>
         </div>
       </section>
 
-      {/* ── 主カード: シミュレーター ＋ 記事一覧 ───────────── */}
-      <section className="grid gap-5 md:grid-cols-2">
-        <MainCard
-          primary
-          title="カードローン返済シミュレーター"
-          desc="借入額・金利・返済方式を入力し、条件別に月々返済額・総利息・完済時期を比較できます。A/B比較・CSV出力に対応。"
-          href="/simulator/cardloan"
-          cta="シミュレーターへ"
-          event={{
-            action: "click_top_main_card",
-            location: "top_main_cards",
-            target: "/simulator/cardloan",
-            link_type: "main_card",
-            label: "simulator",
-          }}
-        />
-        <MainCard
-          title="条件別の比較記事一覧"
-          desc="借入返済・返済計画・固定費の見え方など、条件ごとに月々負担の違いを整理した記事をカテゴリ別に確認できます。記事とシミュレーターを往復して判断に役立てられます。"
-          href="/articles"
-          cta="記事一覧へ"
-          event={{
-            action: "click_top_main_card",
-            location: "top_main_cards",
-            target: "/articles",
-            link_type: "main_card",
-            label: "articles",
-          }}
-        />
-      </section>
-
-      {/* ── その他のツール ───────────────────────────────── */}
+      {/* 2. おすすめ・スポットライト */}
       <section className="ds-card ds-card-pad">
-        <h2 className="text-xl font-black text-gray-900 md:text-2xl">その他のツール</h2>
-        <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-          借入返済以外にも、固定負担の見直し効果を試算するツールを用意しています。
-        </p>
-        <TrackedLink
-          href="/tools/fixed-cost-impact"
-          className="mt-4 block ds-subcard p-5 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
-          event={{
-            action: "click_top_tool",
-            location: "top_other_tools",
-            target: "/tools/fixed-cost-impact",
-            link_type: "tool_card",
-            label: "fixed-cost-impact",
-          }}
-        >
-          <div>
-            <span className="text-base font-black text-gray-900">固定費削減インパクト計算</span>
-            <p className="mt-1.5 text-sm text-gray-600 leading-relaxed">
-              毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。通信費・サブスクなどの見直し効果を数字で把握するための軽量ツールです。
-            </p>
-            <span className="mt-3 inline-block text-sm font-bold text-gray-700">計算する →</span>
-          </div>
-        </TrackedLink>
-      </section>
-
-      {/* ── よくある悩みから探す（具体悩みの入口） ───────── */}
-      <section className="ds-card ds-card-pad">
-        <h2 className="text-xl font-black text-gray-900 md:text-2xl">よくある悩みから探す</h2>
-        <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-          一般論ではなく具体条件で違いを確認する前提で記事を整理しています。気になる条件に近い記事から読み、自分のケースはシミュレーターで試算し、記事とツールを往復して判断してください。
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">おすすめの記事</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          体験記から条件別の記事まで、よく参照されるものを先に並べています。
         </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-          {featuredArticles.map((a) => (
+          {spotlight.map((a) => (
             <li key={a.slug}>
               <TrackedLink
                 href={`/articles/${a.slug}`}
-                className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
                 event={{
-                  action: "click_top_problem_article",
-                  location: "top_problem_articles",
+                  action: "click_top_spotlight_article",
+                  location: "top_spotlight",
                   target: `/articles/${a.slug}`,
-                  link_type: "featured_problem_article",
+                  link_type: "spotlight_article",
                   article_slug: a.slug,
                   category_key: a.category,
                 }}
               >
-                <span className="rounded-full border border-gray-200 bg-white px-2 py-0.5 text-xs font-bold text-gray-600">
+                <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
                   {CATEGORY_LABELS[a.category]}
                 </span>
-                <span className="mt-2 block text-sm font-bold text-gray-900 leading-snug">{a.title}</span>
-                <p className="mt-1.5 text-xs text-gray-500 leading-relaxed line-clamp-2">{a.summary}</p>
-                <span className="mt-2 inline-block text-xs font-bold text-gray-700">記事を読む →</span>
+                {a.badge && (
+                  <span className="ml-1 rounded-full bg-stone-800 px-2 py-0.5 text-xs font-bold text-white">
+                    {a.badge}
+                  </span>
+                )}
+                <span className="mt-2 block text-sm font-bold text-stone-900 leading-snug">{a.title}</span>
+                <p className="mt-1.5 text-xs text-stone-500 leading-relaxed line-clamp-2">{a.summary}</p>
+                <span className="mt-2 inline-block text-xs font-bold text-stone-700">記事を読む →</span>
               </TrackedLink>
             </li>
           ))}
         </ul>
-        <TrackedLink
-          href="/articles"
-          className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-gray-700 hover:underline"
-          event={{
-            action: "click_top_problem_article",
-            location: "top_problem_articles",
-            target: "/articles",
-            link_type: "featured_problem_article",
-          }}
-        >
-          すべての記事を見る →
-        </TrackedLink>
-        <p className="mt-4 text-xs text-gray-500 leading-relaxed">
-          固定費・家計・改善効果のカテゴリも、順次記事を追加していきます。気になるテーマがあれば記事一覧から探してください。
+      </section>
+
+      {/* 2b. 最近の記事（日付順） */}
+      <section className="ds-card ds-card-pad">
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">最近の記事</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          公開日が新しい記事です。「おすすめの記事」と重なる場合もあります。
+        </p>
+        <ul className="mt-5 divide-y divide-stone-200 border-y border-stone-200">
+          {recent.map((a) => {
+            const dateLabel = formatPublishedAt(a.publishedAt);
+            return (
+              <li key={a.slug} className="py-3 first:pt-0 last:pb-0">
+                <TrackedLink
+                  href={`/articles/${a.slug}`}
+                  className="group block"
+                  event={{
+                    action: "click_top_recent_article",
+                    location: "top_recent_articles",
+                    target: `/articles/${a.slug}`,
+                    link_type: "recent_article",
+                    article_slug: a.slug,
+                    category_key: a.category,
+                  }}
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
+                      {CATEGORY_LABELS[a.category]}
+                    </span>
+                    {dateLabel && (
+                      <time className="text-xs text-stone-500" dateTime={a.publishedAt}>
+                        {dateLabel}
+                      </time>
+                    )}
+                  </div>
+                  <span className="mt-1 block text-sm font-bold text-stone-900 group-hover:underline">{a.title}</span>
+                </TrackedLink>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      {/* 3. 運営者一言 + 自己紹介 */}
+      <section className="ds-subcard border-stone-200 bg-stone-50/80 p-6">
+        <p className="text-xs font-bold uppercase tracking-wide text-stone-500">運営者より一言</p>
+        <blockquote className="ds-page-serif mt-3 text-base font-bold leading-relaxed text-stone-900 md:text-lg">
+          数字が先に来ると、もっとしんどくなることがあります。体験と試算の両方を置いて、自分のペースで比べられるようにしています。
+        </blockquote>
+        <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+          投資助言や借入の勧誘はしていません。経緯やスタンスの詳細は
+          <TrackedLink
+            href="/about"
+            className="ml-1 font-bold text-stone-900 underline hover:no-underline"
+            event={{
+              action: "click_top_operator_voice",
+              location: "top_operator_voice",
+              target: "/about",
+              link_type: "about_from_voice",
+            }}
+          >
+            運営者プロフィール
+          </TrackedLink>
+          へ。
         </p>
       </section>
 
-      {/* ── 知っておきたいこと（カテゴリ入口） ─────────────── */}
+      {/* 4. テーマ別ピラー */}
       <section className="ds-card ds-card-pad">
-        <h2 className="text-xl font-black text-gray-900 md:text-2xl">知っておきたいこと</h2>
-        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-          固定負担の見直し・借入返済・返済計画などを、カテゴリ別に条件ごとの違いとして整理しています。気になるカテゴリから読み、シミュレーターで自分の条件を試算し、記事とツールを往復して判断材料にしてください。
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">悩み別に読む</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          記事一覧のセクションへジャンプするか、ツールでその場で試せます。
         </p>
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {THEME_PILLARS.map((p) => (
+            <li key={p.categoryKey}>
+              <TrackedLink
+                href={p.href}
+                className="block h-full ds-subcard p-4 transition hover:shadow-md"
+                event={{
+                  action: "click_top_theme_pillar",
+                  location: p.eventLocation,
+                  target: p.href,
+                  link_type: "theme_pillar",
+                  category_key: p.categoryKey,
+                }}
+              >
+                <span className="text-2xl" aria-hidden>
+                  {p.icon}
+                </span>
+                <span className="mt-2 block text-base font-bold text-stone-900">{p.title}</span>
+                <p className="mt-1.5 text-xs text-stone-600 leading-relaxed">{p.desc}</p>
+                <span className="mt-3 inline-block text-xs font-bold text-stone-700">開く →</span>
+              </TrackedLink>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 5. よく読まれている */}
+      <section className="ds-card ds-card-pad">
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">よく読まれている記事</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          アクセス数ではなく、手動で「定番」として置いている一覧です。
+        </p>
+        <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm text-stone-800">
+          {popular.map((a) => (
+            <li key={a.slug}>
+              <TrackedLink
+                href={`/articles/${a.slug}`}
+                className="font-bold text-stone-900 underline decoration-stone-300 hover:decoration-stone-800"
+                event={{
+                  action: "click_top_popular_article",
+                  location: "top_popular",
+                  target: `/articles/${a.slug}`,
+                  link_type: "popular_article",
+                  article_slug: a.slug,
+                }}
+              >
+                {a.title}
+              </TrackedLink>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* 6. はじめての方（3カード） */}
+      <section className="ds-card ds-card-pad">
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">はじめての方へ</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          迷ったらこの順でどうぞ。
+        </p>
+        <ul className="mt-6 grid gap-4 md:grid-cols-3">
           <li>
             <TrackedLink
-              href="/articles#fixed-cost"
-              className="block ds-subcard p-4 transition hover:shadow-md"
+              href="/welcome#recommended"
+              className="block h-full ds-subcard p-5 transition hover:shadow-md"
               event={{
-                action: "click_top_category_entry",
-                location: "top_categories",
-                target: "/articles#fixed-cost",
-                link_type: "category_entry",
-                category_key: "fixed-cost",
+                action: "click_top_welcome_card",
+                location: "top_welcome_cards",
+                target: "/welcome#recommended",
+                link_type: "welcome_card",
+                label: "reading_order",
               }}
             >
-              <span className="text-base font-bold text-gray-900">固定費見直し</span>
-              <p className="mt-1.5 text-xs text-gray-600 leading-relaxed">通信費・サブスク・保険など、毎月の固定負担を見直す</p>
+              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 1</div>
+              <div className="mt-2 text-base font-bold text-stone-900">読む順番を決める</div>
+              <p className="mt-2 text-xs text-stone-600 leading-relaxed">
+                体験記と解説記事のおすすめ順を「はじめての方へ」にまとめました。
+              </p>
+              <span className="mt-3 inline-block text-sm font-bold text-stone-700">開く →</span>
+            </TrackedLink>
+          </li>
+          <li>
+            <TrackedLink
+              href="/simulator/cardloan"
+              className="block h-full ds-subcard p-5 transition hover:shadow-md"
+              event={{
+                action: "click_top_welcome_card",
+                location: "top_welcome_cards",
+                target: "/simulator/cardloan",
+                link_type: "welcome_card",
+                label: "simulator",
+              }}
+            >
+              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 2</div>
+              <div className="mt-2 text-base font-bold text-stone-900">返済を数字で試す</div>
+              <p className="mt-2 text-xs text-stone-600 leading-relaxed">
+                借入額・金利・期間を変えて、月々と総額のイメージを掴みます。
+              </p>
+              <span className="mt-3 inline-block text-sm font-bold text-stone-700">シミュレーターへ →</span>
             </TrackedLink>
           </li>
           <li>
             <TrackedLink
               href="/articles#household"
-              className="block ds-subcard p-4 transition hover:shadow-md"
+              className="block h-full ds-subcard p-5 transition hover:shadow-md"
               event={{
-                action: "click_top_category_entry",
-                location: "top_categories",
+                action: "click_top_welcome_card",
+                location: "top_welcome_cards",
                 target: "/articles#household",
-                link_type: "category_entry",
-                category_key: "household",
+                link_type: "welcome_card",
+                label: "stories",
               }}
             >
-              <span className="text-base font-bold text-gray-900">家計管理</span>
-              <p className="mt-1.5 text-xs text-gray-600 leading-relaxed">家計簿が続かない、支出が見えないなどの悩みを整理する</p>
-            </TrackedLink>
-          </li>
-          <li>
-            <TrackedLink
-              href="/articles#improvement-effect"
-              className="block ds-subcard p-4 transition hover:shadow-md"
-              event={{
-                action: "click_top_category_entry",
-                location: "top_categories",
-                target: "/articles#improvement-effect",
-                link_type: "category_entry",
-                category_key: "improvement-effect",
-              }}
-            >
-              <span className="text-base font-bold text-gray-900">改善効果の試算</span>
-              <p className="mt-1.5 text-xs text-gray-600 leading-relaxed">月5,000円・1万円の改善で何が変わるかを比較する</p>
-            </TrackedLink>
-          </li>
-          <li>
-            <TrackedLink
-              href="/articles#loan-comparison"
-              className="block ds-subcard p-4 transition hover:shadow-md"
-              event={{
-                action: "click_top_category_entry",
-                location: "top_categories",
-                target: "/articles#loan-comparison",
-                link_type: "category_entry",
-                category_key: "loan-comparison",
-              }}
-            >
-              <span className="text-base font-bold text-gray-900">借入返済比較</span>
-              <p className="mt-1.5 text-xs text-gray-600 leading-relaxed">借入額・返済方式・追加返済の違いを試算する</p>
-            </TrackedLink>
-          </li>
-          <li>
-            <TrackedLink
-              href="/articles#repayment-planning"
-              className="block ds-subcard p-4 transition hover:shadow-md"
-              event={{
-                action: "click_top_category_entry",
-                location: "top_categories",
-                target: "/articles#repayment-planning",
-                link_type: "category_entry",
-                category_key: "repayment-planning",
-              }}
-            >
-              <span className="text-base font-bold text-gray-900">逆算・計画</span>
-              <p className="mt-1.5 text-xs text-gray-600 leading-relaxed">毎月いくらなら無理がないかを逆算する</p>
+              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 3</div>
+              <div className="mt-2 text-base font-bold text-stone-900">体験記・家計の記事</div>
+              <p className="mt-2 text-xs text-stone-600 leading-relaxed">
+                家計カテゴリで体験記や家計の整理の記事に進めます。
+              </p>
+              <span className="mt-3 inline-block text-sm font-bold text-stone-700">記事一覧へ →</span>
             </TrackedLink>
           </li>
         </ul>
-        <TrackedLink
-          href="/articles"
-          className="ds-btn ds-btn-primary mt-6"
-          event={{
-            action: "click_top_category_entry",
-            location: "top_categories",
-            target: "/articles",
-            link_type: "category_entry",
-          }}
-        >
-          記事一覧を見る <span aria-hidden>→</span>
-        </TrackedLink>
       </section>
 
-      {/* ── 注意事項・補助導線 ──────────────────────────── */}
+      {/* 7. お問い合わせ */}
       <section className="ds-subcard p-6">
-        <h2 className="text-sm font-bold text-gray-700">注意事項</h2>
-        <ul className="mt-3 space-y-1.5 text-xs text-gray-500 leading-relaxed">
-          <li>・本ツールは参考情報です。実際の返済条件は契約内容（適用金利、端数処理、約定日等）を優先してください。</li>
-          <li>・表示結果は入力値に基づく試算であり、将来の金利変動や手数料等は反映されません（入力で調整してください）。</li>
-          <li>・ご不明点は「お問い合わせ」ページからご連絡ください。</li>
-        </ul>
+        <h2 className="ds-page-serif text-lg font-bold text-stone-900">ご相談・お問い合わせ</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          内容によっては返信にお時間がかかる場合があります。緊急の金融トラブルは取引先や専門窓口へご相談ください。
+        </p>
+        <TrackedLink
+          href="/contact"
+          className="ds-btn ds-btn-secondary mt-4"
+          event={{
+            action: "click_top_contact",
+            location: "top_contact_block",
+            target: "/contact",
+            link_type: "contact",
+          }}
+        >
+          お問い合わせページへ →
+        </TrackedLink>
+        {(noteUrl || xUrl) && (
+          <div className="mt-6 border-t border-stone-200 pt-5">
+            <p className="text-xs font-bold text-stone-600">更新・発信（外部）</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {noteUrl ? (
+                <TrackedLink
+                  href={noteUrl}
+                  className="text-sm font-bold text-stone-800 underline decoration-stone-300 hover:decoration-stone-800"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  event={{
+                    action: "click_top_social_note",
+                    location: "top_contact_social",
+                    target: noteUrl,
+                    link_type: "external_note",
+                  }}
+                >
+                  note で読む →
+                </TrackedLink>
+              ) : null}
+              {xUrl ? (
+                <TrackedLink
+                  href={xUrl}
+                  className="text-sm font-bold text-stone-800 underline decoration-stone-300 hover:decoration-stone-800"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  event={{
+                    action: "click_top_social_x",
+                    location: "top_contact_social",
+                    target: xUrl,
+                    link_type: "external_x",
+                  }}
+                >
+                  X（旧Twitter）→
+                </TrackedLink>
+              ) : null}
+            </div>
+          </div>
+        )}
+      </section>
 
+      {/* 8. このサイトについて */}
+      <section className="ds-card ds-card-pad border-stone-200 bg-stone-50/60">
+        <h2 className="ds-page-serif text-lg font-bold text-stone-900">このサイトについて</h2>
+        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+          借入返済・固定費の見直し・返済計画を、一般論ではなく<strong>条件を変えたときの数字</strong>で確認できるようにしています。
+          シミュレーターと記事を行き来しながら、自分の判断材料にしていただければ幸いです。
+        </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <TrackedLink
-            href="/about"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/about", link_type: "support_link" }}
-          >
-            このサイトについて
+          <TrackedLink href="/articles" className="ds-btn ds-btn-primary ds-btn-sm" event={{ action: "click_top_site_about", location: "top_site_about", target: "/articles", link_type: "support_link" }}>
+            記事一覧
           </TrackedLink>
-          <TrackedLink
-            href="/how-to"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/how-to", link_type: "support_link" }}
-          >
+          <TrackedLink href="/how-to" className="ds-btn ds-btn-secondary ds-btn-sm" event={{ action: "click_top_site_about", location: "top_site_about", target: "/how-to", link_type: "support_link" }}>
             使い方
           </TrackedLink>
-          <TrackedLink
-            href="/logic"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/logic", link_type: "support_link" }}
-          >
-            計算ロジック
-          </TrackedLink>
-          <TrackedLink
-            href="/faq"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/faq", link_type: "support_link" }}
-          >
+          <TrackedLink href="/faq" className="ds-btn ds-btn-secondary ds-btn-sm" event={{ action: "click_top_site_about", location: "top_site_about", target: "/faq", link_type: "support_link" }}>
             FAQ
           </TrackedLink>
-          <TrackedLink
-            href="/privacy"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/privacy", link_type: "support_link" }}
-          >
-            プライバシーポリシー
+          <TrackedLink href="/logic" className="ds-btn ds-btn-secondary ds-btn-sm" event={{ action: "click_top_site_about", location: "top_site_about", target: "/logic", link_type: "support_link" }}>
+            計算ロジック
           </TrackedLink>
-          <TrackedLink
-            href="/contact"
-            className="ds-btn ds-btn-secondary ds-btn-sm text-gray-600"
-            event={{ action: "click_top_support_link", location: "top_footer_support", target: "/contact", link_type: "support_link" }}
-          >
-            お問い合わせ
+          <TrackedLink href="/privacy" className="ds-btn ds-btn-secondary ds-btn-sm" event={{ action: "click_top_site_about", location: "top_site_about", target: "/privacy", link_type: "support_link" }}>
+            プライバシー
           </TrackedLink>
         </div>
+      </section>
+
+      {/* 注意事項 */}
+      <section className="ds-subcard p-6">
+        <h2 className="text-sm font-bold text-stone-700">注意事項</h2>
+        <ul className="mt-3 space-y-1.5 text-xs text-stone-500 leading-relaxed">
+          <li>・本ツールは参考情報です。実際の返済条件は契約内容を優先してください。</li>
+          <li>・表示は入力に基づく試算であり、将来の金利変動等は反映されません。</li>
+        </ul>
       </section>
     </div>
   );

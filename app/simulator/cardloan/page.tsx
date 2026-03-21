@@ -80,9 +80,13 @@ export default function Page() {
       <section className="ds-card ds-card-pad">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h1 className="text-2xl font-black text-gray-900 md:text-3xl">カードローン返済シミュレーター</h1>
-            <p className="mt-1 text-xs text-gray-500">入力値はサーバーに送信されません。ブラウザ内だけで計算しています。</p>
-            <p className="mt-1.5 text-sm text-gray-600">4つの返済方式・A/B比較・入力に連動したおすすめ記事で、条件の違いをすぐ比較できます。</p>
+            <h1 className="text-2xl font-black text-stone-900 md:text-3xl">カードローン返済シミュレーター</h1>
+            <p className="mt-1 text-xs text-stone-500">入力値はサーバーに送信されません。ブラウザ内だけで計算しています。</p>
+            <p className="mt-1.5 text-sm text-stone-600">4つの返済方式・A/B比較・入力に連動したおすすめ記事で、条件の違いをすぐ比較できます。</p>
+            <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+              返済の見え方って、どの前提で数字を見ているかで変わってしまうんですよね。
+              この画面は、条件を切り替えて自分の状況に近い形で確かめられるように作っています。
+            </p>
           </div>
           <div className="flex gap-2">
             <button
@@ -149,20 +153,20 @@ export default function Page() {
 
       <SimulatorRepaymentImprovementSection />
 
-      <p className="mt-6 text-sm text-gray-600 leading-relaxed">
+      <p className="mt-6 text-sm text-stone-600 leading-relaxed">
         気になる条件が見つかったら、関連記事で考え方を整理し、自分の条件で再度試算してください。条件別の記事とあわせて確認すると、返済負担の違いがよりわかりやすくなります。
       </p>
 
       <section className="ds-subcard mt-6 p-5">
-        <div className="text-sm font-bold text-gray-700">注意点</div>
-        <ul className="mt-2 list-disc pl-5 text-xs text-gray-600 leading-relaxed space-y-1">
+        <div className="text-sm font-bold text-stone-700">注意点</div>
+        <ul className="mt-2 list-disc pl-5 text-xs text-stone-600 leading-relaxed space-y-1">
           <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>
           <li>計算は一般的な月次の近似です。金融機関の計算と差が出る場合があります。</li>
         </ul>
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <Link
             href="/logic"
-            className="font-bold text-gray-700 hover:underline"
+            className="font-bold text-stone-700 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",
@@ -176,7 +180,7 @@ export default function Page() {
           </Link>
           <Link
             href="/faq"
-            className="font-bold text-gray-700 hover:underline"
+            className="font-bold text-stone-700 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",
@@ -190,7 +194,7 @@ export default function Page() {
           </Link>
           <Link
             href="/how-to"
-            className="font-bold text-gray-700 hover:underline"
+            className="font-bold text-stone-700 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",

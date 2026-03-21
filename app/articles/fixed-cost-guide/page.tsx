@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-guide`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
@@ -85,20 +89,11 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-guide")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             このカテゴリでは、毎月の固定負担を見直すための記事を、条件別に「いくら変わるか」が比較できる形で整理していきます。
           </p>
 
@@ -113,16 +108,16 @@ export default function Page() {
             />
           </section>
 
-          <section className="mt-8 space-y-6 text-sm text-gray-700 leading-relaxed">
+          <section className="mt-8 space-y-6 text-sm text-stone-700 leading-relaxed">
             <section>
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">このカテゴリの役割</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">このカテゴリの役割</h2>
               <p className="mt-3">
                 通信費・サブスク・保険など、毎月決まった支出は「固定費」としてまとめて見直すと、何から手をつけるべきか整理しやすくなります。一般論ではなく、具体条件で「月いくら変わるか」「年間でどれくらいの改善効果か」を比較できる記事を、順次追加していく方針です。
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">何から手をつけるか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">何から手をつけるか</h2>
               <p className="mt-3">
                 見直しの優先順位は、削減しやすさ・効果の大きさ・自分の状況によって変わります。このカテゴリでは、項目別に「どの程度の改善が見込めるか」を条件付きで示し、判断材料にしてもらえるようにします。
               </p>
@@ -152,14 +147,14 @@ export default function Page() {
             </section>
 
             <section>
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">ツール・記事一覧</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">ツール・記事一覧</h2>
               <p className="mt-3">
                 毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかは、
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                 ですぐ確認できます。借入返済の月々負担を試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">借入返済シミュレーター</Link>
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
                 を、条件別の記事は
-                <Link href="/articles" className="font-bold text-gray-900 hover:underline">記事一覧</Link>
+                <Link href="/articles" className="font-bold text-stone-900 hover:underline">記事一覧</Link>
                 から探せます。
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
@@ -183,11 +178,11 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <h3 className="text-base font-black text-gray-900">{item.question}</h3>
+                    <h3 className="text-base font-black text-stone-900">{item.question}</h3>
                     <p className="mt-2">{item.answer}</p>
                   </div>
                 ))}
@@ -197,7 +192,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="fixed-cost-guide" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

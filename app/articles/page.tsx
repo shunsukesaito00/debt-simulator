@@ -4,14 +4,16 @@ import {
   getArticlesByCategory,
   ARTICLE_LIST_SECTIONS,
   CATEGORY_LABELS,
+  getStoryArticles,
 } from "@/lib/articles";
+import { ARTICLES_INDEX_CRUMB_LABEL } from "@/lib/article-breadcrumb";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
 export const metadata: Metadata = {
-  title: "知っておきたいこと｜生活改善・固定負担を条件別に比較する記事一覧",
+  title: "悩み別に読む（記事一覧）｜借入返済シミュレーター",
   description:
-    "固定費見直し・借入返済・返済計画など、生活の負担を条件別に比較する記事一覧です。一般論ではなく具体条件で確認し、記事とシミュレーターを往復して判断材料としてご活用ください。",
+    "返済・固定費・家計で悩む方向けに、記事をテーマ別に並べています。条件別の数字や体験記から、自分に近いところから読めます。",
   alternates: { canonical: `${BASE}/articles` },
 };
 
@@ -19,13 +21,21 @@ const breadcrumbListJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "トップ", item: `${BASE}/` },
-    { "@type": "ListItem", position: 2, name: "知っておきたいこと", item: `${BASE}/articles` },
+    { "@type": "ListItem", position: 1, name: "ホーム", item: `${BASE}/` },
+    { "@type": "ListItem", position: 2, name: ARTICLES_INDEX_CRUMB_LABEL, item: `${BASE}/articles` },
   ],
 };
 
+function formatPublishedAt(iso?: string): string | null {
+  if (!iso) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) return iso;
+  return `${m[1]}年${m[2]}月${m[3]}日`;
+}
+
 export default function ArticlesListPage() {
   const byCategory = getArticlesByCategory();
+  const storyArticles = getStoryArticles();
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -34,28 +44,76 @@ export default function ArticlesListPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbListJsonLd) }}
       />
 
-      <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
+      <nav className="mb-4 text-sm text-stone-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
             <Link href="/" className="hover:underline">
-              トップ
+              ホーム
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="font-bold text-gray-900" aria-current="page">
-            知っておきたいこと
+          <li className="font-bold text-stone-900" aria-current="page">
+            {ARTICLES_INDEX_CRUMB_LABEL}
           </li>
         </ol>
       </nav>
 
       <div className="ds-card ds-card-pad">
-        <h1 className="text-2xl font-black text-gray-900 md:text-3xl">知っておきたいこと</h1>
-        <p className="mt-5 text-sm text-gray-700 leading-relaxed">
-          生活の固定負担を条件別に比較し、判断材料にするための記事です。固定費見直し・借入返済・返済計画などを、一般論ではなく具体条件で整理しています。気になるカテゴリから読み、シミュレーターで自分の条件を試算し、記事とツールを往復して判断に役立ててください。
+        <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">
+          悩み別に読む（記事一覧）
+        </h1>
+        <p className="mt-5 text-sm text-stone-700 leading-relaxed">
+          返済や固定費で「どこから読めばいいか分からない」とき向けに、悩み別に記事を並べています。体験記で気持ちの整理をしてから、条件別の解説やシミュレーターで数字を試す、という順でも大丈夫です。
         </p>
-        <p className="mt-3 text-sm text-gray-600">
-          返済額の目安を表で見る：<Link href="/quick-reference" className="font-bold text-gray-800 underline hover:no-underline">早見表（100万・200万・300万・年利15%・3年/5年）</Link>
+        <p className="mt-3 text-sm text-stone-600">
+          返済額の目安を表で見る：
+          <Link href="/quick-reference" className="font-bold text-stone-800 underline hover:no-underline">
+            早見表（100万・200万・300万・年利15%・3年/5年）
+          </Link>
         </p>
+
+        {storyArticles.length > 0 && (
+          <section className="mt-10 border-t border-stone-200 pt-10" aria-labelledby="articles-story-heading">
+            <h2 id="articles-story-heading" className="ds-page-serif text-lg font-bold text-stone-900 md:text-xl">
+              体験記・ストーリー
+            </h2>
+            <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+              数字の前に「自分と近い文脈」を置きたい方向けの記事です。
+            </p>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {storyArticles.map((article) => {
+                const dateLabel = formatPublishedAt(article.publishedAt);
+                return (
+                  <li key={article.slug}>
+                    <Link
+                      href={`/articles/${article.slug}`}
+                      className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
+                    >
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
+                          {CATEGORY_LABELS[article.category]}
+                        </span>
+                        {article.badge && (
+                          <span className="rounded-full bg-stone-800 px-2 py-0.5 text-xs font-bold text-white">
+                            {article.badge}
+                          </span>
+                        )}
+                        {dateLabel && (
+                          <time className="text-xs text-stone-500" dateTime={article.publishedAt}>
+                            {dateLabel}
+                          </time>
+                        )}
+                      </div>
+                      <span className="mt-2 block text-sm font-bold text-stone-900 leading-snug">{article.title}</span>
+                      <p className="mt-1.5 text-xs text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
+                      <span className="mt-2 inline-block text-xs font-bold text-stone-700">読む →</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
 
         <div className="mt-10 space-y-12">
           {ARTICLE_LIST_SECTIONS.map((section) => {
@@ -64,22 +122,24 @@ export default function ArticlesListPage() {
             );
             return (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="text-xl font-black text-gray-900 border-b-2 border-gray-200 pb-2">
+                <h2 className="ds-page-serif text-xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2">
                   {section.label}
                 </h2>
-                <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+                <p className="mt-4 text-sm text-stone-700 leading-relaxed">
                   {section.description}
                 </p>
                 {items.length > 0 ? (
                   <ul className="mt-5 grid gap-5">
-                    {items.map((article) => (
+                    {items.map((article) => {
+                      const dateLabel = formatPublishedAt(article.publishedAt);
+                      return (
                       <li key={article.slug}>
                         <Link
                           href={`/articles/${article.slug}`}
-                          className="block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
                         >
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="rounded-full border border-gray-300 bg-gray-50 px-2.5 py-0.5 text-xs font-bold text-gray-700">
+                            <span className="rounded-full border border-stone-300 bg-stone-50 px-2.5 py-0.5 text-xs font-bold text-stone-700">
                               {CATEGORY_LABELS[article.category]}
                             </span>
                             {article.order === 0 && (
@@ -88,20 +148,26 @@ export default function ArticlesListPage() {
                               </span>
                             )}
                             {article.badge && (
-                              <span className="rounded-full bg-gray-900 px-2.5 py-0.5 text-xs font-bold text-white">
+                              <span className="rounded-full bg-stone-800 px-2.5 py-0.5 text-xs font-bold text-white">
                                 {article.badge}
                               </span>
                             )}
+                            {dateLabel && (
+                              <time className="text-xs text-stone-500" dateTime={article.publishedAt}>
+                                {dateLabel}
+                              </time>
+                            )}
                           </div>
-                          <h3 className="mt-3 text-lg font-black text-gray-900">{article.title}</h3>
-                          <p className="mt-2 text-sm text-gray-600 leading-relaxed">{article.summary}</p>
-                          <span className="mt-3 inline-block text-sm font-bold text-gray-700">記事を読む →</span>
+                          <h3 className="ds-page-serif mt-3 text-lg font-bold text-stone-900">{article.title}</h3>
+                          <p className="mt-2 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
+                          <span className="mt-3 inline-block text-sm font-bold text-stone-700">記事を読む →</span>
                         </Link>
                       </li>
-                    ))}
+                    );
+                    })}
                   </ul>
                 ) : (
-                  <p className="mt-5 text-sm text-gray-500 leading-relaxed">
+                  <p className="mt-5 text-sm text-stone-500 leading-relaxed">
                     このカテゴリの記事は準備中です。順次追加していきます。
                   </p>
                 )}
@@ -111,8 +177,8 @@ export default function ArticlesListPage() {
         </div>
 
         <section className="ds-subcard mt-12 p-6">
-          <h2 className="text-lg font-black text-gray-900">自分の条件で試算する</h2>
-          <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+          <h2 className="text-lg font-black text-stone-900">自分の条件で試算する</h2>
+          <p className="mt-3 text-sm text-stone-700 leading-relaxed">
             記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力し、月々返済額・総利息・完済時期を条件別に比較して、記事とシミュレーターを往復して判断に役立ててください。
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

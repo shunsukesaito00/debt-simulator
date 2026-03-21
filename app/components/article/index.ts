@@ -5,4 +5,5 @@
 export { ArticlePagePremise } from "./ArticlePagePremise";
 export { ArticleReadingPoints } from "./ArticleReadingPoints";
 export { ArticleEditorMemo } from "./ArticleEditorMemo";
+export { ArticleAuthorCard } from "./ArticleAuthorCard";
 export type { ArticlePremise, ReadingPoint, ArticleReadingPoints as ArticleReadingPointsData, ArticleEditorMemo as ArticleEditorMemoData } from "./types";

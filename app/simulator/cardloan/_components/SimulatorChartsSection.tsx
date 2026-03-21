@@ -32,22 +32,22 @@ function RepaymentChart({ result, className }: { result: CalcResult; className?:
     <div className={`overflow-x-auto ${className ?? ""}`}>
       <svg viewBox={`0 0 ${w} ${h}`} className="min-w-[280px] w-full" preserveAspectRatio="xMidYMid meet">
         {[0.25, 0.5, 0.75].map((p) => (
-          <line key={p} x1={pad.l} y1={pad.t + chartH * (1 - p)} x2={w - pad.r} y2={pad.t + chartH * (1 - p)} stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="2 2" />
+          <line key={p} x1={pad.l} y1={pad.t + chartH * (1 - p)} x2={w - pad.r} y2={pad.t + chartH * (1 - p)} stroke="#e7e5e4" strokeWidth="0.5" strokeDasharray="2 2" />
         ))}
         <path d={balanceAreaPath} fill="rgba(59,130,246,0.12)" stroke="none" />
-        <line x1={pad.l} y1={pad.t} x2={pad.l} y2={h - pad.b} stroke="#9ca3af" strokeWidth="1" />
-        <line x1={pad.l} y1={h - pad.b} x2={w - pad.r} y2={h - pad.b} stroke="#9ca3af" strokeWidth="1" />
+        <line x1={pad.l} y1={pad.t} x2={pad.l} y2={h - pad.b} stroke="#a8a29e" strokeWidth="1" />
+        <line x1={pad.l} y1={h - pad.b} x2={w - pad.r} y2={h - pad.b} stroke="#a8a29e" strokeWidth="1" />
         <path d={balancePath} fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d={payPath} fill="none" stroke="#059669" strokeWidth="2" strokeDasharray="5 3" strokeLinecap="round" strokeLinejoin="round" />
-        <text x={pad.l - 6} y={h - pad.b + 4} textAnchor="end" fontSize="11" fill="#6b7280">0</text>
-        <text x={pad.l - 6} y={pad.t + 4} textAnchor="end" fontSize="11" fill="#6b7280">{fmt(maxY)}</text>
-        <text x={pad.l} y={h - 8} textAnchor="start" fontSize="11" fill="#6b7280">{first.year}/{first.month}</text>
-        <text x={w - pad.r} y={h - 8} textAnchor="end" fontSize="11" fill="#6b7280">{last.year}/{last.month}</text>
+        <text x={pad.l - 6} y={h - pad.b + 4} textAnchor="end" fontSize="11" fill="#57534e">0</text>
+        <text x={pad.l - 6} y={pad.t + 4} textAnchor="end" fontSize="11" fill="#57534e">{fmt(maxY)}</text>
+        <text x={pad.l} y={h - 8} textAnchor="start" fontSize="11" fill="#57534e">{first.year}/{first.month}</text>
+        <text x={w - pad.r} y={h - 8} textAnchor="end" fontSize="11" fill="#57534e">{last.year}/{last.month}</text>
         <g transform={`translate(${w - pad.r - 100}, ${pad.t})`}>
           <line x1={0} y1={6} x2={14} y2={6} stroke="#2563eb" strokeWidth="2.5" />
-          <text x={18} y={10} fontSize="12" fill="#374151">残高</text>
+          <text x={18} y={10} fontSize="12" fill="#44403c">残高</text>
           <line x1={52} y1={6} x2={66} y2={6} stroke="#059669" strokeWidth="2" strokeDasharray="5 3" />
-          <text x={70} y={10} fontSize="12" fill="#374151">支払</text>
+          <text x={70} y={10} fontSize="12" fill="#44403c">支払</text>
         </g>
       </svg>
     </div>
@@ -61,10 +61,10 @@ export type SimulatorChartsSectionProps = {
 
 export function SimulatorChartsSection({ result, activeTab }: SimulatorChartsSectionProps) {
   return (
-    <section className="flex min-h-0 flex-col rounded-xl border border-gray-200 bg-white p-5">
-      <h2 className="text-base font-bold text-gray-900">推移グラフ（{activeTab}）</h2>
+    <section className="flex min-h-0 flex-col rounded-xl border border-stone-200 bg-white p-5">
+      <h2 className="text-base font-bold text-stone-900">推移グラフ（{activeTab}）</h2>
       <div className="mt-3 min-h-[260px] flex-1 w-full">
-        {result.ok ? <RepaymentChart result={result} className="w-full" /> : <p className="text-sm text-gray-500 py-8">計算結果がありません</p>}
+        {result.ok ? <RepaymentChart result={result} className="w-full" /> : <p className="text-sm text-stone-500 py-8">計算結果がありません</p>}
       </div>
     </section>
   );

@@ -13,8 +13,8 @@ import {
 const LABEL_3 = "3年返済";
 const LABEL_5 = "5年返済";
 const LABEL_50K = "毎月5万円返済";
-const GRAY_900 = "#111827";
-const GRAY_600 = "#4b5563";
+const STONE_800 = "#292524";
+const STONE_600 = "#57534e";
 
 const monthlyData = [
   { period: LABEL_3, value: 103995 },
@@ -39,15 +39,15 @@ function formatYen(val: number) {
 export function MonthlyPaymentBarChart300() {
   return (
     <div>
-      <p className="mb-2 text-sm font-bold text-gray-700">毎月返済額の比較</p>
-      <div className="h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%">
+      <p className="mb-2 text-sm font-bold text-stone-700">毎月返済額の比較</p>
+      <div className="h-[220px] min-h-[220px] w-full min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
           <BarChart data={monthlyData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={GRAY_600} />
-            <YAxis tick={{ fontSize: 11 }} stroke={GRAY_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
+            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
+            <YAxis tick={{ fontSize: 11 }} stroke={STONE_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />
             <Tooltip formatter={(v) => (v != null ? [formatYen(Number(v)), "毎月返済額"] : "")} contentStyle={{ fontSize: 12 }} />
-            <Bar dataKey="value" fill={GRAY_900} radius={[4, 4, 0, 0]} name="毎月返済額" />
+            <Bar dataKey="value" fill={STONE_800} radius={[4, 4, 0, 0]} name="毎月返済額" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -58,15 +58,15 @@ export function MonthlyPaymentBarChart300() {
 export function TotalInterestBarChart300() {
   return (
     <div>
-      <p className="mb-2 text-sm font-bold text-gray-700">総利息の比較</p>
-      <div className="h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%">
+      <p className="mb-2 text-sm font-bold text-stone-700">総利息の比較</p>
+      <div className="h-[220px] min-h-[220px] w-full min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
           <BarChart data={interestData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={GRAY_600} />
-            <YAxis tick={{ fontSize: 11 }} stroke={GRAY_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
+            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
+            <YAxis tick={{ fontSize: 11 }} stroke={STONE_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />
             <Tooltip formatter={(v) => (v != null ? [formatYen(Number(v)), "総利息"] : "")} contentStyle={{ fontSize: 12 }} />
-            <Bar dataKey="value" fill={GRAY_600} radius={[4, 4, 0, 0]} name="総利息" />
+            <Bar dataKey="value" fill={STONE_600} radius={[4, 4, 0, 0]} name="総利息" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -77,15 +77,15 @@ export function TotalInterestBarChart300() {
 export function PayoffMonthsBarChart300() {
   return (
     <div>
-      <p className="mb-2 text-sm font-bold text-gray-700">完済までの期間（か月）の比較</p>
-      <div className="h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%">
+      <p className="mb-2 text-sm font-bold text-stone-700">完済までの期間（か月）の比較</p>
+      <div className="h-[220px] min-h-[220px] w-full min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
           <BarChart data={monthsData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={GRAY_600} />
-            <YAxis tick={{ fontSize: 11 }} stroke={GRAY_600} tickFormatter={(v) => `${v}か月`} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
+            <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
+            <YAxis tick={{ fontSize: 11 }} stroke={STONE_600} tickFormatter={(v) => `${v}か月`} />
             <Tooltip formatter={(v) => (v != null ? [`${Number(v)}か月`, "完済目安"] : "")} contentStyle={{ fontSize: 12 }} />
-            <Bar dataKey="value" fill={GRAY_900} radius={[4, 4, 0, 0]} name="完済目安(か月)" />
+            <Bar dataKey="value" fill={STONE_800} radius={[4, 4, 0, 0]} name="完済目安(か月)" />
           </BarChart>
         </ResponsiveContainer>
       </div>

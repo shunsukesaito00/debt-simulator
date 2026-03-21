@@ -1,5 +1,5 @@
 /**
- * 記事メタデータの共通管理（知っておきたいこと）
+ * 記事メタデータの共通管理（/articles 一覧・内部リンク用）
  * 一覧ページ・ナビ・サイトマップ・記事末尾で参照。追加時はここに1件追加する。
  *
  * サイト方針: 条件別・比較別・逆算別の返済シミュレーション情報ハブ。
@@ -36,21 +36,21 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
  */
 export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   "fixed-cost":
-    "通信費・サブスク・保険など、毎月の固定負担を見直したい方のためのカテゴリです。何から手をつけるべきか、改善効果を比較できる記事を順次追加していきます。",
+    "通信費・サブスク・保険など、毎月の固定負担を見直したい方のためのカテゴリ。何から手をつけるべきか、改善効果を比較できる記事を順次追加しています。",
   household:
-    "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理するカテゴリです。自分に合うやり方を選ぶための材料としてご利用ください。",
+    "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理。自分に合うやり方を選ぶときの参考にしてください。",
   "improvement-effect":
-    "月5,000円・1万円の見直しで何がどう変わるかを、具体条件で比較するカテゴリです。一般論ではなく数字で効果を確認できます。",
+    "月5,000円・1万円の見直しで何がどう変わるか、具体条件で比較。数字で効果を確認できます。",
   "loan-amount":
     "借入額が変わると、毎月返済額・総利息・完済までの期間がどう変わるかを整理するカテゴリです。",
   "repayment-method":
-    "元利均等、元金均等、定額元利、定額元金など、返し方の違いによる負担差を比較するカテゴリです。",
+    "元利均等、元金均等、定額元利、定額元金など、返し方の違いによる負担差を比較。",
   revolving:
     "毎月返済額の設定によって、完済時期や利息がどう変わるかを確認するカテゴリです。",
   "repayment-improvement":
-    "繰り上げ返済、返済期間、返済方式の見直しなど、返済負担を改善する方法を整理するカテゴリです。",
+    "繰り上げ返済、返済期間、返済方式の見直しなど、返済負担を改善する方法を整理。",
   "repayment-planning":
-    "借入額から考えるのではなく、毎月いくら返せるかから無理のない条件を逆算するカテゴリです。",
+    "借入額からではなく、毎月いくら返せるかから無理のない条件を逆算するカテゴリです。",
 };
 
 /**
@@ -68,44 +68,44 @@ export type ArticleListSection = {
 export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
   {
     id: "fixed-cost",
-    label: "固定費見直し",
+    label: "固定費をゆるく見直す",
     description:
-      "通信費・サブスク・保険など、毎月の固定負担を見直したい方のための記事です。何から手をつけるべきか整理し、改善効果を比較できるように順次記事を追加していきます。",
+      "通信・サブスク・保険など、「毎月ひっそり出ていくお金」が気になるときの入口です。無理なく手をつける順番と、削ったあとがイメージしやすい比較記事を集めています。",
     articleCategories: ["fixed-cost"],
   },
   {
     id: "household",
-    label: "家計管理",
+    label: "家計の見え方・体験記",
     description:
-      "家計簿が続かない、支出が見えないといった悩みを、条件別の考え方で整理する記事です。自分に合うやり方を選ぶための材料としてご利用ください。",
+      "家計簿が続かない、収支がぼんやりする、といった悩みを、数字に強くなくても読める形で整理した記事です。体験記もここにまとめています。",
     articleCategories: ["household"],
   },
   {
     id: "improvement-effect",
-    label: "改善効果の試算",
+    label: "少し削ったらどう変わる？",
     description:
-      "月5,000円・1万円の見直しで何がどう変わるかを、具体条件で比較する記事です。一般論ではなく数字で効果を確認できます。",
+      "月数千円〜1万円の見直しが、1年・3年・5年でどれくらい積み上がるかを比較する記事です。「小さくても続ける」のイメージづくりに。",
     articleCategories: ["improvement-effect"],
   },
   {
     id: "loan-comparison",
-    label: "借入返済比較",
+    label: "借入・リボの負担を比べる",
     description:
-      "借入額・返済方式・追加返済の違いを、条件別に試算・比較する記事です。借入額別・返済方式別・リボ払いの内容をまとめています。",
+      "借入額や返済方式が変わると、月々と利息はどう動くか。リボ・カードローン・元利均等など、条件ごとの違いがつかみやすい記事を並べています。",
     articleCategories: ["loan-amount", "repayment-method", "revolving"],
   },
   {
     id: "repayment-improvement",
-    label: "返済改善",
+    label: "返済を軽くするヒント",
     description:
-      "繰り上げ返済や返済方式の見直しで、負担がどう変わるかを整理する記事です。改善の効果を具体条件で確認できます。",
+      "繰り上げ返済や期間の見直しで、負担や完済時期がどう変わるか。改善の選択肢を、具体例つきで読める記事です。",
     articleCategories: ["repayment-improvement"],
   },
   {
     id: "repayment-planning",
-    label: "逆算・計画",
+    label: "返せる額から考える",
     description:
-      "毎月いくらなら無理がないかを逆算し、借入額や返済期間を考える記事です。返せる額から条件を決めたい方の判断材料としてご利用ください。",
+      "「月いくらなら無理がないか」から借入額や期間の目安を考えたい方向け。逆算や固定返済額の考え方がわかる記事を集めています。",
     articleCategories: ["repayment-planning"],
   },
 ];
@@ -122,6 +122,9 @@ export function getArticleListSectionIdForCategory(cat: ArticleCategory): string
 
 export type ArticleRelatedLink = { href: string; label: string };
 
+/** 体験記などコンテンツ種別（一覧の体験記レール・フィルタ用） */
+export type ArticleKind = "story" | "guide";
+
 export interface ArticleItem {
   slug: string;
   title: string;
@@ -130,6 +133,10 @@ export interface ArticleItem {
   badge?: string;
   order?: number;
   relatedLinks?: ArticleRelatedLink[];
+  /** 体験記など */
+  kind?: ArticleKind;
+  /** 公開日（YYYY-MM-DD）。一覧の日付表示用 */
+  publishedAt?: string;
 }
 
 const articlesData: ArticleItem[] = [
@@ -141,6 +148,7 @@ const articlesData: ArticleItem[] = [
     category: "fixed-cost",
     order: 0,
     badge: "おすすめ",
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles", label: "記事一覧で他のカテゴリも見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
@@ -153,6 +161,7 @@ const articlesData: ArticleItem[] = [
       "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリスト記事です。見直しやすさ・削減額・生活への影響の3軸で比較します。",
     category: "fixed-cost",
     order: 1,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
       { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
@@ -168,6 +177,7 @@ const articlesData: ArticleItem[] = [
       "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。固定費チェックリストの「通信費」を深掘りする記事です。",
     category: "fixed-cost",
     order: 2,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
@@ -182,6 +192,7 @@ const articlesData: ArticleItem[] = [
       "サブスク・月額課金を見直したい方向けに、見落としがちな契約の洗い出し方と、やめる・減らすときの判断のポイントを整理します。",
     category: "fixed-cost",
     order: 3,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -196,6 +207,7 @@ const articlesData: ArticleItem[] = [
       "保険の見直しで確認すべきポイントと、削ってよい保障・慎重にすべき保障の考え方を整理します。重複保障や過剰保障の見直しの参考に。",
     category: "fixed-cost",
     order: 4,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -210,6 +222,7 @@ const articlesData: ArticleItem[] = [
       "電気・ガスなどの光熱系契約を見直すと、月々の支払いがどれくらい変わる可能性があるかを整理します。乗り換えやプラン変更の判断材料に。",
     category: "fixed-cost",
     order: 5,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -224,6 +237,7 @@ const articlesData: ArticleItem[] = [
       "家計簿が続かない方向けに、記録せずに支出を把握する方法と、最低限チェックするポイントを整理します。",
     category: "household",
     order: 0,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
@@ -237,6 +251,7 @@ const articlesData: ArticleItem[] = [
       "家計を把握するときの「固定費」と「変動費」の分け方と、それぞれ何を入れるかを整理します。",
     category: "household",
     order: 1,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
@@ -250,10 +265,30 @@ const articlesData: ArticleItem[] = [
       "家計簿をつけずに、月の収支をざっくり把握する方法と、手取りから逆算する考え方を整理します。",
     category: "household",
     order: 2,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
       { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方" },
+      { href: "/articles", label: "記事一覧へ" },
+    ],
+  },
+  {
+    slug: "investment-loss-family-trust",
+    title:
+      "投資で負けが膨らんだ私の体験｜取り返し、家族への信用、投資を止めたときまで",
+    summary:
+      "少しでも豊かになりたいと始めた投資が、現物株・信用・FXへとエスカレードし、家族に助けを求めるまでの体験記です。投資助言ではありません。",
+    category: "household",
+    order: 3,
+    badge: "体験記",
+    kind: "story",
+    publishedAt: "2026-03-19",
+    relatedLinks: [
+      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
+      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクト計算" },
+      { href: "/articles/repayment-improvement-guide", label: "返済の見直し・改善の考え方" },
+      { href: "/about", label: "運営者情報" },
       { href: "/articles", label: "記事一覧へ" },
     ],
   },
@@ -265,6 +300,7 @@ const articlesData: ArticleItem[] = [
     category: "improvement-effect",
     order: 0,
     badge: "おすすめ",
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
@@ -280,6 +316,7 @@ const articlesData: ArticleItem[] = [
       "月1万円の固定費改善で、1年・3年・5年にどれくらい差が出るかを具体的に整理した記事です。継続したときの累計効果を数字で確認できます。",
     category: "improvement-effect",
     order: 1,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-5000-impact", label: "月5,000円の効果比較を見る" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -295,6 +332,7 @@ const articlesData: ArticleItem[] = [
       "月3,000円の固定費見直しが年間・3年・5年でどれくらいの差になるかを具体的に整理した記事です。小さくても続ける効果を数字で確認できます。",
     category: "improvement-effect",
     order: 2,
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/fixed-cost-5000-impact", label: "月5,000円の効果比較を見る" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -310,6 +348,7 @@ const articlesData: ArticleItem[] = [
     category: "loan-amount",
     order: 0,
     badge: "おすすめ",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を詳しく見る" },
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を詳しく見る" },
@@ -324,6 +363,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "借金100万円を年利15%で借りた場合の月々の返済額、総支払額、総利息を3年返済・5年返済で比較して解説します。実際の条件は返済シミュレーターで確認できます。",
     category: "loan-amount",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を見る" },
@@ -337,6 +377,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "借金200万円を年利15%で借りた場合の月々返済額と総利息を比較し、返済期間ごとの違いをわかりやすく解説します。自分の条件は返済シミュレーターで試算できます。",
     category: "loan-amount",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を見る" },
@@ -350,6 +391,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "借入300万円を年利15%で返済する場合の月々返済額、総利息、完済までの期間を、3年返済・5年返済・月5万円返済の比較でわかりやすく解説します。",
     category: "loan-amount",
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を詳しく見る" },
       { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を見る" },
@@ -365,6 +407,7 @@ const articlesData: ArticleItem[] = [
       "借金500万円を年利15%で借りた場合、3年・5年・7年で月々の返済額と総利息がどう変わるかを整理します。",
     category: "loan-amount",
     order: 4,
+    publishedAt: "2026-03-16",
     relatedLinks: [
       { href: "/articles/loan-amount-guide", label: "借入額別に見る返済負担の違い" },
       { href: "/articles/borrow-300-monthly-payment", label: "借金300万円の返済を見る" },
@@ -378,6 +421,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "リボ払いで100万円を利用した場合の利息、完済までの期間、総支払額を比較しながら、返済額による違いをわかりやすく解説します。",
     category: "revolving",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/revo-100man-15percent-simulation", label: "リボ100万・金利15%の返済シミュレーションを見る" },
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を知りたい方はこちら" },
@@ -390,6 +434,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "元利均等返済と元金均等返済の違いを中心に、定額元利・定額元金も含めた4つの返済方式の特徴や向いている人を比較して解説します。",
     category: "repayment-method",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を見る" },
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を見る" },
@@ -404,6 +449,7 @@ const articlesData: ArticleItem[] = [
     category: "repayment-improvement",
     order: 0,
     badge: "おすすめ",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/early-repayment-effect", label: "繰り上げ返済の効果を詳しく見る" },
       { href: "/articles/100man-100months-risk-at-15percent", label: "長期返済のリスクを詳しく見る" },
@@ -418,6 +464,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "繰り上げ返済をすると何が変わるのかを、利息軽減、完済時期、毎月返済額の違いからわかりやすく解説します。",
     category: "repayment-improvement",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法を見る" },
       { href: "/articles/early-repayment-100k-effect", label: "繰り上げ返済10万円の効果を詳しく見る" },
@@ -431,6 +478,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "10万円の繰り上げ返済で、総利息や完済時期がどれだけ変わるのかを、具体例・比較表・グラフでわかりやすく解説します。",
     category: "repayment-improvement",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/early-repayment-effect", label: "繰り上げ返済の効果を詳しく見る" },
       { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法を見る" },
@@ -445,6 +493,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "定額元利返済で完済できないと言われる理由を、利息と返済額の関係から整理し、具体例・表・グラフでわかりやすく解説します。",
     category: "repayment-method",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/repayment-method-difference", label: "返済方式の違いを詳しく見る" },
       { href: "/articles/revo-100-interest", label: "リボ払いの利息を知りたい方はこちら" },
@@ -457,6 +506,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "毎月5万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較でわかりやすく解説します。",
     category: "repayment-planning",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/fixed-monthly-payment-borrowing-reverse-calculator", label: "月々返済額から借入額を逆算する考え方を見る" },
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を詳しく見る" },
@@ -469,6 +519,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "毎月3万円返済できる場合、年利15%を前提に何万円くらいまで借りると現実的かを、3年・5年・7年返済の比較でわかりやすく解説します。",
     category: "repayment-planning",
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられるかを見る" },
       { href: "/articles/fixed-monthly-payment-borrowing-reverse-calculator", label: "返済額から借入額を逆算する考え方を見る" },
@@ -483,6 +534,7 @@ const articlesData: ArticleItem[] = [
       "月7万円の返済なら、年利15%でいくらまで借りられるかを3年・5年・7年で整理します。",
     category: "repayment-planning",
     order: 3,
+    publishedAt: "2026-03-16",
     relatedLinks: [
       { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられる？" },
       { href: "/articles/monthly-30000-how-much-can-borrow", label: "月3万円ならいくらまで借りられる？" },
@@ -497,6 +549,7 @@ const articlesData: ArticleItem[] = [
       "月々の返済額を固定した場合に、返済期間や金利によって借入額の目安がどう変わるかを、表とグラフでわかりやすく解説します。",
     category: "repayment-planning",
     badge: "新着",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/monthly-50000-how-much-can-borrow", label: "月5万円ならいくらまで借りられるかを知りたい方はこちら" },
       { href: "/articles/borrow-200-monthly-payment", label: "借金200万円の月々返済を知りたい方はこちら" },
@@ -509,6 +562,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "毎月5万円返済・年利15%を前提に、借入額100万円・200万円・300万円で総利息と完済期間がどう変わるかを表とグラフでわかりやすく解説します。",
     category: "loan-amount",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/loan-amount-guide", label: "借入額別の返済負担の違いを見る" },
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を見る" },
@@ -523,6 +577,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "年利15%で100万円を100ヶ月かけて返済すると、毎月返済額は低く見えても総利息は大きく膨らみます。長期返済のリスクを表とグラフでわかりやすく解説します。",
     category: "repayment-improvement",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法を見る" },
       { href: "/articles/early-repayment-effect", label: "繰り上げ返済の効果を詳しく見る" },
@@ -536,6 +591,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "リボ払い100万円を毎月3万円ずつ返済した場合、完済までの期間と総利息がどうなるかを年利15%の例でわかりやすく解説します。",
     category: "revolving",
+    publishedAt: "2025-03-11",
     relatedLinks: [
       { href: "/articles/revo-100man-15percent-simulation", label: "リボ100万・金利15%の返済シミュレーションを見る" },
       { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息を詳しく見る" },
@@ -548,6 +604,7 @@ const articlesData: ArticleItem[] = [
     summary:
       "リボ払い100万円を年利15%で利用した場合、毎月3万円・5万円・7万円返済で完済までの期間、総支払額、総利息がどう変わるかを表とグラフでわかりやすく解説します。",
     category: "revolving",
+    publishedAt: "2025-03-08",
     relatedLinks: [
       { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息を詳しく見る" },
       { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を見る" },
@@ -561,6 +618,7 @@ const articlesData: ArticleItem[] = [
       "リボ払い50万円を年利15%で返済する場合、月1万・2万・3万円でどう変わるかを比較します。",
     category: "revolving",
     order: 4,
+    publishedAt: "2026-03-16",
     relatedLinks: [
       { href: "/articles/revo-100man-15percent-simulation", label: "リボ100万円のシミュレーション" },
       { href: "/articles/revo-100-interest", label: "リボ100万円の利息" },
@@ -576,6 +634,7 @@ export const articlesList = articlesData.map((a) => ({
   title: a.title,
   summary: a.summary,
   badge: a.badge,
+  publishedAt: a.publishedAt,
 }));
 
 export type ArticleSlug = (typeof articlesList)[number]["slug"];
@@ -587,6 +646,7 @@ export function getArticle(slug: string): ArticleItem | undefined {
 
 /** トップページ「よくある悩みから探す」用。具体悩みに近い記事を表示優先順で返す（存在するもののみ） */
 const FEATURED_PROBLEM_SLUGS: string[] = [
+  "investment-loss-family-trust",
   "borrow-100-interest",
   "borrow-200-monthly-payment",
   "fixed-payment-principal-interest-cannot-payoff",
@@ -599,6 +659,63 @@ export function getFeaturedProblemArticles(): ArticleItem[] {
   return FEATURED_PROBLEM_SLUGS.map((slug) => getArticle(slug)).filter(
     (a): a is ArticleItem => a != null
   );
+}
+
+/** トップ「おすすめ・スポットライト」用（体験記を先頭に含む固定順） */
+const HOME_SPOTLIGHT_SLUGS: string[] = [
+  "investment-loss-family-trust",
+  "borrow-100-interest",
+  "fixed-cost-checklist",
+  "borrow-200-monthly-payment",
+  "early-repayment-100k-effect",
+];
+
+export function getHomeSpotlightArticles(): ArticleItem[] {
+  return HOME_SPOTLIGHT_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
+}
+
+/** はじめての方ページの「まず読む」順（記事スラッグ） */
+const WELCOME_RECOMMENDED_ARTICLE_SLUGS: string[] = [
+  "investment-loss-family-trust",
+  "fixed-cost-checklist",
+  "borrow-100-interest",
+  "repayment-improvement-guide",
+];
+
+export function getWelcomeRecommendedArticles(): ArticleItem[] {
+  return WELCOME_RECOMMENDED_ARTICLE_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
+}
+
+/** トップ「よく読まれている」相当（アクセス解析なしの手動キュレーション） */
+const POPULAR_ARTICLE_SLUGS: string[] = [
+  "borrow-100-interest",
+  "repayment-method-difference",
+  "fixed-cost-checklist",
+  "revo-100man-15percent-simulation",
+  "investment-loss-family-trust",
+];
+
+export function getPopularArticles(): ArticleItem[] {
+  return POPULAR_ARTICLE_SLUGS.map((slug) => getArticle(slug)).filter(
+    (a): a is ArticleItem => a != null
+  );
+}
+
+/** トップ「最近の記事」：publishedAt 降順（日付は各記事 JSON-LD と lib を同期済みであること） */
+export function getRecentArticles(limit = 5): ArticleItem[] {
+  return [...articlesData]
+    .filter((a) => a.publishedAt)
+    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
+    .slice(0, limit);
+}
+
+/** 体験記・ストーリー系（badge 体験記 または kind story） */
+export function getStoryArticles(): ArticleItem[] {
+  return articlesData.filter((a) => a.kind === "story" || a.badge === "体験記");
 }
 
 /** カテゴリ別に記事をグループ化（表示順はカテゴリ定義順・同一カテゴリ内は order 昇順→登録順） */

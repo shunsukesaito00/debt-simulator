@@ -26,8 +26,8 @@ function Item({
 }) {
   return (
     <section className="ds-card p-5">
-      <h2 className="text-base font-black text-gray-900">{q}</h2>
-      <div className="mt-3 text-sm text-gray-700 leading-relaxed">{children}</div>
+      <h2 className="text-base font-black text-stone-900">{q}</h2>
+      <div className="mt-3 text-sm text-stone-700 leading-relaxed">{children}</div>
     </section>
   );
 }
@@ -36,8 +36,8 @@ export default function Page() {
   return (
     <div className="grid gap-6">
       <header className="ds-card ds-card-pad">
-        <h1 className="text-2xl font-black text-gray-900 md:text-3xl">FAQ（よくある質問）</h1>
-        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        <h1 className="text-2xl font-black text-stone-900 md:text-3xl">FAQ（よくある質問）</h1>
+        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
           借入返済シミュレーターの使い方・計算結果の見方・金利や返済方式の考え方について、よくある質問をまとめています。
           実際の返済条件は契約内容（適用金利、約定日、端数処理、手数料等）を優先してください。
         </p>
@@ -188,8 +188,8 @@ export default function Page() {
       </Item>
 
       <section className="ds-card ds-card-pad">
-        <h2 className="text-base font-black text-gray-900">補足</h2>
-        <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+        <h2 className="text-base font-black text-stone-900">補足</h2>
+        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
           使い方の詳細は「使い方」ページ、計算の考え方は「計算ロジック」ページにまとめています。
           追加してほしい質問があれば「お問い合わせ」からご連絡ください。
         </p>

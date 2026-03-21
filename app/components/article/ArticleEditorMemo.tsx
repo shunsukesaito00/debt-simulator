@@ -19,23 +19,26 @@ export function ArticleEditorMemo({
 
   return (
     <section
-      className="ds-subcard p-4 text-sm text-gray-600"
+      className="ds-subcard p-4 text-sm text-stone-600"
       aria-label="編集メモ"
     >
-      <h2 className="text-xs font-black text-gray-500 uppercase tracking-wide">編集メモ</h2>
-      <p className="mt-2 text-sm text-gray-700 leading-relaxed">
-        <span className="font-bold text-gray-800">このページで判断してほしいこと：</span>
-        {purpose}
-      </p>
-      {reasonAxis != null && reasonAxis !== "" && (
-        <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-          <span className="font-bold text-gray-700">この比較軸を採用した理由：</span>
-          {reasonAxis}
+      <div className="border-l-4 border-stone-200 pl-4">
+        <h2 className="text-xs font-black text-stone-500 uppercase tracking-wide">ひとことメモ</h2>
+        <div className="ds-hr my-3" />
+        <p className="mt-2 text-sm text-stone-700 leading-relaxed">
+          <span className="font-bold text-stone-800">この数字を見て、自分で決めるときのヒントにしてもらえたら：</span>
+          {purpose}
         </p>
-      )}
-      {memo != null && memo !== "" && (
-        <p className="mt-2 text-sm text-gray-600 leading-relaxed italic">{memo}</p>
-      )}
+        {reasonAxis != null && reasonAxis !== "" && (
+          <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+            <span className="font-bold text-stone-700">この比較を載せた理由：</span>
+            {reasonAxis}
+          </p>
+        )}
+        {memo != null && memo !== "" && (
+          <p className="mt-2 text-sm text-stone-600 leading-relaxed italic">{memo}</p>
+        )}
+      </div>
     </section>
   );
 }

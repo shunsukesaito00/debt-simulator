@@ -4,6 +4,10 @@ import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/loan-amount-guide`;
@@ -33,8 +37,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-08",
   dateModified: "2025-03-08",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -100,10 +104,10 @@ function CategoryReadBlock() {
   if (articles.length === 0) return null;
   return (
     <section id="category-read">
-      <h2 className="text-lg font-black text-gray-900 md:text-xl">
+      <h2 className="text-lg font-black text-stone-900 md:text-xl">
         このカテゴリで読むべき記事
       </h2>
-      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+      <p className="mt-3 text-sm text-stone-700 leading-relaxed">
         借入額別カテゴリでは、次の記事もあわせて読むと理解が深まります。
       </p>
       <ul className="mt-4 space-y-3">
@@ -111,10 +115,10 @@ function CategoryReadBlock() {
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-gray-100"
+              className="block rounded-xl border border-stone-200 bg-stone-50 p-4 transition hover:bg-stone-100"
             >
-              <span className="text-sm font-bold text-gray-900">{a.title}</span>
-              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+              <span className="text-sm font-bold text-stone-900">{a.title}</span>
+              <p className="mt-1 text-xs text-stone-600 line-clamp-2">{a.summary}</p>
             </Link>
           </li>
         ))}
@@ -155,32 +159,13 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li>
-              <Link href="/" className="hover:underline">
-                トップ
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li>
-              <Link href="/articles" className="hover:underline">
-                知っておきたいこと
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">
-              {ARTICLE_TITLE}
-            </li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("loan-amount-guide")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際の商品や契約条件によって異なる場合があります。
           </p>
 
@@ -196,11 +181,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -208,7 +193,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <p>
               借入額が100万円なのか、200万円なのか、300万円なのかで、返済負担は大きく変わります。借入額が増えれば元本が増えるだけでなく、月々返済額、総利息、完済までの期間も重くなりやすくなります。
             </p>
@@ -217,7 +202,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜借入額が増えるほど返済負担は重くなる
               </h2>
               <p className="mt-3">
@@ -229,7 +214,7 @@ export default function Page() {
             </section>
 
             <section id="monthly-vs-total">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 まず確認したいのは「月々」と「総額」の両方
               </h2>
               <p className="mt-3">
@@ -239,7 +224,7 @@ export default function Page() {
                 逆に総額だけ見ても、毎月の家計に収まるかは判断できません。借入額別の比較では、この2つをセットで見ることが大切です。返済期間が長いほど利息が重くなりやすい点は、
                 <Link
                   href="/articles/100man-100months-risk-at-15percent"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   金利15%で100万円を100ヶ月返済するリスクとは？
                 </Link>
@@ -248,7 +233,7 @@ export default function Page() {
             </section>
 
             <section id="100man">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 借入100万円の返済負担
               </h2>
               <p className="mt-3">
@@ -258,7 +243,7 @@ export default function Page() {
                 また、毎月5万円返済に固定すると、完済までの目安は約24か月、総利息は約157,947円です。返済額を厚くできるなら、総利息はかなり抑えやすくなります。詳しくは
                 <Link
                   href="/articles/borrow-100-interest"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   借金100万円の利息はいくら？年利15%での返済額をシミュレーション
                 </Link>
@@ -267,7 +252,7 @@ export default function Page() {
             </section>
 
             <section id="200man">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 借入200万円の返済負担
               </h2>
               <p className="mt-3">
@@ -277,7 +262,7 @@ export default function Page() {
                 また、毎月5万円返済に固定した場合、完済までの目安は約56か月、総利息は約789,932円です。借入額が200万円になると、月5万円返済でもかなり長期化しやすくなります。詳しくは
                 <Link
                   href="/articles/borrow-200-monthly-payment"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   借金200万円の月々返済はいくら？年利15%で3年・5年返済を比較
                 </Link>
@@ -286,7 +271,7 @@ export default function Page() {
             </section>
 
             <section id="300man">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 借入300万円の返済負担
               </h2>
               <p className="mt-3">
@@ -296,7 +281,7 @@ export default function Page() {
                 さらに、毎月5万円返済に固定した場合、完済までの目安は約112か月、総利息は約2,579,838円です。借入額が大きいと、毎月返済額を抑えた途端に返済期間が大幅に長くなり、総利息も急増します。詳しくは
                 <Link
                   href="/articles/monthly-50000-interest-at-15percent"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   借金返済が月5万円・金利15%なら総利息はいくら？借入額別に比較
                 </Link>
@@ -328,28 +313,28 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 借入額別に比較すると何が違うか
               </h2>
               <p className="mt-3">
                 借入額別の返済負担を、5年返済と毎月5万円返済固定の2パターンで整理しました。いずれも年利15%・元利均等の近似例です。
               </p>
 
-              <h3 className="mt-6 text-base font-black text-gray-900">5年返済での比較</h3>
+              <h3 className="mt-6 text-base font-black text-stone-900">5年返済での比較</h3>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-200">
-                      <th className="py-3 pr-4 font-black text-gray-900">借入額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">毎月返済額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総利息</th>
-                      <th className="py-3 font-black text-gray-900">特徴</th>
+                    <tr className="border-b-2 border-stone-200">
+                      <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">毎月返済額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
+                      <th className="py-3 font-black text-stone-900">特徴</th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
+                  <tbody className="text-stone-700">
                     {table5Years.map((row) => (
-                      <tr key={row.amount} className="border-b border-gray-200">
-                        <td className="py-3 pr-4 font-bold text-gray-900">{row.amount}</td>
+                      <tr key={row.amount} className="border-b border-stone-200">
+                        <td className="py-3 pr-4 font-bold text-stone-900">{row.amount}</td>
                         <td className="py-3 pr-4">{row.monthly}</td>
                         <td className="py-3 pr-4">{row.interest}</td>
                         <td className="py-3">{row.note}</td>
@@ -359,21 +344,21 @@ export default function Page() {
                 </table>
               </div>
 
-              <h3 className="mt-8 text-base font-black text-gray-900">毎月5万円返済固定での比較</h3>
+              <h3 className="mt-8 text-base font-black text-stone-900">毎月5万円返済固定での比較</h3>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-200">
-                      <th className="py-3 pr-4 font-black text-gray-900">借入額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">完済までの目安</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総利息</th>
-                      <th className="py-3 font-black text-gray-900">特徴</th>
+                    <tr className="border-b-2 border-stone-200">
+                      <th className="py-3 pr-4 font-black text-stone-900">借入額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">完済までの目安</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
+                      <th className="py-3 font-black text-stone-900">特徴</th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
+                  <tbody className="text-stone-700">
                     {table50kFixed.map((row) => (
-                      <tr key={row.amount} className="border-b border-gray-200">
-                        <td className="py-3 pr-4 font-bold text-gray-900">{row.amount}</td>
+                      <tr key={row.amount} className="border-b border-stone-200">
+                        <td className="py-3 pr-4 font-bold text-stone-900">{row.amount}</td>
                         <td className="py-3 pr-4">{row.months}</td>
                         <td className="py-3 pr-4">{row.interest}</td>
                         <td className="py-3">{row.note}</td>
@@ -385,7 +370,7 @@ export default function Page() {
             </section>
 
             <section id="reverse">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 借入額を決めるときに大事なのは「逆算」
               </h2>
               <p className="mt-3">
@@ -395,14 +380,14 @@ export default function Page() {
                 毎月5万円返済できるとしても、何年で返すか、金利がいくらかによって、無理のない借入額は変わります。詳しくは
                 <Link
                   href="/articles/monthly-50000-how-much-can-borrow"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   借金返済が月5万円ならいくらまで借りられる？返済額から逆算する目安を解説
                 </Link>
                 や
                 <Link
                   href="/articles/fixed-monthly-payment-borrowing-reverse-calculator"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   月々返済額を固定すると借入額はいくら？返済額から逆算する考え方を解説
                 </Link>
@@ -413,7 +398,7 @@ export default function Page() {
             <CategoryReadBlock />
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 迷ったらシミュレーターで比較するのが早い
               </h2>
               <p className="mt-3">
@@ -421,7 +406,7 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 そのため、最終的には自分の条件を入れて確認するのが一番確実です。次の
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                   借入返済シミュレーター
                 </Link>
                 では、借入額や金利、返済期間を変えながら、月々の返済額や総利息を比較できます。
@@ -437,7 +422,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 注意点
               </h2>
               <p className="mt-3">
@@ -457,12 +442,12 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 よくある質問
               </h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     借入額が増えると何が一番重くなりますか？
                   </h3>
                   <p className="mt-2">
@@ -470,7 +455,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     100万円と200万円では返済負担はどれくらい違いますか？
                   </h3>
                   <p className="mt-2">
@@ -478,7 +463,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     借入額はどう決めるのが安全ですか？
                   </h3>
                   <p className="mt-2">
@@ -486,7 +471,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     借入額を決めるときに、金利の違いはどれくらい影響しますか？
                   </h3>
                   <p className="mt-2">
@@ -494,7 +479,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     借入額100万円と300万円で迷ったら、どう判断すればよいですか？
                   </h3>
                   <p className="mt-2">
@@ -505,7 +490,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 まとめ
               </h2>
               <p className="mt-3">
@@ -513,7 +498,7 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 大切なのは、「いくら借りられるか」ではなく、「その借入額を無理なく返せるか」を見ることです。自分の条件で試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                   返済シミュレーター
                 </Link>
                 で確認できます。
@@ -531,7 +516,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="loan-amount-guide" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

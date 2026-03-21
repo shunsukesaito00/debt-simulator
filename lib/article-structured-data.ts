@@ -3,6 +3,8 @@
  * SEO・リッチリザルト用。
  */
 
+import { ARTICLES_INDEX_CRUMB_LABEL } from "@/lib/article-breadcrumb";
+
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
 export type FaqItem = { question: string; answer: string };
@@ -12,8 +14,8 @@ export function getArticleBreadcrumbJsonLd(articleUrl: string, articleTitle: str
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "トップ", item: BASE },
-      { "@type": "ListItem", position: 2, name: "知っておきたいこと", item: `${BASE}/articles` },
+      { "@type": "ListItem", position: 1, name: "ホーム", item: BASE },
+      { "@type": "ListItem", position: 2, name: ARTICLES_INDEX_CRUMB_LABEL, item: `${BASE}/articles` },
       { "@type": "ListItem", position: 3, name: articleTitle, item: articleUrl },
     ],
   };

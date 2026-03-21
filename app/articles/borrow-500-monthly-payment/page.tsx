@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/borrow-500-monthly-payment`;
@@ -32,8 +36,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2026-03-16",
   dateModified: "2026-03-16",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -104,20 +108,11 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="text-gray-900 font-bold" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("borrow-500-monthly-payment")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             借金が500万円になると、月々の返済額は大きく、返済計画を慎重に考える必要があります。
           </p>
 
@@ -133,28 +128,28 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">{item.label}</a>
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">{item.label}</a>
                 </li>
               ))}
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <p>
               借金500万円の返済は、毎月の負担が大きく、返済期間の選び方で生活への影響が大きく変わります。返済期間を短くすれば利息は抑えられますが月々の支払いが重くなり、長くすれば月々は楽になるものの利息が大幅に増えます。
             </p>
             <p>
               この記事では、500万円を年利15%で借りた場合の月々返済額・総利息を、3年・5年・7年の3パターンで比較します。自分の条件で試算したい場合は
-              <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">シミュレーター</Link>
+              <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">シミュレーター</Link>
               をご利用ください。
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">結論：500万円の月々返済額の目安</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">結論：500万円の月々返済額の目安</h2>
               <p className="mt-3">
                 先に結論です。500万円を年利15%で借りた場合、3年返済なら月々約173,300円、5年返済なら月々約118,950円、7年返済なら月々約97,520円です。総利息は3年で約123.9万円、5年で約213.7万円、7年で約319.2万円になります。
               </p>
@@ -164,7 +159,7 @@ export default function Page() {
             </section>
 
             <section id="reason">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">なぜ500万円の返済は負担が大きいのか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">なぜ500万円の返済は負担が大きいのか</h2>
               <p className="mt-3">
                 借入額が大きくなるほど、毎月発生する利息も大きくなります。500万円を年利15%で借りると、初月の利息だけで約62,500円になります。
               </p>
@@ -174,7 +169,7 @@ export default function Page() {
             </section>
 
             <section id="3years">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">3年返済の場合の負担</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">3年返済の場合の負担</h2>
               <p className="mt-3">
                 借入500万円・年利15%・3年返済の場合、月々返済額は約173,300円、総利息は約1,238,800円です。
               </p>
@@ -184,7 +179,7 @@ export default function Page() {
             </section>
 
             <section id="5years">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">5年返済の場合の負担</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">5年返済の場合の負担</h2>
               <p className="mt-3">
                 借入500万円・年利15%・5年返済の場合、月々返済額は約118,950円、総利息は約2,137,000円です。
               </p>
@@ -194,7 +189,7 @@ export default function Page() {
             </section>
 
             <section id="7years">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">7年返済の場合の負担</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">7年返済の場合の負担</h2>
               <p className="mt-3">
                 借入500万円・年利15%・7年返済の場合、月々返済額は約97,520円、総利息は約3,191,680円です。
               </p>
@@ -227,22 +222,22 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">3年・5年・7年の返済額と総利息の比較表</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">3年・5年・7年の返済額と総利息の比較表</h2>
               <p className="mt-3">3つの返済期間を並べて比較します。</p>
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[520px] border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-200">
-                      <th className="py-3 pr-4 font-black text-gray-900">返済期間</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">月々返済額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">返済回数</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総支払額</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総利息</th>
-                      <th className="py-3 font-black text-gray-900">備考</th>
+                    <tr className="border-b-2 border-stone-200">
+                      <th className="py-3 pr-4 font-black text-stone-900">返済期間</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">月々返済額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">返済回数</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総支払額</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総利息</th>
+                      <th className="py-3 font-black text-stone-900">備考</th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
-                    <tr className="border-b border-gray-200">
+                  <tbody className="text-stone-700">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">3年返済</td>
                       <td className="py-3 pr-4">約173,300円</td>
                       <td className="py-3 pr-4">36回</td>
@@ -250,7 +245,7 @@ export default function Page() {
                       <td className="py-3 pr-4">約1,238,800円</td>
                       <td className="py-3 text-xs">利息を最も抑えられるが月々負担大</td>
                     </tr>
-                    <tr className="border-b border-gray-200">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">5年返済</td>
                       <td className="py-3 pr-4">約118,950円</td>
                       <td className="py-3 pr-4">60回</td>
@@ -258,7 +253,7 @@ export default function Page() {
                       <td className="py-3 pr-4">約2,137,000円</td>
                       <td className="py-3 text-xs">バランス型</td>
                     </tr>
-                    <tr className="border-b border-gray-200">
+                    <tr className="border-b border-stone-200">
                       <td className="py-3 pr-4">7年返済</td>
                       <td className="py-3 pr-4">約97,520円</td>
                       <td className="py-3 pr-4">84回</td>
@@ -272,7 +267,7 @@ export default function Page() {
             </section>
 
             <section id="judge">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">借金500万円を返済するための判断ポイント</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">借金500万円を返済するための判断ポイント</h2>
               <p className="mt-3">
                 500万円の返済では、月々の返済額が手取り収入の3分の1以下に収まるかが一つの目安です。3年返済は月17.3万円なので手取り52万円以上、5年返済は月11.9万円なので手取り36万円以上が必要な計算になります。
               </p>
@@ -282,34 +277,34 @@ export default function Page() {
             </section>
 
             <section id="category">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">借入額別カテゴリ：500万円の位置づけ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">借入額別カテゴリ：500万円の位置づけ</h2>
               <p className="mt-3">
                 100万円・200万円・300万円との比較は、
-                <Link href="/articles/loan-amount-guide" className="font-bold text-gray-900 hover:underline">借入額別に見る返済負担の違い｜100万・200万・300万で比較</Link>
+                <Link href="/articles/loan-amount-guide" className="font-bold text-stone-900 hover:underline">借入額別に見る返済負担の違い｜100万・200万・300万で比較</Link>
                 をご覧ください。
               </p>
               <p className="mt-3">
                 300万円の返済については
-                <Link href="/articles/borrow-300-monthly-payment" className="font-bold text-gray-900 hover:underline">借金300万円の月々返済はいくら？年利15%で3年・5年・月5万円返済を比較</Link>
+                <Link href="/articles/borrow-300-monthly-payment" className="font-bold text-stone-900 hover:underline">借金300万円の月々返済はいくら？年利15%で3年・5年・月5万円返済を比較</Link>
                 で詳しく解説しています。500万円は300万円と比べて月々の返済額・総利息ともに約1.67倍になるため、より慎重な返済計画が求められます。
               </p>
             </section>
 
             <section id="reverse">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">逆算でも考えてみる</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">逆算でも考えてみる</h2>
               <p className="mt-3">
                 「500万円を借りたらいくらか」ではなく「毎月いくら返せるか」から逆算する方法もあります。
               </p>
               <p className="mt-3">
-                <Link href="/articles/loan-amount-guide" className="font-bold text-gray-900 hover:underline">借入額別の返済負担の違い</Link>
+                <Link href="/articles/loan-amount-guide" className="font-bold text-stone-900 hover:underline">借入額別の返済負担の違い</Link>
                 や
-                <Link href="/articles/monthly-50000-how-much-can-borrow" className="font-bold text-gray-900 hover:underline">月5万円ならいくらまで借りられるか</Link>
+                <Link href="/articles/monthly-50000-how-much-can-borrow" className="font-bold text-stone-900 hover:underline">月5万円ならいくらまで借りられるか</Link>
                 も合わせてご確認ください。
               </p>
             </section>
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">シミュレーターで自分の条件を試す</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">シミュレーターで自分の条件を試す</h2>
               <p className="mt-3">
                 この記事では500万円・年利15%という条件で比較しましたが、実際の金利や返済条件は人によって異なります。自分の条件で試算したい場合はシミュレーターをご利用ください。
               </p>
@@ -335,7 +330,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">注意</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">注意</h2>
               <p className="mt-3">
                 本記事の計算結果は、年利15%・元利均等返済を前提とした概算です。実際の返済額は金融機関の条件、手数料、端数処理等によって異なる場合があります。
               </p>
@@ -345,34 +340,34 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">借金500万円の月々返済額はいくらですか？</h3>
+                  <h3 className="text-base font-black text-stone-900">借金500万円の月々返済額はいくらですか？</h3>
                   <p className="mt-2">
                     年利15%の場合、3年返済で約173,300円、5年返済で約118,950円、7年返済で約97,520円です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">借金500万円の総利息はいくらですか？</h3>
+                  <h3 className="text-base font-black text-stone-900">借金500万円の総利息はいくらですか？</h3>
                   <p className="mt-2">
                     年利15%の場合、3年返済で約123.9万円、5年返済で約213.7万円、7年返済で約319.2万円です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">借金500万円を無理なく返すには？</h3>
+                  <h3 className="text-base font-black text-stone-900">借金500万円を無理なく返すには？</h3>
                   <p className="mt-2">
                     手取り収入の3分の1以下に月々返済額を収めることが目安です。まず5年で試算し、厳しければ7年に延ばしつつ繰り上げ返済を活用するのが現実的です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">500万円の借金は返済可能ですか？</h3>
+                  <h3 className="text-base font-black text-stone-900">500万円の借金は返済可能ですか？</h3>
                   <p className="mt-2">
                     収入と支出のバランスによります。年利15%・5年返済で月々約11.9万円が必要です。手取り月収35万円以上あれば生活費を確保しながら返済できる計算ですが、余裕を持った計画が重要です。
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">借金500万円と300万円では返済負担はどのくらい違う？</h3>
+                  <h3 className="text-base font-black text-stone-900">借金500万円と300万円では返済負担はどのくらい違う？</h3>
                   <p className="mt-2">
                     年利15%・5年返済の場合、300万円は月々約71,370円、500万円は月々約118,950円で、差額は約47,580円です。総利息も300万円の約128万円に対し500万円は約214万円と大幅に増えます。
                   </p>
@@ -381,13 +376,13 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">
                 借金500万円を年利15%で返済する場合、3年返済なら月々約173,300円・総利息約123.9万円、5年返済なら月々約118,950円・総利息約213.7万円、7年返済なら月々約97,520円・総利息約319.2万円が目安です。
               </p>
               <p className="mt-3">
                 500万円は高額借入のため、返済期間の選び方が生活に大きく影響します。自分の収入・支出に合わせた返済計画を立てるために、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">シミュレーター</Link>
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">シミュレーター</Link>
                 で試算してみてください。
               </p>
             </section>
@@ -395,7 +390,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="borrow-500-monthly-payment" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

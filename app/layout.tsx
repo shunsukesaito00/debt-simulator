@@ -1,8 +1,16 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Noto_Serif_JP } from "next/font/google";
 import HeaderNav from "./components/HeaderNav";
 import FooterNav from "./components/FooterNav";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
+
+const notoSerifJp = Noto_Serif_JP({
+  weight: ["600", "700"],
+  subsets: ["latin"],
+  variable: "--font-heading-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
-      <body className="ds-shell">
+      <body className={`ds-shell ${notoSerifJp.variable}`}>
         <GoogleAnalytics />
         {/* 上段固定ヘッダ（ナビをここに固定） */}
         <HeaderNav />

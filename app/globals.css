@@ -4,19 +4,19 @@
 
 :root {
   color-scheme: light;
-  /* Design tokens (light) */
-  --ds-bg: 248 250 252; /* slate-50 */
+  /* Design tokens (warm / life-improvement) */
+  --ds-bg: 250 250 249; /* stone-50 */
   --ds-bg-elev: 255 255 255;
-  --ds-fg: 15 23 42; /* slate-900 */
-  --ds-muted: 71 85 105; /* slate-600 */
-  --ds-border: 226 232 240; /* slate-200 */
-  --ds-accent: 37 99 235; /* blue-600 */
-  --ds-accent-2: 16 185 129; /* emerald-500 (subtle) */
+  --ds-fg: 41 37 36; /* stone-800 */
+  --ds-muted: 87 83 78; /* stone-600 */
+  --ds-border: 231 229 228; /* stone-200 */
+  --ds-accent: 22 163 74; /* green-600 life-improvement */
+  --ds-accent-2: 34 197 94; /* green-500 */
 
   --ds-radius-lg: 16px;
   --ds-radius-xl: 24px;
-  --ds-shadow-sm: 0 1px 1px rgba(15, 23, 42, 0.04), 0 6px 20px rgba(15, 23, 42, 0.06);
-  --ds-shadow-md: 0 1px 2px rgba(15, 23, 42, 0.05), 0 18px 60px rgba(15, 23, 42, 0.10);
+  --ds-shadow-sm: 0 1px 1px rgba(41, 37, 36, 0.04), 0 6px 20px rgba(41, 37, 36, 0.06);
+  --ds-shadow-md: 0 1px 2px rgba(41, 37, 36, 0.05), 0 18px 60px rgba(41, 37, 36, 0.10);
 }
 
 html,
@@ -41,7 +41,7 @@ textarea {
 }
 
 ::selection {
-  background: rgba(15, 23, 42, 0.12);
+  background: rgba(41, 37, 36, 0.12);
 }
 
 @layer base {
@@ -75,19 +75,19 @@ textarea {
   .ds-subcard {
     @apply border;
     border-color: rgb(var(--ds-border));
-    background: rgba(248, 250, 252, 0.8);
+    background: rgba(250, 250, 249, 0.9);
     border-radius: var(--ds-radius-lg);
   }
 
   /* Typography helpers */
   .ds-h1 {
-    @apply text-2xl font-black tracking-tight text-slate-900 md:text-3xl;
+    @apply text-2xl font-black tracking-tight text-stone-900 md:text-3xl;
   }
   .ds-h2 {
-    @apply text-lg font-black tracking-tight text-slate-900 md:text-xl;
+    @apply text-lg font-black tracking-tight text-stone-900 md:text-xl;
   }
   .ds-muted {
-    @apply text-slate-600;
+    @apply text-stone-600;
   }
 
   /* Links & buttons */
@@ -109,11 +109,11 @@ textarea {
     opacity: 0.92;
   }
   .ds-btn-secondary {
-    @apply border bg-white text-slate-800;
+    @apply border bg-white text-stone-800;
     border-color: rgb(var(--ds-border));
   }
   .ds-btn-secondary:hover {
-    background: rgba(248, 250, 252, 0.9);
+    background: rgba(250, 250, 249, 0.9);
   }
   .ds-btn-sm {
     @apply rounded-xl px-3 py-2 text-xs font-bold;
@@ -123,12 +123,44 @@ textarea {
   .ds-header {
     @apply border-b backdrop-blur;
     border-color: rgb(var(--ds-border));
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 253, 251, 0.88);
   }
   .ds-footer {
     @apply border-t;
     border-color: rgb(var(--ds-border));
     background: rgb(var(--ds-bg-elev));
+  }
+
+  /* ブログ風見出し（Noto Serif JP は layout で variable 注入） */
+  .ds-page-serif {
+    font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+
+  .ds-blog-prose {
+    @apply max-w-prose text-stone-800 leading-relaxed;
+  }
+  .ds-blog-prose > p + p {
+    @apply mt-4;
+  }
+  .ds-blog-prose h2 {
+    @apply mt-10 mb-3 text-xl font-bold tracking-tight text-stone-900;
+    font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  .ds-blog-prose h3 {
+    @apply mt-8 mb-2 text-lg font-bold text-stone-900;
+    font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+
+  /* 記事ページ：本文を読みやすい幅に（表・グラフは内側で max-w-none 等で調整可） */
+  .ds-article-shell {
+    @apply mx-auto max-w-prose;
+  }
+}
+
+@layer utilities {
+  /* 記事の“塊感”を作る横線（コンポーネント内で必要なところだけ使う） */
+  .ds-hr {
+    @apply w-full border-t border-stone-200;
   }
 }
 
@@ -137,7 +169,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   height: 8px;
-  background: #e5e7eb;
+  background: #e7e5e4;
   border-radius: 4px;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -145,7 +177,7 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 22px;
   height: 22px;
-  background: #111827;
+  background: #292524;
   border-radius: 50%;
   cursor: grab;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -156,7 +188,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 input[type="range"]::-moz-range-thumb {
   width: 22px;
   height: 22px;
-  background: #111827;
+  background: #292524;
   border-radius: 50%;
   cursor: grab;
   border: none;
@@ -184,14 +216,14 @@ input[type="number"] {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #d6d3d1;
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #a8a29e;
 }
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #d1d5db transparent;
+  scrollbar-color: #d6d3d1 transparent;
 }

@@ -13,9 +13,15 @@
 | **5. 関連記事** | 条件別の関連リンク | `ArticleFooter`（既存・lib/articles の relatedLinks） |
 | **6. 記事一覧への導線** | カテゴリ一覧・記事一覧へ戻る | `ArticleFooter`（既存） |
 
+## ページシェル・幅（全記事共通）
+
+- **`ArticlePageShell`**（`app/components/ArticlePageShell.tsx`）でラップする。パンくずは **ホーム → 悩み別に読む（記事一覧）→ 記事タイトル**（`lib/article-breadcrumb.ts` の `ARTICLES_INDEX_CRUMB_LABEL` と JSON-LD `getArticleBreadcrumbJsonLd` を揃える）。
+- **幅**: 通常は `ds-article-shell`（本文は `max-w-prose` 相当）。**表・Recharts が主役**の記事は `wide={articleUsesWideLayout("your-slug")}` で `max-w-3xl`。slug の登録は **`lib/article-layout.ts`** の `WIDE_LAYOUT_SLUGS`。
+- **見出し**: 記事タイトル（h1）やセクション見出し（h2）に **`ds-page-serif`** と **`font-bold`** を寄せると一覧ページとトーンが揃う（既存記事は段階的にで可）。
+
 ## 推奨レイアウト順
 
-1. パンくず
+1. パンくず（`ArticlePageShell` 内）
 2. タイトル + 短いリード
 3. **このページの前提**（目次の直後がわかりやすい）
 4. 目次
@@ -47,6 +53,8 @@
 
 ```tsx
 import { ArticleFooter } from "@/app/components/ArticleFooter";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
 import {
   ArticlePagePremise,
   ArticleReadingPoints,
@@ -80,14 +88,15 @@ const editorMemo = {
 
 export default function Page() {
   return (
-    <article>
-      {/* ... パンくず・タイトル・目次 ... */}
-      <ArticlePagePremise {...premise} />
-      {/* ... 本文 ... */}
-      <ArticleReadingPoints {...readingPoints} />
-      <ArticleEditorMemo {...editorMemo} />
-      <ArticleFooter articleSlug="your-slug" />
-    </article>
+    <ArticlePageShell currentPageTitle="記事タイトル" wide={articleUsesWideLayout("your-slug")}>
+      <div className="ds-card ds-card-pad">
+        {/* h1・目次・本文 ... */}
+        <ArticlePagePremise {...premise} />
+        <ArticleReadingPoints {...readingPoints} />
+        <ArticleEditorMemo {...editorMemo} />
+        <ArticleFooter articleSlug="your-slug" />
+      </div>
+    </ArticlePageShell>
   );
 }
 ```
@@ -104,6 +113,7 @@ export default function Page() {
 ```
 app/components/
 ├── ArticleFooter.tsx          # 既存（CTA・関連記事・一覧導線）
+├── ArticlePageShell.tsx       # パンくず＋記事幅（ds-article-shell / wide）
 └── article/
     ├── index.ts
     ├── types.ts               # ArticlePremise, ArticleReadingPoints, ArticleEditorMemo の型

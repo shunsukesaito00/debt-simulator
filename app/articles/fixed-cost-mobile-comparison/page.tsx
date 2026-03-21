@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-mobile-comparison`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -95,21 +99,12 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-mobile-comparison")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             スマホ料金は固定費のなかでも「見直しの効果が出やすく、一度変えれば継続しやすい」項目の一つです。格安プランへの乗り換えや、データ量・オプションの見直しで、月々どれくらい変わる可能性があるかを整理します。
           </p>
 
@@ -124,11 +119,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -136,9 +131,9 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜スマホ料金は見直しの効果が出やすい
               </h2>
               <p className="mt-3">
@@ -170,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="what-to-check">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">何を確認するか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">何を確認するか</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>現在の月額（通信料＋オプション＋機種代金の合計）</li>
                 <li>データの月間使用量（設定アプリや請求書で確認）</li>
@@ -179,24 +174,24 @@ export default function Page() {
               </ul>
               <p className="mt-3">
                 固定費全体の見直し順番としては、
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                 では「サブスクの次に通信費」を推奨しています。手続きはサブスクより少し手間ですが、一度見直すと効果が続きやすいです。
               </p>
             </section>
 
             <section id="rough-amount">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">どれくらい変わるか（目安）</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">どれくらい変わるか（目安）</h2>
               <p className="mt-3">
                 大手キャリアの単体プランから格安プランに乗り換えた場合、月額2,000円〜5,000円程度の削減になることが多いです。データ量を適正化したり、通話オプションを外したりするだけでも、月1,000円前後の削減になるケースがあります。月3,000円の削減なら1年で36,000円なので、継続すると差は大きくなります。
               </p>
               <p className="mt-3">
                 削減額を「1年・3年・5年でいくらになるか」で確認したい場合は、
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                 で試算できます。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-gray-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-sm text-gray-700">
+                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
                 <Link
@@ -217,28 +212,28 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <dt className="font-bold text-gray-900">{item.question}</dt>
-                    <dd className="mt-1 text-gray-700">{item.answer}</dd>
+                    <dt className="font-bold text-stone-900">{item.question}</dt>
+                    <dd className="mt-1 text-stone-700">{item.answer}</dd>
                   </div>
                 ))}
               </dl>
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>スマホ料金は固定費のなかでも<strong>見直しの効果が出やすく、継続しやすい</strong>項目です。</li>
                 <li>データ量・通話オプションの適正化、格安プランへの乗り換えで、月額が数千円単位で変わるケースがあります。</li>
                 <li>削減額の目安は契約内容により異なります。1年・3年・5年での効果は
-                  <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                  <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                   で確認できます。
                 </li>
                 <li>固定費全体の見直し順や他の項目は
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                   を参照してください。
                 </li>
               </ul>
@@ -247,7 +242,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="fixed-cost-mobile-comparison" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-insurance-review`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -95,21 +99,12 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-insurance-review")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             保険は固定費のなかでも月額が大きくなりがちですが、安易に削るといざというときの備えが足りなくなるリスクがあります。このページでは、何を確認すべきか、削ってよい保障と慎重にすべき保障の考え方を整理します。
           </p>
 
@@ -124,11 +119,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -136,9 +131,9 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜内容を理解したうえで慎重に
               </h2>
               <p className="mt-3">
@@ -170,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="what-to-check">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">何を確認するか</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">何を確認するか</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>契約している保険の一覧（生命保険・医療・がん・就業不能・火災など）と月額・年額</li>
                 <li>各保険の保障内容（死亡時・入院時・手術時など、何にいくら出るか）</li>
@@ -179,13 +174,13 @@ export default function Page() {
               </ul>
               <p className="mt-3">
                 固定費見直しの順番としては、
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                 では、サブスク・通信費の次に「保険」を推奨しています。内容の理解が必要な分、通信費よりは手間がかかりますが、見直しで月額が数千円変わるケースもあります。
               </p>
             </section>
 
             <section id="ok-to-reduce">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">削ってよいもの・慎重にすべきもの</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">削ってよいもの・慎重にすべきもの</h2>
               <p className="mt-3">
                 <strong>削ってよい・見直しの候補になりやすいもの</strong>：同じような補償が複数ある重複保障、子どもが独立した後の教育保険の過剰な部分、ライフステージで不要になった特約など。必要な額を超えている部分を整理すると、月額を下げられることがあります。
               </p>
@@ -194,12 +189,12 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 見直しで浮いた金額が1年・3年・5年でいくらになるかは、
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                 で試算できます。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-gray-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-sm text-gray-700">
+                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
                 <Link
@@ -220,27 +215,27 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <dt className="font-bold text-gray-900">{item.question}</dt>
-                    <dd className="mt-1 text-gray-700">{item.answer}</dd>
+                    <dt className="font-bold text-stone-900">{item.question}</dt>
+                    <dd className="mt-1 text-stone-700">{item.answer}</dd>
                   </div>
                 ))}
               </dl>
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>保険見直しは<strong>保障内容を理解したうえで</strong>、重複・過剰な部分から検討するのがおすすめです。</li>
                 <li>削ってよいのは重複保障や不要になった特約など。死亡・医療・火災などいざというときの備えは慎重に判断します。</li>
                 <li>判断に迷う場合は、保険の相談窓口やファイナンシャルプランナーなどに相談するのが安心です。</li>
                 <li>見直しで浮いた金額の効果は
-                  <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                  <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                   で確認できます。固定費全体の順番は
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                   を参照してください。
                 </li>
               </ul>
@@ -249,7 +244,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="fixed-cost-insurance-review" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

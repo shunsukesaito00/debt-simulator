@@ -26,8 +26,8 @@ export function SupplementPageFooterFaq() {
 
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-gray-900">関連記事とシミュレーター</h2>
-      <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+      <h2 className="text-base font-black text-stone-900">関連記事とシミュレーター</h2>
+      <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         条件別の記事で返済の考え方を整理し、シミュレーターで自分の条件を試算できます。
       </p>
       <ul className="mt-4 flex flex-col gap-2">
@@ -35,7 +35,7 @@ export function SupplementPageFooterFaq() {
           <li key={item.href}>
             <TrackedLink
               href={item.href}
-              className="text-sm font-bold text-gray-700 hover:underline"
+              className="text-sm font-bold text-stone-700 hover:underline"
               event={{
                 action: "click_supplement_article_link",
                 location: "supplement_footer_faq",
@@ -51,7 +51,7 @@ export function SupplementPageFooterFaq() {
         <li>
           <TrackedLink
             href="/articles"
-            className="text-sm font-bold text-gray-700 hover:underline"
+            className="text-sm font-bold text-stone-700 hover:underline"
             event={{
               action: "click_supplement_back_to_articles",
               location: "supplement_footer_faq",
@@ -64,7 +64,7 @@ export function SupplementPageFooterFaq() {
         </li>
       </ul>
       <div className="ds-subcard mt-6 p-4">
-        <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
+        <p className="text-sm font-bold text-stone-900">自分の条件で試算する</p>
         <TrackedLink
           href={SIMULATOR_HREF}
           className="ds-btn ds-btn-primary mt-3"
@@ -100,8 +100,8 @@ export function SupplementPageFooterLogic() {
 
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-gray-900">関連記事とシミュレーター</h2>
-      <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+      <h2 className="text-base font-black text-stone-900">関連記事とシミュレーター</h2>
+      <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         返済方式の違いや借入額の逆算など、計算ロジックに近い記事をまとめています。
       </p>
       <ul className="mt-4 flex flex-col gap-2">
@@ -110,7 +110,7 @@ export function SupplementPageFooterLogic() {
             {item.slug ? (
               <TrackedLink
                 href={item.href}
-                className="text-sm font-bold text-gray-700 hover:underline"
+                className="text-sm font-bold text-stone-700 hover:underline"
                 event={{
                   action: "click_supplement_article_link",
                   location: "supplement_footer_logic",
@@ -124,7 +124,7 @@ export function SupplementPageFooterLogic() {
             ) : (
               <TrackedLink
                 href={item.href}
-                className="text-sm font-bold text-gray-700 hover:underline"
+                className="text-sm font-bold text-stone-700 hover:underline"
                 event={{
                   action: "click_supplement_back_to_articles",
                   location: "supplement_footer_logic",
@@ -139,7 +139,7 @@ export function SupplementPageFooterLogic() {
         ))}
       </ul>
       <div className="ds-subcard mt-6 p-4">
-        <p className="text-sm font-bold text-gray-900">自分の条件で試算する</p>
+        <p className="text-sm font-bold text-stone-900">自分の条件で試算する</p>
         <TrackedLink
           href={SIMULATOR_HREF}
           className="ds-btn ds-btn-primary mt-3"
@@ -161,8 +161,8 @@ export function SupplementPageFooterLogic() {
 export function SupplementPageFooterHowTo() {
   return (
     <section className="ds-subcard mt-10 p-6">
-      <h2 className="text-base font-black text-gray-900">自分の条件で試算する</h2>
-      <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+      <h2 className="text-base font-black text-stone-900">自分の条件で試算する</h2>
+      <p className="mt-2 text-sm text-stone-700 leading-relaxed">
         借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
       </p>
       <TrackedLink
@@ -177,10 +177,10 @@ export function SupplementPageFooterHowTo() {
       >
         {SIMULATOR_LABEL} →
       </TrackedLink>
-      <p className="mt-6 text-sm font-bold text-gray-900">条件別の記事も読む</p>
+      <p className="mt-6 text-sm font-bold text-stone-900">条件別の記事も読む</p>
       <TrackedLink
         href="/articles"
-        className="mt-2 inline-block text-sm font-bold text-gray-700 hover:underline"
+        className="mt-2 inline-block text-sm font-bold text-stone-700 hover:underline"
         event={{
           action: "click_supplement_back_to_articles",
           location: "supplement_footer_how_to",

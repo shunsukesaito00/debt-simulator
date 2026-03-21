@@ -18,7 +18,7 @@ export default function Page() {
     <div className="ds-card ds-card-pad">
       <h1 className="text-2xl font-black">お問い合わせ</h1>
 
-      <div className="mt-5 grid gap-4 text-sm text-gray-700 leading-relaxed">
+      <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
         <p>
           ご意見・不具合報告は下記フォームからお願いします。返信が必要な場合はメールアドレスをご記入ください。
         </p>
@@ -42,7 +42,7 @@ export default function Page() {
         </div>
 
         <div className="ds-subcard p-4">
-          <div className="font-black text-gray-900">フォームが表示されない場合</div>
+          <div className="font-black text-stone-900">フォームが表示されない場合</div>
           <div className="mt-2">
             <Link
               href="https://forms.gle/aBARtVTxaKEMvQkr8"
@@ -56,7 +56,7 @@ export default function Page() {
         </div>
 
         <div className="ds-subcard p-4">
-          <div className="font-black text-gray-900">技術的な不具合報告（任意）</div>
+          <div className="font-black text-stone-900">技術的な不具合報告（任意）</div>
           <div className="mt-2">
             <Link
               href="https://github.com/shunsukesaito00/debt-simulator/issues"
@@ -69,7 +69,7 @@ export default function Page() {
           </div>
         </div>
 
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-stone-500">
           ※ 個別の契約条件・審査・借換等の相談は、金融機関または専門家へご相談ください。
         </p>
       </div>

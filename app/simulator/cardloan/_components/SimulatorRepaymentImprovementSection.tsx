@@ -36,15 +36,15 @@ export function SimulatorRepaymentImprovementSection() {
                 })
               }
             >
-              <span className="text-sm font-bold text-gray-900">{a.title}</span>
-              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+              <span className="text-sm font-bold text-stone-900">{a.title}</span>
+              <p className="mt-1 text-xs text-stone-600 line-clamp-2">{a.summary}</p>
             </Link>
           </li>
         ))}
       </ul>
       <Link
         href="/articles"
-        className="mt-4 inline-block text-sm font-bold text-gray-700 hover:underline"
+        className="mt-4 inline-block text-sm font-bold text-stone-700 hover:underline"
         onClick={() =>
           trackEvent({
             action: "click_simulator_improvement_article",

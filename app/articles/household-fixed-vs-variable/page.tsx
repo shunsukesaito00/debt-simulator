@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/household-fixed-vs-variable`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -95,21 +99,12 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("household-fixed-vs-variable")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             家計を把握するとき、「固定費」と「変動費」に分けると見えやすくなります。このページでは、何を固定費・変動費に入れるかの分け方と、それぞれの特徴を整理します。
           </p>
 
@@ -124,11 +119,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -136,9 +131,9 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜固定費＝毎月ほぼ一定、変動費＝月で増減
               </h2>
               <p className="mt-3">
@@ -170,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="fixed">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">固定費に含めるもの</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">固定費に含めるもの</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>家賃・住宅ローン（持ち家の場合の返済）</li>
                 <li>通信費（スマホ・自宅回線・サブスクなど）</li>
@@ -183,7 +178,7 @@ export default function Page() {
             </section>
 
             <section id="variable">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">変動費に含めるもの</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">変動費に含めるもの</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>食費・日用品</li>
                 <li>交際費・娯楽</li>
@@ -193,9 +188,9 @@ export default function Page() {
               </ul>
               <p className="mt-3">
                 固定費を把握したあと、手取り − 固定費 ＝ 変動費に回せる額になります。月の収支のざっくり把握は
-                <Link href="/articles/household-monthly-balance-check" className="font-bold text-gray-900 hover:underline">月の収支をざっくり把握する方法</Link>
+                <Link href="/articles/household-monthly-balance-check" className="font-bold text-stone-900 hover:underline">月の収支をざっくり把握する方法</Link>
                 を、固定費の見直しは
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                 を参照してください。
               </p>
             </section>
@@ -209,24 +204,24 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <dt className="font-bold text-gray-900">{item.question}</dt>
-                    <dd className="mt-1 text-gray-700">{item.answer}</dd>
+                    <dt className="font-bold text-stone-900">{item.question}</dt>
+                    <dd className="mt-1 text-stone-700">{item.answer}</dd>
                   </div>
                 ))}
               </dl>
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>固定費＝毎月ほぼ一定でかかる支出（家賃・通信費・保険・ローン・サブスク・光熱など）。変動費＝月で増減する支出（食費・日用品・交際費など）。</li>
                 <li>固定費の合計を把握すると、手取りとの差（変動費に回せる額）が見えやすくなります。</li>
                 <li>固定費の見直しは
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                   を参照してください。
                 </li>
               </ul>
@@ -235,7 +230,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="household-fixed-vs-variable" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

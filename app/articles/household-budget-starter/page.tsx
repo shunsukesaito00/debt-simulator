@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/household-budget-starter`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -95,21 +99,12 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("household-budget-starter")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             家計簿をつけたいけれど続かない、という方は多いです。このページでは、<strong>記録を頑張らなくても</strong>支出を把握する方法と、最低限チェックするポイントを整理します。
           </p>
 
@@ -124,11 +119,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -136,9 +131,9 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜記録を減らして「見る」だけでも把握できる
               </h2>
               <p className="mt-3">
@@ -170,7 +165,7 @@ export default function Page() {
             </section>
 
             <section id="minimal-check">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">最低限チェックするポイント</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">最低限チェックするポイント</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>手取り（月の収入から税金・社会保険を引いたあと）</li>
                 <li>固定費の合計（家賃・通信費・保険・ローン・サブスクなど、毎月必ず出るもの）</li>
@@ -178,21 +173,21 @@ export default function Page() {
               </ul>
               <p className="mt-3">
                 固定費が手取りの何割かを知っておくと、「残りで生活できるか」「見直す余地があるか」が判断しやすくなります。固定費と変動費の分け方の詳細は
-                <Link href="/articles/household-fixed-vs-variable" className="font-bold text-gray-900 hover:underline">固定費と変動費の分け方</Link>
+                <Link href="/articles/household-fixed-vs-variable" className="font-bold text-stone-900 hover:underline">固定費と変動費の分け方</Link>
                 を参照してください。
               </p>
             </section>
 
             <section id="no-diary-method">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">記録せずに把握する方法</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">記録せずに把握する方法</h2>
               <p className="mt-3">
                 銀行口座・クレジットカード・キャリア決済・電子マネーの利用明細を、月1回程度確認します。費目がついている場合はそのまま、ついていなければ「食費」「日用品」「交際費」など自分でざっくりメモするだけでも構いません。細かい数字より「何に多く出ているか」の感覚がつかめれば、固定費の見直しや支出の調整の材料になります。
               </p>
               <p className="mt-3">
                 月の収支を手取りから逆算する考え方は
-                <Link href="/articles/household-monthly-balance-check" className="font-bold text-gray-900 hover:underline">月の収支をざっくり把握する方法</Link>
+                <Link href="/articles/household-monthly-balance-check" className="font-bold text-stone-900 hover:underline">月の収支をざっくり把握する方法</Link>
                 で整理しています。固定費を見直すときは
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                 を参照してください。
               </p>
             </section>
@@ -206,26 +201,26 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <dt className="font-bold text-gray-900">{item.question}</dt>
-                    <dd className="mt-1 text-gray-700">{item.answer}</dd>
+                    <dt className="font-bold text-stone-900">{item.question}</dt>
+                    <dd className="mt-1 text-stone-700">{item.answer}</dd>
                   </div>
                 ))}
               </dl>
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>家計簿が続かない場合は、<strong>「つける」より「見る」</strong>にすると負担が減ります。明細の確認だけでも支出の傾向は把握できます。</li>
                 <li>最低限、手取りと固定費の合計、その差（変動費に回せる額）をチェックすると、見直しの材料になります。</li>
                 <li>固定費・変動費の分け方は
-                  <Link href="/articles/household-fixed-vs-variable" className="font-bold text-gray-900 hover:underline">固定費と変動費の分け方</Link>
+                  <Link href="/articles/household-fixed-vs-variable" className="font-bold text-stone-900 hover:underline">固定費と変動費の分け方</Link>
                   、固定費の見直しは
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                   を参照してください。
                 </li>
               </ul>
@@ -234,7 +229,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="household-budget-starter" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

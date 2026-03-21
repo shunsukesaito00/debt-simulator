@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-subscription-audit`;
@@ -31,8 +35,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
   dateModified: "2025-03-11",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -95,21 +99,12 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li><Link href="/" className="hover:underline">トップ</Link></li>
-            <li aria-hidden>/</li>
-            <li><Link href="/articles" className="hover:underline">知っておきたいこと</Link></li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">{ARTICLE_TITLE}</li>
-          </ol>
-        </nav>
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-subscription-audit")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             サブスクや月額課金は、気づかないうちに契約が増え、合計額が大きくなっていることがあります。このページでは、見落としがちな契約の洗い出し方と、やめる・減らすときの判断のポイントを整理します。
           </p>
 
@@ -124,11 +119,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -136,14 +131,14 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜まず洗い出してから判断する
               </h2>
               <p className="mt-3">
                 サブスク整理は、<strong>まず「何にいくら払っているか」を洗い出す</strong>ところから始めると進めやすくなります。見落としがちな月額課金を一覧にしたうえで、「直近で実際に使ったか」を基準にやめる・減らすものを決めると、無理のない整理ができます。固定費見直しのなかでは手軽に着手しやすいので、
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                 では最初の項目として推奨しています。
               </p>
             </section>
@@ -172,7 +167,7 @@ export default function Page() {
             </section>
 
             <section id="how-to-list">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">洗い出し方</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">洗い出し方</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>クレジットカード・デビットカードの利用明細で「月額」「定期」とわかるものを書き出す</li>
                 <li>スマホのサブスク管理（Apple IDのサブスクリプション、Google プレイの定期購入など）を確認する</li>
@@ -185,18 +180,18 @@ export default function Page() {
             </section>
 
             <section id="easy-to-miss">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">見落としがちな月額課金</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">見落としがちな月額課金</h2>
               <p className="mt-3">
                 音楽・動画・ストレージ・ゲームの課金、無料トライアル後の自動課金、アプリ内の定期購入、新聞・雑誌の電子版、クラウドサービスやドメインの年間契約（月換算）などは、契約したことを忘れがちです。請求元名がサービス名と違う場合もあるので、不明な引き落としは請求元に問い合わせて確認するのも有効です。
               </p>
               <p className="mt-3">
                 整理で浮いた金額が、1年・3年・5年でいくらになるかは
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                 で試算できます。
               </p>
               <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-black text-gray-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-sm text-gray-700">
+                <h3 className="text-base font-black text-stone-900">固定費削減インパクトを計算する</h3>
+                <p className="mt-2 text-sm text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
                 <Link
@@ -217,27 +212,27 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">よくある質問</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">よくある質問</h2>
               <dl className="mt-4 space-y-4">
                 {faqItems.map((item, i) => (
                   <div key={i}>
-                    <dt className="font-bold text-gray-900">{item.question}</dt>
-                    <dd className="mt-1 text-gray-700">{item.answer}</dd>
+                    <dt className="font-bold text-stone-900">{item.question}</dt>
+                    <dd className="mt-1 text-stone-700">{item.answer}</dd>
                   </div>
                 ))}
               </dl>
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">まとめ</h2>
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
                 <li>サブスク整理は<strong>まず契約を洗い出す</strong>ところから。カード明細・スマホのサブスク管理・銀行引き落としを確認します。</li>
                 <li>見落としがちな月額課金（無料トライアル後の自動課金、アプリ内課金など）を一覧にすると、やめるか残すかの判断がしやすくなります。</li>
                 <li>「直近で使ったか」を基準に、使っていないものから解約・一時停止を検討するのがおすすめです。</li>
                 <li>削減額の効果は
-                  <Link href="/tools/fixed-cost-impact" className="font-bold text-gray-900 hover:underline">固定費削減インパクト計算</Link>
+                  <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
                   で確認できます。固定費全体の順番は
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-gray-900 hover:underline">固定費見直しチェックリスト</Link>
+                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
                   を参照してください。
                 </li>
               </ul>
@@ -246,7 +241,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="fixed-cost-subscription-audit" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }

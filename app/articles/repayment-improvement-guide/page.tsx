@@ -4,6 +4,10 @@ import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
+import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
+import { ArticlePageShell } from "@/app/components/ArticlePageShell";
+import { articleUsesWideLayout } from "@/lib/article-layout";
+
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/repayment-improvement-guide`;
@@ -33,8 +37,8 @@ const jsonLd = {
   url: ARTICLE_URL,
   datePublished: "2025-03-08",
   dateModified: "2025-03-08",
-  author: { "@type": "Organization", name: "借入返済シミュレーター" },
-  publisher: { "@type": "Organization", name: "借入返済シミュレーター" },
+  author: ARTICLE_AUTHOR_JSON_LD,
+  publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
@@ -99,10 +103,10 @@ function CategoryReadBlock() {
   if (articles.length === 0) return null;
   return (
     <section id="category-read">
-      <h2 className="text-lg font-black text-gray-900 md:text-xl">
+      <h2 className="text-lg font-black text-stone-900 md:text-xl">
         このカテゴリで読むべき記事
       </h2>
-      <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+      <p className="mt-3 text-sm text-stone-700 leading-relaxed">
         返済改善カテゴリでは、次の記事もあわせて読むと理解が深まります。
       </p>
       <ul className="mt-4 space-y-3">
@@ -110,10 +114,10 @@ function CategoryReadBlock() {
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-gray-100"
+              className="block rounded-xl border border-stone-200 bg-stone-50 p-4 transition hover:bg-stone-100"
             >
-              <span className="text-sm font-bold text-gray-900">{a.title}</span>
-              <p className="mt-1 text-xs text-gray-600 line-clamp-2">{a.summary}</p>
+              <span className="text-sm font-bold text-stone-900">{a.title}</span>
+              <p className="mt-1 text-xs text-stone-600 line-clamp-2">{a.summary}</p>
             </Link>
           </li>
         ))}
@@ -171,32 +175,13 @@ export default function Page() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="パンくず">
-          <ol className="flex flex-wrap items-center gap-1">
-            <li>
-              <Link href="/" className="hover:underline">
-                トップ
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li>
-              <Link href="/articles" className="hover:underline">
-                知っておきたいこと
-              </Link>
-            </li>
-            <li aria-hidden>/</li>
-            <li className="font-bold text-gray-900" aria-current="page">
-              {ARTICLE_TITLE}
-            </li>
-          </ol>
-        </nav>
-
-        <div className="ds-card ds-card-pad">
-          <h1 className="text-2xl font-black text-gray-900 md:text-3xl">
+      
+      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("repayment-improvement-guide")}>
+<div className="ds-card ds-card-pad">
+          <h1 className="text-2xl font-black text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
-          <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
             本記事で紹介する改善策は、一般的な返済の考え方に基づくものです。実際の商品や契約条件によって異なる場合があります。
           </p>
 
@@ -212,11 +197,11 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-black text-gray-900">目次</h2>
+            <h2 className="text-sm font-black text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
               {tocItems.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-gray-700 hover:underline">
+                  <a href={`#${item.id}`} className="text-stone-700 hover:underline">
                     {item.label}
                   </a>
                 </li>
@@ -224,7 +209,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
             <p>
               借金返済を少しでも軽くしたい、総利息を減らしたい、完済を早めたいと考える人は多いはずです。ただし、返済を軽くする方法といっても、毎月の負担を減らしたいのか、総支払額を減らしたいのか、早く終わらせたいのかで、取るべき方法は変わります。
             </p>
@@ -233,7 +218,7 @@ export default function Page() {
             </p>
 
             <section id="conclusion">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 結論｜返済を軽くする方法は1つではない
               </h2>
               <p className="mt-3">
@@ -268,7 +253,7 @@ export default function Page() {
             </section>
 
             <section id="monthly-vs-total">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 まず確認したいのは「毎月」と「総額」のどちらを重視するか
               </h2>
               <p className="mt-3">
@@ -280,7 +265,7 @@ export default function Page() {
             </section>
 
             <section id="method-1">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 方法1｜繰り上げ返済・追加返済で総利息を減らす
               </h2>
               <p className="mt-3">
@@ -290,7 +275,7 @@ export default function Page() {
                 特に、追加返済後も毎月返済額を維持して完済を早める考え方では、利息軽減効果が見えやすくなります。詳しくは
                 <Link
                   href="/articles/early-repayment-effect"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   繰り上げ返済の効果とは？利息はいくら減る？返済期間短縮との違いも解説
                 </Link>
@@ -299,7 +284,7 @@ export default function Page() {
             </section>
 
             <section id="method-2">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 方法2｜返済期間を見直して総支払額を管理する
               </h2>
               <p className="mt-3">
@@ -309,7 +294,7 @@ export default function Page() {
                 たとえば、100万円を年利15%で100ヶ月返済するような長期設定では、毎月返済額は低く見えても、利息負担はかなり重くなります。詳しくは
                 <Link
                   href="/articles/100man-100months-risk-at-15percent"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説
                 </Link>
@@ -318,7 +303,7 @@ export default function Page() {
             </section>
 
             <section id="method-3">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 方法3｜毎月返済額を見直して元本の減り方を改善する
               </h2>
               <p className="mt-3">
@@ -328,14 +313,14 @@ export default function Page() {
                 毎月返済額を少し上げるだけでも、元本の減り方が改善し、総利息が大きく変わることがあります。詳しくは
                 <Link
                   href="/articles/fixed-payment-principal-interest-cannot-payoff"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   定額元利で完済できないのはなぜ？返済額が足りないケースをわかりやすく解説
                 </Link>
                 や
                 <Link
                   href="/articles/revo-100-interest"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   リボ払い100万円の利息はいくら？完済までの総支払額をシミュレーション
                 </Link>
@@ -344,7 +329,7 @@ export default function Page() {
             </section>
 
             <section id="method-4">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 方法4｜返済方式を理解して、自分に合う返し方を選ぶ
               </h2>
               <p className="mt-3">
@@ -354,7 +339,7 @@ export default function Page() {
                 毎月の支出を安定させたいのか、総利息を抑えたいのかで向いている方式は変わります。詳しくは
                 <Link
                   href="/articles/repayment-method-difference"
-                  className="font-bold text-gray-900 hover:underline"
+                  className="font-bold text-stone-900 hover:underline"
                 >
                   元利均等返済と元金均等返済の違いは？4つの返済方式を比較して解説
                 </Link>
@@ -363,7 +348,7 @@ export default function Page() {
             </section>
 
             <section id="compare-table">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 返済改善の方法を一覧で比べる
               </h2>
               <p className="mt-3">
@@ -372,25 +357,25 @@ export default function Page() {
               <div className="mt-6 overflow-x-auto">
                 <table className="w-full min-w-[640px] border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-200">
-                      <th className="py-3 pr-4 font-black text-gray-900">方法</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">毎月の負担</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">総利息への効果</th>
-                      <th className="py-3 pr-4 font-black text-gray-900">向いている人</th>
-                      <th className="py-3 font-black text-gray-900">関連記事</th>
+                    <tr className="border-b-2 border-stone-200">
+                      <th className="py-3 pr-4 font-black text-stone-900">方法</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">毎月の負担</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">総利息への効果</th>
+                      <th className="py-3 pr-4 font-black text-stone-900">向いている人</th>
+                      <th className="py-3 font-black text-stone-900">関連記事</th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
+                  <tbody className="text-stone-700">
                     {comparisonRows.map((row) => (
-                      <tr key={row.method} className="border-b border-gray-200">
-                        <td className="py-3 pr-4 font-bold text-gray-900">{row.method}</td>
+                      <tr key={row.method} className="border-b border-stone-200">
+                        <td className="py-3 pr-4 font-bold text-stone-900">{row.method}</td>
                         <td className="py-3 pr-4">{row.monthly}</td>
                         <td className="py-3 pr-4">{row.interest}</td>
                         <td className="py-3 pr-4">{row.who}</td>
                         <td className="py-3">
                           <Link
                             href={row.link.href}
-                            className="font-bold text-gray-900 hover:underline"
+                            className="font-bold text-stone-900 hover:underline"
                           >
                             {row.link.label}
                           </Link>
@@ -403,7 +388,7 @@ export default function Page() {
             </section>
 
             <section id="priority">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 どの改善策を優先すべきか
               </h2>
               <p className="mt-3">
@@ -417,7 +402,7 @@ export default function Page() {
             <CategoryReadBlock />
 
             <section id="simulator">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 迷ったらシミュレーターで比較するのが早い
               </h2>
               <p className="mt-3">
@@ -425,7 +410,7 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 そのため、最終的には自分の条件を入れて確認するのが一番確実です。次の
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                   借入返済シミュレーター
                 </Link>
                 では、返済方式や返済条件を切り替えながら、毎月の返済額や総利息を比較できます。
@@ -441,7 +426,7 @@ export default function Page() {
             </section>
 
             <section id="notice">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 注意点
               </h2>
               <p className="mt-3">
@@ -461,12 +446,12 @@ export default function Page() {
             </section>
 
             <section id="faq">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 よくある質問
               </h2>
               <div className="mt-4 space-y-6">
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     返済を軽くする一番いい方法は何ですか？
                   </h3>
                   <p className="mt-2">
@@ -474,7 +459,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     繰り上げ返済は本当に効果がありますか？
                   </h3>
                   <p className="mt-2">
@@ -482,7 +467,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     毎月返済額を下げると楽になりますか？
                   </h3>
                   <p className="mt-2">
@@ -490,7 +475,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     複数の改善策を同時に実行してもよいですか？
                   </h3>
                   <p className="mt-2">
@@ -498,7 +483,7 @@ export default function Page() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-gray-900">
+                  <h3 className="text-base font-black text-stone-900">
                     おまとめローン（借り換え）を検討すべきタイミングはいつですか？
                   </h3>
                   <p className="mt-2">
@@ -509,7 +494,7 @@ export default function Page() {
             </section>
 
             <section id="summary">
-              <h2 className="text-lg font-black text-gray-900 md:text-xl">
+              <h2 className="text-lg font-black text-stone-900 md:text-xl">
                 まとめ
               </h2>
               <p className="mt-3">
@@ -517,7 +502,7 @@ export default function Page() {
               </p>
               <p className="mt-3">
                 1つの方法だけで判断せず、全体を比較して、自分に合う改善策を選ぶことが重要です。自分の条件で試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-gray-900 hover:underline">
+                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">
                   返済シミュレーター
                 </Link>
                 で確認できます。
@@ -535,7 +520,7 @@ export default function Page() {
 
           <ArticleFooter articleSlug="repayment-improvement-guide" />
         </div>
-      </article>
+      </ArticlePageShell>
     </>
   );
 }
