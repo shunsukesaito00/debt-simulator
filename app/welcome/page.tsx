@@ -59,7 +59,7 @@ export default function WelcomePage() {
         </ol>
       </nav>
 
-      <div className="ds-card ds-card-pad">
+      <div className="ds-surface-soft ds-card-pad">
         <p className="text-sm font-normal text-stone-600">サイトの案内</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">
           はじめての方へ

@@ -4,22 +4,23 @@
 
 :root {
   color-scheme: light;
-  /* Design tokens（モダン寄せ：シャープな角丸・薄い階層） */
-  --ds-bg: 250 250 249; /* stone-50 */
-  --ds-bg-elev: 255 255 255;
-  --ds-bg-muted: 245 245 244; /* stone-100 セクション交互 */
-  --ds-fg: 41 37 36; /* stone-800 */
-  --ds-muted: 87 83 78; /* stone-600 */
-  --ds-border: 231 229 228; /* stone-200 */
-  --ds-accent: 22 163 74; /* green-600 リンク等 */
-  --ds-accent-strong: 21 128 61; /* green-700 CTA（コントラスト） */
-  --ds-accent-2: 34 197 94; /* green-500 */
+  /* Design tokens：個人ブログ寄せ（暖色の紙・柔らかい角・影は重なり程度） */
+  --ds-bg: 245 242 237; /* warm paper */
+  --ds-bg-elev: 255 253 250; /* わずかに温かい白 */
+  --ds-bg-muted: 236 232 225; /* セクション交互 */
+  --ds-fg: 41 37 36;
+  --ds-muted: 87 83 78;
+  --ds-border: 228 224 216; /* 柔らかい境界 */
+  --ds-accent: 22 163 74;
+  --ds-accent-strong: 21 128 61;
+  --ds-accent-2: 34 197 94;
 
-  --ds-radius-sm: 8px;
-  --ds-radius-md: 12px;
-  --ds-radius-lg: 12px;
-  --ds-shadow-sm: 0 1px 0 rgba(41, 37, 36, 0.04), 0 1px 3px rgba(41, 37, 36, 0.06);
-  --ds-shadow-md: 0 4px 6px -1px rgba(41, 37, 36, 0.06), 0 2px 4px -2px rgba(41, 37, 36, 0.05);
+  --ds-radius-sm: 10px;
+  --ds-radius-md: 16px;
+  --ds-radius-lg: 20px;
+  /* 紙が少し重なる程度（浮きすぎない） */
+  --ds-shadow-sm: 0 1px 0 rgba(28, 25, 23, 0.04), 0 2px 10px rgba(28, 25, 23, 0.05);
+  --ds-shadow-md: 0 2px 4px rgba(28, 25, 23, 0.04), 0 14px 32px rgba(28, 25, 23, 0.08);
 }
 
 html,
@@ -46,7 +47,7 @@ textarea {
 }
 
 ::selection {
-  background: rgba(41, 37, 36, 0.12);
+  background: rgba(41, 37, 36, 0.1);
 }
 
 @layer base {
@@ -55,7 +56,7 @@ textarea {
   }
   a:focus-visible,
   button:focus-visible {
-    @apply outline-none ring-2 ring-emerald-700/40 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
+    @apply outline-none ring-2 ring-emerald-700/35 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
   }
 }
 
@@ -70,18 +71,17 @@ textarea {
     @apply mx-auto w-full max-w-5xl px-4 md:px-6;
   }
 
-  /* トップヒーロー等：淡いグラデ＋フラット寄り */
+  /* トップヒーロー：枠線を弱め、面のグラデで区切る */
   .ds-hero {
-    @apply border;
-    border-color: rgb(var(--ds-border));
-    border-radius: var(--ds-radius-md);
+    border: none;
+    border-radius: var(--ds-radius-lg);
     background: linear-gradient(
-      135deg,
+      168deg,
       rgb(var(--ds-bg-elev)) 0%,
-      rgb(var(--ds-bg-muted)) 42%,
-      rgba(240, 253, 244, 0.45) 100%
+      rgb(var(--ds-bg-muted)) 48%,
+      rgba(220, 252, 231, 0.28) 100%
     );
-    box-shadow: var(--ds-shadow-sm);
+    box-shadow: var(--ds-shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.65);
   }
 
   /* セクション背景の交互用 */
@@ -95,10 +95,17 @@ textarea {
     @apply p-6 md:p-8;
   }
 
+  /* 全面カードより軽い面（トップのサブセクション用） */
+  .ds-surface-soft {
+    border-radius: var(--ds-radius-md);
+    border: 1px solid rgb(var(--ds-border) / 0.55);
+    background: rgba(255, 253, 250, 0.72);
+    box-shadow: var(--ds-shadow-sm);
+  }
+
   /* Cards / sections */
   .ds-card {
-    @apply border;
-    border-color: rgb(var(--ds-border));
+    border: 1px solid rgb(var(--ds-border) / 0.65);
     background: rgb(var(--ds-bg-elev));
     border-radius: var(--ds-radius-md);
     box-shadow: var(--ds-shadow-sm);
@@ -107,15 +114,15 @@ textarea {
     @apply p-6 md:p-8;
   }
   .ds-subcard {
-    @apply border;
-    border-color: rgb(var(--ds-border));
-    background: rgb(var(--ds-bg-elev));
+    border: 1px solid rgb(var(--ds-border) / 0.55);
+    background: rgba(255, 253, 250, 0.85);
     border-radius: var(--ds-radius-sm);
+    box-shadow: 0 1px 0 rgba(28, 25, 23, 0.03);
   }
 
   /* シミュレーター等のフォームコントロール */
   .ds-input {
-    @apply rounded-lg border border-stone-200 bg-white px-3 py-2 text-base font-semibold text-stone-900 outline-none transition;
+    @apply rounded-lg border border-stone-200/90 bg-white px-3 py-2 text-base font-semibold text-stone-900 outline-none transition;
   }
   .ds-input:focus-visible {
     @apply border-emerald-700 ring-2 ring-emerald-700/25 ring-offset-2 ring-offset-white;
@@ -123,10 +130,6 @@ textarea {
 
   /*
    * Typography scale（読みやすさ）
-   * - ページタイトル: .ds-h1 / .ds-page-serif + font-bold
-   * - セクション見出し: .ds-h2（semibold）／記事内 .ds-blog-prose h2,h3 も semibold で階層を揃える
-   * - ラベル・補助: .ds-label（medium + muted）
-   * 本文内リンクは .ds-link-prose（下線は hover で強調）
    */
   .ds-h1 {
     @apply text-2xl font-bold tracking-tight text-stone-900 md:text-3xl;
@@ -135,10 +138,22 @@ textarea {
     @apply text-lg font-semibold tracking-tight text-stone-900 md:text-xl;
   }
   .ds-label {
-    @apply text-xs font-medium tracking-wide text-stone-600;
+    @apply text-xs font-medium text-stone-500;
   }
   .ds-muted {
     @apply text-stone-600;
+  }
+
+  /* 日付・メタ行（開発者ブログのスパイス：等幅はここだけ） */
+  .ds-meta {
+    @apply text-[11px] font-medium tabular-nums text-stone-500 sm:text-xs;
+    font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+  }
+
+  /* セクション見出し：左罫でブログ的な区切り */
+  .ds-section-title {
+    @apply border-l-[3px] border-emerald-800/25 pl-3 text-lg font-semibold tracking-tight text-stone-900 md:text-xl;
+    font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
 
   /* Links & buttons */
@@ -149,7 +164,6 @@ textarea {
   .ds-link:hover {
     @apply underline;
   }
-  /** 記事本文・カード内のインラインリンク（強すぎない太さ） */
   .ds-link-prose {
     @apply font-medium text-emerald-900 underline decoration-emerald-200/80 underline-offset-2 transition hover:decoration-emerald-700;
   }
@@ -158,21 +172,28 @@ textarea {
     border-radius: var(--ds-radius-sm);
   }
   .ds-btn:focus-visible {
-    @apply outline-none ring-2 ring-emerald-700/45 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
+    @apply outline-none ring-2 ring-emerald-700/40 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
   }
   .ds-btn-primary {
     background: rgb(var(--ds-accent-strong));
     color: white;
   }
   .ds-btn-primary:hover {
-    filter: brightness(0.96);
+    filter: brightness(0.97);
   }
+  /* 二次CTA：枠は残しつつ軽く */
   .ds-btn-secondary {
-    @apply border bg-white text-stone-800;
-    border-color: rgb(var(--ds-border));
+    @apply border border-stone-300/80 bg-white/90 text-stone-800 shadow-sm;
   }
   .ds-btn-secondary:hover {
     background: rgb(var(--ds-bg-muted));
+  }
+  /* テキストに近い第三ボタン */
+  .ds-btn-ghost {
+    @apply border border-transparent bg-transparent text-stone-800;
+  }
+  .ds-btn-ghost:hover {
+    @apply border-stone-200/90 bg-stone-100/80 text-stone-900;
   }
   .ds-btn-sm {
     @apply px-3 py-2 text-xs font-semibold;
@@ -182,16 +203,15 @@ textarea {
   /* Header / footer surfaces */
   .ds-header {
     @apply border-b backdrop-blur-md;
-    border-color: rgb(var(--ds-border));
-    background: rgba(255, 255, 255, 0.82);
+    border-color: rgb(var(--ds-border) / 0.65);
+    background: rgba(255, 253, 250, 0.78);
   }
   .ds-footer {
     @apply border-t;
-    border-color: rgb(var(--ds-border));
+    border-color: rgb(var(--ds-border) / 0.55);
     background: rgb(var(--ds-bg-elev));
   }
 
-  /* ブログ風見出し（Noto Serif JP は layout で variable 注入） */
   .ds-page-serif {
     font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
@@ -211,11 +231,6 @@ textarea {
     font-family: var(--font-heading-serif), ui-serif, "Hiragino Mincho ProN", "Yu Mincho", serif;
   }
 
-  /**
-   * 記事ページのメインカラム（section 単位で既に見出しがある場合）
-   * — .ds-blog-prose と違い、子孫の h2 に一律 margin は付けない（二重余白防止）
-   */
-  /* 記事本文：個人ブログ寄せ（行間ゆたり・色はやわらかめ） */
   .ds-article-body {
     @apply text-[15px] text-stone-700 sm:text-base;
     line-height: 1.85;
@@ -233,24 +248,18 @@ textarea {
     @apply my-4 border-l-[3px] border-stone-200/90 pl-4 text-stone-600 not-italic;
   }
 
-  /**
-   * 記事ページ：本文を読みやすい幅に（表・グラフは内側で max-w-none 等で調整可）
-   * 長文の段落は可能なら .ds-blog-prose でラップし、見出し階層を統一する（docs/TYPOGRAPHY.md）。
-   */
   .ds-article-shell {
     @apply mx-auto max-w-prose;
   }
 
-  /** 記事末・補足ブロックの区切り（連続する ds-subcard のリズム用） */
   .ds-section-gap {
     @apply mb-6;
   }
 }
 
 @layer utilities {
-  /* 記事の“塊感”を作る横線（コンポーネント内で必要なところだけ使う） */
   .ds-hr {
-    @apply w-full border-t border-stone-200;
+    @apply w-full border-t border-stone-200/80;
   }
 }
 
@@ -285,7 +294,6 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 1px 3px rgba(21, 128, 61, 0.35);
 }
 
-/* 数値入力のスピンボタン（矢印）を非表示にして選択中の文字が隠れないように */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -297,7 +305,6 @@ input[type="number"] {
   appearance: textfield;
 }
 
-/* スクロールバー（極細） */
 ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
@@ -312,7 +319,6 @@ input[type="number"] {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a29e;
 }
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #d6d3d1 transparent;

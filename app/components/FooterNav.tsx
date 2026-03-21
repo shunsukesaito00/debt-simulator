@@ -17,13 +17,13 @@ const siteLinks = [
 ] as const;
 
 const linkClass =
-  "text-sm font-semibold text-stone-600 transition-colors hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm";
+  "text-sm font-medium text-stone-600 transition-colors hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(255,253,250)] rounded-sm";
 
 function CategoryColumn() {
   const byCategory = getArticlesByCategory();
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">カテゴリ</p>
+      <p className="ds-label">カテゴリ</p>
       <ul className="mt-3 flex flex-col gap-1.5">
         {ARTICLE_LIST_SECTIONS.map((sec) => {
           const count = sec.articleCategories.reduce(
@@ -57,10 +57,13 @@ export default function FooterNav() {
   return (
     <footer className="ds-footer">
       <div className="ds-container py-10">
-        <div className="grid gap-10 sm:grid-cols-2">
+        <p className="max-w-xl text-sm leading-relaxed text-stone-600">
+          個人の生活再建・家計改善の試行錯誤を、記事と試算で整理しています。急がず、自分のペースで読んでください。
+        </p>
+        <div className="mt-10 grid gap-10 sm:grid-cols-2">
           {/* 左列: サイトリンク */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">サイト情報</p>
+            <p className="ds-label">サイト情報</p>
             <nav className="mt-3 flex flex-col gap-1.5" aria-label="フッターリンク">
               {siteLinks.map((l) => (
                 <Link key={l.href} href={l.href} className={linkClass}>

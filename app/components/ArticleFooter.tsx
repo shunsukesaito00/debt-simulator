@@ -31,7 +31,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
   return (
     <section className="mt-10 border-t border-stone-200 pt-8">
       {showCta && (
-        <div className="ds-section-gap ds-subcard p-6">
+        <div className="ds-section-gap rounded-xl border border-stone-200/55 bg-white/55 p-6 shadow-sm">
           <h2 className="text-base font-semibold text-stone-900">自分の条件で試算する</h2>
           <p className="mt-2 text-sm text-stone-700 leading-relaxed">
             借入額・金利・返済期間を入力して、月々の返済額や総利息をシミュレーションできます。
@@ -63,7 +63,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
                 <TrackedLink
                   key={link.href}
                   href={link.href}
-                  className="ds-subcard block p-4 transition-colors hover:border-emerald-200/80 hover:shadow-ds"
+                  className="block rounded-xl border border-stone-200/55 bg-white/55 p-4 shadow-sm transition-colors hover:border-stone-300/80 hover:bg-white/90"
                   event={{
                     action: "click_article_related_article",
                     location: "article_related_articles",

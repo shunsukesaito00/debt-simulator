@@ -58,7 +58,7 @@ export default function ArticlesListPage() {
         </ol>
       </nav>
 
-      <div className="ds-card ds-card-pad">
+      <div className="ds-surface-soft ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">
           テーマ別記事一覧
         </h1>
@@ -73,24 +73,24 @@ export default function ArticlesListPage() {
         </p>
 
         {storyArticles.length > 0 && (
-          <section className="mt-10 border-t border-stone-200 pt-10" aria-labelledby="articles-story-heading">
-            <h2 id="articles-story-heading" className="ds-page-serif text-lg font-semibold text-stone-900 md:text-xl">
+          <section className="mt-10 border-t border-stone-200/80 pt-10" aria-labelledby="articles-story-heading">
+            <h2 id="articles-story-heading" className="ds-section-title">
               体験記・ストーリー
             </h2>
-            <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+            <p className="mt-3 text-sm text-stone-600 leading-relaxed">
               体験記・ストーリー形式の記事です。
             </p>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-5 divide-y divide-stone-200/70 rounded-xl border border-stone-200/50 bg-white/45">
               {storyArticles.map((article) => {
                 const dateLabel = formatPublishedAt(article.publishedAt);
                 return (
                   <li key={article.slug}>
                     <Link
                       href={`/articles/${article.slug}`}
-                      className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
+                      className="block px-4 py-4 transition first:rounded-t-xl last:rounded-b-xl hover:bg-stone-50/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/25 focus-visible:ring-inset"
                     >
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
+                        <span className="rounded-md border border-stone-200/80 bg-stone-50/90 px-2 py-0.5 text-xs font-medium text-stone-600">
                           {CATEGORY_LABELS[article.category]}
                         </span>
                         {article.badge && (
@@ -99,14 +99,14 @@ export default function ArticlesListPage() {
                           </span>
                         )}
                         {dateLabel && (
-                          <time className="text-xs text-stone-500" dateTime={article.publishedAt}>
+                          <time className="ds-meta text-stone-500" dateTime={article.publishedAt}>
                             {dateLabel}
                           </time>
                         )}
                       </div>
-                      <span className="mt-2 block text-sm font-medium text-stone-900 leading-snug">{article.title}</span>
-                      <p className="mt-1.5 text-xs text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
-                      <span className="mt-2 inline-block text-xs font-semibold text-emerald-900">読む →</span>
+                      <span className="mt-2 block text-sm font-semibold text-stone-900 leading-snug">{article.title}</span>
+                      <p className="mt-1.5 text-sm text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
+                      <span className="ds-meta mt-2 inline-block text-emerald-900">読む →</span>
                     </Link>
                   </li>
                 );
@@ -122,27 +122,27 @@ export default function ArticlesListPage() {
             );
             return (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="ds-page-serif flex items-center gap-2 text-xl font-semibold text-stone-900 border-b-2 border-stone-200 pb-2">
-                  {section.label}
-                  <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs font-semibold text-stone-500">
+                <h2 className="ds-section-title flex flex-wrap items-center gap-2 text-xl md:text-2xl">
+                  <span>{section.label}</span>
+                  <span className="rounded-full bg-stone-100/90 px-2 py-0.5 text-xs font-medium text-stone-500 tabular-nums">
                     {items.length}
                   </span>
                 </h2>
-                <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+                <p className="mt-3 text-sm text-stone-700 leading-relaxed">
                   {section.description}
                 </p>
                 {items.length > 0 ? (
-                  <ul className="mt-5 grid gap-5">
+                  <ul className="mt-5 divide-y divide-stone-200/75 border-y border-stone-200/65">
                     {items.map((article) => {
                       const dateLabel = formatPublishedAt(article.publishedAt);
                       return (
                       <li key={article.slug}>
                         <Link
                           href={`/articles/${article.slug}`}
-                          className="block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
+                          className="block py-5 first:pt-0 transition hover:bg-stone-50/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/20 focus-visible:ring-inset -mx-3 rounded-lg px-3"
                         >
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
+                            <span className="rounded-md border border-stone-200/80 bg-stone-50/90 px-2 py-0.5 text-xs font-medium text-stone-600">
                               {CATEGORY_LABELS[article.category]}
                             </span>
                             {article.order === 0 && (
@@ -156,14 +156,14 @@ export default function ArticlesListPage() {
                               </span>
                             )}
                             {dateLabel && (
-                              <time className="text-xs text-stone-500" dateTime={article.publishedAt}>
+                              <time className="ds-meta text-stone-500" dateTime={article.publishedAt}>
                                 {dateLabel}
                               </time>
                             )}
                           </div>
                           <h3 className="ds-page-serif mt-3 text-lg font-semibold text-stone-900">{article.title}</h3>
                           <p className="mt-2 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
-                          <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">記事を読む →</span>
+                          <span className="ds-meta mt-3 inline-block text-emerald-900">記事を読む →</span>
                         </Link>
                       </li>
                     );
@@ -179,8 +179,8 @@ export default function ArticlesListPage() {
           })}
         </div>
 
-        <section className="ds-subcard mt-12 p-6">
-          <h2 className="text-lg font-semibold text-stone-900">自分の条件で試算する</h2>
+        <section className="mt-12 rounded-xl border border-stone-200/55 bg-white/50 p-6 shadow-sm">
+          <h2 className="ds-h2">自分の条件で試算する</h2>
           <p className="mt-3 text-sm text-stone-700 leading-relaxed">
             記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力し、月々返済額・総利息・完済時期を条件別に比較して、記事とシミュレーターを往復して判断に役立ててください。
           </p>

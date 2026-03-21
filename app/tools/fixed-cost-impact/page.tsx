@@ -50,7 +50,7 @@ export default function FixedCostImpactPage() {
         </ol>
       </nav>
 
-      <div className="ds-card ds-card-pad">
+      <div className="ds-surface-soft ds-card-pad">
         <h1 className="ds-h1">固定費削減インパクト計算</h1>
         <p className="mt-2 text-xs text-stone-500">
           入力値は送信されません。ブラウザ内だけで計算しています。
@@ -59,7 +59,7 @@ export default function FixedCostImpactPage() {
           毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。通信費・サブスク・保険などの見直し効果を数字で把握するためのツールです。
         </p>
 
-        <section className="ds-subcard mt-6 p-5">
+        <section className="mt-6 rounded-xl border border-stone-200/55 bg-white/70 p-5 shadow-sm">
           <h2 className="text-base font-semibold text-stone-900">入力</h2>
           <div className="mt-4 space-y-4">
             <div>
@@ -98,7 +98,7 @@ export default function FixedCostImpactPage() {
           </div>
         </section>
 
-        <section className="ds-subcard mt-6 p-5">
+        <section className="mt-6 rounded-xl border border-stone-200/55 bg-white/70 p-5 shadow-sm">
           <h2 className="text-base font-semibold text-stone-900">削減効果の目安</h2>
           <p className="mt-1 text-sm text-stone-600">
             毎月{formatYen(monthly)}の削減を続けた場合の累計です。
@@ -135,8 +135,8 @@ export default function FixedCostImpactPage() {
           </div>
         </section>
 
-        <section className="ds-subcard mt-6 p-5">
-          <h2 className="text-sm font-bold text-stone-700">計算の考え方</h2>
+        <section className="mt-6 rounded-xl border border-stone-200/55 bg-white/70 p-5 shadow-sm">
+          <h2 className="text-sm font-semibold text-stone-700">計算の考え方</h2>
           <p className="mt-2 text-xs text-stone-600 leading-relaxed">
             毎月の削減額 × 継続月数で累計を出しています。実際の支出は収入やライフイベントで変動するため、あくまで目安としてご利用ください。
           </p>

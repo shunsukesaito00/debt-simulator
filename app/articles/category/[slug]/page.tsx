@@ -72,12 +72,12 @@ export default async function CategoryPage({ params }: Props) {
       {items.length === 0 ? (
         <p className="text-sm text-stone-600">このカテゴリにはまだ記事がありません。</p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="divide-y divide-stone-200/75 overflow-hidden rounded-xl border border-stone-200/50 bg-white/45">
           {items.map((article) => (
             <li key={article.slug}>
               <TrackedLink
                 href={`/articles/${article.slug}`}
-                className="block ds-subcard p-4 transition hover:border-emerald-200/80 hover:shadow-ds"
+                className="block px-4 py-4 transition first:rounded-t-xl last:rounded-b-xl hover:bg-stone-50/85"
                 event={{
                   action: "click_category_article",
                   location: "category_page",
@@ -87,11 +87,11 @@ export default async function CategoryPage({ params }: Props) {
                   category_key: article.category,
                 }}
               >
-                <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
+                <span className="rounded-md border border-stone-200/80 bg-stone-50/90 px-2 py-0.5 text-xs font-medium text-stone-600">
                   {CATEGORY_LABELS[article.category as ArticleCategory]}
                 </span>
                 <span className="mt-2 block text-sm font-semibold text-stone-900 leading-snug">{article.title}</span>
-                <p className="mt-1.5 text-xs text-stone-500 leading-relaxed line-clamp-2">{article.summary}</p>
+                <p className="mt-1.5 text-sm text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
               </TrackedLink>
             </li>
           ))}

@@ -17,24 +17,24 @@ export function SimulatorSummarySection({
   activeTab,
 }: SimulatorSummarySectionProps) {
   return (
-    <section className="flex min-h-0 flex-col rounded-ds border border-stone-200 bg-white p-5 shadow-ds">
-      <h2 className="text-lg font-bold text-stone-900">サマリー（A/B 比較）</h2>
+    <section className="flex min-h-0 flex-col rounded-ds border border-stone-200/70 bg-white/90 p-5 shadow-sm">
+      <h2 className="text-lg font-semibold text-stone-900">サマリー（A/B 比較）</h2>
       {result.ok && (
         <div className="mt-4 grid grid-cols-2 gap-4 rounded-ds border border-emerald-200/60 bg-emerald-50/40 p-6">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">毎月返済額</div>
+            <div className="ds-label">毎月返済額</div>
             <div className="mt-1 text-2xl font-bold text-stone-900 md:text-3xl">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">総返済額</div>
+            <div className="ds-label">総返済額</div>
             <div className="mt-1 text-2xl font-bold text-stone-900 md:text-3xl">{formatYen(result.totalPayment + result.totalBonus)}</div>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">利息合計</div>
+            <div className="ds-label">利息合計</div>
             <div className="mt-1 text-xl font-bold text-amber-800 md:text-2xl">{formatYen(result.totalInterest)}</div>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">完済</div>
+            <div className="ds-label">完済</div>
             <div className="mt-1 text-lg font-bold text-stone-900 md:text-xl">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
           </div>
         </div>

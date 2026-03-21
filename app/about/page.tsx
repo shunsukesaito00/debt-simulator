@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="mx-auto max-w-prose">
-      <div className="ds-card ds-card-pad">
-        <p className="text-sm font-bold text-stone-600">運営者プロフィール</p>
+      <div className="ds-surface-soft ds-card-pad">
+        <p className="text-sm font-medium text-stone-600">運営者プロフィール</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">運営者情報</h1>
 
         <div className="mt-6 space-y-4 text-sm text-stone-700 leading-relaxed">
@@ -81,8 +81,8 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="ds-card ds-card-pad mt-6">
-        <h2 className="ds-page-serif text-lg font-bold text-stone-900">運営方針・編集ポリシー</h2>
+      <div className="ds-surface-soft ds-card-pad mt-6">
+        <h2 className="ds-page-serif text-lg font-semibold text-stone-900">運営方針・編集ポリシー</h2>
         <div className="mt-4 space-y-4 text-sm text-stone-700 leading-relaxed">
           <div>
             <div className="font-semibold text-stone-900">サイトの方針</div>

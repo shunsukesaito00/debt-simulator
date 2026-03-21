@@ -48,7 +48,7 @@ export function SiteSearchClient({ articles }: Props) {
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="block ds-subcard p-4 transition hover:border-emerald-200/80 hover:shadow-ds"
+              className="block rounded-xl border border-stone-200/55 bg-white/55 p-4 shadow-sm transition hover:border-stone-300/80 hover:bg-white/90"
             >
               <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-[10px] font-semibold text-stone-500">
                 {CATEGORY_LABELS[a.category]}
