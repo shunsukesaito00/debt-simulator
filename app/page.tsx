@@ -13,7 +13,7 @@ import { getSiteBaseUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib
 const BASE = getSiteBaseUrl();
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME}｜体験記・副業・節約と返済・固定費の試算`,
+  title: `${SITE_NAME}｜体験記・副業実験・節約と返済・固定費の試算`,
   description: SITE_DESCRIPTION,
   alternates: { canonical: BASE },
   openGraph: {
@@ -70,11 +70,19 @@ const THEME_PILLARS: Pillar[] = [
   },
   {
     icon: "💼",
-    title: "副業・収入改善",
-    desc: "返済とつなげた副業の記録や、時間とリスクの考え方",
+    title: "副業実験・収入改善",
+    desc: "返済や家計改善のための副業・個人開発・販売記録",
     href: "/articles#side-income",
     eventLocation: "top_theme_pillars",
     categoryKey: "side-income",
+  },
+  {
+    icon: "🗓️",
+    title: "月次収益レポート",
+    desc: "副業実験の定点観測。月ごとのレンジ推移と次の仮説を記録",
+    href: "/income",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "income-report",
   },
   {
     icon: "🍱",
@@ -199,9 +207,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 1b. 3本柱：体験記・副業・節約 */}
+      {/* 1b. 3本柱：体験記・副業実験・節約 */}
       <section className="ds-card ds-card-pad">
-        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">体験記・副業・節約の最新</h2>
+        <h2 className="ds-page-serif text-xl font-semibold text-stone-900 md:text-2xl">体験記・副業実験・節約の最新</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           カテゴリ別の新着記事です。
         </p>
@@ -236,7 +244,7 @@ export default function Page() {
             </TrackedLink>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-emerald-900">副業・収入改善</h3>
+            <h3 className="text-sm font-semibold text-emerald-900">副業実験・収入改善</h3>
             <ul className="mt-3 space-y-2">
               {pillarSide.map((a) => (
                 <li key={a.slug}>
@@ -261,7 +269,14 @@ export default function Page() {
               className="mt-3 inline-block text-xs font-semibold text-emerald-900"
               event={{ action: "click_top_pillar_more", location: "top_three_pillars", target: "/articles/category/side-income", link_type: "pillar_more" }}
             >
-              副業の記事をもっと見る →
+              副業実験の記事をもっと見る →
+            </TrackedLink>
+            <TrackedLink
+              href="/income"
+              className="mt-1 inline-block text-xs font-semibold text-emerald-900"
+              event={{ action: "click_top_pillar_income", location: "top_three_pillars", target: "/income", link_type: "income_archive" }}
+            >
+              月次の収益レポートを見る →
             </TrackedLink>
           </div>
           <div>

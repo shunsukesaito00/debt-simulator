@@ -24,7 +24,7 @@ export type ArticleCategory = (typeof ARTICLE_CATEGORIES)[number];
 
 export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
   story: "体験記・返済日記",
-  "side-income": "副業・収入改善",
+  "side-income": "副業実験・収入改善",
   saving: "節約・生活改善",
   "fixed-cost": "固定費見直し",
   household: "家計管理",
@@ -44,7 +44,7 @@ export const CATEGORY_DESCRIPTIONS: Record<ArticleCategory, string> = {
   story:
     "借金や返済に関する個人の体験記・日記。状況や試行錯誤の記録を置いています。",
   "side-income":
-    "返済のために副業や収入の柱を増やした経験、選び方、確定申告まで。一般論ではなく「返済とつなげた」視点で整理します。",
+    "返済や家計改善のために取り組む副業・個人開発・販売記録をまとめるカテゴリです。月次の収益レポートと合わせて、実験の経過を確認できます。",
   saving:
     "食費・日用品・ポイントなど、暮らしの中での節約・工夫。固定費以外の変動費や生活のコツもここにまとめます。",
   "fixed-cost":
@@ -87,9 +87,9 @@ export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
   },
   {
     id: "side-income",
-    label: "副業・収入改善",
+    label: "副業実験・収入改善",
     description:
-      "返済のために副業を始めた記録や、会社員のまま収入を増やすときの選び方。数字と生活の両方から整理します。",
+      "返済や家計改善のために取り組む副業・個人開発・販売記録の読み物です。月次の定点観測は /income で確認できます。",
     articleCategories: ["side-income"],
   },
   {

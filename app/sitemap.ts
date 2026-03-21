@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { articlesList, getArticle, getArticleLastModifiedIso } from "@/lib/articles";
+import { getIncomeReports } from "@/lib/income-log";
 import { getSiteBaseUrl } from "@/lib/site-config";
 
 const BASE = getSiteBaseUrl();
@@ -31,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/tools/fixed-cost-impact", priority: 0.8, changeFrequency: "monthly" },
     { path: "/resources/consultation-guide", priority: 0.7, changeFrequency: "monthly" },
     { path: "/updates", priority: 0.5, changeFrequency: "weekly" },
+    { path: "/income", priority: 0.6, changeFrequency: "weekly" },
     { path: "/glossary", priority: 0.6, changeFrequency: "monthly" },
     { path: "/search", priority: 0.5, changeFrequency: "monthly" },
     { path: "/stories/submit", priority: 0.4, changeFrequency: "yearly" },
@@ -69,5 +71,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticRoutes, ...articleRoutes];
+  const incomeRoutes = getIncomeReports().map((r) => ({
+    url: `${BASE}/income/${r.month}`,
+    lastModified: new Date(`${r.publishedAt}T12:00:00+09:00`),
+    changeFrequency: "monthly" as const,
+    priority: 0.55,
+  }));
+
+  return [...staticRoutes, ...articleRoutes, ...incomeRoutes];
 }

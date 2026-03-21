@@ -1,4 +1,4 @@
-import { getDefaultArticleEnhancements } from "@/lib/article-enhancements";
+import { getDefaultArticleEnhancements, type ArticleEnhancementBlocks } from "@/lib/article-enhancements";
 import { getArticle } from "@/lib/articles";
 import { ArticleChecklist } from "./ArticleChecklist";
 import { ArticleFurtherReading, type FurtherReadingItem } from "./ArticleFurtherReading";

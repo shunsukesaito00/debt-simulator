@@ -8,6 +8,7 @@ const siteLinks = [
   { href: "/glossary", label: "用語集" },
   { href: "/search", label: "記事検索" },
   { href: "/updates", label: "更新ログ" },
+  { href: "/income", label: "収益レポート" },
   { href: "/stories/submit", label: "体験談を送る" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/disclaimer", label: "免責事項" },

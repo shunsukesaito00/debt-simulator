@@ -215,20 +215,22 @@ textarea {
    * 記事ページのメインカラム（section 単位で既に見出しがある場合）
    * — .ds-blog-prose と違い、子孫の h2 に一律 margin は付けない（二重余白防止）
    */
+  /* 記事本文：個人ブログ寄せ（行間ゆたり・色はやわらかめ） */
   .ds-article-body {
-    @apply text-base text-stone-800 leading-relaxed;
+    @apply text-[15px] text-stone-700 sm:text-base;
+    line-height: 1.85;
   }
   .ds-article-body section p + p {
-    @apply mt-4;
+    @apply mt-[1.125rem];
   }
   .ds-article-body section ul {
-    @apply my-3 list-disc space-y-2 pl-5 text-stone-800;
+    @apply my-3 list-disc space-y-2 pl-5 text-stone-700;
   }
   .ds-article-body section ol {
-    @apply my-3 list-decimal space-y-2 pl-5 text-stone-800;
+    @apply my-3 list-decimal space-y-2 pl-5 text-stone-700;
   }
   .ds-article-body blockquote {
-    @apply my-4 border-l-4 border-stone-200 pl-4 text-stone-700 italic;
+    @apply my-4 border-l-[3px] border-stone-200/90 pl-4 text-stone-600 not-italic;
   }
 
   /**

@@ -19,17 +19,17 @@ export function ArticleEditorMemo({
 
   return (
     <section
-      className="ds-subcard p-4 text-sm text-stone-600"
+      className="rounded-2xl border border-dashed border-stone-200/90 bg-stone-50/80 p-4 text-sm text-stone-600 md:p-5"
       aria-label="編集メモ"
     >
-      <div className="border-l-4 border-stone-200 pl-4">
-        <h2 className="ds-label text-stone-500">メモ</h2>
-        <p className="mt-2 text-sm text-stone-700 leading-relaxed">{purpose}</p>
+      <div className="border-l-[3px] border-stone-300/70 pl-3">
+        <h2 className="text-xs font-medium text-stone-500">メモ（この記事のねらい）</h2>
+        <p className="mt-2 text-[15px] leading-[1.8] text-stone-700 sm:text-sm">{purpose}</p>
         {reasonAxis != null && reasonAxis !== "" && (
-          <p className="mt-2 text-sm text-stone-600 leading-relaxed">{reasonAxis}</p>
+          <p className="mt-2 text-[15px] leading-[1.8] text-stone-600 sm:text-sm">{reasonAxis}</p>
         )}
         {memo != null && memo !== "" && (
-          <p className="mt-2 text-sm text-stone-600 leading-relaxed italic">{memo}</p>
+          <p className="mt-2 text-[15px] leading-[1.8] text-stone-600 sm:text-sm">{memo}</p>
         )}
       </div>
     </section>

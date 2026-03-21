@@ -8,23 +8,26 @@ type ArticleKeyTakeawaysProps = {
 };
 
 export function ArticleKeyTakeaways({
-  title = "この記事で分かること",
+  title = "まずここだけ押さえる",
   items,
   bullet = "・",
 }: ArticleKeyTakeawaysProps) {
   if (items.length === 0) return null;
   return (
     <aside
-      className="ds-section-gap rounded-lg border border-emerald-200/80 bg-emerald-50/50 px-4 py-4 md:px-5 md:py-5"
+      className="ds-section-gap rounded-2xl border border-stone-200/90 bg-stone-50/90 px-4 py-4 shadow-sm md:px-5 md:py-5"
       aria-labelledby="article-key-takeaways-heading"
     >
-      <h2 id="article-key-takeaways-heading" className="ds-label uppercase tracking-wider text-emerald-900/90">
+      <h2
+        id="article-key-takeaways-heading"
+        className="text-sm font-medium text-stone-600 [font-feature-settings:normal]"
+      >
         {title}
       </h2>
-      <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-stone-800">
+      <ul className="mt-3 space-y-2.5 text-[15px] leading-[1.75] text-stone-700 sm:text-base sm:leading-relaxed">
         {items.map((line) => (
-          <li key={line} className="flex gap-2">
-            <span className="shrink-0 text-emerald-800/90" aria-hidden>
+          <li key={line} className="flex gap-2.5">
+            <span className="shrink-0 text-stone-400" aria-hidden>
               {bullet}
             </span>
             <span>{line}</span>

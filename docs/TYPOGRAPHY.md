@@ -14,7 +14,7 @@
 | `.ds-h2` | セクション見出し（semibold） |
 | `.ds-label` | 補助ラベル（xs・medium・muted） |
 | `.ds-blog-prose` | 長文を **そのまま** prose 化するとき（直下の `h2` に余白が付く） |
-| `.ds-article-body` | **section 内に既に `h2` がある記事**のメインカラム（`ArticleProse`）。段落・リストの余白のみ |
+| `.ds-article-body` | **section 内に既に `h2` がある記事**のメインカラム（`ArticleProse`）。行間 1.85・色はやわらかめ（個人ブログ寄せ） |
 | `.ds-link` | ナビ・カード内の目立たせたいリンク（medium） |
 | `.ds-link-prose` | 記事本文内のリンク（下線は hover で強調） |
 | `.ds-section-gap` | 記事末など連続ブロックの下余白 |
