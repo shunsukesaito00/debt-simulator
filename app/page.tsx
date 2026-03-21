@@ -125,9 +125,9 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
 
       {/* 1. ヒーロー */}
-      <section className="ds-card p-6 md:p-10">
+      <section className="ds-hero p-6 md:p-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-bold text-stone-600">悩んでいる方へ</p>
+          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ</p>
           <h1 className="ds-page-serif mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
             借入返済シミュレーター
           </h1>
@@ -136,7 +136,7 @@ export default function Page() {
             <strong className="text-stone-900">体験の記録</strong>と
             <strong className="text-stone-900">試算できるツール</strong>
             の両方を置いています。まずは
-            <Link href="/welcome" className="font-bold text-stone-900 underline decoration-stone-400 hover:no-underline">
+            <Link href="/welcome" className="font-semibold text-emerald-900 underline decoration-emerald-300 hover:no-underline">
               はじめての方へ
             </Link>
             から読む順番を決めても大丈夫です。
@@ -169,7 +169,7 @@ export default function Page() {
           </div>
           <p className="mt-4 text-sm text-stone-600">
             早見表：
-            <Link href="/quick-reference" className="font-bold text-stone-800 underline hover:no-underline">
+            <Link href="/quick-reference" className="font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700">
               100万・200万・300万・3年/5年
             </Link>
           </p>
@@ -187,7 +187,7 @@ export default function Page() {
             <li key={a.slug}>
               <TrackedLink
                 href={`/articles/${a.slug}`}
-                className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
+                className="block ds-subcard p-4 transition hover:border-emerald-200/80 hover:shadow-ds focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/35 focus-visible:ring-offset-2"
                 event={{
                   action: "click_top_spotlight_article",
                   location: "top_spotlight",
@@ -197,17 +197,17 @@ export default function Page() {
                   category_key: a.category,
                 }}
               >
-                <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
+                <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
                   {CATEGORY_LABELS[a.category]}
                 </span>
                 {a.badge && (
-                  <span className="ml-1 rounded-full bg-stone-800 px-2 py-0.5 text-xs font-bold text-white">
+                  <span className="ml-1 rounded-md bg-emerald-900 px-2 py-0.5 text-xs font-semibold text-white">
                     {a.badge}
                   </span>
                 )}
-                <span className="mt-2 block text-sm font-bold text-stone-900 leading-snug">{a.title}</span>
+                <span className="mt-2 block text-sm font-semibold text-stone-900 leading-snug">{a.title}</span>
                 <p className="mt-1.5 text-xs text-stone-500 leading-relaxed line-clamp-2">{a.summary}</p>
-                <span className="mt-2 inline-block text-xs font-bold text-stone-700">記事を読む →</span>
+                <span className="mt-2 inline-block text-xs font-semibold text-emerald-900">記事を読む →</span>
               </TrackedLink>
             </li>
           ))}
@@ -238,7 +238,7 @@ export default function Page() {
                   }}
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
+                    <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
                       {CATEGORY_LABELS[a.category]}
                     </span>
                     {dateLabel && (
@@ -247,7 +247,7 @@ export default function Page() {
                       </time>
                     )}
                   </div>
-                  <span className="mt-1 block text-sm font-bold text-stone-900 group-hover:underline">{a.title}</span>
+                  <span className="mt-1 block text-sm font-semibold text-stone-900 group-hover:underline">{a.title}</span>
                 </TrackedLink>
               </li>
             );
@@ -256,8 +256,8 @@ export default function Page() {
       </section>
 
       {/* 3. 運営者一言 + 自己紹介 */}
-      <section className="ds-subcard border-stone-200 bg-stone-50/80 p-6">
-        <p className="text-xs font-bold uppercase tracking-wide text-stone-500">運営者より一言</p>
+      <section className="ds-section-alt border border-stone-200/90">
+        <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">運営者より一言</p>
         <blockquote className="ds-page-serif mt-3 text-base font-bold leading-relaxed text-stone-900 md:text-lg">
           数字が先に来ると、もっとしんどくなることがあります。体験と試算の両方を置いて、自分のペースで比べられるようにしています。
         </blockquote>
@@ -265,7 +265,7 @@ export default function Page() {
           投資助言や借入の勧誘はしていません。経緯やスタンスの詳細は
           <TrackedLink
             href="/about"
-            className="ml-1 font-bold text-stone-900 underline hover:no-underline"
+            className="ml-1 font-semibold text-emerald-900 underline decoration-emerald-300 hover:no-underline"
             event={{
               action: "click_top_operator_voice",
               location: "top_operator_voice",
@@ -290,7 +290,7 @@ export default function Page() {
             <li key={p.categoryKey}>
               <TrackedLink
                 href={p.href}
-                className="block h-full ds-subcard p-4 transition hover:shadow-md"
+                className="block h-full ds-subcard p-4 transition hover:border-emerald-200/80 hover:shadow-ds"
                 event={{
                   action: "click_top_theme_pillar",
                   location: p.eventLocation,
@@ -302,9 +302,9 @@ export default function Page() {
                 <span className="text-2xl" aria-hidden>
                   {p.icon}
                 </span>
-                <span className="mt-2 block text-base font-bold text-stone-900">{p.title}</span>
+                <span className="mt-2 block text-base font-semibold text-stone-900">{p.title}</span>
                 <p className="mt-1.5 text-xs text-stone-600 leading-relaxed">{p.desc}</p>
-                <span className="mt-3 inline-block text-xs font-bold text-stone-700">開く →</span>
+                <span className="mt-3 inline-block text-xs font-semibold text-emerald-900">開く →</span>
               </TrackedLink>
             </li>
           ))}
@@ -322,7 +322,7 @@ export default function Page() {
             <li key={a.slug}>
               <TrackedLink
                 href={`/articles/${a.slug}`}
-                className="font-bold text-stone-900 underline decoration-stone-300 hover:decoration-stone-800"
+                className="font-semibold text-stone-900 underline decoration-stone-300 hover:decoration-emerald-700"
                 event={{
                   action: "click_top_popular_article",
                   location: "top_popular",
@@ -348,7 +348,7 @@ export default function Page() {
           <li>
             <TrackedLink
               href="/welcome#recommended"
-              className="block h-full ds-subcard p-5 transition hover:shadow-md"
+              className="block h-full ds-subcard p-5 transition hover:border-emerald-200/80 hover:shadow-ds"
               event={{
                 action: "click_top_welcome_card",
                 location: "top_welcome_cards",
@@ -357,18 +357,18 @@ export default function Page() {
                 label: "reading_order",
               }}
             >
-              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 1</div>
-              <div className="mt-2 text-base font-bold text-stone-900">読む順番を決める</div>
+              <div className="text-xs font-semibold uppercase tracking-wide text-emerald-900/70">Step 1</div>
+              <div className="mt-2 text-base font-semibold text-stone-900">読む順番を決める</div>
               <p className="mt-2 text-xs text-stone-600 leading-relaxed">
                 体験記と解説記事のおすすめ順を「はじめての方へ」にまとめました。
               </p>
-              <span className="mt-3 inline-block text-sm font-bold text-stone-700">開く →</span>
+              <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">開く →</span>
             </TrackedLink>
           </li>
           <li>
             <TrackedLink
               href="/simulator/cardloan"
-              className="block h-full ds-subcard p-5 transition hover:shadow-md"
+              className="block h-full ds-subcard p-5 transition hover:border-emerald-200/80 hover:shadow-ds"
               event={{
                 action: "click_top_welcome_card",
                 location: "top_welcome_cards",
@@ -377,18 +377,18 @@ export default function Page() {
                 label: "simulator",
               }}
             >
-              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 2</div>
-              <div className="mt-2 text-base font-bold text-stone-900">返済を数字で試す</div>
+              <div className="text-xs font-semibold uppercase tracking-wide text-emerald-900/70">Step 2</div>
+              <div className="mt-2 text-base font-semibold text-stone-900">返済を数字で試す</div>
               <p className="mt-2 text-xs text-stone-600 leading-relaxed">
                 借入額・金利・期間を変えて、月々と総額のイメージを掴みます。
               </p>
-              <span className="mt-3 inline-block text-sm font-bold text-stone-700">シミュレーターへ →</span>
+              <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">シミュレーターへ →</span>
             </TrackedLink>
           </li>
           <li>
             <TrackedLink
               href="/articles#household"
-              className="block h-full ds-subcard p-5 transition hover:shadow-md"
+              className="block h-full ds-subcard p-5 transition hover:border-emerald-200/80 hover:shadow-ds"
               event={{
                 action: "click_top_welcome_card",
                 location: "top_welcome_cards",
@@ -397,19 +397,19 @@ export default function Page() {
                 label: "stories",
               }}
             >
-              <div className="text-xs font-bold uppercase tracking-wide text-stone-500">Step 3</div>
-              <div className="mt-2 text-base font-bold text-stone-900">体験記・家計の記事</div>
+              <div className="text-xs font-semibold uppercase tracking-wide text-emerald-900/70">Step 3</div>
+              <div className="mt-2 text-base font-semibold text-stone-900">体験記・家計の記事</div>
               <p className="mt-2 text-xs text-stone-600 leading-relaxed">
                 家計カテゴリで体験記や家計の整理の記事に進めます。
               </p>
-              <span className="mt-3 inline-block text-sm font-bold text-stone-700">記事一覧へ →</span>
+              <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">記事一覧へ →</span>
             </TrackedLink>
           </li>
         </ul>
       </section>
 
       {/* 7. お問い合わせ */}
-      <section className="ds-subcard p-6">
+      <section className="ds-section-alt border border-stone-200/90">
         <h2 className="ds-page-serif text-lg font-bold text-stone-900">ご相談・お問い合わせ</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
           内容によっては返信にお時間がかかる場合があります。緊急の金融トラブルは取引先や専門窓口へご相談ください。
@@ -428,12 +428,12 @@ export default function Page() {
         </TrackedLink>
         {(noteUrl || xUrl) && (
           <div className="mt-6 border-t border-stone-200 pt-5">
-            <p className="text-xs font-bold text-stone-600">更新・発信（外部）</p>
+            <p className="text-xs font-semibold text-stone-600">更新・発信（外部）</p>
             <div className="mt-3 flex flex-wrap gap-3">
               {noteUrl ? (
                 <TrackedLink
                   href={noteUrl}
-                  className="text-sm font-bold text-stone-800 underline decoration-stone-300 hover:decoration-stone-800"
+                  className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                   rel="noopener noreferrer"
                   target="_blank"
                   event={{
@@ -449,7 +449,7 @@ export default function Page() {
               {xUrl ? (
                 <TrackedLink
                   href={xUrl}
-                  className="text-sm font-bold text-stone-800 underline decoration-stone-300 hover:decoration-stone-800"
+                  className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
                   rel="noopener noreferrer"
                   target="_blank"
                   event={{
@@ -468,7 +468,7 @@ export default function Page() {
       </section>
 
       {/* 8. このサイトについて */}
-      <section className="ds-card ds-card-pad border-stone-200 bg-stone-50/60">
+      <section className="ds-card ds-card-pad border-stone-200/90 bg-gradient-to-br from-white to-emerald-50/30">
         <h2 className="ds-page-serif text-lg font-bold text-stone-900">このサイトについて</h2>
         <p className="mt-3 text-sm text-stone-700 leading-relaxed">
           借入返済・固定費の見直し・返済計画を、一般論ではなく<strong>条件を変えたときの数字</strong>で確認できるようにしています。

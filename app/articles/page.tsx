@@ -47,12 +47,12 @@ export default function ArticlesListPage() {
       <nav className="mb-4 text-sm text-stone-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
-            <Link href="/" className="hover:underline">
+            <Link href="/" className="font-medium text-stone-600 hover:text-emerald-900 hover:underline">
               ホーム
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="font-bold text-stone-900" aria-current="page">
+          <li className="font-semibold text-stone-900" aria-current="page">
             {ARTICLES_INDEX_CRUMB_LABEL}
           </li>
         </ol>
@@ -67,7 +67,7 @@ export default function ArticlesListPage() {
         </p>
         <p className="mt-3 text-sm text-stone-600">
           返済額の目安を表で見る：
-          <Link href="/quick-reference" className="font-bold text-stone-800 underline hover:no-underline">
+          <Link href="/quick-reference" className="font-semibold text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
             早見表（100万・200万・300万・年利15%・3年/5年）
           </Link>
         </p>

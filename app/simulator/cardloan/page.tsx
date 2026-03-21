@@ -80,7 +80,7 @@ export default function Page() {
       <section className="ds-card ds-card-pad">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h1 className="text-2xl font-black text-stone-900 md:text-3xl">カードローン返済シミュレーター</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-stone-900 md:text-3xl">カードローン返済シミュレーター</h1>
             <p className="mt-1 text-xs text-stone-500">入力値はサーバーに送信されません。ブラウザ内だけで計算しています。</p>
             <p className="mt-1.5 text-sm text-stone-600">4つの返済方式・A/B比較・入力に連動したおすすめ記事で、条件の違いをすぐ比較できます。</p>
             <p className="mt-3 text-sm text-stone-600 leading-relaxed">
@@ -92,14 +92,14 @@ export default function Page() {
             <button
               type="button"
               onClick={() => setActiveTab("A")}
-              className={`ds-btn px-4 py-2 text-base font-bold ${activeTab === "A" ? "ds-btn-primary" : "ds-btn-secondary"}`}
+              className={`ds-btn px-4 py-2 text-base font-semibold ${activeTab === "A" ? "ds-btn-primary" : "ds-btn-secondary"}`}
             >
               A
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("B")}
-              className={`ds-btn px-4 py-2 text-base font-bold ${activeTab === "B" ? "ds-btn-primary" : "ds-btn-secondary"}`}
+              className={`ds-btn px-4 py-2 text-base font-semibold ${activeTab === "B" ? "ds-btn-primary" : "ds-btn-secondary"}`}
             >
               B
             </button>
@@ -158,7 +158,7 @@ export default function Page() {
       </p>
 
       <section className="ds-subcard mt-6 p-5">
-        <div className="text-sm font-bold text-stone-700">注意点</div>
+        <div className="text-sm font-semibold text-stone-700">注意点</div>
         <ul className="mt-2 list-disc pl-5 text-xs text-stone-600 leading-relaxed space-y-1">
           <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>
           <li>計算は一般的な月次の近似です。金融機関の計算と差が出る場合があります。</li>
@@ -166,7 +166,7 @@ export default function Page() {
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <Link
             href="/logic"
-            className="font-bold text-stone-700 hover:underline"
+            className="font-semibold text-emerald-900 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",
@@ -180,7 +180,7 @@ export default function Page() {
           </Link>
           <Link
             href="/faq"
-            className="font-bold text-stone-700 hover:underline"
+            className="font-semibold text-emerald-900 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",
@@ -194,7 +194,7 @@ export default function Page() {
           </Link>
           <Link
             href="/how-to"
-            className="font-bold text-stone-700 hover:underline"
+            className="font-semibold text-emerald-900 hover:underline"
             onClick={() =>
               trackEvent({
                 action: "click_simulator_support_link",

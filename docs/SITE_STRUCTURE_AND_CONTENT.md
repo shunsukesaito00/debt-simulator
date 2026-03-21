@@ -14,7 +14,8 @@
 | 「はじめての方」ランディング | **`/welcome`** … 推奨読む順・できること／できないこと・ツール導線 |
 | トップのブロック順（共感→記事→自己紹介→テーマ別→定番…） | **`/`** を上記に近い順に再構成（中身は自サイト文案）。計測は `TrackedLink` の `location` でブロック単位 |
 | 記事一覧の「体験記」枠 | **`/articles`** 先頭に「体験記・ストーリー」レール（`kind: story` または badge「体験記」） |
-| WordPress 風の読みやすさ | 見出しにセリフ系フォント（Noto Serif JP の variable）、`.ds-blog-prose`／`.ds-article-shell` で本文幅・見出し間隔を調整。**WordPress への移行はしない**（Next のまま） |
+| WordPress 風の読みやすさ | 見出しにセリフ（Noto Serif JP）、本文・UI は Zen Kaku Gothic New。`.ds-blog-prose`／`.ds-article-shell` で本文幅を調整。**WordPress への移行はしない**（Next のまま） |
+| モダンなプロダクトUI | 角丸 12px 前後・薄い影・ナビはテキストリンク＋アクティブ下線。CTA は `--ds-accent-strong`（緑）系。詳細は `app/globals.css` の `ds-*` |
 
 **真似しないもの**：文言のコピペ、ロゴ・画像の流用、商標に紛らわしい名称、ツール弱体化（参考サイトはツールが薄いため、当サイトはシミュ・固定費ツールを前面に残す）。
 

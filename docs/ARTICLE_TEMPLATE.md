@@ -19,6 +19,12 @@
 - **幅**: 通常は `ds-article-shell`（本文は `max-w-prose` 相当）。**表・Recharts が主役**の記事は `wide={articleUsesWideLayout("your-slug")}` で `max-w-3xl`。slug の登録は **`lib/article-layout.ts`** の `WIDE_LAYOUT_SLUGS`。
 - **見出し**: 記事タイトル（h1）やセクション見出し（h2）に **`ds-page-serif`** と **`font-bold`** を寄せると一覧ページとトーンが揃う（既存記事は段階的にで可）。
 
+### タイポグラフィ（2025 モダンUI刷新）
+
+- **UI・本文のベース**: `app/layout.tsx` の **Zen Kaku Gothic New**（`--font-ui-sans`）。ナビ・ボタン・フォーム・トップのリードはゴシック基調。
+- **編集感のある見出し**: **Noto Serif JP**（`--font-heading-serif`）は **`.ds-page-serif`** と `.ds-blog-prose` 内 h2/h3 に限定して使う。
+- **トークン**: 角丸・影・CTA 色は `app/globals.css` の `--ds-*` と `.ds-btn-primary`（緑系アクセント）に集約。新規コンポーネントは可能な限り `ds-*` を継承する。
+
 ## 推奨レイアウト順
 
 1. パンくず（`ArticlePageShell` 内）

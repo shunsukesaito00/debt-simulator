@@ -46,7 +46,7 @@ export function SimulatorFormSection({
         {/* 基本条件 */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3 min-h-12">
-            <label className="w-24 shrink-0 text-base font-bold text-stone-800">借入金額</label>
+            <label className="w-24 shrink-0 text-base font-semibold text-stone-800">借入金額</label>
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <input
                 type="range"
@@ -62,23 +62,23 @@ export function SimulatorFormSection({
                   type="number"
                   inputMode="decimal"
                   min={1}
-                  className="min-w-[4rem] w-20 rounded-xl border-2 border-stone-200 px-3 py-2 text-base font-bold outline-none focus:border-stone-800"
+                  className="min-w-[4rem] w-20 ds-input px-3 py-2 text-base font-semibold"
                   value={form.principalMan || ""}
                   onChange={(e) => updateForm({ principalMan: Number(e.target.value) || 0 })}
                 />
-                <span className="text-base font-bold text-stone-600">万</span>
+                <span className="text-base font-semibold text-stone-600">万</span>
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 min-h-12">
             <div className="flex items-center gap-3">
-              <label className="w-20 shrink-0 text-base font-bold text-stone-800">返済開始</label>
+              <label className="w-20 shrink-0 text-base font-semibold text-stone-800">返済開始</label>
               <div className="flex flex-1 items-center gap-1">
                 <input
                   type="number"
                   min={2000}
                   max={2100}
-                  className="w-16 rounded-lg border-2 border-stone-200 px-2 py-2 text-base font-bold outline-none focus:border-stone-800"
+                  className="w-16 ds-input px-2 py-2 text-base font-semibold"
                   value={form.startYear}
                   onChange={(e) => updateForm({ startYear: Number(e.target.value) || 2025 })}
                 />
@@ -87,7 +87,7 @@ export function SimulatorFormSection({
                   type="number"
                   min={1}
                   max={12}
-                  className="w-12 rounded-lg border-2 border-stone-200 px-2 py-2 text-base font-bold outline-none focus:border-stone-800"
+                  className="w-12 ds-input px-2 py-2 text-base font-semibold"
                   value={form.startMonth}
                   onChange={(e) => updateForm({ startMonth: Number(e.target.value) || 1 })}
                 />
@@ -95,9 +95,9 @@ export function SimulatorFormSection({
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <label className="w-20 shrink-0 text-base font-bold text-stone-800">返済方式</label>
+              <label className="w-20 shrink-0 text-base font-semibold text-stone-800">返済方式</label>
               <select
-                className="flex-1 rounded-lg border-2 border-stone-200 px-2 py-2 text-base font-bold outline-none focus:border-stone-800"
+                className="flex-1 ds-input px-2 py-2 text-base font-semibold"
                 value={form.method}
                 onChange={(e) => {
                   const m = e.target.value as RepaymentMethod;
@@ -118,7 +118,7 @@ export function SimulatorFormSection({
           </div>
           {(form.method === "equal_payment" || form.method === "equal_principal") && (
             <div className="flex items-center gap-3 min-h-12">
-              <label className="w-24 shrink-0 text-base font-bold text-stone-800">返済期間</label>
+              <label className="w-24 shrink-0 text-base font-semibold text-stone-800">返済期間</label>
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <input
                   type="range"
@@ -135,18 +135,18 @@ export function SimulatorFormSection({
                     inputMode="decimal"
                     min={0.5}
                     step={0.5}
-                    className="w-14 rounded-xl border-2 border-stone-200 px-2 py-2 text-base font-bold outline-none focus:border-stone-800"
+                    className="w-14 ds-input px-2 py-2 text-base font-semibold"
                     value={form.years || ""}
                     onChange={(e) => updateForm({ years: Number(e.target.value) || 1 })}
                   />
-                  <span className="text-base font-bold text-stone-600">年</span>
+                  <span className="text-base font-semibold text-stone-600">年</span>
                 </div>
               </div>
             </div>
           )}
           {form.method === "fixed_payment" && (
             <div className="flex items-center gap-3 min-h-12">
-              <label className="w-24 shrink-0 text-base font-bold text-stone-800">毎月返済額</label>
+              <label className="w-24 shrink-0 text-base font-semibold text-stone-800">毎月返済額</label>
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <input
                   type="range"
@@ -162,18 +162,18 @@ export function SimulatorFormSection({
                     type="number"
                     inputMode="numeric"
                     min={1}
-                    className="min-w-[5.5rem] w-24 rounded-xl border-2 border-stone-200 px-3 py-2 text-base font-bold outline-none focus:border-stone-800"
+                    className="min-w-[5.5rem] w-24 ds-input px-3 py-2 text-base font-semibold"
                     value={form.monthlyPayment ?? ""}
                     onChange={(e) => updateForm({ monthlyPayment: e.target.value ? Number(e.target.value) : null })}
                   />
-                  <span className="text-base font-bold text-stone-600">円</span>
+                  <span className="text-base font-semibold text-stone-600">円</span>
                 </div>
               </div>
             </div>
           )}
           {form.method === "fixed_principal" && (
             <div className="flex items-center gap-3 min-h-12">
-              <label className="w-24 shrink-0 text-base font-bold text-stone-800">毎月元金</label>
+              <label className="w-24 shrink-0 text-base font-semibold text-stone-800">毎月元金</label>
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <input
                   type="range"
@@ -189,7 +189,7 @@ export function SimulatorFormSection({
                     type="number"
                     inputMode="numeric"
                     min={1}
-                    className="min-w-[5.5rem] w-24 rounded-xl border-2 border-stone-200 px-3 py-2 text-base font-bold outline-none focus:border-stone-800"
+                    className="min-w-[5.5rem] w-24 ds-input px-3 py-2 text-base font-semibold"
                     value={form.monthlyPrincipal ?? ""}
                     onChange={(e) => updateForm({ monthlyPrincipal: e.target.value ? Number(e.target.value) : null })}
                   />
@@ -207,7 +207,7 @@ export function SimulatorFormSection({
 
         <div className="space-y-2 pt-1 border-t border-stone-100">
           <div className="flex items-center gap-3 min-h-12">
-            <label className="w-24 shrink-0 text-base font-bold text-stone-800">金利</label>
+            <label className="w-24 shrink-0 text-base font-semibold text-stone-800">金利</label>
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <input
                 type="range"
@@ -239,7 +239,7 @@ export function SimulatorFormSection({
                 <input
                   type="number"
                   min={1}
-                  className="w-14 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                  className="w-14 ds-input px-2 py-1.5 text-sm"
                   value={r.fromMonth}
                   onChange={(e) =>
                     setForm((prev) => {
@@ -254,7 +254,7 @@ export function SimulatorFormSection({
                   type="number"
                   min={0}
                   step={0.1}
-                  className="w-14 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                  className="w-14 ds-input px-2 py-1.5 text-sm"
                   value={r.rate}
                   onChange={(e) =>
                     setForm((prev) => {
@@ -277,7 +277,7 @@ export function SimulatorFormSection({
 
         <div className={`space-y-3 pt-1 border-t border-stone-100 ${form.extraEnabled ? "rounded-xl bg-stone-50/80 p-4 -mx-1" : ""}`}>
           <div className="flex items-center gap-3 min-h-12">
-            <span className="w-24 shrink-0 text-base font-bold text-stone-800">追加返済</span>
+            <span className="w-24 shrink-0 text-base font-semibold text-stone-800">追加返済</span>
             <button
               type="button"
               role="switch"
@@ -325,11 +325,11 @@ export function SimulatorFormSection({
                         min={0}
                         max={100000}
                         inputMode="numeric"
-                        className="min-w-[5.5rem] w-24 rounded-xl border-2 border-stone-200 px-3 py-2 text-base font-bold outline-none focus:border-stone-800"
+                        className="min-w-[5.5rem] w-24 ds-input px-3 py-2 text-base font-semibold"
                         value={form.monthlyExtraAmount || ""}
                         onChange={(e) => updateForm({ monthlyExtraAmount: Number(e.target.value) || 0 })}
                       />
-                      <span className="text-base font-bold text-stone-600">円</span>
+                      <span className="text-base font-semibold text-stone-600">円</span>
                     </div>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export function SimulatorFormSection({
                         type="number"
                         min={form.startYear}
                         max={2100}
-                        className="w-16 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                        className="w-16 ds-input px-2 py-1.5 text-sm"
                         value={o.year}
                         onChange={(e) =>
                           setForm((prev) => {
@@ -363,7 +363,7 @@ export function SimulatorFormSection({
                         type="number"
                         min={1}
                         max={12}
-                        className="w-12 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                        className="w-12 ds-input px-2 py-1.5 text-sm"
                         value={o.month}
                         onChange={(e) =>
                           setForm((prev) => {
@@ -379,7 +379,7 @@ export function SimulatorFormSection({
                         min={0}
                         max={2000000}
                         inputMode="numeric"
-                        className="w-24 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                        className="w-24 ds-input px-2 py-1.5 text-sm"
                         value={o.amount || ""}
                         onChange={(e) =>
                           setForm((prev) => {
@@ -408,7 +408,7 @@ export function SimulatorFormSection({
                   {form.bonusPayments.map((b, i) => (
                     <div key={i} className="flex items-center gap-3 min-h-12">
                       <select
-                        className="w-16 shrink-0 rounded-lg border-2 border-stone-200 px-2 py-1.5 text-sm outline-none focus:border-stone-800"
+                        className="w-16 shrink-0 ds-input px-2 py-1.5 text-sm"
                         value={b.month}
                         onChange={(e) =>
                           setForm((prev) => {
@@ -445,7 +445,7 @@ export function SimulatorFormSection({
                             max={2000000}
                             inputMode="numeric"
                             placeholder="0"
-                            className="min-w-[5.5rem] w-24 rounded-xl border-2 border-stone-200 px-3 py-2 text-base outline-none focus:border-stone-800"
+                            className="min-w-[5.5rem] w-24 ds-input px-3 py-2 text-base"
                             value={b.amount || ""}
                             onChange={(e) =>
                               setForm((prev) => {

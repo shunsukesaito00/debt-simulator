@@ -17,32 +17,32 @@ export function SimulatorSummarySection({
   activeTab,
 }: SimulatorSummarySectionProps) {
   return (
-    <section className="flex min-h-0 flex-col rounded-xl border border-stone-200 bg-white p-5">
-      <h2 className="text-lg font-black text-stone-900">サマリー（A/B 比較）</h2>
+    <section className="flex min-h-0 flex-col rounded-ds border border-stone-200 bg-white p-5 shadow-ds">
+      <h2 className="text-lg font-bold text-stone-900">サマリー（A/B 比較）</h2>
       {result.ok && (
-        <div className="mt-4 grid grid-cols-2 gap-4 rounded-2xl border-2 border-stone-900/15 bg-stone-50 p-6 shadow-sm">
+        <div className="mt-4 grid grid-cols-2 gap-4 rounded-ds border border-emerald-200/60 bg-emerald-50/40 p-6">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-stone-500">毎月返済額</div>
-            <div className="mt-1 text-2xl font-black text-stone-900 md:text-3xl">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">毎月返済額</div>
+            <div className="mt-1 text-2xl font-bold text-stone-900 md:text-3xl">{formatYen(result.schedule[0]?.payment ?? 0)}</div>
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-stone-500">総返済額</div>
-            <div className="mt-1 text-2xl font-black text-stone-900 md:text-3xl">{formatYen(result.totalPayment + result.totalBonus)}</div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">総返済額</div>
+            <div className="mt-1 text-2xl font-bold text-stone-900 md:text-3xl">{formatYen(result.totalPayment + result.totalBonus)}</div>
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-stone-500">利息合計</div>
-            <div className="mt-1 text-xl font-black text-amber-700 md:text-2xl">{formatYen(result.totalInterest)}</div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">利息合計</div>
+            <div className="mt-1 text-xl font-bold text-amber-800 md:text-2xl">{formatYen(result.totalInterest)}</div>
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-stone-500">完済</div>
-            <div className="mt-1 text-lg font-black text-stone-900 md:text-xl">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-stone-500">完済</div>
+            <div className="mt-1 text-lg font-bold text-stone-900 md:text-xl">{result.finalYear}年{result.finalMonth}月（{result.months}回）</div>
           </div>
         </div>
       )}
       <div className="mt-4 grid flex-1 grid-cols-3 gap-3 text-sm">
-        <div className="text-xs text-stone-500 font-medium">項目</div>
-        <div className={`text-xs font-bold ${activeTab === "A" ? "text-stone-900" : "text-stone-500"}`}>A</div>
-        <div className={`text-xs font-bold ${activeTab === "B" ? "text-stone-900" : "text-stone-500"}`}>B</div>
+        <div className="text-xs font-medium text-stone-500">項目</div>
+        <div className={`text-xs font-semibold ${activeTab === "A" ? "text-emerald-950" : "text-stone-500"}`}>A</div>
+        <div className={`text-xs font-semibold ${activeTab === "B" ? "text-emerald-950" : "text-stone-500"}`}>B</div>
         <div className="text-xs text-stone-500">毎月返済額</div>
         <div>{resultA.ok ? formatYen(resultA.schedule[0]?.payment ?? 0) : "-"}</div>
         <div>{resultB.ok ? formatYen(resultB.schedule[0]?.payment ?? 0) : "-"}</div>

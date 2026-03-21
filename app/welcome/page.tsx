@@ -32,7 +32,7 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "トップ", item: BASE },
+    { "@type": "ListItem", position: 1, name: "ホーム", item: BASE },
     { "@type": "ListItem", position: 2, name: "はじめての方へ", item: PAGE_URL },
   ],
 };
@@ -48,8 +48,8 @@ export default function WelcomePage() {
       <nav className="mb-4 text-sm text-stone-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
-            <Link href="/" className="hover:underline">
-              トップ
+            <Link href="/" className="font-medium text-stone-700 hover:text-emerald-900 hover:underline">
+              ホーム
             </Link>
           </li>
           <li aria-hidden>/</li>
@@ -60,7 +60,7 @@ export default function WelcomePage() {
       </nav>
 
       <div className="ds-card ds-card-pad">
-        <p className="text-sm font-bold text-stone-600">悩んでいる方へ</p>
+        <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">
           はじめての方へ
         </h1>

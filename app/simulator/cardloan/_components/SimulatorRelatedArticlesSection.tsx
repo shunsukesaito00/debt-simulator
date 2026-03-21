@@ -35,15 +35,15 @@ export function SimulatorRelatedArticlesSection({
   const methodGroup = method as "equal_payment" | "equal_principal" | "fixed_payment" | "fixed_principal";
 
   return (
-    <section className="rounded-xl border-2 border-stone-200 bg-white p-5">
-      <h2 className="text-lg font-black text-stone-900">あわせて読みたい</h2>
+    <section className="ds-card ds-card-pad">
+      <h2 className="text-lg font-bold text-stone-900">あわせて読みたい</h2>
       <p className="mt-1.5 text-sm text-stone-600">いまの入力条件で次に確認すると役立つ記事です。</p>
       <ul className="mt-4 space-y-3">
         {articles.map((a, i) => (
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className={`block rounded-xl p-4 transition hover:bg-stone-50 ${i === 0 ? "border-2 border-stone-800 bg-stone-100 shadow-md ring-2 ring-stone-900/10" : "border border-stone-100 bg-stone-50/50"}`}
+              className={`block rounded-ds p-4 transition ${i === 0 ? "border border-emerald-300/70 bg-emerald-50/50 shadow-ds hover:bg-emerald-50/70" : "border border-stone-200 bg-white hover:bg-stone-50/80"}`}
               onClick={() =>
                 trackEvent({
                   action: "click_simulator_related_article",

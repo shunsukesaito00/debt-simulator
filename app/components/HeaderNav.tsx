@@ -29,8 +29,8 @@ function isToolActive(path: string): boolean {
   return toolItems.some((it) => path === it.href || path.startsWith(`${it.href}/`));
 }
 
-const navLinkBase =
-  "rounded-2xl px-3 py-2 text-sm font-black transition whitespace-nowrap";
+const navFocus =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 function NavLink({
   href,
@@ -48,8 +48,12 @@ function NavLink({
       href={href}
       onClick={onNavigate}
       className={[
-        navLinkBase,
-        active ? "bg-stone-800 text-white" : "border border-stone-200 bg-white text-stone-800 hover:bg-stone-50",
+        "whitespace-nowrap py-2 text-sm font-semibold transition-colors",
+        navFocus,
+        "rounded-sm",
+        active
+          ? "text-stone-900 underline decoration-emerald-700 decoration-2 underline-offset-8"
+          : "text-stone-600 hover:text-stone-900",
       ].join(" ")}
     >
       {label}
@@ -104,12 +108,15 @@ export default function HeaderNav() {
   return (
     <header className="ds-header fixed inset-x-0 top-0 z-50">
       <div className="ds-container flex items-center justify-between gap-3 py-3">
-        <Link href="/" className="min-w-0 shrink font-black tracking-tight text-stone-900 text-sm sm:text-base">
+        <Link
+          href="/"
+          className={`min-w-0 shrink text-sm font-bold leading-snug tracking-tight text-stone-900 sm:text-base ${navFocus} rounded-sm`}
+        >
           <span className="line-clamp-2 sm:line-clamp-1">借入返済シミュレーター</span>
         </Link>
 
-        {/* デスクトップ：プライマリ */}
-        <nav className="hidden md:flex flex-1 flex-wrap items-center justify-end gap-1.5 lg:gap-2" aria-label="メインメニュー">
+        {/* デスクトップ：プライマリ（テキストリンク＋アクティブは下線） */}
+        <nav className="hidden md:flex flex-1 flex-wrap items-center justify-end gap-x-4 lg:gap-x-5" aria-label="メインメニュー">
           {primaryItems.map((it) => (
             <NavLink
               key={it.href}
@@ -119,7 +126,7 @@ export default function HeaderNav() {
             />
           ))}
 
-          <div className="relative" ref={toolsWrapRef}>
+          <div className="relative flex items-center border-l border-stone-200 pl-4 lg:pl-5" ref={toolsWrapRef}>
             <button
               type="button"
               aria-expanded={toolsOpen}
@@ -127,15 +134,15 @@ export default function HeaderNav() {
               aria-controls="header-tools-menu"
               onClick={() => setToolsOpen((o) => !o)}
               className={[
-                navLinkBase,
-                "inline-flex items-center gap-1 border",
+                "inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-sm font-semibold transition-colors",
+                navFocus,
                 toolsOpen || toolsActive
-                  ? "border-stone-800 bg-stone-800 text-white"
-                  : "border-stone-200 bg-white text-stone-800 hover:bg-stone-50",
+                  ? "border-emerald-800 bg-emerald-50 text-emerald-950"
+                  : "border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50",
               ].join(" ")}
             >
               ツール
-              <span className="text-xs opacity-80" aria-hidden>
+              <span className="text-[10px] opacity-70" aria-hidden>
                 ▼
               </span>
             </button>
@@ -143,7 +150,7 @@ export default function HeaderNav() {
               <div
                 id="header-tools-menu"
                 role="menu"
-                className="absolute right-0 top-full z-50 mt-1 min-w-[12rem] rounded-2xl border border-stone-200 bg-white py-1 shadow-lg"
+                className="absolute right-0 top-full z-50 mt-1.5 min-w-[12rem] rounded-lg border border-stone-200 bg-white py-1 shadow-ds"
               >
                 {toolItems.map((it) => {
                   const active = path === it.href || path.startsWith(`${it.href}/`);
@@ -153,8 +160,9 @@ export default function HeaderNav() {
                       href={it.href}
                       role="menuitem"
                       className={[
-                        "block px-4 py-2.5 text-sm font-bold",
-                        active ? "bg-stone-100 text-stone-900" : "text-stone-700 hover:bg-stone-50",
+                        "block px-4 py-2.5 text-sm font-semibold transition-colors",
+                        navFocus,
+                        active ? "bg-emerald-50/80 text-emerald-950" : "text-stone-700 hover:bg-stone-50",
                       ].join(" ")}
                       onClick={() => setToolsOpen(false)}
                     >
@@ -167,10 +175,10 @@ export default function HeaderNav() {
           </div>
         </nav>
 
-        {/* モバイル：メニュー開閉 */}
+        {/* モバイル */}
         <button
           type="button"
-          className="md:hidden shrink-0 rounded-2xl border border-stone-200 bg-white px-3 py-2 text-sm font-black text-stone-800"
+          className={`md:hidden shrink-0 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm font-semibold text-stone-800 ${navFocus}`}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-panel"
           onClick={() => setMobileOpen((o) => !o)}
@@ -179,55 +187,62 @@ export default function HeaderNav() {
         </button>
       </div>
 
-      {/* モバイル：ドロワー風パネル */}
       {mobileOpen && (
         <div className="fixed inset-x-0 top-20 bottom-0 z-[60] flex md:hidden">
           <button
             type="button"
-            className="absolute inset-0 bg-stone-900/40"
+            className="absolute inset-0 bg-stone-900/35"
             aria-label="メニューを閉じる"
             onClick={closeMobile}
           />
           <div
             id="mobile-nav-panel"
-            className="relative ml-auto flex h-full w-[min(100%,20rem)] flex-col border-l border-stone-200 bg-white shadow-xl"
+            className="relative ml-auto flex h-full w-[min(100%,20rem)] flex-col border-l border-stone-200 bg-white shadow-ds-md"
           >
             <div className="overflow-y-auto p-4 pb-24">
-              <p className="text-xs font-bold uppercase tracking-wide text-stone-500">サイト内</p>
-              <nav className="mt-3 flex flex-col gap-2" aria-label="モバイルメインメニュー">
-                {primaryItems.map((it) => (
-                  <Link
-                    key={it.href}
-                    href={it.href}
-                    onClick={closeMobile}
-                    className={[
-                      "rounded-xl px-3 py-3 text-sm font-black",
-                      isPrimaryActive(path, it.href)
-                        ? "bg-stone-800 text-white"
-                        : "bg-stone-50 text-stone-900",
-                    ].join(" ")}
-                  >
-                    {it.label}
-                  </Link>
-                ))}
+              <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">サイト内</p>
+              <nav className="mt-3 flex flex-col gap-0.5" aria-label="モバイルメインメニュー">
+                {primaryItems.map((it) => {
+                  const active = isPrimaryActive(path, it.href);
+                  return (
+                    <Link
+                      key={it.href}
+                      href={it.href}
+                      onClick={closeMobile}
+                      className={[
+                        "rounded-lg px-3 py-3 text-sm font-semibold transition-colors",
+                        navFocus,
+                        active
+                          ? "border-l-4 border-emerald-700 bg-emerald-50/60 pl-2 text-emerald-950"
+                          : "text-stone-800 hover:bg-stone-50",
+                      ].join(" ")}
+                    >
+                      {it.label}
+                    </Link>
+                  );
+                })}
               </nav>
-              <p className="mt-8 text-xs font-bold uppercase tracking-wide text-stone-500">ツール・詳細</p>
-              <nav className="mt-3 flex flex-col gap-2" aria-label="モバイルツールメニュー">
-                {toolItems.map((it) => (
-                  <Link
-                    key={it.href}
-                    href={it.href}
-                    onClick={closeMobile}
-                    className={[
-                      "rounded-xl border border-stone-200 px-3 py-3 text-sm font-bold",
-                      path === it.href || path.startsWith(`${it.href}/`)
-                        ? "border-stone-800 bg-stone-100"
-                        : "bg-white text-stone-800",
-                    ].join(" ")}
-                  >
-                    {it.label}
-                  </Link>
-                ))}
+              <p className="mt-8 text-xs font-semibold uppercase tracking-wide text-stone-500">ツール・詳細</p>
+              <nav className="mt-3 flex flex-col gap-0.5" aria-label="モバイルツールメニュー">
+                {toolItems.map((it) => {
+                  const active = path === it.href || path.startsWith(`${it.href}/`);
+                  return (
+                    <Link
+                      key={it.href}
+                      href={it.href}
+                      onClick={closeMobile}
+                      className={[
+                        "rounded-lg border border-transparent px-3 py-3 text-sm font-semibold transition-colors",
+                        navFocus,
+                        active
+                          ? "border-emerald-200 bg-emerald-50/50 text-emerald-950"
+                          : "text-stone-800 hover:border-stone-200 hover:bg-stone-50",
+                      ].join(" ")}
+                    >
+                      {it.label}
+                    </Link>
+                  );
+                })}
               </nav>
             </div>
           </div>

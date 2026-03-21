@@ -1,10 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Noto_Serif_JP } from "next/font/google";
+import { Noto_Serif_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import HeaderNav from "./components/HeaderNav";
 import FooterNav from "./components/FooterNav";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
 
+/** UI 本文・ナビ用ゴシック */
+const zenKaku = Zen_Kaku_Gothic_New({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-ui-sans",
+  display: "swap",
+});
+
+/** 記事・大見出しのセリフ */
 const notoSerifJp = Noto_Serif_JP({
   weight: ["600", "700"],
   subsets: ["latin"],
@@ -35,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`ds-shell ${notoSerifJp.variable}`}>
+      <body className={`ds-shell ${zenKaku.variable} ${notoSerifJp.variable}`}>
         <GoogleAnalytics />
         {/* 上段固定ヘッダ（ナビをここに固定） */}
         <HeaderNav />

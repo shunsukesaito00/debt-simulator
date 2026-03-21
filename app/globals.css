@@ -4,19 +4,22 @@
 
 :root {
   color-scheme: light;
-  /* Design tokens (warm / life-improvement) */
+  /* Design tokens（モダン寄せ：シャープな角丸・薄い階層） */
   --ds-bg: 250 250 249; /* stone-50 */
   --ds-bg-elev: 255 255 255;
+  --ds-bg-muted: 245 245 244; /* stone-100 セクション交互 */
   --ds-fg: 41 37 36; /* stone-800 */
   --ds-muted: 87 83 78; /* stone-600 */
   --ds-border: 231 229 228; /* stone-200 */
-  --ds-accent: 22 163 74; /* green-600 life-improvement */
+  --ds-accent: 22 163 74; /* green-600 リンク等 */
+  --ds-accent-strong: 21 128 61; /* green-700 CTA（コントラスト） */
   --ds-accent-2: 34 197 94; /* green-500 */
 
-  --ds-radius-lg: 16px;
-  --ds-radius-xl: 24px;
-  --ds-shadow-sm: 0 1px 1px rgba(41, 37, 36, 0.04), 0 6px 20px rgba(41, 37, 36, 0.06);
-  --ds-shadow-md: 0 1px 2px rgba(41, 37, 36, 0.05), 0 18px 60px rgba(41, 37, 36, 0.10);
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 12px;
+  --ds-radius-lg: 12px;
+  --ds-shadow-sm: 0 1px 0 rgba(41, 37, 36, 0.04), 0 1px 3px rgba(41, 37, 36, 0.06);
+  --ds-shadow-md: 0 4px 6px -1px rgba(41, 37, 36, 0.06), 0 2px 4px -2px rgba(41, 37, 36, 0.05);
 }
 
 html,
@@ -27,6 +30,8 @@ body {
 body {
   background: rgb(var(--ds-bg));
   color: rgb(var(--ds-fg));
+  font-family: var(--font-ui-sans), ui-sans-serif, system-ui, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    Meiryo, sans-serif;
 }
 
 * {
@@ -48,6 +53,10 @@ textarea {
   a {
     text-underline-offset: 3px;
   }
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-none ring-2 ring-emerald-700/40 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
+  }
 }
 
 @layer components {
@@ -61,12 +70,37 @@ textarea {
     @apply mx-auto w-full max-w-5xl px-4 md:px-6;
   }
 
+  /* トップヒーロー等：淡いグラデ＋フラット寄り */
+  .ds-hero {
+    @apply border;
+    border-color: rgb(var(--ds-border));
+    border-radius: var(--ds-radius-md);
+    background: linear-gradient(
+      135deg,
+      rgb(var(--ds-bg-elev)) 0%,
+      rgb(var(--ds-bg-muted)) 42%,
+      rgba(240, 253, 244, 0.45) 100%
+    );
+    box-shadow: var(--ds-shadow-sm);
+  }
+
+  /* セクション背景の交互用 */
+  .ds-section-muted {
+    border-radius: var(--ds-radius-md);
+    background: rgb(var(--ds-bg-muted));
+  }
+  .ds-section-alt {
+    border-radius: var(--ds-radius-md);
+    background: rgb(var(--ds-bg-muted));
+    @apply p-6 md:p-8;
+  }
+
   /* Cards / sections */
   .ds-card {
     @apply border;
     border-color: rgb(var(--ds-border));
     background: rgb(var(--ds-bg-elev));
-    border-radius: var(--ds-radius-xl);
+    border-radius: var(--ds-radius-md);
     box-shadow: var(--ds-shadow-sm);
   }
   .ds-card-pad {
@@ -75,16 +109,24 @@ textarea {
   .ds-subcard {
     @apply border;
     border-color: rgb(var(--ds-border));
-    background: rgba(250, 250, 249, 0.9);
-    border-radius: var(--ds-radius-lg);
+    background: rgb(var(--ds-bg-elev));
+    border-radius: var(--ds-radius-sm);
+  }
+
+  /* シミュレーター等のフォームコントロール */
+  .ds-input {
+    @apply rounded-lg border border-stone-200 bg-white px-3 py-2 text-base font-semibold text-stone-900 outline-none transition;
+  }
+  .ds-input:focus-visible {
+    @apply border-emerald-700 ring-2 ring-emerald-700/25 ring-offset-2 ring-offset-white;
   }
 
   /* Typography helpers */
   .ds-h1 {
-    @apply text-2xl font-black tracking-tight text-stone-900 md:text-3xl;
+    @apply text-2xl font-bold tracking-tight text-stone-900 md:text-3xl;
   }
   .ds-h2 {
-    @apply text-lg font-black tracking-tight text-stone-900 md:text-xl;
+    @apply text-lg font-bold tracking-tight text-stone-900 md:text-xl;
   }
   .ds-muted {
     @apply text-stone-600;
@@ -92,38 +134,43 @@ textarea {
 
   /* Links & buttons */
   .ds-link {
-    @apply font-bold;
-    color: rgb(var(--ds-accent));
+    @apply font-semibold;
+    color: rgb(var(--ds-accent-strong));
   }
   .ds-link:hover {
     @apply underline;
   }
   .ds-btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-black transition;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold transition;
+    border-radius: var(--ds-radius-sm);
+  }
+  .ds-btn:focus-visible {
+    @apply outline-none ring-2 ring-emerald-700/45 ring-offset-2 ring-offset-[rgb(var(--ds-bg))];
   }
   .ds-btn-primary {
-    background: rgb(var(--ds-fg));
+    background: rgb(var(--ds-accent-strong));
     color: white;
   }
   .ds-btn-primary:hover {
-    opacity: 0.92;
+    filter: brightness(0.96);
   }
   .ds-btn-secondary {
     @apply border bg-white text-stone-800;
     border-color: rgb(var(--ds-border));
   }
   .ds-btn-secondary:hover {
-    background: rgba(250, 250, 249, 0.9);
+    background: rgb(var(--ds-bg-muted));
   }
   .ds-btn-sm {
-    @apply rounded-xl px-3 py-2 text-xs font-bold;
+    @apply px-3 py-2 text-xs font-semibold;
+    border-radius: var(--ds-radius-sm);
   }
 
   /* Header / footer surfaces */
   .ds-header {
-    @apply border-b backdrop-blur;
+    @apply border-b backdrop-blur-md;
     border-color: rgb(var(--ds-border));
-    background: rgba(255, 253, 251, 0.88);
+    background: rgba(255, 255, 255, 0.82);
   }
   .ds-footer {
     @apply border-t;
@@ -175,24 +222,24 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
-  background: #292524;
+  width: 20px;
+  height: 20px;
+  background: rgb(var(--ds-accent-strong));
   border-radius: 50%;
   cursor: grab;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(21, 128, 61, 0.35);
 }
 input[type="range"]::-webkit-slider-thumb:active {
   cursor: grabbing;
 }
 input[type="range"]::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  background: #292524;
+  width: 20px;
+  height: 20px;
+  background: rgb(var(--ds-accent-strong));
   border-radius: 50%;
   cursor: grab;
   border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(21, 128, 61, 0.35);
 }
 
 /* 数値入力のスピンボタン（矢印）を非表示にして選択中の文字が隠れないように */
