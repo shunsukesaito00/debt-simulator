@@ -106,7 +106,14 @@ export default function HeaderNav() {
   const toolsActive = isToolActive(path);
 
   return (
-    <header className="ds-header fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* タグライン帯 */}
+      <div className="bg-emerald-950 text-center">
+        <p className="py-1.5 text-[11px] font-medium tracking-wide text-emerald-100/90">
+          悩んでいる方へ。一緒に考えていきましょう。
+        </p>
+      </div>
+      <div className="ds-header">
       <div className="ds-container flex items-center justify-between gap-3 py-3">
         <Link
           href="/"
@@ -186,9 +193,10 @@ export default function HeaderNav() {
           {mobileOpen ? "閉じる" : "MENU"}
         </button>
       </div>
+      </div>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-20 bottom-0 z-[60] flex md:hidden">
+        <div className="fixed inset-x-0 top-[5.5rem] bottom-0 z-[60] flex md:hidden">
           <button
             type="button"
             className="absolute inset-0 bg-stone-900/35"

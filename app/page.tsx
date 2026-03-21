@@ -127,7 +127,7 @@ export default function Page() {
       {/* 1. ヒーロー */}
       <section className="ds-hero p-6 md:p-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ</p>
+          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ。一緒に考えていきましょう。</p>
           <h1 className="ds-page-serif mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
             借入返済シミュレーター
           </h1>

@@ -713,6 +713,21 @@ export function getRecentArticles(limit = 5): ArticleItem[] {
     .slice(0, limit);
 }
 
+/** 同一カテゴリ内で publishedAt 順の前後記事を返す */
+export function getAdjacentArticles(slug: string): { prev?: ArticleItem; next?: ArticleItem } {
+  const article = getArticle(slug);
+  if (!article) return {};
+  const siblings = articlesData
+    .filter((a) => a.category === article.category && a.publishedAt)
+    .sort((a, b) => (a.publishedAt ?? "").localeCompare(b.publishedAt ?? ""));
+  const idx = siblings.findIndex((a) => a.slug === slug);
+  if (idx === -1) return {};
+  return {
+    prev: idx > 0 ? siblings[idx - 1] : undefined,
+    next: idx < siblings.length - 1 ? siblings[idx + 1] : undefined,
+  };
+}
+
 /** 体験記・ストーリー系（badge 体験記 または kind story） */
 export function getStoryArticles(): ArticleItem[] {
   return articlesData.filter((a) => a.kind === "story" || a.badge === "体験記");

@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { ARTICLE_LIST_SECTIONS, getArticlesByCategory } from "@/lib/articles";
 
-const links = [
+const siteLinks = [
   { href: "/welcome", label: "はじめての方へ" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/disclaimer", label: "免責事項" },
@@ -9,24 +10,66 @@ const links = [
 ] as const;
 
 const linkClass =
-  "text-sm font-semibold text-stone-600 transition-colors hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm";
+  "text-sm font-semibold text-stone-600 transition-colors hover:text-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm";
+
+function CategoryColumn() {
+  const byCategory = getArticlesByCategory();
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">カテゴリ</p>
+      <ul className="mt-3 flex flex-col gap-1.5">
+        {ARTICLE_LIST_SECTIONS.map((sec) => {
+          const count = sec.articleCategories.reduce(
+            (n, cat) => n + (byCategory.get(cat)?.length ?? 0),
+            0,
+          );
+          return (
+            <li key={sec.id}>
+              <Link
+                href={`/articles#${sec.id}`}
+                className="group flex items-center gap-2 text-sm font-medium text-stone-600 transition-colors hover:text-emerald-900"
+              >
+                <span>{sec.label}</span>
+                <span className="rounded-full bg-stone-100 px-1.5 py-0.5 text-[10px] font-semibold text-stone-500 group-hover:bg-emerald-50 group-hover:text-emerald-900">
+                  {count}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 
 export default function FooterNav() {
   return (
     <footer className="ds-footer">
       <div className="ds-container py-10">
-        <nav className="flex flex-wrap items-center gap-x-1 gap-y-2" aria-label="フッターリンク">
-          {links.map((l, i) => (
-            <span key={l.href} className="flex items-center gap-x-1">
-              {i > 0 ? <span className="hidden text-stone-300 sm:inline" aria-hidden>|</span> : null}
-              <Link href={l.href} className={linkClass}>
-                {l.label}
-              </Link>
-            </span>
-          ))}
-        </nav>
-        <div className="mt-6 border-t border-stone-100 pt-6 text-xs font-medium text-stone-500">
-          © {new Date().getFullYear()} 借入返済シミュレーター
+        <div className="grid gap-10 sm:grid-cols-2">
+          {/* 左列: サイトリンク */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">サイト情報</p>
+            <nav className="mt-3 flex flex-col gap-1.5" aria-label="フッターリンク">
+              {siteLinks.map((l) => (
+                <Link key={l.href} href={l.href} className={linkClass}>
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* 右列: カテゴリ */}
+          <CategoryColumn />
+        </div>
+
+        <div className="mt-10 border-t border-stone-100 pt-6">
+          <p className="text-sm font-medium text-stone-500 leading-relaxed">
+            悩んでいる方へ。一緒に考えていきましょう。
+          </p>
+          <p className="mt-2 text-xs text-stone-400">
+            &copy; {new Date().getFullYear()} 借入返済シミュレーター
+          </p>
         </div>
       </div>
     </footer>

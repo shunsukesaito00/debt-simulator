@@ -90,11 +90,11 @@ export default function ArticlesListPage() {
                       className="block ds-subcard p-4 transition hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
                     >
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-bold text-stone-600">
+                        <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
                           {CATEGORY_LABELS[article.category]}
                         </span>
                         {article.badge && (
-                          <span className="rounded-full bg-stone-800 px-2 py-0.5 text-xs font-bold text-white">
+                          <span className="rounded-md bg-emerald-900 px-2 py-0.5 text-xs font-semibold text-white">
                             {article.badge}
                           </span>
                         )}
@@ -106,7 +106,7 @@ export default function ArticlesListPage() {
                       </div>
                       <span className="mt-2 block text-sm font-bold text-stone-900 leading-snug">{article.title}</span>
                       <p className="mt-1.5 text-xs text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
-                      <span className="mt-2 inline-block text-xs font-bold text-stone-700">読む →</span>
+                      <span className="mt-2 inline-block text-xs font-semibold text-emerald-900">読む →</span>
                     </Link>
                   </li>
                 );
@@ -122,8 +122,11 @@ export default function ArticlesListPage() {
             );
             return (
               <section key={section.id} id={section.id} className="scroll-mt-24">
-                <h2 className="ds-page-serif text-xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2">
+                <h2 className="ds-page-serif flex items-center gap-2 text-xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2">
                   {section.label}
+                  <span className="rounded-full bg-stone-100 px-2 py-0.5 text-xs font-semibold text-stone-500">
+                    {items.length}
+                  </span>
                 </h2>
                 <p className="mt-4 text-sm text-stone-700 leading-relaxed">
                   {section.description}
@@ -139,16 +142,16 @@ export default function ArticlesListPage() {
                           className="block ds-card p-5 transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-stone-900/10"
                         >
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="rounded-full border border-stone-300 bg-stone-50 px-2.5 py-0.5 text-xs font-bold text-stone-700">
+                            <span className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600">
                               {CATEGORY_LABELS[article.category]}
                             </span>
                             {article.order === 0 && (
-                              <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-bold text-white">
+                              <span className="rounded-md bg-emerald-800 px-2 py-0.5 text-xs font-semibold text-white">
                                 おすすめ
                               </span>
                             )}
                             {article.badge && (
-                              <span className="rounded-full bg-stone-800 px-2.5 py-0.5 text-xs font-bold text-white">
+                              <span className="rounded-md bg-emerald-900 px-2 py-0.5 text-xs font-semibold text-white">
                                 {article.badge}
                               </span>
                             )}
@@ -160,7 +163,7 @@ export default function ArticlesListPage() {
                           </div>
                           <h3 className="ds-page-serif mt-3 text-lg font-bold text-stone-900">{article.title}</h3>
                           <p className="mt-2 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
-                          <span className="mt-3 inline-block text-sm font-bold text-stone-700">記事を読む →</span>
+                          <span className="mt-3 inline-block text-sm font-semibold text-emerald-900">記事を読む →</span>
                         </Link>
                       </li>
                     );

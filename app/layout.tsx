@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HeaderNav />
 
         {/* ヘッダ固定分の余白 */}
-        <main className="ds-container pb-12 pt-20">
+        <main className="ds-container pb-12 pt-[5.75rem]">
           {children}
         </main>
 

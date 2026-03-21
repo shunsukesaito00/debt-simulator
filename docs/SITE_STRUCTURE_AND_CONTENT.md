@@ -16,6 +16,11 @@
 | 記事一覧の「体験記」枠 | **`/articles`** 先頭に「体験記・ストーリー」レール（`kind: story` または badge「体験記」） |
 | WordPress 風の読みやすさ | 見出しにセリフ（Noto Serif JP）、本文・UI は Zen Kaku Gothic New。`.ds-blog-prose`／`.ds-article-shell` で本文幅を調整。**WordPress への移行はしない**（Next のまま） |
 | モダンなプロダクトUI | 角丸 12px 前後・薄い影・ナビはテキストリンク＋アクティブ下線。CTA は `--ds-accent-strong`（緑）系。詳細は `app/globals.css` の `ds-*` |
+| タグライン帯 | ヘッダ最上段に「悩んでいる方へ。一緒に考えていきましょう。」帯（`bg-emerald-950`）。ヒーロー冒頭にエコー |
+| 記事ページの共通強化 | `ArticlePageShell` に日付+カテゴリバッジ。`ArticleToc`（折りたたみ目次）、`ArticleShareBar`（URLコピー）、`ArticlePrevNext`（前後記事ナビ）を新設 |
+| 関連記事カード型 | `ArticleFooter` が `/articles/:slug` リンクを `getArticle()` で引きカード（タイトル+要約+バッジ）に展開 |
+| フッター充実 | `FooterNav` を2カラム化。「サイト情報」列＋「カテゴリ」列（件数バッジ付き）＋タグライン |
+| 一覧セクション件数 | `/articles` 各セクション見出しに件数バッジ表示 |
 
 **真似しないもの**：文言のコピペ、ロゴ・画像の流用、商標に紛らわしい名称、ツール弱体化（参考サイトはツールが薄いため、当サイトはシミュ・固定費ツールを前面に残す）。
 
