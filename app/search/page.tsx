@@ -19,7 +19,7 @@ export default function Page() {
   const articles = getArticlesForSearch();
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="ds-page-width">
       <nav className="mb-6 text-sm text-stone-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>
@@ -34,7 +34,7 @@ export default function Page() {
 
       <div className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">記事を検索</h1>
-        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+        <p className="mt-2 text-base text-stone-600 leading-relaxed">
           タイトル・要約・カテゴリ名のキーワードで、読みたい記事を探せます。
         </p>
         <div className="mt-6">

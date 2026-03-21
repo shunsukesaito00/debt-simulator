@@ -71,6 +71,11 @@ textarea {
     @apply mx-auto w-full max-w-5xl px-4 md:px-6;
   }
 
+  /** 固定ページ・記事と揃える読み幅（max-w-3xl = 48rem）。max-w-prose（65ch）は使わない */
+  .ds-page-width {
+    @apply mx-auto w-full min-w-0 max-w-3xl;
+  }
+
   /* トップヒーロー：枠線を弱め、面のグラデで区切る */
   .ds-hero {
     border: none;
@@ -217,7 +222,7 @@ textarea {
   }
 
   .ds-blog-prose {
-    @apply max-w-prose text-stone-800 leading-relaxed;
+    @apply max-w-none text-stone-800 leading-relaxed;
   }
   .ds-blog-prose > p + p {
     @apply mt-4;
@@ -232,7 +237,7 @@ textarea {
   }
 
   .ds-article-body {
-    @apply text-[15px] text-stone-700 sm:text-base;
+    @apply text-base text-stone-700;
     line-height: 1.85;
   }
   .ds-article-body section p + p {
@@ -249,7 +254,7 @@ textarea {
   }
 
   .ds-article-shell {
-    @apply mx-auto max-w-prose;
+    @apply mx-auto w-full min-w-0 max-w-3xl;
   }
 
   .ds-section-gap {

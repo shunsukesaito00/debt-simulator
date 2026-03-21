@@ -12,10 +12,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="ds-card ds-card-pad">
-      <h1 className="text-2xl font-semibold">プライバシーポリシー</h1>
+    <div className="ds-page-width">
+      <div className="ds-card ds-card-pad">
+        <h1 className="text-2xl font-semibold">プライバシーポリシー</h1>
 
-      <div className="mt-5 grid gap-5 text-sm text-stone-700 leading-relaxed">
+        <div className="mt-5 grid gap-5 text-base text-stone-700 leading-relaxed">
         <section>
           <h2 className="text-base font-semibold text-stone-900">取得する情報</h2>
           <p className="mt-2">
@@ -70,6 +71,7 @@ export default function Page() {
             当サイトの内容は予告なく変更されることがあります。
           </p>
         </section>
+        </div>
       </div>
     </div>
   );

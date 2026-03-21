@@ -16,7 +16,7 @@
 ## ページシェル・幅（全記事共通）
 
 - **`ArticlePageShell`**（`app/components/ArticlePageShell.tsx`）でラップする。パンくずは **ホーム → 悩み別に読む（記事一覧）→ 記事タイトル**（`lib/article-breadcrumb.ts` の `ARTICLES_INDEX_CRUMB_LABEL` と JSON-LD `getArticleBreadcrumbJsonLd` を揃える）。
-- **幅**: 通常は `ds-article-shell`（本文は `max-w-prose` 相当）。**表・Recharts が主役**の記事は `wide={articleUsesWideLayout("your-slug")}` で `max-w-3xl`。slug の登録は **`lib/article-layout.ts`** の `WIDE_LAYOUT_SLUGS`。
+- **幅**: 通常は `ds-article-shell`（**`max-w-3xl` / 48rem**）。**表・Recharts が主役**の記事は `wide={articleUsesWideLayout("your-slug")}` でも同じ `max-w-3xl`（表が主役のときは内側ブロックで `max-w-none` 等）。slug の登録は **`lib/article-layout.ts`** の `WIDE_LAYOUT_SLUGS`。
 - **見出し**: 記事タイトル（h1）やセクション見出し（h2）に **`ds-page-serif`** と **`font-bold`** を寄せると一覧ページとトーンが揃う（既存記事は段階的にで可）。
 
 ### タイポグラフィ（2025 モダンUI刷新）

@@ -25,7 +25,7 @@ export default function FixedCostImpactPage() {
   }, [monthly, months]);
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="ds-page-width">
       <nav className="mb-4 text-sm text-stone-600" aria-label="パンくず">
         <ol className="flex flex-wrap items-center gap-1">
           <li>

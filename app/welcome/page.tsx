@@ -41,7 +41,7 @@ export default function WelcomePage() {
   const recommended = getWelcomeRecommendedArticles();
 
   return (
-    <div className="mx-auto max-w-prose">
+    <div className="ds-page-width">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
@@ -64,13 +64,13 @@ export default function WelcomePage() {
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">
           はじめての方へ
         </h1>
-        <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-4 text-base text-stone-700 leading-relaxed">
           このページでは、おすすめの読む順とツールへの入口をまとめています。
         </p>
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="recommended">
           <h2 className="ds-page-serif text-lg font-semibold text-stone-900">まず読む記事（おすすめ順）</h2>
-          <ol className="mt-4 list-decimal space-y-4 pl-5 text-sm text-stone-700 leading-relaxed">
+          <ol className="mt-4 list-decimal space-y-4 pl-5 text-base text-stone-700 leading-relaxed">
             {recommended.map((a) => (
               <li key={a.slug}>
                 <Link
@@ -79,7 +79,7 @@ export default function WelcomePage() {
                 >
                   {a.title}
                 </Link>
-                <p className="mt-1 text-stone-600">{a.summary}</p>
+                <p className="mt-1 text-stone-600 leading-relaxed">{a.summary}</p>
                 <span className="mt-1 inline-block text-xs text-stone-500">
                   {CATEGORY_LABELS[a.category]}
                   {a.badge ? ` · ${a.badge}` : ""}
@@ -91,7 +91,7 @@ export default function WelcomePage() {
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="tools">
           <h2 className="ds-page-serif text-lg font-semibold text-stone-900">数字を試す（ツール）</h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-stone-700">
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-base text-stone-700 leading-relaxed">
             <li>
               <Link href="/simulator/cardloan" className="font-medium text-stone-900 underline hover:no-underline">
                 借入返済シミュレーター
@@ -115,7 +115,7 @@ export default function WelcomePage() {
 
         <section className="mt-8 border-t border-stone-200 pt-8" id="can-cannot">
           <h2 className="ds-page-serif text-lg font-semibold text-stone-900">このサイトでできること・できないこと</h2>
-          <div className="mt-3 space-y-3 text-sm text-stone-700 leading-relaxed">
+          <div className="mt-3 space-y-3 text-base text-stone-700 leading-relaxed">
             <div className="ds-subcard p-4">
               <div className="font-semibold text-stone-900">できること</div>
               <ul className="mt-2 list-disc pl-5 space-y-1">

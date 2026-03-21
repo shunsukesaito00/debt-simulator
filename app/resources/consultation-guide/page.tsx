@@ -35,17 +35,17 @@ const faqJsonLd = {
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-prose">
+    <div className="ds-page-width">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
       <div className="ds-card ds-card-pad">
         <p className="text-sm font-semibold text-stone-600">リソース</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">相談先・公的支援の一覧</h1>
-        <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-4 text-base text-stone-700 leading-relaxed">
           {SITE_NAME}は、借入の勧誘や法律・税務の専門的な判断を行うサイトではありません。
         </p>
 
-        <section className="mt-8 space-y-4 text-sm text-stone-700 leading-relaxed">
+        <section className="mt-8 space-y-4 text-base text-stone-700 leading-relaxed">
           <h2 className="ds-page-serif text-lg font-bold text-stone-900">はじめに（重要）</h2>
           <ul className="list-disc pl-5 space-y-2">
             <li>契約内容・金利・返済条件は、各金融機関の説明書面・公式サイトを最優先してください。</li>
@@ -53,7 +53,7 @@ export default function Page() {
           </ul>
         </section>
 
-        <section className="mt-10 space-y-3 text-sm">
+        <section className="mt-10 space-y-3 text-base leading-relaxed">
           <h2 className="ds-page-serif text-lg font-bold text-stone-900">主な相談先・参考（外部）</h2>
           <ul className="space-y-3">
             <li>

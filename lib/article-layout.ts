@@ -1,5 +1,5 @@
 /**
- * 表・Recharts など横幅が必要な記事は max-w-3xl。テキスト中心は ds-article-shell（max-w-prose）。
+ * 表・Recharts など横幅が必要な記事は max-w-3xl。テキスト中心も ds-article-shell（max-w-3xl）で統一。
  */
 const WIDE_LAYOUT_SLUGS = new Set<string>([
   "borrow-100-interest",

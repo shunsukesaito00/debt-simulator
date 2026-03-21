@@ -63,18 +63,18 @@ const definedTermSet = {
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-prose">
+    <div className="ds-page-width">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSet) }} />
       <div className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">用語集</h1>
-        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+        <p className="mt-3 text-base text-stone-600 leading-relaxed">
           一般的な説明であり、契約書・金融機関の説明を優先してください。外部リンクは公的サイトへの入口です。
         </p>
         <dl className="mt-8 space-y-8">
           {terms.map((t) => (
             <div key={t.term}>
               <dt className="ds-page-serif text-base font-bold text-stone-900">{t.term}</dt>
-              <dd className="mt-2 text-sm text-stone-700 leading-relaxed">{t.def}</dd>
+              <dd className="mt-2 text-base text-stone-700 leading-relaxed">{t.def}</dd>
               {t.href ? (
                 <dd className="mt-2">
                   {t.href.startsWith("http") ? (

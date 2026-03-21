@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-prose">
+    <div className="ds-page-width">
       <div className="ds-surface-soft ds-card-pad">
         <p className="text-sm font-medium text-stone-600">運営者プロフィール</p>
         <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">運営者情報</h1>
 
-        <div className="mt-6 space-y-4 text-sm text-stone-700 leading-relaxed">
+        <div className="mt-6 space-y-4 text-base text-stone-700 leading-relaxed">
           <p>
             運営者の経験をもとに、返済・固定費・家計に関する記事と、条件を変えて試せる試算ツールを公開しています。
             投資助言や借入の勧誘は行っていません。
@@ -33,7 +33,7 @@ export default function Page() {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-4 border-t border-stone-200 pt-8 text-sm text-stone-700 leading-relaxed">
+        <div className="mt-8 grid gap-4 border-t border-stone-200 pt-8 text-base text-stone-700 leading-relaxed">
           <div>
             <div className="font-semibold text-stone-900">サイト名</div>
             <div>{SITE_NAME}（返済・固定費の試算ツール「借入返済シミュレーター」を併設）</div>
@@ -83,7 +83,7 @@ export default function Page() {
 
       <div className="ds-surface-soft ds-card-pad mt-6">
         <h2 className="ds-page-serif text-lg font-semibold text-stone-900">運営方針・編集ポリシー</h2>
-        <div className="mt-4 space-y-4 text-sm text-stone-700 leading-relaxed">
+        <div className="mt-4 space-y-4 text-base text-stone-700 leading-relaxed">
           <div>
             <div className="font-semibold text-stone-900">サイトの方針</div>
             <div>

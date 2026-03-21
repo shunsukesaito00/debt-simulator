@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-prose">
+    <div className="ds-page-width">
       <div className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">体験談・感想の送信</h1>
-        <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-4 text-base text-stone-700 leading-relaxed">
           借金・返済・家計の体験を匿名で共有したい方は、下記フォームからお送りください。掲載の可否・編集は運営側の判断とし、必ず掲載されるわけではありません。
         </p>
-        <ul className="mt-4 list-disc pl-5 text-sm text-stone-600 space-y-1">
+        <ul className="mt-4 list-disc pl-5 text-base text-stone-600 space-y-1 leading-relaxed">
           <li>個人が特定される情報は書かないでください。</li>
           <li>誹謗中傷・違法行為の助長となる内容は掲載しません。</li>
           <li>返信はできない場合があります。</li>
@@ -33,7 +33,7 @@ export default function Page() {
             <iframe title="体験談送信フォーム" src={FORM_URL} className="h-[32rem] w-full" />
           </div>
         ) : (
-          <div className="mt-8 ds-subcard p-6 text-sm text-stone-700">
+          <div className="mt-8 ds-subcard p-6 text-base text-stone-700 leading-relaxed">
             <p>
               送信フォームの準備が整い次第、こちらに表示します。お急ぎの場合は{" "}
               <Link href="/contact" className="font-semibold text-emerald-900 underline">
