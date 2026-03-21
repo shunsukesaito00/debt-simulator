@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ARTICLES_INDEX_CRUMB_LABEL } from "@/lib/article-breadcrumb";
-import { CATEGORY_LABELS, type ArticleCategory } from "@/lib/articles";
+import { CATEGORY_LABELS, getArticleListSectionIdForCategory, type ArticleCategory } from "@/lib/articles";
 
 function formatDateLabel(iso?: string): string | null {
   if (!iso) return null;
@@ -55,7 +55,7 @@ export function ArticlePageShell({
         <div className="mb-5 flex flex-wrap items-center gap-2">
           {category && (
             <Link
-              href={`/articles#${category}`}
+              href={`/articles#${getArticleListSectionIdForCategory(category)}`}
               className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600 transition-colors hover:border-emerald-300 hover:text-emerald-900"
             >
               {CATEGORY_LABELS[category]}

@@ -66,7 +66,12 @@ export default function Page() {
       />
 
       
-      <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("investment-loss-family-trust")}>
+      <ArticlePageShell
+        currentPageTitle={ARTICLE_TITLE}
+        wide={articleUsesWideLayout("investment-loss-family-trust")}
+        publishedAt="2026-03-19"
+        category="story"
+      >
 <div className="ds-card ds-card-pad">
           <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 

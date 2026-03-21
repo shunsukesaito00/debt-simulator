@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getSiteBaseUrl, SITE_NAME } from "@/lib/site-config";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+const BASE = getSiteBaseUrl();
 
 export const metadata: Metadata = {
   title: "運営者情報",
@@ -35,7 +36,7 @@ export default function Page() {
         <div className="mt-8 grid gap-4 border-t border-stone-200 pt-8 text-sm text-stone-700 leading-relaxed">
           <div>
             <div className="font-black text-stone-900">サイト名</div>
-            <div>借入返済シミュレーター</div>
+            <div>{SITE_NAME}（返済・固定費の試算ツール「借入返済シミュレーター」を併設）</div>
           </div>
 
           <div>
@@ -71,13 +72,8 @@ export default function Page() {
             <div className="font-black text-stone-900">連絡先</div>
             <div>
               お問い合わせは{" "}
-              <Link
-                href="https://github.com/shunsukesaito00/debt-simulator/issues"
-                className="font-black text-stone-800 underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub Issues
+              <Link href="/contact" className="font-black text-stone-800 underline">
+                お問い合わせフォーム
               </Link>
               からお願いします（メールアドレスの公開は行っていません）。
             </div>
@@ -103,21 +99,20 @@ export default function Page() {
           </div>
 
           <div>
-            <div className="font-black text-stone-900">記事作成プロセス</div>
-            <div>各記事は以下のプロセスで作成しています。</div>
+            <div className="font-black text-stone-900">記事のつくり方</div>
+            <div>各記事は、次のような流れで整えています。</div>
             <ol className="mt-2 list-decimal pl-5 space-y-1">
-              <li>テーマの選定：検索意図と読者ニーズに基づきテーマを決定</li>
-              <li>骨組みの作成：AIツールで構成案と計算例を作成</li>
-              <li>判断材料の追加：人間が前提条件・読み方のポイント・編集メモを追記し、条件の妥当性を確認</li>
-              <li>公開前チェック：計算ロジック・内部リンク・構造化データ・免責事項を確認してから公開</li>
+              <li>テーマの選定：読む方の疑問や状況に沿うかを考えて決めます</li>
+              <li>構成と試算：見出しと計算例のたたき台を用意し、条件が現実的かを確認します</li>
+              <li>追記・推敲：前提条件・読み方の注意・免責の表現を人の手で足し、誤解がないか見直します</li>
+              <li>公開前：試算の考え方と免責事項を最終確認してから公開します</li>
             </ol>
           </div>
 
           <div>
             <div className="font-black text-stone-900">更新方針</div>
             <div>
-              記事は公開後も定期的に見直し、計算条件の見直し・内容の追加・読みやすさの改善を行っています。更新があった場合は、記事の構造化データ（JSON-LD）の{" "}
-              <code className="text-xs bg-stone-100 px-1 py-0.5 rounded">dateModified</code> を更新しています。
+              記事は公開後も定期的に見直し、計算条件の見直し・内容の追加・読みやすさの改善を行っています。内容を直したときは、記事ページの更新日もあわせて示します。
             </div>
           </div>
 

@@ -11,7 +11,7 @@ export function ArticleAuthorCard() {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="text-xs font-black uppercase tracking-wide text-stone-500">この記事を書いた人</div>
-          <div className="mt-1 text-sm font-black text-stone-900">{AUTHOR_NAME}</div>
+          <div className="mt-1 text-sm font-bold text-stone-900">{AUTHOR_NAME}</div>
         </div>
         <div className="text-sm text-stone-600">
           <Link href="/about" className="ds-link inline-flex items-center gap-1">
@@ -22,7 +22,7 @@ export function ArticleAuthorCard() {
 
       <div className="mt-3 text-sm text-stone-700 leading-relaxed">
         20代後半の会社員で、株式投資・FXの失敗をきっかけに約300万円の借金を経験しました。
-        返済の「数字の見え方」が変わると、判断も変わると実感したので、このサイトの形に落とし込みました。
+        返済の「数字の見え方」が変わると判断も変わると実感し、体験記・副業・節約の記録と試算ツールを同じ場所に置いています。
       </div>
     </div>
   );

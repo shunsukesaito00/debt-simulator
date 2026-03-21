@@ -2,6 +2,7 @@ import { getArticle, CATEGORY_LABELS, getArticleListSectionIdForCategory } from 
 import { TrackedLink } from "@/app/components/TrackedLink";
 import { ArticleAuthorCard } from "@/app/components/article";
 import { ArticlePrevNext } from "@/app/components/ArticlePrevNext";
+import { ArticlePublicResources } from "@/app/components/ArticlePublicResources";
 
 const SIMULATOR_HREF = "/simulator/cardloan";
 const SIMULATOR_LABEL = "借入返済シミュレーターで計算する";
@@ -149,6 +150,8 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
           記事一覧へ戻る
         </TrackedLink>
       </div>
+
+      <ArticlePublicResources />
 
       <ArticlePrevNext slug={articleSlug} />
     </section>

@@ -1,13 +1,19 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getSiteBaseUrl, SITE_NAME } from "@/lib/site-config";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+const BASE = getSiteBaseUrl();
 
 export const metadata: Metadata = {
   title: "お問い合わせ",
-  description: "借入返済シミュレーターへのご意見・不具合報告はフォームまたはGitHub Issuesからお願いします。",
+  description: `${SITE_NAME}へのご意見・ご感想は下記フォームからお願いします。`,
   alternates: { canonical: `${BASE}/contact` },
-  openGraph: { title: "お問い合わせ", description: "借入返済シミュレーターへのお問い合わせ。", url: `${BASE}/contact`, type: "website" },
+  openGraph: {
+    title: "お問い合わせ",
+    description: `${SITE_NAME}へのお問い合わせ。`,
+    url: `${BASE}/contact`,
+    type: "website",
+  },
 };
 
 const GOOGLE_FORM_EMBED_URL =
@@ -20,10 +26,7 @@ export default function Page() {
 
       <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
         <p>
-          ご意見・不具合報告は下記フォームからお願いします。返信が必要な場合はメールアドレスをご記入ください。
-        </p>
-        <p>
-          技術的な不具合の詳細共有はGitHub Issuesも利用できます（任意）。
+          ご意見・ご感想・サイトに関するお問い合わせは下記フォームからお願いします。返信が必要な場合はメールアドレスをご記入ください。
         </p>
 
         <div className="ds-subcard min-h-[900px] w-full overflow-hidden p-0">
@@ -51,20 +54,6 @@ export default function Page() {
               rel="noreferrer"
             >
               お問い合わせフォームを直接開く
-            </Link>
-          </div>
-        </div>
-
-        <div className="ds-subcard p-4">
-          <div className="font-black text-stone-900">技術的な不具合報告（任意）</div>
-          <div className="mt-2">
-            <Link
-              href="https://github.com/shunsukesaito00/debt-simulator/issues"
-              className="font-black underline"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub Issues（不具合報告 / 要望 / その他）
             </Link>
           </div>
         </div>

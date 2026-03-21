@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
+import { getSiteBaseUrl } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
+  const base = getSiteBaseUrl();
   return {
     rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app"}/sitemap.xml`,
+    sitemap: `${base}/sitemap.xml`,
   };
 }

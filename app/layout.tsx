@@ -4,6 +4,8 @@ import { Noto_Serif_JP, Zen_Kaku_Gothic_New } from "next/font/google";
 import HeaderNav from "./components/HeaderNav";
 import FooterNav from "./components/FooterNav";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
+import { Analytics } from "@vercel/analytics/react";
+import { getSiteBaseUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
 /** UI 本文・ナビ用ゴシック */
 const zenKaku = Zen_Kaku_Gothic_New({
@@ -21,16 +23,23 @@ const notoSerifJp = Noto_Serif_JP({
   display: "swap",
 });
 
+const siteBase = getSiteBaseUrl();
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteBase),
   title: {
-    default: "借入返済シミュレーター",
-    template: "%s | 借入返済シミュレーター",
+    default: `${SITE_NAME}｜${SITE_TAGLINE}`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "毎月の固定負担を条件別に比較・試算するシミュレーターと記事。借入返済・返済計画を中心に、月々負担の違いを具体条件で確認し、記事とツールを往復して判断材料を提供します。",
+  description: SITE_DESCRIPTION,
   robots: { index: true, follow: true },
   verification: {
     google: "068cd6d5bb52c21b",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
   },
 };
 
@@ -55,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         <FooterNav />
+        <Analytics />
       </body>
     </html>
   );

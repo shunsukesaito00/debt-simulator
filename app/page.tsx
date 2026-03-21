@@ -4,21 +4,21 @@ import {
   getHomeSpotlightArticles,
   getPopularArticles,
   getRecentArticles,
+  getArticlesByCategory,
   CATEGORY_LABELS,
 } from "@/lib/articles";
 import { TrackedLink } from "./components/TrackedLink";
+import { getSiteBaseUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
+const BASE = getSiteBaseUrl();
 
 export const metadata: Metadata = {
-  title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
-  description:
-    "金欠や返済で悩む方向けに、体験記と数字のツールを並べています。借入返済シミュレーターで条件別に月々・総利息・完済時期を試算できます。",
+  title: `${SITE_NAME}｜体験記・副業・節約と返済シミュレーター`,
+  description: SITE_DESCRIPTION,
   alternates: { canonical: BASE },
   openGraph: {
-    title: "借入返済シミュレーター｜条件別に月々返済額・総利息・完済時期を比較",
-    description:
-      "体験記とシミュレーターで、返済と固定費の見え方を整理するサイトです。",
+    title: `${SITE_NAME}｜${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
     url: BASE,
     type: "website",
   },
@@ -27,22 +27,20 @@ export const metadata: Metadata = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "借入返済シミュレーター",
+  name: SITE_NAME,
   url: BASE,
-  description:
-    "借入返済の試算シミュレーターと、固定費・返済まわりの記事。金欠や返済で悩む方の判断材料になります。",
+  description: SITE_DESCRIPTION,
   publisher: { "@id": `${BASE}/#organization` },
-  logo: { "@type": "ImageObject", url: `${BASE}/favicon.ico` },
+  logo: { "@type": "ImageObject", url: `${BASE}/icon` },
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${BASE}/#organization`,
-  name: "借入返済シミュレーター",
+  name: SITE_NAME,
   url: BASE,
-  description:
-    "返済・固定費の数字を試せるツールと、条件別の記事・体験記を載せています。投資助言や借入の勧誘は行いません。",
+  description: SITE_DESCRIPTION,
 };
 
 type Pillar = {
@@ -63,6 +61,30 @@ function formatPublishedAt(iso?: string): string | null {
 
 const THEME_PILLARS: Pillar[] = [
   {
+    icon: "📖",
+    title: "体験記・返済日記",
+    desc: "当事者の一次体験。数字の前に気持ちの揺れも記録しています",
+    href: "/articles#story",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "story",
+  },
+  {
+    icon: "💼",
+    title: "副業・収入改善",
+    desc: "返済とつなげた副業の記録や、時間とリスクの考え方",
+    href: "/articles#side-income",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "side-income",
+  },
+  {
+    icon: "🍱",
+    title: "節約・生活改善",
+    desc: "食費・ポイント・日用品など、暮らしの中での工夫",
+    href: "/articles#saving",
+    eventLocation: "top_theme_pillars",
+    categoryKey: "saving",
+  },
+  {
     icon: "💳",
     title: "リボ・借入の負担の見え方",
     desc: "借入額別・返済方式・リボ払いなど、条件ごとに月々や利息がどう変わるか読む",
@@ -79,9 +101,9 @@ const THEME_PILLARS: Pillar[] = [
     categoryKey: "fixed-cost",
   },
   {
-    icon: "📖",
-    title: "体験記・家計の話",
-    desc: "運営者の体験や、家計簿・収支の整理の考え方",
+    icon: "🧾",
+    title: "家計の見え方",
+    desc: "家計簿・収支の整理の考え方（家計管理の記事）",
     href: "/articles#household",
     eventLocation: "top_theme_pillars",
     categoryKey: "household",
@@ -116,6 +138,10 @@ export default function Page() {
   const spotlight = getHomeSpotlightArticles();
   const popular = getPopularArticles();
   const recent = getRecentArticles(5);
+  const byCat = getArticlesByCategory();
+  const pillarStories = (byCat.get("story") ?? []).slice(0, 3);
+  const pillarSide = (byCat.get("side-income") ?? []).slice(0, 3);
+  const pillarSaving = (byCat.get("saving") ?? []).slice(0, 3);
   const noteUrl = (process.env.NEXT_PUBLIC_NOTE_URL ?? "").trim();
   const xUrl = (process.env.NEXT_PUBLIC_X_URL ?? "").trim();
 
@@ -127,14 +153,14 @@ export default function Page() {
       {/* 1. ヒーロー */}
       <section className="ds-hero p-6 md:p-10">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">悩んでいる方へ。一緒に考えていきましょう。</p>
+          <p className="text-sm font-semibold tracking-wide text-emerald-900/80">{SITE_TAGLINE}</p>
           <h1 className="ds-page-serif mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
-            借入返済シミュレーター
+            {SITE_NAME}
           </h1>
           <p className="mt-3 text-base text-stone-700 leading-relaxed md:text-lg">
             返済や金欠で気持ちが沈んでいるとき、数字だけが先に来るサイトだと負けます。このサイトでは
-            <strong className="text-stone-900">体験の記録</strong>と
-            <strong className="text-stone-900">試算できるツール</strong>
+            <strong className="text-stone-900">体験記・副業・節約の記録</strong>と
+            <strong className="text-stone-900">返済・固定費の試算ツール</strong>
             の両方を置いています。まずは
             <Link href="/welcome" className="font-semibold text-emerald-900 underline decoration-emerald-300 hover:no-underline">
               はじめての方へ
@@ -173,6 +199,103 @@ export default function Page() {
               100万・200万・300万・3年/5年
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* 1b. 3本柱：体験記・副業・節約 */}
+      <section className="ds-card ds-card-pad">
+        <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">体験記・副業・節約の最新</h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          企業サイトとは違い、当事者の一次体験と暮らしの工夫を中心に発信しています。
+        </p>
+        <div className="mt-6 grid gap-8 lg:grid-cols-3">
+          <div>
+            <h3 className="text-sm font-bold text-emerald-900">体験記・返済日記</h3>
+            <ul className="mt-3 space-y-2">
+              {pillarStories.map((a) => (
+                <li key={a.slug}>
+                  <TrackedLink
+                    href={`/articles/${a.slug}`}
+                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    event={{
+                      action: "click_top_pillar_story",
+                      location: "top_three_pillars",
+                      target: `/articles/${a.slug}`,
+                      link_type: "pillar_article",
+                      article_slug: a.slug,
+                    }}
+                  >
+                    {a.title}
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <TrackedLink
+              href="/articles/category/story"
+              className="mt-3 inline-block text-xs font-semibold text-emerald-900"
+              event={{ action: "click_top_pillar_more", location: "top_three_pillars", target: "/articles/category/story", link_type: "pillar_more" }}
+            >
+              体験記をもっと見る →
+            </TrackedLink>
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-emerald-900">副業・収入改善</h3>
+            <ul className="mt-3 space-y-2">
+              {pillarSide.map((a) => (
+                <li key={a.slug}>
+                  <TrackedLink
+                    href={`/articles/${a.slug}`}
+                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    event={{
+                      action: "click_top_pillar_side",
+                      location: "top_three_pillars",
+                      target: `/articles/${a.slug}`,
+                      link_type: "pillar_article",
+                      article_slug: a.slug,
+                    }}
+                  >
+                    {a.title}
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <TrackedLink
+              href="/articles/category/side-income"
+              className="mt-3 inline-block text-xs font-semibold text-emerald-900"
+              event={{ action: "click_top_pillar_more", location: "top_three_pillars", target: "/articles/category/side-income", link_type: "pillar_more" }}
+            >
+              副業の記事をもっと見る →
+            </TrackedLink>
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-emerald-900">節約・生活改善</h3>
+            <ul className="mt-3 space-y-2">
+              {pillarSaving.map((a) => (
+                <li key={a.slug}>
+                  <TrackedLink
+                    href={`/articles/${a.slug}`}
+                    className="text-sm font-semibold text-stone-800 underline decoration-stone-300 hover:decoration-emerald-700"
+                    event={{
+                      action: "click_top_pillar_saving",
+                      location: "top_three_pillars",
+                      target: `/articles/${a.slug}`,
+                      link_type: "pillar_article",
+                      article_slug: a.slug,
+                    }}
+                  >
+                    {a.title}
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+            <TrackedLink
+              href="/articles/category/saving"
+              className="mt-3 inline-block text-xs font-semibold text-emerald-900"
+              event={{ action: "click_top_pillar_more", location: "top_three_pillars", target: "/articles/category/saving", link_type: "pillar_more" }}
+            >
+              節約の記事をもっと見る →
+            </TrackedLink>
+          </div>
         </div>
       </section>
 
@@ -315,7 +438,7 @@ export default function Page() {
       <section className="ds-card ds-card-pad">
         <h2 className="ds-page-serif text-xl font-bold text-stone-900 md:text-2xl">よく読まれている記事</h2>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">
-          アクセス数ではなく、手動で「定番」として置いている一覧です。
+          はじめに読む方におすすめの記事を、テーマ別に並べています。
         </p>
         <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm text-stone-800">
           {popular.map((a) => (

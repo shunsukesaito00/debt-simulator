@@ -8,13 +8,20 @@ const primaryItems = [
   { href: "/", label: "ホーム" },
   { href: "/welcome", label: "はじめての方" },
   { href: "/articles", label: "記事" },
-  { href: "/about", label: "運営者プロフィール" },
+  { href: "/articles/category/story", label: "体験記" },
+  { href: "/articles/category/side-income", label: "副業" },
+  { href: "/articles/category/saving", label: "節約" },
+  { href: "/resources/consultation-guide", label: "相談先" },
+  { href: "/search", label: "検索" },
+  { href: "/about", label: "運営者" },
   { href: "/contact", label: "お問い合わせ" },
   { href: "/privacy", label: "プライバシー" },
 ] as const;
 
 const toolItems = [
-  { href: "/simulator/cardloan", label: "シミュレーター" },
+  { href: "/simulator/cardloan", label: "返済シミュレーター" },
+  { href: "/tools/fixed-cost-impact", label: "固定費インパクト" },
+  { href: "/glossary", label: "用語集" },
   { href: "/how-to", label: "使い方" },
   { href: "/faq", label: "FAQ" },
   { href: "/logic", label: "計算ロジック" },
@@ -110,7 +117,7 @@ export default function HeaderNav() {
       {/* タグライン帯 */}
       <div className="bg-emerald-950 text-center">
         <p className="py-1.5 text-[11px] font-medium tracking-wide text-emerald-100/90">
-          悩んでいる方へ。一緒に考えていきましょう。
+          体験・数字・暮らしの工夫で、返済を一緒に考えていきましょう。
         </p>
       </div>
       <div className="ds-header">
@@ -119,7 +126,10 @@ export default function HeaderNav() {
           href="/"
           className={`min-w-0 shrink text-sm font-bold leading-snug tracking-tight text-stone-900 sm:text-base ${navFocus} rounded-sm`}
         >
-          <span className="line-clamp-2 sm:line-clamp-1">借入返済シミュレーター</span>
+          <span className="flex flex-col leading-tight sm:flex-row sm:items-baseline sm:gap-2">
+            <span className="line-clamp-2 sm:line-clamp-1">借金と暮らしの記録</span>
+            <span className="hidden text-[10px] font-semibold text-stone-500 sm:inline">返済シミュレーター付き</span>
+          </span>
         </Link>
 
         {/* デスクトップ：プライマリ（テキストリンク＋アクティブは下線） */}

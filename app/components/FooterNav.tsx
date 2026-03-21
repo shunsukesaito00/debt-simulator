@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { ARTICLE_LIST_SECTIONS, getArticlesByCategory } from "@/lib/articles";
+import { SITE_NAME } from "@/lib/site-config";
 
 const siteLinks = [
   { href: "/welcome", label: "はじめての方へ" },
+  { href: "/resources/consultation-guide", label: "相談先・公的支援" },
+  { href: "/glossary", label: "用語集" },
+  { href: "/search", label: "記事検索" },
+  { href: "/updates", label: "更新ログ" },
+  { href: "/stories/submit", label: "体験談を送る" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/disclaimer", label: "免責事項" },
   { href: "/contact", label: "お問い合わせ" },
@@ -23,10 +29,14 @@ function CategoryColumn() {
             (n, cat) => n + (byCategory.get(cat)?.length ?? 0),
             0,
           );
+          const href =
+            sec.articleCategories.length === 1
+              ? `/articles/category/${sec.articleCategories[0]}`
+              : `/articles#${sec.id}`;
           return (
             <li key={sec.id}>
               <Link
-                href={`/articles#${sec.id}`}
+                href={href}
                 className="group flex items-center gap-2 text-sm font-medium text-stone-600 transition-colors hover:text-emerald-900"
               >
                 <span>{sec.label}</span>
@@ -65,10 +75,10 @@ export default function FooterNav() {
 
         <div className="mt-10 border-t border-stone-100 pt-6">
           <p className="text-sm font-medium text-stone-500 leading-relaxed">
-            悩んでいる方へ。一緒に考えていきましょう。
+            体験・数字・暮らしの工夫で、返済を一緒に考えていきましょう。
           </p>
           <p className="mt-2 text-xs text-stone-400">
-            &copy; {new Date().getFullYear()} 借入返済シミュレーター
+            &copy; {new Date().getFullYear()} {SITE_NAME}
           </p>
         </div>
       </div>
