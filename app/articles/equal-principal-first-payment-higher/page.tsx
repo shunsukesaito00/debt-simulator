@@ -304,7 +304,7 @@ export default function Page() {
           <ArticleEditorMemo
             purpose="「元金均等は初回だけ高い」という体感を、残高・利息・元本の返し方の関係で説明すること"
             reasonAxis="元利均等と同じ期間（36回）で並べ、初回の支払い総額の差を数値で見せる。"
-            memo="GROWTH 3.2 のテーマ（元金均等・初回が高い理由）に沿った短めの解説記事。"
+            memo="元金均等で初回返済が高くなる理由を扱う短めの解説記事。"
           />
 
           <ArticleFooter articleSlug={SLUG} />

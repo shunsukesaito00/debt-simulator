@@ -268,7 +268,7 @@ export default function Page() {
             <section id="editor-memo">
               <ArticleEditorMemo
                 purpose="リボ払い100万円を月5万円で返す場合の完済期間と総利息を具体的に示し、月3万円・月7万円との比較で返済額の効果を伝える記事です。"
-                reasonAxis="GROWTH戦略の『リボ100万 月5万 何年』に対応する専用記事として、定額元利の近似で数値を一本化しています。"
+                reasonAxis="クエリ「リボ100万 月5万 何年」向けの専用記事として、定額元利の近似で数値を一本化しています。"
                 memo="数値は lib/loan-calc の定額元利（端数切り捨て）と整合するよう試算しています。"
               />
             </section>

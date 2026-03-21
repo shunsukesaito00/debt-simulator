@@ -299,7 +299,7 @@ export default function Page() {
           <ArticleEditorMemo
             purpose="「定額だから毎月同じ」と誤解されやすい点を、残高連動の利息で整理すること"
             reasonAxis="100万・15%・月元金3万で、当サイトの計算と一致する表を掲載する。"
-            memo="GROWTH 3.2 の「定額元金 返済額の推移」テーマ向け。"
+            memo="定額元金の返済額の推移を扱うテーマ向け。"
           />
 
           <ArticleFooter articleSlug={SLUG} />

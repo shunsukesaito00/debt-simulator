@@ -262,7 +262,7 @@ export default function Page() {
 
           <ArticleEditorMemo
             purpose="「期間を伸ばすと楽に見えるが利息は増える」というトレードオフを、同条件の数値表で示すこと"
-            reasonAxis="GROWTH 3.2 の「返済期間延ばす 総利息」に対応。3/5/7年で並べる。"
+            reasonAxis="「返済期間を延ばすと総利息がどう増えるか」に対応。3/5/7年で並べる。"
             memo="元利均等・固定金利・追加返済なしのシンプル例。"
           />
 

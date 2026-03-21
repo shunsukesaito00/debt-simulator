@@ -280,7 +280,7 @@ export default function Page() {
             <section id="editor-memo">
               <ArticleEditorMemo
                 purpose="「借金500万 金利15% 5年 総利息」という具体的クエリに答え、元利均等の目安を一画面で示す記事です。"
-                reasonAxis="GROWTH_STRATEGY 3.2 のテーマに対応。300万記事（borrow-300-15percent-5years-total-interest）・500万月々返済（borrow-500-monthly-payment）・期間比較（repayment-term-longer）への内部リンクでクラスターを補強します。"
+                reasonAxis="コンテンツ方針（docs/ROADMAP.md）に沿い、300万記事（borrow-300-15percent-5years-total-interest）・500万月々返済（borrow-500-monthly-payment）・期間比較（repayment-term-longer）への内部リンクでクラスターを補強します。"
                 memo="数値は lib/loan-calc の元利均等・60回・年利15%で再計算可能です。"
               />
             </section>

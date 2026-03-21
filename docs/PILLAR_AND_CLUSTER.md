@@ -1,5 +1,7 @@
 # ピラー（親）とクラスター（子）の対応
 
+[`docs/ROADMAP.md`](./ROADMAP.md) の内部リンク・コンテンツ方針に沿った、**ピラー／クラスター**の参照用ドキュメントです。
+
 **目的**: 内部リンク・関連記事の追加・見直し時に、「各カテゴリの入口記事」と「条件別の子記事」の関係を一目で把握する。
 
 **定義（運用上）**
@@ -92,9 +94,16 @@
 
 ---
 
+## 運用メモ
+
+- 新規記事追加時は、同カテゴリの**ピラー／近接記事**へ `relatedLinks` を張る。
+- ピラーを差し替える場合は **`order` / `badge`** と本ファイルの表を更新する。
+- 同一カテゴリ内の並びは `getArticlesByCategory()` が **`order` 昇順**（未指定は後ろ）で一覧化される。
+- フッターの「よく読まれている記事」は [`getPopularArticles()`](../lib/articles.ts) の手動キュレーション（トップと共通）。
+
 ## 関連URL
 
-- カテゴリ独立URL: `/articles/category/[カテゴリキー]`（例: `/articles/category/loan-amount`）
+- カテゴリ独立URL: `/articles/category/[カテゴリキー]`（例: `/articles/category/loan-amount`）。シミュ・早見表への CTA は [`app/articles/category/[slug]/page.tsx`](../app/articles/category/[slug]/page.tsx)。
 - 記事一覧アンカー: `/articles#loan-comparison` など（[`ARTICLE_LIST_SECTIONS`](../lib/article-types.ts)）
 
 更新したら本ファイルの「スナップショット」も可能な範囲で追随してください。

@@ -1,10 +1,10 @@
 # プロダクト・コンテンツのバックログ（参照用）
 
-実装優先度は都度判断。**全体の優先度の並び**は [`docs/ROADMAP.md`](./ROADMAP.md)。詳細な成長方針は [`GROWTH_STRATEGY.md`](../GROWTH_STRATEGY.md)、SEO 運用は [`docs/SEO_STRATEGY_PHASE8-10.md`](./SEO_STRATEGY_PHASE8-10.md)。
+実装優先度は都度判断。**全体の優先度とコンテンツ／SEO の大方針**は [`docs/ROADMAP.md`](./ROADMAP.md)。
 
 ## コンテンツ（ロングテール）
 
-- [`GROWTH_STRATEGY.md`](../GROWTH_STRATEGY.md) 3.2 のテーマは一通り記事化済み。Search Console 等で新たな具体クエリが見えたら、同じ方針（条件明示）で追加する。
+- 代表的な具体クエリ向けのテーマは一通り記事化済み。Search Console 等で新たな具体クエリが見えたら、[`ROADMAP.md`](./ROADMAP.md) の「コンテンツ・SEO の方針」に沿い、条件明示で追加する。
 - 1記事1条件（借入額・金利・期間）を明示し、シミュレーター・関連記事へ導線を張る。
 
 ## シミュレーター拡張（要望・検討段階）

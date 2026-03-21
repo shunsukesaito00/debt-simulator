@@ -1,6 +1,6 @@
 # 免責・注意書きの表現パターン（金融コンテンツ）
 
-**目的**: [`docs/SEO_STRATEGY_PHASE8-10.md`](./SEO_STRATEGY_PHASE8-10.md) フェーズ10「免責・注意書きの統一」に沿い、各ページで使う定型句の候補を一箇所にまとめる。
+**目的**: [`docs/ROADMAP.md`](./ROADMAP.md) の運用方針に沿い、各ページで使う定型句の候補を一箇所にまとめる。
 
 ## 試算・ツール全般
 
@@ -23,6 +23,6 @@
 ## 参照先
 
 - サイト全体の方針: [`/disclaimer`](../app/disclaimer/page.tsx)、[`/about`](../app/about/page.tsx)
-- 計測・改善サイクル: [GROWTH_STRATEGY.md](../GROWTH_STRATEGY.md) 7章
+- 計測・改善サイクル: [`docs/ROADMAP.md`](./ROADMAP.md)（コンテンツ・SEO の方針）、[`docs/ANALYTICS_MEASUREMENT.md`](./ANALYTICS_MEASUREMENT.md)
 
 新規ページ追加時は、上記から該当するものをコピーするか、同趣旨の一文を必ず入れるとよいです。

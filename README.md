@@ -18,6 +18,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## ドキュメント（開発者向け）
+
+- 優先度・コンテンツ／SEO の大方針: [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- 記事メタの単一ソース: [`docs/CONTENT_SINGLE_SOURCE.md`](docs/CONTENT_SINGLE_SOURCE.md)（実体は `lib/articles-data.ts` 等）
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
