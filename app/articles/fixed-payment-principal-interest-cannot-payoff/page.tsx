@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -118,6 +118,8 @@ export default function Page() {
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-payment-principal-interest-cannot-payoff" />
+
           <ArticlePagePremise
             comparisonConditions={[
               "借入額100万円・年利15%",
@@ -140,7 +142,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               定額元利返済は、毎月の支払額を一定にできるため、一見すると家計管理がしやすい返済方式に見えます。しかし、返済額の設定次第では「なかなか元本が減らない」「想定していた年数で終わらない」「場合によっては完済できないに近い状態になる」といった問題が起こりえます。
             </p>
@@ -420,7 +422,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleEditorMemo
             purpose="定額元利を選ぶときに、返済額が「利息を上回っているか」「元本を十分減らせる水準か」を確認する判断材料。完済できない・遅すぎる設定を避けてもらう。"

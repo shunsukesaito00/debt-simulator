@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -110,6 +110,8 @@ export default function Page() {
             本記事の計算は、一般的な元利均等返済の近似例です。実際の返済条件は契約内容により異なります。
           </p>
 
+          <ArticleStandardBlocks slug="borrow-100-interest" />
+
           <ArticlePagePremise
             comparisonConditions={[
               "借入額100万円",
@@ -134,7 +136,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             {/* 導入 */}
             <p>
               私も気になって、年利と返済期間で“総利息がどれだけ変わるか”を確かめました。特に年利15%前後は消費者金融やカードローンでよく見かける水準なので、返済期間によって総支払額がどこまで増えるのかを把握しておくのは大事だと思っています。
@@ -375,7 +377,7 @@ export default function Page() {
                 で確認できます。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleEditorMemo
             purpose="私が3年と5年で迷ったときに、判断しやすいように“月々”と“総額”のどちらを優先するかが見える順にしました。"

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -110,6 +110,8 @@ export default function Page() {
             本記事の計算は、一般的な固定金利・毎月返済の近似例です。実際の返済条件は契約内容により異なります。
           </p>
 
+          <ArticleStandardBlocks slug="borrow-200-monthly-payment" />
+
           <ArticlePagePremise
             comparisonConditions={[
               "借入額200万円",
@@ -133,7 +135,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               借金200万円をカードローンやフリーローンで借りた場合、毎月の返済額がどれくらいになるのかは、多くの人が最初に気になるポイントです。特に年利15%前後はよく見かける水準なので、返済期間を3年にするか5年にするかで、家計への負担や総支払額がどう変わるかを把握しておくことは重要です。
             </p>
@@ -372,7 +374,7 @@ export default function Page() {
                 で確認できます。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleEditorMemo
             purpose="借入200万円で3年と5年、どちらを現実的な返済計画として選ぶかの判断材料。月々6.9万と4.8万の差と、総利息約36万円の差を押さえてもらう。"

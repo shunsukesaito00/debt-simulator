@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
 import { getArticleBreadcrumbJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
@@ -79,9 +79,11 @@ export default function Page() {
           <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
           <p className="mt-4 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
 
+          <ArticleStandardBlocks slug={SLUG} />
+
           <ArticlePagePremise {...premise} />
 
-          <section className="mt-8 space-y-6 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-6">
             <section>
               <h2 className="ds-page-serif text-lg font-bold text-stone-900">はじめに</h2>
               <p className="mt-3">
@@ -103,7 +105,7 @@ export default function Page() {
                 をご確認ください。
               </p>
             </section>
-          </section>
+          </ArticleProse>
 
           <div className="mt-10">
             <ArticleReadingPoints {...readingPoints} />

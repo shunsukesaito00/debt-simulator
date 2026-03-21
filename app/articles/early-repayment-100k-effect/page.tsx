@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -142,6 +142,8 @@ export default function Page() {
             本記事の比較は、200万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="early-repayment-100k-effect" />
+
           <ArticlePagePremise
             comparisonConditions={[
               "借入額200万円・年利15%・元利均等・5年返済（60回）",
@@ -163,7 +165,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               繰り上げ返済をした方がよいとはよく言われますが、実際に10万円だけ追加で返済した場合、どれくらいの効果があるのかは気になるところです。まとまったお金を入れても、何がどれだけ変わるのかが見えないと判断しにくいからです。
             </p>
@@ -457,7 +459,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleEditorMemo
             purpose="10万円の繰り上げ返済で、利息と完済時期がどれだけ変わるかの判断材料。少額でも効果があること、総支払額の見え方（前倒しで払う代わりに利息が減る）を押さえてもらう。"

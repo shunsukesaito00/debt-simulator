@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
@@ -169,6 +169,8 @@ export default function Page() {
             本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際の商品や契約条件によって異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="loan-amount-guide" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -193,7 +195,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               借入額が100万円なのか、200万円なのか、300万円なのかで、返済負担は大きく変わります。借入額が増えれば元本が増えるだけでなく、月々返済額、総利息、完済までの期間も重くなりやすくなります。
             </p>
@@ -512,7 +514,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="loan-amount-guide" />
         </div>

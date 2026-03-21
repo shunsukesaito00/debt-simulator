@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -80,6 +80,8 @@ export default function Page() {
             同じように金欠や返済で苦しい方の参考になれば幸いです。
           </p>
 
+          <ArticleStandardBlocks slug="investment-loss-family-trust" />
+
           <section id="notice" className="mt-6 ds-subcard p-4 border-l-4 border-stone-400">
             <h2 className="text-sm font-semibold text-stone-900">この記事について</h2>
             <ul className="mt-2 list-disc pl-5 text-sm text-stone-700 space-y-1">
@@ -102,7 +104,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="start">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">投資を始めたきっかけ</h2>
               <p className="mt-3">
@@ -242,7 +244,7 @@ export default function Page() {
                 memo="読んだあとに何か一つでもメモ（引き落とし日、生活の山、いまの不安）が残れば十分だと思っています。"
               />
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="investment-loss-family-trust" />
         </div>

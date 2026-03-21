@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -107,6 +107,8 @@ export default function Page() {
             本記事の計算は、一般的な固定金利・毎月一定額返済の近似例です。実際のリボ払い商品では条件により異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="revo-100man-30k-years" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -128,7 +130,7 @@ export default function Page() {
               ))}
             </ul>
           </section>
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               リボ払いで100万円を利用している場合、「毎月3万円ずつ返しているけど、いつ頃完済できるのか」「総利息はどれくらいになるのか」が気になる方は多いはずです。毎月の返済額を低く設定すると一見ラクに見えますが、元本の減りが遅く、完済まで長引くうえに利息もかさみやすくなります。
             </p>
@@ -258,7 +260,7 @@ export default function Page() {
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <p className="mt-3">リボ払い100万円を毎月3万円で返す場合、年利15%では完済まで約4年2か月、総利息は約47.5万円が目安です。可能であれば返済額を上げるか繰り上げ返済を検討すると、総利息を抑えつつ完済を早めやすくなります。自分の条件で試算したい場合は<Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>で確認できます。</p>
             </section>
-          </div>
+          </ArticleProse>
           <ArticleFooter articleSlug="revo-100man-30k-years" />
         </div>
       </ArticlePageShell>

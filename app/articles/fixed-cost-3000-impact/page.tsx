@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -121,6 +121,8 @@ export default function Page() {
             「月3,000円なんて大したことない」と感じがちですが、固定費改善は続けるほど累計が大きくなります。この記事では月3,000円の固定費改善を基準に、<strong>1年・3年・5年でどう変わるか</strong>を数字で整理しています。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-cost-3000-impact" />
+
           <section className="mt-6 ds-subcard p-4">
             <h2 className="text-sm font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-sm">
@@ -134,7 +136,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 月3,000円でも続くと差は大きい
@@ -286,7 +288,7 @@ export default function Page() {
                 </li>
               </ul>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-cost-3000-impact" />
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -109,6 +109,8 @@ export default function Page() {
             本記事の比較は、100万円・年利15%を前提にした一般的な概算例です。実際の金融商品では条件が異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="repayment-method-difference" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -133,7 +135,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               ローンや借入の返済方式を選ぶ場面で、「元利均等返済と元金均等返済の違いがよくわからない」と感じる方は多いはずです。毎月の返済額が一定なのか、最初の負担が大きいのか、総利息はどちらが少ないのか。この違いを理解しないまま返済計画を立てると、後から想定より負担が重いと感じることがあります。
             </p>
@@ -481,7 +483,7 @@ export default function Page() {
                 で確認できます。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="repayment-method-difference" />
         </div>

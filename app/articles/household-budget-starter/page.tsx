@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -108,6 +108,8 @@ export default function Page() {
             家計簿をつけたいけれど続かない、という方は多いです。このページでは、<strong>記録を頑張らなくても</strong>支出を把握する方法と、最低限チェックするポイントを整理します。
           </p>
 
+          <ArticleStandardBlocks slug="household-budget-starter" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -131,7 +133,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜記録を減らして「見る」だけでも把握できる
@@ -225,7 +227,7 @@ export default function Page() {
                 </li>
               </ul>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="household-budget-starter" />
         </div>

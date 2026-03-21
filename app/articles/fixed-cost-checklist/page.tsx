@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -119,6 +119,8 @@ export default function Page() {
             私も固定費を見直したいと思ったものの、「どこから削るべきか」がわからず手が止まりました。一度見直せば効果が続きやすいのが固定費の強みなので、だからこそ<strong>何から・どういう順番で</strong>見直すかを「すぐ変えられて続く」順に整理したチェックリストで解説します。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-cost-checklist" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
             comparisonConditions={[
@@ -142,7 +144,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜固定費見直しは「すぐ変えやすいもの」から始める
@@ -385,7 +387,7 @@ export default function Page() {
                 </li>
               </ul>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-cost-checklist" />
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -122,6 +122,8 @@ export default function Page() {
             月1万円の固定費見直しは、月額では「1万円」と感じがちですが、私も最初は小さいと思っていました。続けると累計が大きくなります。このページでは<strong>1年・3年・5年でどう変わるか</strong>を数字で整理しています。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-cost-10000-impact" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -146,7 +148,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 月1万円の見直しで、続くと差は大きい
@@ -304,7 +306,7 @@ export default function Page() {
                 </li>
               </ul>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-cost-10000-impact" />
         </div>

@@ -13,14 +13,17 @@
 | `.ds-h1` | 一覧・固定ページの主見出し |
 | `.ds-h2` | セクション見出し（semibold） |
 | `.ds-label` | 補助ラベル（xs・medium・muted） |
-| `.ds-blog-prose` | 記事本文の段落・行長。子の `h2`/`h3` は semibold |
+| `.ds-blog-prose` | 長文を **そのまま** prose 化するとき（直下の `h2` に余白が付く） |
+| `.ds-article-body` | **section 内に既に `h2` がある記事**のメインカラム（`ArticleProse`）。段落・リストの余白のみ |
 | `.ds-link` | ナビ・カード内の目立たせたいリンク（medium） |
 | `.ds-link-prose` | 記事本文内のリンク（下線は hover で強調） |
 | `.ds-section-gap` | 記事末など連続ブロックの下余白 |
 
 ## 記事テンプレート
 
-生成記事・手書き記事とも、**メインの説明段落**を `div` または `section` で `.ds-blog-prose` に入れると、見出しと行間が揃う。
+- **メイン本文カラム**: [`ArticleProse`](/app/components/article/ArticleProse.tsx)（クラス `.ds-article-body`）。見出しは各 `section` 内の `h2` を維持する構成向け。
+- **冒頭ブロック**: [`ArticleStandardBlocks`](/app/components/article/ArticleStandardBlocks.tsx)（要約・シナリオ・チェック・関連）。詳細は [`docs/ARTICLE_CONTENT_TEMPLATE.md`](./ARTICLE_CONTENT_TEMPLATE.md)。
+- 長文を **1 つの prose 流し**にしたい場合は `.ds-blog-prose` をそのまま使ってもよい（見出しは prose の子として統一）。
 
 ## 表・グラフ
 

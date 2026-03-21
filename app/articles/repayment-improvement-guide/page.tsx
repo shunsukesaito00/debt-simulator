@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { getArticle, type ArticleItem } from "@/lib/articles";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
@@ -185,6 +185,8 @@ export default function Page() {
             本記事で紹介する改善策は、一般的な返済の考え方に基づくものです。実際の商品や契約条件によって異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="repayment-improvement-guide" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -209,7 +211,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               借金返済を少しでも軽くしたい、総利息を減らしたい、完済を早めたいと考える人は多いはずです。ただし、返済を軽くする方法といっても、毎月の負担を減らしたいのか、総支払額を減らしたいのか、早く終わらせたいのかで、取るべき方法は変わります。
             </p>
@@ -516,7 +518,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="repayment-improvement-guide" />
         </div>

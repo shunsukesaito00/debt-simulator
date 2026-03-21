@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -113,6 +113,8 @@ export default function Page() {
             本記事で扱うのは返済計画上の目安であり、審査上の借入可能額を示すものではありません。年利15%・元利均等の近似例です。
           </p>
 
+          <ArticleStandardBlocks slug="monthly-30000-how-much-can-borrow" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -137,7 +139,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               毎月3万円までなら返済に充てられそうだと考えたとき、「それならいくらまで借りると現実的なのか」が気になる方は多いはずです。この記事では、毎月3万円返済を前提に、年利15%で3年・5年・7年返済した場合の借入額の目安を整理します。
             </p>
@@ -275,7 +277,7 @@ export default function Page() {
                 で確認することをおすすめします。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="monthly-30000-how-much-can-borrow" />
         </div>

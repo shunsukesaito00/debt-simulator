@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -118,6 +118,8 @@ export default function Page() {
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="100man-100months-risk-at-15percent" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -142,7 +144,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               100万円を借りるとして、毎月の返済額をできるだけ低く抑えたいと考えるのは自然です。ですが、返済期間を100ヶ月のように長く設定すると、毎月の負担は軽く見える一方で、完済まで非常に長い時間がかかり、総利息も大きく膨らみます。
             </p>
@@ -425,7 +427,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="100man-100months-risk-at-15percent" />
         </div>

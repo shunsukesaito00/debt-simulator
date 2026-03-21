@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -108,6 +108,8 @@ export default function Page() {
             保険は固定費のなかでも月額が大きくなりがちですが、安易に削るといざというときの備えが足りなくなるリスクがあります。このページでは、何を確認すべきか、削ってよい保障と慎重にすべき保障の考え方を整理します。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-cost-insurance-review" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -131,7 +133,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
                 結論｜内容を理解したうえで慎重に
@@ -240,7 +242,7 @@ export default function Page() {
                 </li>
               </ul>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-cost-insurance-review" />
         </div>

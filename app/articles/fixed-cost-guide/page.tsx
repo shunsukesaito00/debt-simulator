@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -97,6 +97,8 @@ export default function Page() {
             このカテゴリでは、毎月の固定負担を見直すための記事を、条件別に「いくら変わるか」が比較できる形で整理していきます。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-cost-guide" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -108,7 +110,7 @@ export default function Page() {
             />
           </section>
 
-          <section className="mt-8 space-y-6 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-6">
             <section>
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">このカテゴリの役割</h2>
               <p className="mt-3">
@@ -188,7 +190,7 @@ export default function Page() {
                 ))}
               </div>
             </section>
-          </section>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-cost-guide" />
         </div>

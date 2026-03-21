@@ -319,7 +319,9 @@ borrow-100-interest, borrow-200-monthly-payment, fixed-payment-principal-interes
 
 ## タイポグラフィ（運用メモ）
 
-見出しの太さ・本文ラッパー（`.ds-blog-prose`）・リンクの扱いは、別紙 [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) にまとめています。
+見出しの太さ・本文ラッパー（`.ds-blog-prose` / `.ds-article-body`）・リンクの扱いは、別紙 [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) にまとめています。
+
+記事の標準ブロック（要約・シナリオ・チェック・関連）とカテゴリ別方針は [`ARTICLE_CONTENT_TEMPLATE.md`](./ARTICLE_CONTENT_TEMPLATE.md)、ベンチマーク観察は [`BENCHMARK_READABILITY.md`](./BENCHMARK_READABILITY.md) を参照してください。
 
 ---
 

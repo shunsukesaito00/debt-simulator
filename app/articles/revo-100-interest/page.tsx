@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -110,6 +110,8 @@ export default function Page() {
             本記事の計算は、一般的な固定金利・毎月返済の近似例です。実際のリボ払いの条件は商品により異なります。
           </p>
 
+          <ArticleStandardBlocks slug="revo-100-interest" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -134,7 +136,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               リボ払いで100万円を利用した場合、毎月の支払いは一見そこまで高く見えなくても、実際には利息負担が大きくなりやすい点に注意が必要です。特に毎月の返済額を低く設定すると、元本の減りが遅くなり、そのぶん利息を長く払い続けることになります。
             </p>
@@ -385,7 +387,7 @@ export default function Page() {
                 で確認できます。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="revo-100-interest" />
         </div>

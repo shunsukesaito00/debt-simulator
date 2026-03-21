@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -112,6 +112,8 @@ export default function Page() {
             本記事の比較は、100万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="early-repayment-effect" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -136,7 +138,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               繰り上げ返済をすると本当に得なのか、どれくらい利息が減るのか気になる方は多いはずです。特に借入額が大きい場合や、金利がそれなりに高い場合は、少しの追加返済でも総支払額に差が出ることがあります。
             </p>
@@ -409,7 +411,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="early-repayment-effect" />
         </div>

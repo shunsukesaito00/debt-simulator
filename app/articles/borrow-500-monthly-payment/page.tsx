@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -116,6 +116,8 @@ export default function Page() {
             借金が500万円になると、月々の返済額は大きく、返済計画を慎重に考える必要があります。
           </p>
 
+          <ArticleStandardBlocks slug="borrow-500-monthly-payment" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -138,7 +140,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               借金500万円の返済は、毎月の負担が大きく、返済期間の選び方で生活への影響が大きく変わります。返済期間を短くすれば利息は抑えられますが月々の支払いが重くなり、長くすれば月々は楽になるものの利息が大幅に増えます。
             </p>
@@ -386,7 +388,7 @@ export default function Page() {
                 で試算してみてください。
               </p>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="borrow-500-monthly-payment" />
         </div>

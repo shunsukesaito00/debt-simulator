@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -114,6 +114,8 @@ export default function Page() {
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
 
+          <ArticleStandardBlocks slug="monthly-50000-interest-at-15percent" />
+
           <ArticlePagePremise
             comparisonConditions={[
               "毎月返済額5万円（固定）",
@@ -137,7 +139,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               毎月5万円までなら返済できそうだと考えたとき、気になるのは「その条件で借りた場合、総利息はいくらになるのか」という点です。毎月返済額が同じでも、借入額が増えると完済までの期間が長くなり、そのぶん利息負担も大きくなります。
             </p>
@@ -396,7 +398,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleEditorMemo
             purpose="月5万円返済できる前提で、借入額をどこまでにするかの判断材料。借入額が増えると総利息・完済期間が急増するので、月々の額だけでなく総額を見て決めてもらう。"

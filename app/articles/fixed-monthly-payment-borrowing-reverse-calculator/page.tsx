@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -118,6 +118,8 @@ export default function Page() {
             本記事で扱う借入額は返済計画上の目安であり、審査上の借入可能額や与信枠を示すものではありません。一般的な固定金利・毎月返済の近似例です。
           </p>
 
+          <ArticleStandardBlocks slug="fixed-monthly-payment-borrowing-reverse-calculator" />
+
           <section id="premise" className="mt-6">
             <ArticlePagePremise
               comparisonConditions={[
@@ -142,7 +144,7 @@ export default function Page() {
             </ul>
           </section>
 
-          <div className="mt-8 space-y-10 text-sm text-stone-700 leading-relaxed">
+          <ArticleProse className="mt-8 space-y-10">
             <p>
               毎月の返済額はこれくらいまでに抑えたい、と考える人は多いはずです。そのときに気になるのが、「ではその条件なら、いくらまで借りるのが現実的なのか」という点です。借入額を先に決めるのではなく、月々返済額から逆算して考える方が、無理のない返済計画を立てやすくなります。
             </p>
@@ -436,7 +438,7 @@ export default function Page() {
                 </Link>
               </div>
             </section>
-          </div>
+          </ArticleProse>
 
           <ArticleFooter articleSlug="fixed-monthly-payment-borrowing-reverse-calculator" />
         </div>
