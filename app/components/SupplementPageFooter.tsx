@@ -85,6 +85,8 @@ export function SupplementPageFooterFaq() {
 /** logic 用: 返済方式・逆算・計算に近い記事＋シミュレーターCTA */
 const LOGIC_RELATED_SLUGS = [
   "repayment-method-difference",
+  "equal-principal-first-payment-higher",
+  "fixed-principal-payment-schedule",
   "monthly-50000-how-much-can-borrow",
   "fixed-monthly-payment-borrowing-reverse-calculator",
   "borrow-100-interest",

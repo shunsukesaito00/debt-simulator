@@ -19,6 +19,8 @@ export type FormState = {
   extraEnabled: boolean;
   monthlyExtraAmount: number;
   oneTimeExtras: { year: number; month: number; amount: number }[];
+  /** 返済開始から先頭 N ヶ月は利息 0（簡易モデル）。0〜24 */
+  interestFreeMonths: number;
 };
 
 export const DEFAULT_FORM: FormState = {
@@ -34,6 +36,7 @@ export const DEFAULT_FORM: FormState = {
   extraEnabled: false,
   monthlyExtraAmount: 0,
   oneTimeExtras: [],
+  interestFreeMonths: 0,
 };
 
 /**
@@ -60,6 +63,8 @@ export function toCalcInput(form: FormState): CalcInput {
     }
   }
 
+  const ifm = Math.max(0, Math.min(form.interestFreeMonths ?? 0, 600));
+
   const base: CalcInput = {
     principal: form.principalMan * 10000,
     startYear: form.startYear,
@@ -67,6 +72,7 @@ export function toCalcInput(form: FormState): CalcInput {
     method: form.method,
     rateSteps,
     extraPayments,
+    ...(ifm > 0 ? { interestFreeMonths: ifm } : {}),
   };
 
   if (form.method === "equal_payment" || form.method === "equal_principal") {

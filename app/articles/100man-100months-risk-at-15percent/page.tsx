@@ -7,11 +7,7 @@ import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-au
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
 import { articleUsesWideLayout } from "@/lib/article-layout";
 
-import {
-  MonthlyPaymentBarChart,
-  TotalInterestBarChart,
-  TotalPaymentStackedChart,
-} from "./RepaymentPeriodCharts";
+import { MonthlyPaymentBarChart, TotalInterestBarChart, TotalPaymentStackedChart } from "./ChartsLazy";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/100man-100months-risk-at-15percent`;
@@ -114,7 +110,7 @@ export default function Page() {
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("100man-100months-risk-at-15percent")}>
 <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の近似例です。実際の商品では条件により異なる場合があります。
           </p>
 
@@ -132,8 +128,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">

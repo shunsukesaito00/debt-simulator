@@ -47,6 +47,23 @@ describe("calcLoan 回帰テスト", () => {
     expect(result.schedule[result.schedule.length - 1].balance).toBe(0);
   });
 
+  it("無利息期間の先頭Nヶ月は利息が0になる（簡易モデル）", () => {
+    const input: CalcInput = { ...BASE_INPUT, interestFreeMonths: 2 };
+    const result = calcLoan(input);
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+
+    expect(result.schedule[0].interest).toBe(0);
+    expect(result.schedule[1].interest).toBe(0);
+    expect(result.schedule[2].interest).toBeGreaterThan(0);
+
+    const totalInterestWithPromo = result.totalInterest;
+    const noPromo = calcLoan(BASE_INPUT);
+    expect(noPromo.ok).toBe(true);
+    if (!noPromo.ok) return;
+    expect(totalInterestWithPromo).toBeLessThan(noPromo.totalInterest);
+  });
+
   it("定額元利で利息>返済が12回続くと完済不可エラー", () => {
     const input: CalcInput = {
       ...BASE_INPUT,

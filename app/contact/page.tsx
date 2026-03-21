@@ -21,10 +21,11 @@ const GOOGLE_FORM_EMBED_URL =
 
 export default function Page() {
   return (
-    <div className="ds-card ds-card-pad">
+    <div className="ds-page-width">
+    <div className="ds-surface-soft ds-card-pad">
       <h1 className="text-2xl font-semibold">お問い合わせ</h1>
 
-      <div className="mt-5 grid gap-4 text-sm text-stone-700 leading-relaxed">
+      <div className="mt-5 grid gap-4 text-base text-stone-700 leading-relaxed">
         <p>
           ご意見・ご感想・サイトに関するお問い合わせは下記フォームからお願いします。返信が必要な場合はメールアドレスをご記入ください。
         </p>
@@ -58,10 +59,11 @@ export default function Page() {
           </div>
         </div>
 
-        <p className="text-xs text-stone-500">
+        <p className="text-xs text-stone-500 leading-relaxed">
           ※ 個別の契約条件・審査・借換等の相談は、金融機関または専門家へご相談ください。
         </p>
       </div>
+    </div>
     </div>
   );
 }

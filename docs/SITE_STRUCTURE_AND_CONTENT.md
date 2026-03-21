@@ -2,6 +2,8 @@
 
 このドキュメントは、がいぶしゃ・他のAIにアドバイスをもらうために、現時点のサイト構造と記事内容を文字で書き起こしたものです。更新日時点のスナップショットとして参照してください。
 
+**関連（運用・情報設計の「正」）**: [`CONTENT_SINGLE_SOURCE.md`](./CONTENT_SINGLE_SOURCE.md)（メタの所在）、[`PILLAR_AND_CLUSTER.md`](./PILLAR_AND_CLUSTER.md)（ピラー／クラスター）、[`DISCLAIMER_PATTERNS.md`](./DISCLAIMER_PATTERNS.md)（免責の揃え方）。
+
 ---
 
 ## 0. 情報設計の更新（参考サイトの「パターン」のみ活用）
@@ -14,12 +16,12 @@
 | 「はじめての方」ランディング | **`/welcome`** … 推奨読む順・できること／できないこと・ツール導線 |
 | トップのブロック順（共感→記事→自己紹介→テーマ別→定番…） | **`/`** を上記に近い順に再構成（中身は自サイト文案）。計測は `TrackedLink` の `location` でブロック単位 |
 | 記事一覧の「体験記」枠 | **`/articles`** 先頭に「体験記・ストーリー」レール（`kind: story` または badge「体験記」） |
-| WordPress 風の読みやすさ | 見出しにセリフ（Noto Serif JP）、本文・UI は Zen Kaku Gothic New。`.ds-blog-prose`／`.ds-article-shell` で本文幅を調整。**WordPress への移行はしない**（Next のまま） |
+| WordPress 風の読みやすさ | 見出しにセリフ（Noto Serif JP）、本文・UI は Zen Kaku Gothic New。本文の読み幅は **`.ds-page-width` / `.ds-article-shell`（`max-w-3xl`）** が基本。表・Recharts 中心の記事は `articleUsesWideLayout` で **`max-w-4xl`**。長文の流しは `.ds-blog-prose`（`max-w-none`、親で幅制御）。**WordPress への移行はしない**（Next のまま） |
 | モダンなプロダクトUI | 角丸 12px 前後・薄い影・ナビはテキストリンク＋アクティブ下線。CTA は `--ds-accent-strong`（緑）系。詳細は `app/globals.css` の `ds-*` |
 | タグライン帯 | ヘッダ最上段に「悩んでいる方へ。一緒に考えていきましょう。」帯（`bg-emerald-950`）。ヒーロー冒頭にエコー |
 | 記事ページの共通強化 | `ArticlePageShell` に日付+カテゴリバッジ。`ArticleToc`（折りたたみ目次）、`ArticleShareBar`（URLコピー）、`ArticlePrevNext`（前後記事ナビ）を新設 |
 | 関連記事カード型 | `ArticleFooter` が `/articles/:slug` リンクを `getArticle()` で引きカード（タイトル+要約+バッジ）に展開 |
-| フッター充実 | `FooterNav` を2カラム化。「サイト情報」列＋「カテゴリ」列（件数バッジ付き）＋タグライン |
+| フッター充実 | `FooterNav` を2カラム化。「サイト情報」列＋「カテゴリ」列（件数バッジ付き）＋タグライン。先頭に **よく読まれている記事**（`getPopularArticles()`／`POPULAR_ARTICLE_SLUGS`） |
 | 一覧セクション件数 | `/articles` 各セクション見出しに件数バッジ表示 |
 
 **真似しないもの**：文言のコピペ、ロゴ・画像の流用、商標に紛らわしい名称、ツール弱体化（参考サイトはツールが薄いため、当サイトはシミュ・固定費ツールを前面に残す）。
@@ -56,7 +58,7 @@
 ## 2. URL・ルート構造
 
 ### トップ・静的ページ
-- `/` … **ホーム**（キャッチ→おすすめ記事→**最近の記事**（`publishedAt` 降順）→**運営者一言**→悩み別ピラー→定番→はじめての方3カード→お問い合わせ（**`NEXT_PUBLIC_NOTE_URL` / `NEXT_PUBLIC_X_URL` があれば SNS リンク**）→サイト説明）
+- `/` … **ホーム**（キャッチ→**最近の更新**（`SITE_UPDATES` 先頭＋`/updates`・`/income` 導線）→3本柱→おすすめ記事→**最近の記事**（`publishedAt` 降順）→**運営者一言**→悩み別ピラー→定番→はじめての方3カード→お問い合わせ（**`NEXT_PUBLIC_NOTE_URL` / `NEXT_PUBLIC_X_URL` があれば SNS リンク**）→サイト説明）
 - `/welcome` … **はじめての方へ**（推奨読む順・できること／できないこと）
 - `/about` … 運営者情報（冒頭は共感トーン、編集ポリシー等は下段）
 - `/how-to` … 使い方
@@ -73,12 +75,13 @@
 
 ### 記事
 - `/articles` … 記事一覧（画面・メタの見出しは **悩み別に読む（記事一覧）**。パンくずラベルは `ARTICLES_INDEX_CRUMB_LABEL` と同一）
-- `/articles/[slug]` … 個別記事（下記の slug 一覧参照）。共通で **`ArticlePageShell`**（パンくず＋幅）。表・Recharts 多用記事は `lib/article-layout.ts` の `articleUsesWideLayout` で `max-w-3xl`
+- `/articles/[slug]` … 個別記事（下記の slug 一覧参照）。共通で **`ArticlePageShell`**（パンくず＋幅）。表・Recharts 多用記事は `lib/article-layout.ts` の `articleUsesWideLayout` で **`max-w-4xl`**（通常は `.ds-article-shell` の `max-w-3xl`）
 
 ### ヘッダーナビのリンク
-- **プライマリ**：ホーム / はじめての方（/welcome）/ 記事（/articles）/ 運営者プロフィール（/about）/ お問い合わせ（/contact）/ **プライバシー（/privacy）**
-- **ツール（PC はドロップダウン「ツール」内）**：シミュレーター（/simulator/cardloan）/ 使い方 / FAQ / 計算ロジック
-- **モバイル**：右上 MENU で上記を縦並び（プライマリ→ツール）
+- **主要（太め・先頭）**：ホーム / はじめての方（/welcome）/ 記事（/articles）/ 収益レポート（/income）/ 運営者（/about）
+- **その他（控えめ・区切りの後）**：体験記・副業実験・節約のカテゴリ入口、相談先、検索、お問い合わせ、プライバシー（項目数は維持）
+- **ツール（PC はドロップダウン「ツール」内）**：シミュレーター（/simulator/cardloan）/ 固定費インパクト / 用語集 / 使い方 / FAQ / 計算ロジック
+- **モバイル**：右上 MENU で「主要」「カテゴリ・その他」「ツール」の順
 
 フッターには **はじめての方へ（/welcome）** へのリンクあり。
 
@@ -87,15 +90,25 @@
 ## 3. トップページの構成（上から順）
 
 1. **ヒーロー** … 短いキャッチ・共感文案、`/welcome` とシミュへの CTA、早見表リンク  
-2. **おすすめの記事** … `getHomeSpotlightArticles()`（編集キュレ・固定スラッグ）  
-3. **最近の記事** … `getRecentArticles(5)`（`lib/articles.ts` の `publishedAt` 降順。未設定記事はリストに出ない）  
-4. **運営者一言** … 引用風カード＋ `/about`（運営者プロフィール）  
-5. **悩み別に読む（テーマピラー）** … 記事一覧アンカー＋シミュ＋固定費ツールの6前後  
-6. **よく読まれている記事** … `getPopularArticles()`（手動キュレーション）  
-7. **はじめての方へ（3カード）** … 読む順・シミュ・体験記カテゴリへの導線  
-8. **お問い合わせ** … `/contact`（環境変数があれば note / X の外部リンクを併記）  
-9. **このサイトについて** … 短文＋記事一覧・使い方・FAQ・ロジック・プライバシー  
-10. **注意事項** … 参考情報・契約優先など短文  
+2. **最近の更新** … `lib/updates-log.ts` の `SITE_UPDATES[0]` を1行表示、`/updates` と `/income` への `TrackedLink`（計測 `top_recent_updates_strip`）  
+3. **体験記・副業・節約の最新（3本柱）** … カテゴリ別の新着記事抜粋  
+4. **おすすめの記事** … `getHomeSpotlightArticles()`（編集キュレ・固定スラッグ）  
+5. **最近の記事** … `getRecentArticles(5)`（`publishedAt` 降順。未設定記事はリストに出ない）  
+6. **運営者一言** … 引用風カード＋ `/about`（運営者プロフィール）  
+7. **悩み別に読む（テーマピラー）** … 記事一覧アンカー＋シミュ＋固定費ツールの6前後  
+8. **よく読まれている記事** … `getPopularArticles()`（手動キュレーション）  
+9. **はじめての方へ（3カード）** … 読む順・シミュ・体験記カテゴリへの導線  
+10. **お問い合わせ** … `/contact`（環境変数があれば note / X の外部リンクを併記）  
+11. **このサイトについて** … 短文＋記事一覧・使い方・FAQ・ロジック・プライバシー  
+12. **注意事項** … 参考情報・契約優先など短文  
+
+---
+
+## リリース前の視覚確認（手動）
+
+主要画面のレイアウト崩れ・タイポ・ナビ折り返しを確認する場合の一覧（`docs/VISUAL_REGRESSION_CHECKLIST.md` にも同内容を記載）。
+
+- `/`（トップ）、`/welcome`、`/articles`、代表記事1本（`/articles` から任意）、`/simulator/cardloan`、`/tools/fixed-cost-impact`、`/income`、`/updates`
 
 ---
 
@@ -132,7 +145,7 @@
 
 ## 5. 記事カテゴリと記事一覧（slug / タイトル / カテゴリ）
 
-記事は **lib/articles.ts** の `articlesData` で管理。各記事は slug, title, summary, category, order, badge, relatedLinks に加え、任意で **kind**（`story` | `guide`）、**publishedAt**（YYYY-MM-DD・一覧の日付表示用）を持てる。
+記事は **lib/articles-data.ts** の `articlesData`（型は **lib/article-types.ts**、取得関数は **lib/articles.ts**）で管理。各記事は slug, title, summary, category, order, badge, relatedLinks に加え、任意で **kind**（`story` | `guide`）、**publishedAt**（YYYY-MM-DD・一覧の日付表示用）を持てる。
 
 ### 固定費見直し（fixed-cost）
 - **fixed-cost-guide** … 固定費見直しの進め方｜何から手をつけるか・改善効果の比較（おすすめ）
@@ -152,25 +165,34 @@
 - **fixed-cost-10000-impact** … 固定費を月1万円見直すとどう変わる？1年・3年・5年の改善効果を比較
 - **fixed-cost-3000-impact** … 月3,000円の固定費見直しは意味がある？年間・3年・5年で検証
 
+### 補助ページ（Q&A・ガイド）
+- **/qa/what-can-simulator-do** … 借入返済シミュレーターで何ができますか？（QAPage JSON-LD）
+
 ### 借入額別（loan-amount）
 - **loan-amount-guide** … 借入額別に見る返済負担の違い｜100万・200万・300万で比較（おすすめ）
 - **borrow-100-interest** … 借金100万円の利息はいくら？年利15%での返済額をシミュレーション
 - **borrow-200-monthly-payment** … 借金200万円の月々返済はいくら？年利15%で3年・5年返済を比較
+- **borrow-200-15percent-5years-total-interest** … 借金200万円・金利15%で5年返済すると総利息はいくら？元利均等の目安
 - **borrow-300-monthly-payment** … 借金300万円の月々返済はいくら？年利15%で3年・5年・月5万円返済を比較
+- **borrow-300-15percent-5years-total-interest** … 借金300万円・金利15%で5年返済すると総利息はいくら？元利均等の目安
 - **borrow-500-monthly-payment** … 借金500万円の月々返済はいくら？年利15%で比較
 
 ### 返済方式（repayment-method）
 - **repayment-method-difference** … 元利均等返済と元金均等返済の違いは？4つの返済方式を比較して解説
+- **equal-principal-first-payment-higher** … 元金均等返済で初回の返済額が高いのはなぜ？元利均等との違いをわかりやすく解説
+- **fixed-principal-payment-schedule** … 定額元金返済の返済額は月ごとにどう変わる？推移の見方と数値例
 - **fixed-payment-principal-interest-cannot-payoff** … 定額元利で完済できないのはなぜ？返済額が足りないケースをわかりやすく解説
 
 ### リボ払い（revolving）
 - **revo-100-interest** … リボ払い100万円の利息はいくら？完済までの総支払額をシミュレーション
 - **revo-100man-30k-years** … リボ払い100万円を月3万円で返すと何年かかる？完済までの期間と総利息を解説
+- **revo-100man-50k-years** … リボ払い100万円を月5万円で返すと何年かかる？完済までの期間と総利息を解説
 - **revo-100man-15percent-simulation** … リボ払い100万円・金利15%の返済シミュレーション｜毎月返済額でどう変わる？
 - **revo-50man-simulation** … リボ払い50万円の返済シミュレーション｜毎月の返済額でどう変わる？
 
 ### 返済改善（repayment-improvement）
 - **repayment-improvement-guide** … 返済を軽くする方法｜繰り上げ返済・返済期間・返済方式の見直しを解説（おすすめ）
+- **repayment-term-longer-total-interest** … 返済期間を延ばすと総利息はどれだけ増える？100万円・年利15%・元利均等の比較
 - **early-repayment-effect** … 繰り上げ返済の効果とは？利息はいくら減る？返済期間短縮との違いも解説
 - **early-repayment-100k-effect** … 繰り上げ返済10万円の効果は？利息はいくら減る？完済時期の違いも解説
 - **100man-100months-risk-at-15percent** … 金利15%で100万円を100ヶ月返済するリスクとは？総利息と総支払額を解説
@@ -284,7 +306,7 @@ borrow-100-interest, borrow-200-monthly-payment, fixed-payment-principal-interes
   借入返済は **lib/loan-calc.ts**（calcLoan）。固定費インパクトはフロントのみで乗算。
 
 - **データ**  
-  記事メタデータは **lib/articles.ts** の articlesData。カテゴリ・一覧セクション・関連記事・条件連動スコアもここで管理。
+  記事メタデータは **lib/articles-data.ts** の articlesData。カテゴリ・一覧セクション・関連記事・条件連動スコアもここで管理。
 
 - **デザイン**  
   Tailwind。rounded-2xl/3xl、border-gray-200、bg-gray-50/80、font-black 見出しなどで統一。モバイルではボタン・表の横スクロールを考慮。

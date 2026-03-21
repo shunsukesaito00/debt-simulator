@@ -9,6 +9,7 @@ import {
 } from "@/lib/articles";
 import { TrackedLink } from "./components/TrackedLink";
 import { getSiteBaseUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
+import { SITE_UPDATES } from "@/lib/updates-log";
 
 const BASE = getSiteBaseUrl();
 
@@ -207,6 +208,58 @@ export default function Page() {
               100万・200万・300万・3年/5年
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* 1a. 最近の更新（更新ログ・収益レポートへの入口） */}
+      <section
+        className="rounded-xl border border-stone-200/55 bg-white/50 px-4 py-4 shadow-sm md:px-6 md:py-5"
+        aria-labelledby="top-recent-updates-heading"
+      >
+        <h2 id="top-recent-updates-heading" className="sr-only">
+          最近の更新
+        </h2>
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
+          <div className="min-w-0 max-w-2xl">
+            <p className="ds-label">最近の更新</p>
+            {SITE_UPDATES[0] && (
+              <p className="mt-2 text-sm leading-relaxed text-stone-700">
+                <time className="ds-meta text-stone-500" dateTime={SITE_UPDATES[0].date}>
+                  {formatPublishedAt(SITE_UPDATES[0].date)}
+                </time>
+                <span className="mx-1.5 text-stone-400" aria-hidden>
+                  ·
+                </span>
+                <span>{SITE_UPDATES[0].title}</span>
+              </p>
+            )}
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2 sm:justify-end">
+            <TrackedLink
+              href="/updates"
+              className="ds-btn ds-btn-secondary px-4 py-2.5 text-sm"
+              event={{
+                action: "click_top_recent_updates_strip",
+                location: "top_recent_updates_strip",
+                target: "/updates",
+                link_type: "updates_log",
+              }}
+            >
+              更新ログを見る
+            </TrackedLink>
+            <TrackedLink
+              href="/income"
+              className="ds-btn ds-btn-ghost px-4 py-2.5 text-sm"
+              event={{
+                action: "click_top_income_from_updates_strip",
+                location: "top_recent_updates_strip",
+                target: "/income",
+                link_type: "income_report",
+              }}
+            >
+              収益レポート →
+            </TrackedLink>
+          </div>
         </div>
       </section>
 

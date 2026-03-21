@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 
 export function ArticleShareBar({ title, url }: { title: string; url: string }) {
+  const shareLabel = `「${title}」のURL`;
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
@@ -21,6 +22,7 @@ export function ArticleShareBar({ title, url }: { title: string; url: string }) 
       <button
         type="button"
         onClick={handleCopy}
+        aria-label={shareLabel}
         className="ds-btn ds-btn-secondary ds-btn-sm gap-1.5"
       >
         {copied ? (

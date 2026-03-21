@@ -48,15 +48,15 @@
 
 ### 3.2 優先して追加したい記事テーマ（例）
 
-計画にあった第2・第3群の例。存在しないものだけ追加すればよい。
+計画にあった第2・第3群の例。**下記はいずれも記事化済み**（随時、新しいクエリ向けに追加してよい）。
 
-- リボ100万 月5万 何年
-- 借金300万 金利15% 5年 総利息
-- 月3万返済 いくらまで借りられる
-- 月7万返済 いくらまで借りられる
-- 定額元金 返済額の推移
-- 元金均等 初回返済 高い 理由
-- 返済期間延ばす 総利息 増える
+- ~~リボ100万 月5万 何年~~ → [`revo-100man-50k-years`](app/articles/revo-100man-50k-years/page.tsx)（2026-03 追加）
+- ~~借金300万 金利15% 5年 総利息~~ → [`borrow-300-15percent-5years-total-interest`](app/articles/borrow-300-15percent-5years-total-interest/page.tsx)（2026-03 追加）
+- ~~月3万返済 いくらまで借りられる~~ → [`monthly-30000-how-much-can-borrow`](app/articles/monthly-30000-how-much-can-borrow/page.tsx)
+- ~~月7万返済 いくらまで借りられる~~ → [`monthly-70000-how-much-can-borrow`](app/articles/monthly-70000-how-much-can-borrow/page.tsx)
+- ~~定額元金 返済額の推移~~ → [`fixed-principal-payment-schedule`](app/articles/fixed-principal-payment-schedule/page.tsx)
+- ~~元金均等 初回返済 高い 理由~~ → [`equal-principal-first-payment-higher`](app/articles/equal-principal-first-payment-higher/page.tsx)
+- ~~返済期間延ばす 総利息 増える~~ → [`repayment-term-longer-total-interest`](app/articles/repayment-term-longer-total-interest/page.tsx)
 
 ### 3.3 記事の品質ルール（SEO・離脱防止）
 
@@ -108,6 +108,8 @@
 ---
 
 ## 7. 計測と次の一手
+
+ドキュメント同期・内部リンク・サイトマップの運用は [`docs/SEO_STRATEGY_PHASE8-10.md`](docs/SEO_STRATEGY_PHASE8-10.md) を参照（フェーズ8〜10）。
 
 ### 見る指標（Search Console 前提）
 

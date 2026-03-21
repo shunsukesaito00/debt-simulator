@@ -7,11 +7,8 @@ import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-au
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
 import { articleUsesWideLayout } from "@/lib/article-layout";
 
-import {
-  InterestComparisonBarChart,
-  MonthsComparisonBarChart,
-  PaymentBreakdownCards,
-} from "./EarlyRepayment100kCharts";
+import { PaymentBreakdownCards } from "./EarlyRepayment100kCharts";
+import { InterestComparisonBarChart, MonthsComparisonBarChart } from "./ChartsLazy";
 
 /** 比較表用データ（SSRで使うためクライアントモジュール外で定義） */
 const comparisonTableRows = [
@@ -138,7 +135,7 @@ export default function Page() {
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             本記事の比較は、200万円・年利15%・5年返済を前提にした一般的な概算例です。実際の商品では条件が異なる場合があります。
           </p>
 
@@ -153,8 +150,8 @@ export default function Page() {
           />
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">
@@ -273,11 +270,11 @@ export default function Page() {
                 <InterestComparisonBarChart />
                 <MonthsComparisonBarChart />
                 <div>
-                  <p className="mb-2 text-sm font-bold text-stone-700">総支払額の内訳比較</p>
+                  <p className="mb-2 text-base font-bold text-stone-700">総支払額の内訳比較</p>
                   <PaymentBreakdownCards />
                 </div>
               </div>
-              <p className="mt-4 text-sm text-stone-600">
+              <p className="mt-4 text-base text-stone-600">
                 10万円の追加返済は、元本を早く減らすことで、その後に払う利息を減らす効果があります。
               </p>
 

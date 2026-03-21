@@ -24,7 +24,10 @@ export function ArticlePageShell({
   category,
   children,
 }: ArticlePageShellProps) {
-  const shellClass = wide ? "mx-auto max-w-3xl min-w-0" : "ds-article-shell min-w-0";
+  /** 表・Recharts 多用記事は本文カラムだけやや広げる（`ds-page-width` の max-w-3xl より一段） */
+  const shellClass = wide
+    ? "mx-auto w-full min-w-0 max-w-4xl"
+    : "ds-article-shell min-w-0";
   const dateLabel = formatDateLabel(publishedAt);
 
   return (
@@ -56,13 +59,13 @@ export function ArticlePageShell({
           {category && (
             <Link
               href={`/articles#${getArticleListSectionIdForCategory(category)}`}
-              className="rounded-md border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-semibold text-stone-600 transition-colors hover:border-emerald-300 hover:text-emerald-900"
+              className="ds-meta inline-flex items-center rounded-md border border-stone-200/80 bg-stone-50 px-2 py-0.5 text-stone-600 transition-colors hover:border-emerald-300 hover:text-emerald-900"
             >
               {CATEGORY_LABELS[category]}
             </Link>
           )}
           {dateLabel && (
-            <time className="text-xs text-stone-500" dateTime={publishedAt}>
+            <time className="ds-meta text-stone-500" dateTime={publishedAt}>
               {dateLabel}
             </time>
           )}

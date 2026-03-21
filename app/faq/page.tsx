@@ -1,6 +1,8 @@
 // app/faq/page.tsx
 import type { Metadata } from "next";
 import { SupplementPageFooterFaq } from "@/app/components/SupplementPageFooter";
+import { getArticleFaqJsonLd, getFaqPageBreadcrumbJsonLd } from "@/lib/article-structured-data";
+import { FAQ_PAGE_ITEMS } from "@/lib/faq-page-data";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 
@@ -25,19 +27,30 @@ function Item({
   children: React.ReactNode;
 }) {
   return (
-    <section className="ds-card p-5">
+    <section className="ds-surface-soft p-5 md:p-6">
       <h2 className="text-base font-semibold text-stone-900">{q}</h2>
-      <div className="mt-3 text-sm text-stone-700 leading-relaxed">{children}</div>
+      <div className="mt-3 text-base text-stone-700 leading-relaxed">{children}</div>
     </section>
   );
 }
 
 export default function Page() {
+  const breadcrumbJsonLd = getFaqPageBreadcrumbJsonLd();
+  const faqJsonLd = getArticleFaqJsonLd(FAQ_PAGE_ITEMS);
+
   return (
-    <div className="grid gap-6">
-      <header className="ds-card ds-card-pad">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd != null && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
+    <div className="ds-page-width grid gap-6">
+      <header className="ds-surface-soft ds-card-pad">
         <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">FAQ（よくある質問）</h1>
-        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-3 text-base text-stone-700 leading-relaxed">
           借入返済シミュレーターの使い方・計算結果の見方・金利や返済方式の考え方について、よくある質問をまとめています。
           実際の返済条件は契約内容（適用金利、約定日、端数処理、手数料等）を優先してください。
         </p>
@@ -187,9 +200,17 @@ export default function Page() {
         </p>
       </Item>
 
-      <section className="ds-card ds-card-pad">
+      <Item q="Q19. 「無利息期間」はどう計算されますか？">
+        <p>
+          返済開始から指定した月数は、発生利息を<strong className="font-semibold text-stone-800">0円</strong>として試算する簡易モデルです。
+          元利均等では当初の毎月返済額の再計算（キャンペーン後の据え置き等）は行わず、利息項のみを0にします。
+          実際のカードの無利息キャンペーンとは対象・手数料等の条件が異なる場合があります。
+        </p>
+      </Item>
+
+      <section className="ds-surface-soft ds-card-pad">
         <h2 className="text-base font-semibold text-stone-900">補足</h2>
-        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-3 text-base text-stone-700 leading-relaxed">
           使い方の詳細は「使い方」ページ、計算の考え方は「計算ロジック」ページにまとめています。
           追加してほしい質問があれば「お問い合わせ」からご連絡ください。
         </p>
@@ -197,5 +218,6 @@ export default function Page() {
 
       <SupplementPageFooterFaq />
     </div>
+    </>
   );
 }

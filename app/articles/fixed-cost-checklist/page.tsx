@@ -115,7 +115,7 @@ export default function Page() {
 <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             私も固定費を見直したいと思ったものの、「どこから削るべきか」がわからず手が止まりました。一度見直せば効果が続きやすいのが固定費の強みなので、だからこそ<strong>何から・どういう順番で</strong>見直すかを「すぐ変えられて続く」順に整理したチェックリストで解説します。
           </p>
 
@@ -132,8 +132,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">
@@ -302,7 +302,7 @@ export default function Page() {
               </p>
               <div className="mt-6 ds-subcard p-6">
                 <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-sm text-stone-700">
+                <p className="mt-2 text-base text-stone-700">
                   毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
                 </p>
                 <Link

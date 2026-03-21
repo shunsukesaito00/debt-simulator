@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 内部リンクチェック: lib/articles.ts の relatedLinks で参照されている
+ * 内部リンクチェック: lib/articles-data.ts の relatedLinks で参照されている
  * /articles/:slug が、存在する記事 slug を指しているか検証する。
  * 用法: node scripts/check-internal-links.mjs
  * 失敗時は exit 1 で終了する。
@@ -12,8 +12,8 @@ import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const articlesPath = join(root, "lib/articles.ts");
-const content = readFileSync(articlesPath, "utf-8");
+const dataPath = join(root, "lib/articles-data.ts");
+const content = readFileSync(dataPath, "utf-8");
 
 // 記事 slug 一覧を抽出（slug: "xxx" の形式）
 const slugRegex = /slug:\s*["']([^"']+)["']/g;
@@ -37,5 +37,5 @@ if (broken.length > 0) {
   process.exit(1);
 }
 
-console.log("Internal link check passed: all /articles/* links in lib/articles.ts point to existing slugs.");
+console.log("Internal link check passed: all /articles/* links in lib/articles-data.ts point to existing slugs.");
 process.exit(0);

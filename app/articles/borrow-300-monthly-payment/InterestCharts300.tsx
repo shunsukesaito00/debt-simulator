@@ -40,8 +40,8 @@ export function MonthlyPaymentBarChart300() {
   return (
     <div>
       <p className="mb-2 text-sm font-bold text-stone-700">毎月返済額の比較</p>
-      <div className="h-[220px] min-h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
+      <div className="h-[220px] min-h-[220px] w-full min-h-0 min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={220}>
           <BarChart data={monthlyData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
             <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
@@ -59,8 +59,8 @@ export function TotalInterestBarChart300() {
   return (
     <div>
       <p className="mb-2 text-sm font-bold text-stone-700">総利息の比較</p>
-      <div className="h-[220px] min-h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
+      <div className="h-[220px] min-h-[220px] w-full min-h-0 min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={220}>
           <BarChart data={interestData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
             <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
@@ -78,8 +78,8 @@ export function PayoffMonthsBarChart300() {
   return (
     <div>
       <p className="mb-2 text-sm font-bold text-stone-700">完済までの期間（か月）の比較</p>
-      <div className="h-[220px] min-h-[220px] w-full min-w-0">
-        <ResponsiveContainer width="100%" height="100%" minHeight={220}>
+      <div className="h-[220px] min-h-[220px] w-full min-h-0 min-w-0">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={220}>
           <BarChart data={monthsData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
             <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />

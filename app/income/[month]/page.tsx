@@ -9,11 +9,7 @@ import {
   getIncomeReports,
   getIncomeReportUrl,
 } from "@/lib/income-log";
-import { getSiteBaseUrl } from "@/lib/site-config";
-
 type Props = { params: Promise<{ month: string }> };
-
-const BASE = getSiteBaseUrl();
 
 export function generateStaticParams() {
   return getIncomeReports().map((r) => ({ month: r.month }));

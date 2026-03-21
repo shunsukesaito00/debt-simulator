@@ -28,6 +28,14 @@ export default function Page() {
         </section>
 
         <section>
+          <h2 className="text-base font-semibold text-stone-900">無利息期間（任意）</h2>
+          <p className="mt-2">
+            シミュレーターで「無利息期間（月）」を指定した場合、返済開始から先頭 N ヶ月は<strong className="text-stone-900">発生利息を0円</strong>として試算します。
+            元利均等では当初の毎月返済額の再計算（キャンペーン後の据え置き等）は行わず、利息項のみを0にする簡易モデルです。実際のカードの無利息キャンペーンとは条件が異なる場合があります。
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-base font-semibold text-stone-900">端数処理</h2>
           <p className="mt-2">
             利息計算の端数は切り捨て（円未満）で行っています。金融機関の約定（四捨五入・切り上げ等）とは異なる場合があります。

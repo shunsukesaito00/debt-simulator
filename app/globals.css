@@ -14,6 +14,12 @@
   --ds-accent: 22 163 74;
   --ds-accent-strong: 21 128 61;
   --ds-accent-2: 34 197 94;
+  /*
+   * アクセント（緑）の使い分け：
+   * - 本文・説明文は stone 系のまま（読み疲れ・広告感を抑える）
+   * - 緑は「主CTA（.ds-btn-primary）」「ナビ・カード内の重要リンクの hover での強調」に寄せる
+   * - 装飾目的の全面緑背景・大面積の emerald テキストは避ける
+   */
 
   --ds-radius-sm: 10px;
   --ds-radius-md: 16px;
@@ -67,8 +73,9 @@ textarea {
     background: rgb(var(--ds-bg));
     color: rgb(var(--ds-fg));
   }
+  /* ヘッダ／フッタの行長。本文カラムは .ds-page-width / .ds-article-shell で max-w-3xl（〜wide 時 4xl）に制限 */
   .ds-container {
-    @apply mx-auto w-full max-w-5xl px-4 md:px-6;
+    @apply mx-auto w-full max-w-6xl px-4 md:px-6;
   }
 
   /** 固定ページ・記事と揃える読み幅（max-w-3xl = 48rem）。max-w-prose（65ch）は使わない */
@@ -251,6 +258,18 @@ textarea {
   }
   .ds-article-body blockquote {
     @apply my-4 border-l-[3px] border-stone-200/90 pl-4 text-stone-600 not-italic;
+  }
+  .ds-article-body pre,
+  .ds-article-body code {
+    font-family: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+  }
+  .ds-article-body pre {
+    @apply overflow-x-auto rounded-lg border border-stone-200/80 bg-stone-50/90 p-3 text-sm;
+  }
+
+  /* Recharts ResponsiveContainer の親（flex 子での幅 -1 警告・縦詰まり対策） */
+  .ds-recharts-wrap {
+    @apply w-full min-h-0 min-w-0;
   }
 
   .ds-article-shell {

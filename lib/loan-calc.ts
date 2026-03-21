@@ -43,6 +43,11 @@ export type CalcInput = {
   /** 定額元金: 毎月元金（円） */
   monthlyPrincipal?: number;
   maxMonths?: number;
+  /**
+   * 返済開始から先頭 N ヶ月は利息を 0 として扱う（簡易モデル）。
+   * 実際のカードの無利息キャンペーンとは条件が異なる場合があります。
+   */
+  interestFreeMonths?: number;
 };
 
 export type ScheduleRow = {
@@ -193,9 +198,16 @@ function calcSchedule(input: CalcInput): CalcResult {
   let lastRateForEqualPayment = getRateAtMonth(rateSteps, 1);
   let insolvencyCount = 0;  // 定額元利: 利息>返済が続いた回数
 
+  const interestFreeMonthsRaw = input.interestFreeMonths ?? 0;
+  if (interestFreeMonthsRaw < 0) {
+    return { ok: false, error: "無利息期間（月）は0以上で指定してください。" };
+  }
+  const interestFreeMonths = Math.min(interestFreeMonthsRaw, maxMonths);
+
   for (let rowIndex = 0; balance > 0 && rowIndex < maxMonths; rowIndex++) {
     const annualRate = getRateAtMonth(rateSteps, rowIndex + 1);
-    const interest = calcInterest(balance, annualRate);
+    const rawInterest = calcInterest(balance, annualRate);
+    const effectiveInterest = rowIndex < interestFreeMonths ? 0 : rawInterest;
 
     let paymentBase: number;
     switch (method) {
@@ -211,7 +223,7 @@ function calcSchedule(input: CalcInput): CalcResult {
       }
       case "equal_principal": {
         const G = Math.min(equalPrincipalAmount!, balance);
-        paymentBase = Math.round(G) + interest;
+        paymentBase = Math.round(G) + effectiveInterest;
         break;
       }
       case "fixed_payment":
@@ -219,7 +231,7 @@ function calcSchedule(input: CalcInput): CalcResult {
         break;
       case "fixed_principal": {
         const G = Math.min(fixedPrincipalAmount!, balance);
-        paymentBase = Math.round(G) + interest;
+        paymentBase = Math.round(G) + effectiveInterest;
         break;
       }
       default:
@@ -231,15 +243,15 @@ function calcSchedule(input: CalcInput): CalcResult {
     const extra = getExtraForMonth(extraPayments, yyyymm);
 
     const paymentTotalRaw = paymentBase + extra;
-    const paymentCap = interest + balance;  // 最終月過払い防止
+    const paymentCap = effectiveInterest + balance;  // 最終月過払い防止
     const paymentTotal = Math.min(paymentTotalRaw, paymentCap);
 
-    const principalPaid = Math.max(0, paymentTotal - interest);
+    const principalPaid = Math.max(0, paymentTotal - effectiveInterest);
     const principalActual = Math.min(principalPaid, balance);
 
     // 定額元利: 完済不可検出（利息 > 返済が12回続く）
     if (method === "fixed_payment") {
-      if (fixedPaymentAmount! + extra <= interest) {
+      if (fixedPaymentAmount! + extra <= effectiveInterest) {
         insolvencyCount++;
         if (insolvencyCount >= 12) {
           return {
@@ -258,15 +270,15 @@ function calcSchedule(input: CalcInput): CalcResult {
     const extraApplied = Math.min(extra, Math.max(0, paymentTotal - paymentBase));
 
     totalPayment += paymentTotal;
-    totalInterest += interest;
+    totalInterest += effectiveInterest;
     totalBonus += extraApplied;
 
     schedule.push({
       year,
       month,
-      annualRatePercent: annualRate,
+      annualRatePercent: rowIndex < interestFreeMonths ? 0 : annualRate,
       payment: paymentTotal,
-      interest,
+      interest: effectiveInterest,
       principal: principalActual,
       bonus: extraApplied,
       balance,

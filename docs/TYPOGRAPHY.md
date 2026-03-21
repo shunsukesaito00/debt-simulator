@@ -12,6 +12,9 @@
 
 | クラス | 用途 |
 |--------|------|
+| `.ds-container` | サイト全体の横ラッパー（ヘッダ・フッタ・`main`）。`max-w-6xl`。本文の読み幅は `.ds-page-width` / `.ds-article-shell` 側で制限 |
+| `.ds-recharts-wrap` | Recharts `ResponsiveContainer` の親に付与（`w-full min-h-0 min-w-0`）。flex 内の幅警告対策 |
+| 記事チャート（`ChartsLazy.tsx`） | `next/dynamic` + `ssr: false`（[`article-chart-dynamic.tsx`](../app/components/article/article-chart-dynamic.tsx) の `clientOnlyChart`）。SSG 時の Recharts ログを避ける |
 | `.ds-h1` | 一覧・固定ページの主見出し |
 | `.ds-h2` | セクション見出し（semibold） |
 | `.ds-label` | 補助ラベル（xs・medium・muted） |
@@ -35,3 +38,13 @@
 ## 表・グラフ
 
 表頭やチャートのラベルは **`font-semibold`** を上限にし、`font-black` は使わない（スキャンしやすさ優先）。
+
+## アクセシビリティ・フォーカス
+
+- グローバル: [`app/globals.css`](../app/globals.css) の `@layer base` で `a:focus-visible` / `button:focus-visible` にリングを定義。
+- カスタム操作要素（`role="button"` の `div` 等）は `focus-visible:ring-*` を手動で付与する。
+
+## 画像（記事に増やす場合）
+
+- `next/image` を使い、**width / height**（または `fill` + 親の `aspect-*`）と **意味のある `alt`** を付ける。
+- 装飾のみの画像は `alt=""` とし、本文と重複するキャプションは避ける。

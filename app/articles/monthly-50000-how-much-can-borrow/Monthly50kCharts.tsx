@@ -39,8 +39,8 @@ function formatYen(val: number) {
 
 export function PrincipalBarChart() {
   return (
-    <div className="h-[240px] w-full min-w-0">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="h-[240px] w-full min-h-0 min-w-0">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={principalData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
@@ -55,8 +55,8 @@ export function PrincipalBarChart() {
 
 export function TotalInterestBarChart() {
   return (
-    <div className="h-[240px] w-full min-w-0">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="h-[240px] w-full min-h-0 min-w-0">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={interestData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis dataKey="period" tick={{ fontSize: 11 }} stroke={STONE_600} />
@@ -71,8 +71,8 @@ export function TotalInterestBarChart() {
 
 export function TotalPaymentStackedChart() {
   return (
-    <div className="h-[260px] w-full min-w-0">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="h-[260px] w-full min-h-0 min-w-0">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={stackData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }} layout="vertical" barCategoryGap="28%">
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis type="number" tick={{ fontSize: 11 }} stroke={STONE_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />

@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/how-to", priority: 0.6, changeFrequency: "monthly" },
     { path: "/logic", priority: 0.6, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/qa/what-can-simulator-do", priority: 0.55, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.5, changeFrequency: "yearly" },
     { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },

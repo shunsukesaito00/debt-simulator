@@ -35,8 +35,8 @@ export function RevoMonthsAndInterestBarCharts() {
     <div className="grid gap-8">
       <div>
         <p className="mb-2 text-sm font-bold text-stone-700">完済までの期間の比較</p>
-        <div className="h-[220px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-[220px] w-full min-h-0 min-w-0">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <BarChart data={monthsData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
               <XAxis dataKey="label" tick={{ fontSize: 12 }} stroke={STONE_600} />
@@ -49,8 +49,8 @@ export function RevoMonthsAndInterestBarCharts() {
       </div>
       <div>
         <p className="mb-2 text-sm font-bold text-stone-700">総利息の比較</p>
-        <div className="h-[220px] w-full min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="h-[220px] w-full min-h-0 min-w-0">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <BarChart data={interestData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
               <XAxis dataKey="label" tick={{ fontSize: 12 }} stroke={STONE_600} />
@@ -72,8 +72,8 @@ const stackData = [
 
 export function RevoTotalPaymentStackedChart() {
   return (
-    <div className="h-[260px] w-full min-w-0">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="h-[260px] w-full min-h-0 min-w-0">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={stackData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }} layout="vertical" barCategoryGap="28%">
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis type="number" tick={{ fontSize: 11 }} stroke={STONE_600} tickFormatter={(v) => `${(v / 10000).toFixed(0)}万`} />

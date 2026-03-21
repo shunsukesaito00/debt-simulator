@@ -107,7 +107,7 @@ function CategoryReadBlock() {
       <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
         このカテゴリで読むべき記事
       </h2>
-      <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+      <p className="mt-3 text-base text-stone-700 leading-relaxed">
         借入額別カテゴリでは、次の記事もあわせて読むと理解が深まります。
       </p>
       <ul className="mt-4 space-y-3">
@@ -117,7 +117,7 @@ function CategoryReadBlock() {
               href={`/articles/${a.slug}`}
               className="block rounded-xl border border-stone-200 bg-stone-50 p-4 transition hover:bg-stone-100"
             >
-              <span className="text-sm font-bold text-stone-900">{a.title}</span>
+              <span className="text-base font-bold text-stone-900">{a.title}</span>
               <p className="mt-1 text-xs text-stone-600 line-clamp-2">{a.summary}</p>
             </Link>
           </li>
@@ -165,7 +165,7 @@ export default function Page() {
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">
             {ARTICLE_TITLE}
           </h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             本記事の比較は、一般的な固定金利・毎月返済の考え方に基づく概算です。実際の商品や契約条件によって異なる場合があります。
           </p>
 
@@ -183,8 +183,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">

@@ -1,5 +1,6 @@
 "use client";
 
+import type { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import type { RepaymentMethod } from "@/lib/loan-calc";
 import type { FormState } from "../_lib/simulatorMappers";
@@ -24,6 +25,9 @@ export type SimulatorFormSectionProps = {
   extraTab: "monthly" | "oneTime" | "bonus";
   setExtraTab: (t: "monthly" | "oneTime" | "bonus") => void;
   errorMessage: string | null;
+  /** 手取り月収（円・任意）。サマリーの返済負担率表示用 */
+  takeHomeMonthly: number | null;
+  setTakeHomeMonthly: Dispatch<SetStateAction<number | null>>;
 };
 
 export function SimulatorFormSection({
@@ -39,6 +43,8 @@ export function SimulatorFormSection({
   extraTab,
   setExtraTab,
   errorMessage,
+  takeHomeMonthly,
+  setTakeHomeMonthly,
 }: SimulatorFormSectionProps) {
   return (
     <div className="mt-5">
@@ -273,6 +279,45 @@ export function SimulatorFormSection({
               </div>
             ))}
           </div>
+          <div className="flex flex-col gap-1 pl-0 pt-2">
+            <div className="flex items-center gap-3 min-h-12">
+              <label className="w-24 shrink-0 text-base font-semibold text-stone-800">無利息期間</label>
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <input
+                  type="range"
+                  min={0}
+                  max={24}
+                  step={1}
+                  className="min-w-0 flex-1"
+                  value={Math.min(24, Math.max(0, form.interestFreeMonths ?? 0))}
+                  onChange={(e) => updateForm({ interestFreeMonths: Number(e.target.value) })}
+                />
+                <div className="flex w-20 shrink-0 items-center gap-0.5">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={0}
+                    max={24}
+                    className="w-12 ds-input px-2 py-1.5 text-sm font-semibold"
+                    value={form.interestFreeMonths ?? 0}
+                    onChange={(e) => {
+                      const n = Number(e.target.value);
+                      if (!Number.isFinite(n)) {
+                        updateForm({ interestFreeMonths: 0 });
+                        return;
+                      }
+                      updateForm({ interestFreeMonths: Math.min(24, Math.max(0, Math.round(n))) });
+                    }}
+                  />
+                  <span className="text-sm text-stone-600">ヶ月</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-stone-600 pl-24 max-w-xl leading-relaxed">
+              返済開始から指定した月数は<strong className="text-stone-700">利息を0円</strong>として試算します（簡易モデル）。
+              実際のカードの無利息キャンペーンとは条件が異なる場合があります。
+            </p>
+          </div>
         </div>
 
         <div className={`space-y-3 pt-1 border-t border-stone-100 ${form.extraEnabled ? "rounded-xl bg-stone-50/80 p-4 -mx-1" : ""}`}>
@@ -467,6 +512,49 @@ export function SimulatorFormSection({
               )}
             </div>
           )}
+        </div>
+
+        <div className="rounded-xl border border-stone-200/80 bg-stone-50/50 p-4">
+          <p className="text-sm font-semibold text-stone-800">参考（任意）</p>
+          <p className="mt-1 text-xs text-stone-600 leading-relaxed">
+            手取り月収を入れると、サマリーに初月返済額に対する<strong className="font-semibold text-stone-800">返済負担率（参考）</strong>
+            を表示します。審査や返済能力の判断ではなく、家計の目安用です。
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <label htmlFor="take-home-monthly" className="shrink-0 text-sm font-semibold text-stone-800">
+              手取り月収
+            </label>
+            <div className="flex items-center gap-1">
+              <input
+                id="take-home-monthly"
+                type="number"
+                min={0}
+                inputMode="numeric"
+                placeholder="未入力"
+                className="w-32 ds-input px-3 py-2 text-base"
+                value={takeHomeMonthly === null ? "" : takeHomeMonthly}
+                onChange={(e) => {
+                  const raw = e.target.value;
+                  if (raw === "") {
+                    setTakeHomeMonthly(null);
+                    return;
+                  }
+                  const n = Number(raw);
+                  setTakeHomeMonthly(Number.isFinite(n) && n >= 0 ? Math.round(n) : null);
+                }}
+              />
+              <span className="text-sm text-stone-600">円</span>
+            </div>
+            {takeHomeMonthly != null && takeHomeMonthly > 0 && (
+              <button
+                type="button"
+                className="text-sm font-medium text-stone-600 underline hover:text-stone-900"
+                onClick={() => setTakeHomeMonthly(null)}
+              >
+                クリア
+              </button>
+            )}
+          </div>
         </div>
       </form>
 

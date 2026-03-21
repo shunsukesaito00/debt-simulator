@@ -75,7 +75,7 @@ export default function Page() {
 <div className="ds-card ds-card-pad">
           <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             この記事は、運営者個人の体験を書いたものです。<strong>投資・借入の勧誘や助言ではありません。</strong>
             同じように金欠や返済で苦しい方の参考になれば幸いです。
           </p>
@@ -83,8 +83,8 @@ export default function Page() {
           <ArticleStandardBlocks slug="investment-loss-family-trust" />
 
           <section id="notice" className="mt-6 ds-subcard p-4 border-l-4 border-stone-400">
-            <h2 className="text-sm font-semibold text-stone-900">この記事について</h2>
-            <ul className="mt-2 list-disc pl-5 text-sm text-stone-700 space-y-1">
+            <h2 className="text-base font-semibold text-stone-900">この記事について</h2>
+            <ul className="mt-2 list-disc pl-5 text-base text-stone-700 space-y-1">
               <li>銘柄・サービス名の推奨や、取引のやり方の指南は書いていません。</li>
               <li>金額は記憶と感覚に基づく概算です（生涯収支はおおよそ1,000万円を超える規模の負け、と自己認識しています）。</li>
               <li>体験の事実関係は個人の記録であり、一般論として「こうあるべき」とは言えません。</li>
@@ -92,8 +92,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">

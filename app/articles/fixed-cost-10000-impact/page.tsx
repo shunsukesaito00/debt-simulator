@@ -118,7 +118,7 @@ export default function Page() {
 <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             月1万円の固定費見直しは、月額では「1万円」と感じがちですが、私も最初は小さいと思っていました。続けると累計が大きくなります。このページでは<strong>1年・3年・5年でどう変わるか</strong>を数字で整理しています。
           </p>
 
@@ -136,8 +136,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">
@@ -210,7 +210,7 @@ export default function Page() {
                 </table>
               </div>
               <div className="mt-6 ds-subcard p-4">
-                <h3 className="text-sm font-semibold text-stone-900">累計改善額のイメージ（月1万円×継続月数）</h3>
+                <h3 className="text-base font-semibold text-stone-900">累計改善額のイメージ（月1万円×継続月数）</h3>
                 <div className="mt-3 space-y-3" aria-hidden>
                   {impactRows.map((row, i) => (
                     <div key={i}>

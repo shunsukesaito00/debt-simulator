@@ -62,10 +62,10 @@ export default function ArticlesListPage() {
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">
           テーマ別記事一覧
         </h1>
-        <p className="mt-5 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-5 text-base text-stone-700 leading-relaxed">
           返済・固定費・家計・体験記など、テーマ別に記事を並べています。関心のある見出しから開いてください。
         </p>
-        <p className="mt-3 text-sm text-stone-600">
+        <p className="mt-3 text-base text-stone-600 leading-relaxed">
           返済額の目安を表で見る：
           <Link href="/quick-reference" className="font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
             早見表（100万・200万・300万・年利15%・3年/5年）
@@ -77,7 +77,7 @@ export default function ArticlesListPage() {
             <h2 id="articles-story-heading" className="ds-section-title">
               体験記・ストーリー
             </h2>
-            <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+            <p className="mt-3 text-base text-stone-600 leading-relaxed">
               体験記・ストーリー形式の記事です。
             </p>
             <ul className="mt-5 divide-y divide-stone-200/70 rounded-xl border border-stone-200/50 bg-white/45">
@@ -104,8 +104,8 @@ export default function ArticlesListPage() {
                           </time>
                         )}
                       </div>
-                      <span className="mt-2 block text-sm font-semibold text-stone-900 leading-snug">{article.title}</span>
-                      <p className="mt-1.5 text-sm text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
+                      <span className="mt-2 block text-base font-semibold text-stone-900 leading-snug">{article.title}</span>
+                      <p className="mt-1.5 text-base text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
                       <span className="ds-meta mt-2 inline-block text-emerald-900">読む →</span>
                     </Link>
                   </li>
@@ -128,7 +128,7 @@ export default function ArticlesListPage() {
                     {items.length}
                   </span>
                 </h2>
-                <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+                <p className="mt-3 text-base text-stone-700 leading-relaxed">
                   {section.description}
                 </p>
                 {items.length > 0 ? (
@@ -162,7 +162,7 @@ export default function ArticlesListPage() {
                             )}
                           </div>
                           <h3 className="ds-page-serif mt-3 text-lg font-semibold text-stone-900">{article.title}</h3>
-                          <p className="mt-2 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
+                          <p className="mt-2 text-base text-stone-600 leading-relaxed">{article.summary}</p>
                           <span className="ds-meta mt-3 inline-block text-emerald-900">記事を読む →</span>
                         </Link>
                       </li>
@@ -170,7 +170,7 @@ export default function ArticlesListPage() {
                     })}
                   </ul>
                 ) : (
-                  <p className="mt-5 text-sm text-stone-500 leading-relaxed">
+                  <p className="mt-5 text-base text-stone-500 leading-relaxed">
                     このカテゴリの記事は準備中です。順次追加していきます。
                   </p>
                 )}
@@ -181,7 +181,7 @@ export default function ArticlesListPage() {
 
         <section className="mt-12 rounded-xl border border-stone-200/55 bg-white/50 p-6 shadow-sm">
           <h2 className="ds-h2">自分の条件で試算する</h2>
-          <p className="mt-3 text-sm text-stone-700 leading-relaxed">
+          <p className="mt-3 text-base text-stone-700 leading-relaxed">
             記事で理解した条件の違いを、自分の数字で確認できます。借入額・金利・返済期間・追加返済を入力し、月々返済額・総利息・完済時期を条件別に比較して、記事とシミュレーターを往復して判断に役立ててください。
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

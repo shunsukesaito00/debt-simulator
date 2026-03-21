@@ -33,7 +33,7 @@
 |------|------|------|
 | 内部リンクのビルド時チェック | `lib/articles.ts` の `relatedLinks` および記事本文内の `/articles/:slug` が、存在する slug を指しているか検証するスクリプトを用意し、`npm run build` 前や CI で実行する。 | 実施 |
 | ピラー・クラスターの明示 | 各カテゴリの「親記事」（order: 0 や badge: おすすめ）と子記事の対応をドキュメント化し、関連リンクの追加・見直し時に参照する。 | ドキュメント化 |
-| 構造化データの見直し | 既存の Article / FAQPage / BreadcrumbList に加え、必要に応じて HowTo や QAPage を検討する（優先度は中）。 | 検討 |
+| 構造化データの見直し | 記事は Article / FAQPage / BreadcrumbList。`/how-to` に HowTo、`/faq` に FAQPage＋BreadcrumbList、`/qa/what-can-simulator-do` に QAPage（単一Q&A）を実装済み。 | 実施 |
 
 ### 次の一手（すぐ落とし込む）
 - [x] **ビルド時または手動実行で内部リンクチェック**（`scripts/check-internal-links.mjs` を追加し、`npm run check-links` で実行可能にする）。
@@ -70,10 +70,26 @@
 
 ---
 
-## 今後の追加検討
+## 今後の追加検討（実施状況の整理）
 
-- **サイトマップの lastModified**: `articlesData` に `dateModified?: string` を追加し、sitemap.ts で記事ルートにのみ反映する。
-- **CI でのリンクチェック**: `npm run check-links` を CI の `build` 前ステップに組み込む。
-- **GROWTH_STRATEGY.md との統合**: 本ファイルのフェーズ8〜10 を GROWTH_STRATEGY.md の「7. 計測と次の一手」の後続として参照する形にしてもよい。
+### 実施済み（コード・運用）
 
-このドキュメントは、フェーズ8・9・10 の施策と「次の一手」の実施状況を更新するたびに書き換える。
+| 項目 | 内容 |
+|------|------|
+| サイトマップの lastModified | `articlesData` の `dateModified`（任意）を `getArticleLastModifiedIso` 経由で `app/sitemap.ts` に反映 |
+| RSS の更新日 | `app/feed.xml/route.ts` の各 item の `pubDate` に `dateModified` を優先反映 |
+| CI | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) で `check-links` の後に `npm run build` |
+| Lint | `npm run lint` は `eslint .`（`next lint` は未使用） |
+| HowTo JSON-LD | [`/how-to`](../app/how-to/page.tsx) |
+| FAQPage JSON-LD | [`/faq`](../app/faq/page.tsx)（BreadcrumbList 併記） |
+| QAPage JSON-LD | [`/qa/what-can-simulator-do`](../app/qa/what-can-simulator-do/page.tsx)（単一Q&A） |
+| 内部リンク検証 | `npm run check-links`（`lib/articles-data.ts` の `relatedLinks` 等） |
+
+### 任意・継続（未実装のまま検討）
+
+- **QAPage の追加（別テーマ）**: 単一Q&Aページをさらに増やす場合は [`ROADMAP.md`](./ROADMAP.md) とあわせて優先度を決める。
+- **計測サイクル**: Search Console・GA4 の見方は [GROWTH_STRATEGY.md](../GROWTH_STRATEGY.md) の「7. 計測と次の一手」と本ファイルフェーズ10を参照。
+
+**ドキュメントの位置づけ**: フェーズ8〜10の詳細は本ファイル、コンテンツの増やし方・勝つ戦場は GROWTH_STRATEGY、サイト全体の優先度は ROADMAP を正とする。
+
+このドキュメントは、施策の実施状況が変わったときに上表とチェックリストを更新する。

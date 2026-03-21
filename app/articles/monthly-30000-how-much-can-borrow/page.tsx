@@ -109,7 +109,7 @@ export default function Page() {
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("monthly-30000-how-much-can-borrow")}>
 <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             本記事で扱うのは返済計画上の目安であり、審査上の借入可能額を示すものではありません。年利15%・元利均等の近似例です。
           </p>
 
@@ -127,8 +127,8 @@ export default function Page() {
           </section>
 
           <section className="mt-6 ds-subcard p-4">
-            <h2 className="text-sm font-semibold text-stone-900">目次</h2>
-            <ul className="mt-2 space-y-1.5 text-sm">
+            <h2 className="text-base font-semibold text-stone-900">目次</h2>
+            <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="text-stone-700 hover:underline">

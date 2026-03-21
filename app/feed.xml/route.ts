@@ -21,13 +21,13 @@ export async function GET() {
         const full = getArticle(a.slug);
         const link = `${base}/articles/${a.slug}`;
         const pub = a.publishedAt ?? "";
-        const mod = full ? getArticleLastModifiedIso(full) ?? pub : pub;
+        const itemDate = full ? getArticleLastModifiedIso(full) ?? pub : pub;
         return `
     <item>
       <title>${escapeXml(a.title)}</title>
       <link>${link}</link>
       <guid>${link}</guid>
-      <pubDate>${rfc822Date(pub)}</pubDate>
+      <pubDate>${rfc822Date(itemDate)}</pubDate>
       <description>${escapeXml(a.summary)}</description>
     </item>`;
       })

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ARTICLE_LIST_SECTIONS, getArticlesByCategory } from "@/lib/articles";
+import { ARTICLE_LIST_SECTIONS, getArticlesByCategory, getPopularArticles } from "@/lib/articles";
+import { TrackedLink } from "@/app/components/TrackedLink";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
 const siteLinks = [
@@ -54,12 +55,55 @@ function CategoryColumn() {
 }
 
 export default function FooterNav() {
+  const popularArticles = getPopularArticles();
+
   return (
     <footer className="ds-footer">
       <div className="ds-container py-10">
         <p className="max-w-xl text-sm leading-relaxed text-stone-600">
           個人の生活再建・家計改善の試行錯誤を、記事と試算で整理しています。急がず、自分のペースで読んでください。
+          サイトの変更点は
+          <Link href="/updates" className="mx-0.5 font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
+            更新ログ
+          </Link>
+          、副業の定点観測は
+          <Link href="/income" className="mx-0.5 font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
+            収益レポート
+          </Link>
+          を参照してください（カテゴリ一覧とは別の入口です）。
         </p>
+
+        {popularArticles.length > 0 && (
+          <section className="mt-8 rounded-xl border border-stone-200/80 bg-white/50 p-5 shadow-sm" aria-labelledby="footer-popular-heading">
+            <p id="footer-popular-heading" className="ds-label">
+              よく読まれている記事
+            </p>
+            <p className="mt-1 text-xs text-stone-500 leading-relaxed">
+              アクセス解析なしの手動キュレーションです（<code className="rounded bg-stone-100 px-1 py-0.5 text-[11px]">lib/articles.ts</code> の{" "}
+              <code className="rounded bg-stone-100 px-1 py-0.5 text-[11px]">POPULAR_ARTICLE_SLUGS</code>）。
+            </p>
+            <ul className="mt-3 flex flex-col gap-2">
+              {popularArticles.map((a) => (
+                <li key={a.slug}>
+                  <TrackedLink
+                    href={`/articles/${a.slug}`}
+                    className="text-sm font-bold text-stone-700 hover:underline"
+                    event={{
+                      action: "click_footer_popular_article",
+                      location: "footer_nav",
+                      target: `/articles/${a.slug}`,
+                      link_type: "popular_article",
+                      article_slug: a.slug,
+                    }}
+                  >
+                    {a.title}
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <div className="mt-10 grid gap-10 sm:grid-cols-2">
           {/* 左列: サイトリンク */}
           <div>

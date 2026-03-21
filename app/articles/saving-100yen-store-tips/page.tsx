@@ -77,7 +77,7 @@ export default function Page() {
             {CATEGORY_LABELS[article.category]}
           </p>
           <h1 className="ds-page-serif mt-2 text-2xl font-bold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">{article.summary}</p>
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">{article.summary}</p>
 
           <ArticleStandardBlocks slug={SLUG} />
 

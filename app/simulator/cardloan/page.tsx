@@ -1,10 +1,5 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
-import Link from "next/link";
-import { calcLoan } from "@/lib/loan-calc";
-import { trackEvent } from "@/lib/analytics";
-import { toCalcInput, DEFAULT_FORM, type FormState } from "./_lib/simulatorMappers";
 import { SimulatorFormSection } from "./_components/SimulatorFormSection";
 import { SimulatorSummarySection } from "./_components/SimulatorSummarySection";
 import { SimulatorChartsSection } from "./_components/SimulatorChartsSection";
@@ -12,68 +7,31 @@ import { SimulatorScheduleTableSection } from "./_components/SimulatorScheduleTa
 import { SimulatorAbCompareSection } from "./_components/SimulatorAbCompareSection";
 import { SimulatorRelatedArticlesSection } from "./_components/SimulatorRelatedArticlesSection";
 import { SimulatorRepaymentImprovementSection } from "./_components/SimulatorRepaymentImprovementSection";
+import { SimulatorDisclaimerSection } from "./_components/SimulatorDisclaimerSection";
+import { useSimulatorCardloanState } from "./_lib/useSimulatorCardloanState";
 
 export default function Page() {
-  const [formA, setFormA] = useState<FormState>(DEFAULT_FORM);
-  const [formB, setFormB] = useState<FormState>({
-    ...DEFAULT_FORM,
-    principalMan: 100,
-    extraEnabled: true,
-    monthlyExtraAmount: 5000,
-  });
-  const [activeTab, setActiveTab] = useState<"A" | "B">("A");
-  const [extraTab, setExtraTab] = useState<"monthly" | "oneTime" | "bonus">("monthly");
-
-  const resultA = useMemo(() => calcLoan(toCalcInput(formA)), [formA]);
-  const resultB = useMemo(() => calcLoan(toCalcInput(formB)), [formB]);
-
-  const result = activeTab === "A" ? resultA : resultB;
-  const form = activeTab === "A" ? formA : formB;
-  const setForm = activeTab === "A" ? setFormA : setFormB;
-
-  const updateForm = useCallback(
-    (patch: Partial<FormState>) => setForm((prev) => ({ ...prev, ...patch })),
-    [setForm]
-  );
-
-  const addRateStep = useCallback(() => {
-    const last = form.rateSteps[form.rateSteps.length - 1];
-    setForm((prev) => ({
-      ...prev,
-      rateSteps: [...prev.rateSteps, { fromMonth: (last?.fromMonth ?? 1) + 12, rate: last?.rate ?? 15 }],
-    }));
-  }, [form.rateSteps, setForm]);
-
-  const removeRateStep = useCallback(
-    (i: number) => setForm((prev) => ({ ...prev, rateSteps: prev.rateSteps.filter((_, j) => j !== i) })),
-    [setForm]
-  );
-
-  const addBonus = useCallback(() => {
-    setForm((prev) => ({
-      ...prev,
-      bonusPayments: [...prev.bonusPayments, { month: 6, amount: 100000 }],
-    }));
-  }, [setForm]);
-
-  const removeBonus = useCallback(
-    (i: number) => setForm((prev) => ({ ...prev, bonusPayments: prev.bonusPayments.filter((_, j) => j !== i) })),
-    [setForm]
-  );
-
-  const addOneTime = useCallback(() => {
-    setForm((prev) => ({
-      ...prev,
-      oneTimeExtras: [...prev.oneTimeExtras, { year: form.startYear, month: form.startMonth, amount: 100000 }],
-    }));
-  }, [form.startYear, form.startMonth, setForm]);
-
-  const removeOneTime = useCallback(
-    (i: number) => setForm((prev) => ({ ...prev, oneTimeExtras: prev.oneTimeExtras.filter((_, j) => j !== i) })),
-    [setForm]
-  );
-
-  const errorMessage = result.ok === false ? result.error : null;
+  const {
+    takeHomeMonthly,
+    setTakeHomeMonthly,
+    activeTab,
+    setActiveTab,
+    extraTab,
+    setExtraTab,
+    resultA,
+    resultB,
+    result,
+    form,
+    setForm,
+    updateForm,
+    addRateStep,
+    removeRateStep,
+    addBonus,
+    removeBonus,
+    addOneTime,
+    removeOneTime,
+    errorMessage,
+  } = useSimulatorCardloanState();
 
   return (
     <div className="grid gap-5">
@@ -119,6 +77,8 @@ export default function Page() {
           extraTab={extraTab}
           setExtraTab={setExtraTab}
           errorMessage={errorMessage}
+          takeHomeMonthly={takeHomeMonthly}
+          setTakeHomeMonthly={setTakeHomeMonthly}
         />
       </section>
 
@@ -130,6 +90,7 @@ export default function Page() {
               resultA={resultA}
               resultB={resultB}
               activeTab={activeTab}
+              takeHomeMonthly={takeHomeMonthly}
             />
             <SimulatorChartsSection result={result} activeTab={activeTab} />
           </div>
@@ -157,57 +118,7 @@ export default function Page() {
         気になる条件が見つかったら、関連記事で考え方を整理し、自分の条件で再度試算してください。条件別の記事とあわせて確認すると、返済負担の違いがよりわかりやすくなります。
       </p>
 
-      <section className="mt-6 rounded-xl border border-stone-200/55 bg-white/60 p-5 shadow-sm">
-        <div className="text-sm font-semibold text-stone-700">注意点</div>
-        <ul className="mt-2 list-disc pl-5 text-xs text-stone-600 leading-relaxed space-y-1">
-          <li>本ツールは参考情報です。契約内容（利率、返済日、手数料等）を優先してください。</li>
-          <li>計算は一般的な月次の近似です。金融機関の計算と差が出る場合があります。</li>
-        </ul>
-        <div className="mt-4 flex flex-wrap gap-4 text-sm">
-          <Link
-            href="/logic"
-            className="font-semibold text-emerald-900 hover:underline"
-            onClick={() =>
-              trackEvent({
-                action: "click_simulator_support_link",
-                location: "simulator_footer",
-                target: "/logic",
-                link_type: "support_link",
-              })
-            }
-          >
-            計算ロジック
-          </Link>
-          <Link
-            href="/faq"
-            className="font-semibold text-emerald-900 hover:underline"
-            onClick={() =>
-              trackEvent({
-                action: "click_simulator_support_link",
-                location: "simulator_footer",
-                target: "/faq",
-                link_type: "support_link",
-              })
-            }
-          >
-            FAQ
-          </Link>
-          <Link
-            href="/how-to"
-            className="font-semibold text-emerald-900 hover:underline"
-            onClick={() =>
-              trackEvent({
-                action: "click_simulator_support_link",
-                location: "simulator_footer",
-                target: "/how-to",
-                link_type: "support_link",
-              })
-            }
-          >
-            使い方
-          </Link>
-        </div>
-      </section>
+      <SimulatorDisclaimerSection />
     </div>
   );
 }

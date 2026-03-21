@@ -43,6 +43,16 @@ export default async function CategoryPage({ params }: Props) {
   const label = CATEGORY_LABELS[cat];
   const desc = CATEGORY_DESCRIPTIONS[cat];
 
+  const showQuickReference = (
+    [
+      "loan-amount",
+      "repayment-method",
+      "revolving",
+      "repayment-planning",
+      "repayment-improvement",
+    ] as const satisfies readonly ArticleCategory[]
+  ).includes(cat);
+
   return (
     <div className="mx-auto max-w-3xl">
       <nav className="mb-6 text-sm text-stone-600" aria-label="パンくず">
@@ -65,12 +75,54 @@ export default async function CategoryPage({ params }: Props) {
 
       <header className="mb-8">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">{label}の記事</h1>
-        <p className="mt-3 text-sm text-stone-600 leading-relaxed">{desc}</p>
+        <p className="mt-3 text-base text-stone-600 leading-relaxed">{desc}</p>
         <p className="mt-2 text-xs text-stone-500">{SITE_NAME} のカテゴリ別一覧です。</p>
       </header>
 
+      <section
+        className="mb-10 rounded-xl border border-emerald-200/60 bg-emerald-50/40 p-5 shadow-sm"
+        aria-labelledby="category-sim-heading"
+      >
+        <h2 id="category-sim-heading" className="text-base font-semibold text-stone-900">
+          条件を変えて試算する
+        </h2>
+        <p className="mt-2 text-sm text-stone-600 leading-relaxed">
+          記事の数値は一例です。借入額・金利・返済期間を自分の前提で確認するには、返済シミュレーターが便利です。
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <TrackedLink
+            href="/simulator/cardloan"
+            className="ds-btn ds-btn-primary"
+            event={{
+              action: "click_category_simulator_cta",
+              location: "category_page",
+              target: "/simulator/cardloan",
+              link_type: "simulator_cta",
+              category_key: cat,
+            }}
+          >
+            借入返済シミュレーター →
+          </TrackedLink>
+          {showQuickReference && (
+            <TrackedLink
+              href="/quick-reference"
+              className="ds-btn ds-btn-secondary"
+              event={{
+                action: "click_category_quick_reference",
+                location: "category_page",
+                target: "/quick-reference",
+                link_type: "quick_reference",
+                category_key: cat,
+              }}
+            >
+              早見表（100万〜） →
+            </TrackedLink>
+          )}
+        </div>
+      </section>
+
       {items.length === 0 ? (
-        <p className="text-sm text-stone-600">このカテゴリにはまだ記事がありません。</p>
+        <p className="text-base text-stone-600 leading-relaxed">このカテゴリにはまだ記事がありません。</p>
       ) : (
         <ul className="divide-y divide-stone-200/75 overflow-hidden rounded-xl border border-stone-200/50 bg-white/45">
           {items.map((article) => (
@@ -90,15 +142,15 @@ export default async function CategoryPage({ params }: Props) {
                 <span className="rounded-md border border-stone-200/80 bg-stone-50/90 px-2 py-0.5 text-xs font-medium text-stone-600">
                   {CATEGORY_LABELS[article.category as ArticleCategory]}
                 </span>
-                <span className="mt-2 block text-sm font-semibold text-stone-900 leading-snug">{article.title}</span>
-                <p className="mt-1.5 text-sm text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
+                <span className="mt-2 block text-base font-semibold text-stone-900 leading-snug">{article.title}</span>
+                <p className="mt-1.5 text-base text-stone-600 leading-relaxed line-clamp-2">{article.summary}</p>
               </TrackedLink>
             </li>
           ))}
         </ul>
       )}
 
-      <p className="mt-10 text-sm">
+      <p className="mt-10 text-base leading-relaxed">
         <Link href="/articles" className="font-semibold text-emerald-900 underline">
           全カテゴリの記事一覧へ →
         </Link>

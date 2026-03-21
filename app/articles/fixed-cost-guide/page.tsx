@@ -93,7 +93,7 @@ export default function Page() {
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-guide")}>
 <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
-          <p className="mt-4 text-sm text-stone-600 leading-relaxed">
+          <p className="mt-4 text-base text-stone-600 leading-relaxed">
             このカテゴリでは、毎月の固定負担を見直すための記事を、条件別に「いくら変わるか」が比較できる形で整理していきます。
           </p>
 

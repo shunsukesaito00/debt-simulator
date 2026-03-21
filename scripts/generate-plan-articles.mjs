@@ -35,7 +35,6 @@ const SLUGS = [
 ];
 
 function pageSource(slug) {
-  const upperSlug = slug.replace(/-/g, "_").toUpperCase();
   return `import type { Metadata } from "next";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
 import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo } from "@/app/components/article";

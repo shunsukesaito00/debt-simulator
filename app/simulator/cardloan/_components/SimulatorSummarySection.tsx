@@ -3,11 +3,19 @@
 import type { CalcResult } from "@/lib/loan-calc";
 import { formatYen } from "../_lib/simulatorMappers";
 
+function repaymentBurdenPercent(firstPayment: number, takeHomeMonthly: number): string {
+  if (takeHomeMonthly <= 0) return "—";
+  const pct = (firstPayment / takeHomeMonthly) * 100;
+  return `${Math.round(pct * 10) / 10}%`;
+}
+
 export type SimulatorSummarySectionProps = {
   result: CalcResult;
   resultA: CalcResult;
   resultB: CalcResult;
   activeTab: "A" | "B";
+  /** 手取り月収（円）。設定時のみ負担率を表示 */
+  takeHomeMonthly: number | null;
 };
 
 export function SimulatorSummarySection({
@@ -15,6 +23,7 @@ export function SimulatorSummarySection({
   resultA,
   resultB,
   activeTab,
+  takeHomeMonthly,
 }: SimulatorSummarySectionProps) {
   return (
     <section className="flex min-h-0 flex-col rounded-ds border border-stone-200/70 bg-white/90 p-5 shadow-sm">
@@ -55,6 +64,21 @@ export function SimulatorSummarySection({
         <div className="text-xs text-stone-500">完済</div>
         <div>{resultA.ok ? `${resultA.finalYear}年${resultA.finalMonth}月（${resultA.months}回）` : "-"}</div>
         <div>{resultB.ok ? `${resultB.finalYear}年${resultB.finalMonth}月（${resultB.months}回）` : "-"}</div>
+        {takeHomeMonthly != null && takeHomeMonthly > 0 && (
+          <>
+            <div className="text-xs text-stone-500">返済負担率（参考）</div>
+            <div className="text-emerald-900">
+              {resultA.ok
+                ? repaymentBurdenPercent(resultA.schedule[0]?.payment ?? 0, takeHomeMonthly)
+                : "-"}
+            </div>
+            <div className="text-emerald-900">
+              {resultB.ok
+                ? repaymentBurdenPercent(resultB.schedule[0]?.payment ?? 0, takeHomeMonthly)
+                : "-"}
+            </div>
+          </>
+        )}
         {resultA.ok && resultB.ok && (
           <>
             <div className="text-xs text-stone-500 pt-2 border-t border-stone-100">差分（B−A）</div>

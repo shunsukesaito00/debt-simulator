@@ -32,9 +32,9 @@ function formatYen(val: number) {
 
 export function InterestComparisonBarChart() {
   return (
-    <div className="h-[260px] w-full min-w-0">
+    <div className="h-[260px] w-full min-h-0 min-w-0">
       <p className="mb-2 text-sm font-bold text-stone-700">総利息の比較</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={interestChartData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis dataKey="case" tick={{ fontSize: 11 }} stroke={STONE_600} />
@@ -52,9 +52,9 @@ export function InterestComparisonBarChart() {
 
 export function MonthsComparisonBarChart() {
   return (
-    <div className="h-[260px] w-full min-w-0">
+    <div className="h-[260px] w-full min-h-0 min-w-0">
       <p className="mb-2 text-sm font-bold text-stone-700">完済までの期間の比較</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
         <BarChart data={monthsChartData} margin={{ top: 8, right: 8, left: 8, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" />
           <XAxis dataKey="case" tick={{ fontSize: 11 }} stroke={STONE_600} />
