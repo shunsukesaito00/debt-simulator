@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
+import { ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
 import { articleUsesWideLayout } from "@/lib/article-layout";
-
+import { TrackedLink } from "@/app/components/TrackedLink";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://debt-simulator-quzc.vercel.app";
 const ARTICLE_URL = `${BASE}/articles/fixed-cost-checklist`;
@@ -15,12 +15,12 @@ const ARTICLE_TITLE = "固定費見直しチェックリスト｜何から削る
 export const metadata: Metadata = {
   title: ARTICLE_TITLE,
   description:
-    "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリストです。見直しやすさ・削減額・生活への影響の3軸で比較し、取り組み順を解説します。",
+    "固定費を何から手をつけるか、見直しやすさ・削減額・生活への影響で整理したチェックリスト。サブスクから家賃まで、挫折しにくい順番と項目別の確認ポイントを解説します。",
   alternates: { canonical: ARTICLE_URL },
   openGraph: {
     title: ARTICLE_TITLE,
     description:
-      "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリストです。見直しやすさ・削減額・生活への影響の3軸で比較します。",
+      "すぐ変えやすいものから始める固定費見直しの順番と、項目別のチェックポイント。削減額の試算ツールへの導線つき。",
     url: ARTICLE_URL,
     type: "article",
   },
@@ -31,10 +31,10 @@ const jsonLd = {
   "@type": "Article",
   headline: ARTICLE_TITLE,
   description:
-    "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリストです。見直しやすさ・削減額・生活への影響の3軸で比較します。",
+    "固定費見直しのチェックリスト。何から削るか順番と項目別のポイントを整理します。",
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
-  dateModified: "2025-03-11",
+  dateModified: "2026-03-22",
   author: ARTICLE_AUTHOR_JSON_LD,
   publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
@@ -43,27 +43,27 @@ const faqItems = [
   {
     question: "固定費見直しは何から始めるべきですか？",
     answer:
-      "このページでは、すぐ変えやすい「サブスク」から始めることをおすすめしています。使っていないものの解約や一時停止は手軽にでき、小さくても改善を実感しやすいため、その後の通信費・保険などの見直しにもつなげやすくなります。",
+      "まずはサブスクからがおすすめです。解約や一時停止がしやすく、小さくても「減った」が実感しやすいので、次の通信費・保険へ進みやすくなります。",
   },
   {
     question: "固定費はどれくらい削れますか？",
     answer:
-      "人によって異なりますが、サブスク・通信費・保険・光熱費などを総合的に見直すと、月5,000円〜1万円程度の削減が見込めるケースも少なくありません。削減額は固定費削減インパクト計算で、1年・3年・5年でいくらになるかを確認できます。",
+      "人によります。複数項目を組み合わせると、月5,000円〜1万円前後を目安にできるケースもあります。固定費削減インパクト計算で、1年・3年・5年の累計を試算できます。",
   },
   {
     question: "家賃や保険を先に見直すべきですか？",
     answer:
-      "金額は大きいですが、家賃は転居、保険は保障内容の理解が必要で、すぐには変えにくいです。このページでは、挫折しにくい順番として「サブスク → 通信費 → 保険 → 電気・ガス等 → 家賃・車」の順を推奨しています。まず着手しやすい項目で成功体験を積んでから、家賃・保険などの大物に進むと続けやすくなります。",
+      "金額は大きい一方、転居や保障の理解が必要で時間がかかります。この記事の順（サブスク→通信→保険→電気・ガス等→家賃・車）は、着手しやすさと続けやすさを優先した並びです。",
   },
   {
     question: "固定費の見直しにはどれくらい時間がかかりますか？",
     answer:
-      "サブスクの整理なら30分〜1時間程度で一通り確認できます。通信費のプラン変更は手続き含めて数日、保険の見直しは内容確認に1〜2週間かかることもあります。一度にすべてやる必要はなく、着手しやすいものから順番に進めるのがおすすめです。",
+      "サブスクの洗い出しは30分〜1時間程度のイメージです。通信は手続きで数日、保険は内容確認に1〜2週間かかることもあります。一度に全部やらず、順に進めれば十分です。",
   },
   {
-    question: "チェックリストを一通り終えたら次は何をすればいいですか？",
+    question: "チェックリストを終えたあとに何をすればいいですか？",
     answer:
-      "見直し後は、実際にいくら改善できたかを1〜2か月後に確認するのがおすすめです。改善額の累計は固定費削減インパクト計算で試算できます。また、浮いたお金を返済や貯蓄に回す場合は、借入返済シミュレーターで具体的な効果を確認するのも有効です。",
+      "1〜2か月後に、実際にいくら減ったか確認するのがおすすめです。浮いたお金を返済に回す場合は、借入返済シミュレーターで月々の余裕と返済の関係を試算するのも有効です。",
   },
 ];
 
@@ -71,67 +71,122 @@ const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
 const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 const tocItems = [
-  { id: "premise", label: "このページの前提" },
-  { id: "conclusion", label: "結論｜固定費見直しは「すぐ変えやすいもの」から始める" },
-  { id: "reading-points", label: "読み方のポイント" },
-  { id: "checklist", label: "固定費見直しチェックリスト" },
-  { id: "order-reason", label: "順番でやる理由" },
-  { id: "impact-view", label: "月5,000円・1万円改善の見え方" },
-  { id: "loan-link", label: "借入返済とつなげる補足" },
-  { id: "editor-memo", label: "編集メモ" },
+  { id: "intro", label: "導入" },
+  { id: "conclusion", label: "結論｜何から始めるべきか" },
+  { id: "checklist-table", label: "3分で使える固定費見直しチェックリスト" },
+  { id: "items", label: "項目別の見直しポイント" },
+  { id: "order-reason", label: "この順番にしている理由" },
+  { id: "impact", label: "月5,000円・1万円改善の見え方" },
+  { id: "cta-impact", label: "自分の条件で試算する" },
+  { id: "repayment-note", label: "借入返済とつなげる（補足）" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
+  { id: "resources", label: "参考・相談先" },
 ];
 
-/** 取り組み順の判断表の行 */
-const comparisonRows = [
-  { item: "サブスク", ease: "◎", amount: "△", life: "小", priority: "1" },
-  { item: "スマホ・通信費", ease: "◎", amount: "○", life: "小", priority: "2" },
-  { item: "保険", ease: "○", amount: "○", life: "中", priority: "3" },
-  { item: "電気・ガス", ease: "○", amount: "△", life: "小", priority: "4" },
-  { item: "家賃・車", ease: "△", amount: "◎", life: "大", priority: "5" },
+/** 一覧表：着手の優先度は「小さくても続けやすい順」を重視 */
+const checklistRows: {
+  item: string;
+  ease: string;
+  amount: string;
+  life: string;
+  priority: string;
+}[] = [
+  {
+    item: "サブスク",
+    ease: "高",
+    amount: "1件は小さくても、複数で積み上がりやすい",
+    life: "小",
+    priority: "1",
+  },
+  {
+    item: "スマホ・通信費",
+    ease: "高",
+    amount: "中〜大（プラン次第）",
+    life: "小",
+    priority: "2",
+  },
+  {
+    item: "保険",
+    ease: "中",
+    amount: "中〜大（見直し方次第）",
+    life: "中",
+    priority: "3",
+  },
+  {
+    item: "電気・ガス・その他契約",
+    ease: "中",
+    amount: "中程度（継続しやすい）",
+    life: "小〜中",
+    priority: "4",
+  },
+  {
+    item: "家賃・車などの大物",
+    ease: "やや低",
+    amount: "大になりやすい",
+    life: "大",
+    priority: "5",
+  },
 ];
+
+function ItemBlock({
+  title,
+  id,
+  check,
+  guide,
+  skip,
+}: {
+  title: string;
+  id: string;
+  check: string[];
+  guide: string;
+  skip: string;
+}) {
+  return (
+    <div id={id} className="scroll-mt-24">
+      <h3 className="text-base font-semibold text-stone-900 md:text-lg">{title}</h3>
+      <p className="mt-2 text-sm font-medium text-stone-700">確認すること</p>
+      <ul className="mt-1.5 list-disc pl-5 space-y-1 text-stone-800">
+        {check.map((c) => (
+          <li key={c}>{c}</li>
+        ))}
+      </ul>
+      <p className="mt-3 text-sm font-medium text-stone-700">判断の目安</p>
+      <p className="mt-1 text-stone-700 leading-relaxed">{guide}</p>
+      <p className="mt-3 text-sm font-medium text-stone-700">すぐやらなくていいケース</p>
+      <p className="mt-1 text-stone-700 leading-relaxed">{skip}</p>
+    </div>
+  );
+}
 
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}
 
-      
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-checklist")}>
-<div className="ds-card ds-card-pad">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-          <p className="mt-4 text-base text-stone-600 leading-relaxed">
-            私も固定費を見直したいと思ったものの、「どこから削るべきか」がわからず手が止まりました。一度見直せば効果が続きやすいのが固定費の強みなので、だからこそ<strong>何から・どういう順番で</strong>見直すかを「すぐ変えられて続く」順に整理したチェックリストで解説します。
-          </p>
-
-          <ArticleStandardBlocks slug="fixed-cost-checklist" />
-
-          <section id="premise" className="mt-6">
-            <ArticlePagePremise
-            comparisonConditions={[
-              "固定費を「見直しやすさ」「削減額の大きさ」「生活への影響」の3軸で考える",
-              "「最も金額が大きいもの」からではなく、「取り組みやすく効果が続くもの」から始める前提で並べている",
-            ]}
-            reasonForConditions="読者が最初に挫折しない方が、実際の改善につながるためです。いきなり家賃や車から手をつけると止まりやすいので、まず着手しやすい項目で成功体験を積んでから大物に進む順番を重視しています。"
-            />
+          <section id="intro" className="mt-5 text-base text-stone-700 leading-relaxed">
+            <p>
+              固定費は一度見直すと効果が続きやすい一方、「どこから手をつけるか」で止まりがちです。この記事では、
+              <strong>挫折しにくい順番</strong>
+              と、項目ごとの
+              <strong>確認・判断・様子見でよいとき</strong>
+              を一覧にしました。詳しい進め方は
+              <Link href="/articles/fixed-cost-guide" className="font-semibold text-emerald-900 underline">
+                固定費見直しの進め方
+              </Link>
+              とあわせてどうぞ。
+            </p>
           </section>
 
-          <section className="mt-6 ds-subcard p-4">
+          <section className="mt-6 ds-subcard p-4 not-prose">
             <h2 className="text-base font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
@@ -146,250 +201,227 @@ export default function Page() {
 
           <ArticleProse className="mt-8 space-y-10">
             <section id="conclusion">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
-                結論｜固定費見直しは「すぐ変えやすいもの」から始める
-              </h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">結論｜何から始めるべきか</h2>
               <p className="mt-3">
-                私がうまくいったのは、固定費見直しは<strong>すぐ変えやすいものから始める</strong>ときです。おすすめの順番は次のとおりです。
+                おすすめは、<strong>すぐ変えやすいものから</strong>です。金額だけが大きい順（家賃・保険など）ではなく、手続きの負担と生活への影響のバランスで並べています。
               </p>
-              <ol className="mt-3 list-decimal pl-5 space-y-1">
-                <li>サブスク（使っていない・重複しているものの解約）</li>
-                <li>スマホ・通信費（プラン見直し・格安への切替）</li>
-                <li>保険（内容確認・重複保障の整理）</li>
-                <li>電気・ガスなどの契約（会社・プラン・オプション見直し）</li>
-                <li>家賃や車などの大物（効果は大きいが、すぐ動きにくい）</li>
+              <ol className="mt-3 list-decimal pl-5 space-y-1 text-stone-800">
+                <li>サブスク</li>
+                <li>スマホ・通信費</li>
+                <li>保険（内容を確認したうえで）</li>
+                <li>電気・ガスなどの契約</li>
+                <li>家賃・車などの大物</li>
               </ol>
-              <p className="mt-3">
-                この順番にしている理由は、効果の大きさだけでなく、<strong>見直しの難易度と生活への影響のバランス</strong>が違うからです。最初から家賃や車に手をつけると負荷が高く、途中で止まりがちです。サブスクや通信費なら「今月から変えられる」ものが多く、小さくても改善を実感しやすいため、続けやすくなります。
-              </p>
             </section>
 
-            <section id="reading-points">
-              <ArticleReadingPoints
-                points={[
-                  {
-                    label: "月額の大きさだけで判断しない",
-                    body: "家賃や保険は月額が大きいですが、すぐ変えにくく、生活への影響も大きいです。まずは「すぐやめられるか」「一度見直したあと継続しやすいか」を基準に並べています。",
-                  },
-                  {
-                    label: "すぐやめられるか・継続しやすいか",
-                    body: "解約やプラン変更が手軽なものから手をつけると、挫折しにくく、実際に削減が続きやすくなります。",
-                  },
-                  {
-                    label: "生活満足度を下げすぎないか",
-                    body: "削減額だけを追うと、必要なものまで切ってしまい、後から戻すことになりがちです。生活への影響が小さいものから優先する考え方で整理しています。",
-                  },
-                  {
-                    label: "改善額は年間で見るとわかりやすい",
-                    body: "月3,000円の削減でも、1年で36,000円になります。月額だと小さく見えがちなので、年間・複数年で見ると効果のイメージがつきやすくなります。",
-                  },
-                ]}
-                misconceptions={[
-                  "私も最初は「固定費は金額が大きい順に削る」と思ってました。でも、家賃・保険から手をつけると止まりやすく、実際の改善につながりにくいことがあります。",
-                  "「削れる金額が少ないから意味がない」と感じがちですが、固定費削減は継続しやすさが重要で、小さくても続く方が総額では大きくなります。",
-                ]}
-              />
-            </section>
-
-            <section id="checklist">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">固定費見直しチェックリスト</h2>
+            <section id="checklist-table">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">3分で使える固定費見直しチェックリスト</h2>
               <p className="mt-3">
-                以下は、<strong>取り組み順の判断</strong>をしやすくするための一覧です。金額順のランキングではなく、「何から手をつけるか」の目安として使ってください。詳しい進め方は
-                <Link href="/articles/fixed-cost-guide" className="font-bold text-stone-900 hover:underline">固定費見直しの進め方</Link>
-                でも整理しています。
+                下表は「金額ランキング」ではなく、<strong>何から手をつけるか</strong>の目安です。見直しやすさ・削減のなりやすさ・生活への影響を並べ、右端の数字が小さいほど先に検討しやすい順です。
               </p>
 
-              <div className="mt-4 overflow-x-auto">
-                <table className="w-full min-w-[420px] border-collapse text-sm">
+              <div className="not-prose mt-4 overflow-x-auto rounded-xl border border-stone-200 shadow-sm">
+                <table className="w-full min-w-[640px] border-collapse text-sm md:text-base">
+                  <caption className="sr-only">
+                    固定費の項目ごとに、見直しやすさ・削減額のなりやすさ・生活への影響・優先して検討する順を示した表
+                  </caption>
                   <thead>
-                    <tr className="border-b-2 border-stone-300 bg-stone-100">
-                      <th className="py-2 px-3 text-left font-semibold text-stone-900">項目</th>
-                      <th className="py-2 px-3 text-center font-semibold text-stone-900">見直しやすさ</th>
-                      <th className="py-2 px-3 text-center font-semibold text-stone-900">削減額の大きさ</th>
-                      <th className="py-2 px-3 text-center font-semibold text-stone-900">生活への影響</th>
-                      <th className="py-2 px-3 text-center font-semibold text-stone-900">先にやるべき度</th>
+                    <tr className="border-b border-stone-200 bg-stone-100">
+                      <th scope="col" className="py-3 px-3 text-left font-semibold text-stone-900">
+                        項目
+                      </th>
+                      <th scope="col" className="py-3 px-2 text-center font-semibold text-stone-900">
+                        見直しやすさ
+                      </th>
+                      <th scope="col" className="py-3 px-2 text-center font-semibold text-stone-900">
+                        削減額の目安
+                      </th>
+                      <th scope="col" className="py-3 px-2 text-center font-semibold text-stone-900">
+                        生活への影響
+                      </th>
+                      <th scope="col" className="py-3 px-2 text-center font-semibold text-stone-900">
+                        先にやる度
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {comparisonRows.map((row, i) => (
-                      <tr key={i} className="border-b border-stone-200">
-                        <td className="py-2 px-3 font-bold text-stone-800">{row.item}</td>
-                        <td className="py-2 px-3 text-center text-stone-700">{row.ease}</td>
-                        <td className="py-2 px-3 text-center text-stone-700">{row.amount}</td>
-                        <td className="py-2 px-3 text-center text-stone-700">{row.life}</td>
-                        <td className="py-2 px-3 text-center font-bold text-stone-900">{row.priority}</td>
+                    {checklistRows.map((row) => (
+                      <tr key={row.item} className="border-b border-stone-100 odd:bg-white even:bg-stone-50/60">
+                        <th scope="row" className="py-3 px-3 text-left font-semibold text-stone-900">
+                          {row.item}
+                        </th>
+                        <td className="py-3 px-2 text-center text-stone-800">{row.ease}</td>
+                        <td className="py-3 px-2 text-center text-stone-800">{row.amount}</td>
+                        <td className="py-3 px-2 text-center text-stone-800">{row.life}</td>
+                        <td className="py-3 px-2 text-center font-bold tabular-nums text-emerald-900">{row.priority}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="mt-2 text-xs text-stone-500">
-                ◎＝高い／大、○＝中程度、△＝低い／小。先にやるべき度は、このページの「着手しやすさ＋続けやすさ」を重視した順番です。
+              <p className="mt-3 text-xs text-stone-500">
+                「先にやる度」は1が最優先の検討順です。家賃・車は金額は大きいですが、手続きや生活変化も大きいため後ろに置いています。
               </p>
+            </section>
 
-              <div className="mt-8 space-y-8">
-                <div>
-                  <h3 className="text-base font-semibold text-stone-900">A. サブスク</h3>
-                  <ul className="mt-2 list-disc pl-5 space-y-1">
-                    <li>使っていないものがないか</li>
-                    <li>何となく続けているものがないか</li>
-                    <li>代替できるもの（無料や安いサービス）がないか</li>
-                  </ul>
-                  <p className="mt-2">
-                    解約や一時停止が比較的簡単で、<strong>まず着手しやすい</strong>のがサブスクです。複数契約していると月額の合計が意外と大きくなっていることがあるので、一覧にして「本当に使っているか」から確認するのがおすすめです。
-                  </p>
-                </div>
+            <section id="items">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">項目別の見直しポイント</h2>
 
-                <div>
-                  <h3 className="text-base font-semibold text-stone-900">B. スマホ・通信費</h3>
-                  <ul className="mt-2 list-disc pl-5 space-y-1">
-                    <li>現在の料金プランが過剰でないか（データ量・通話）</li>
-                    <li>格安プランへの切替余地</li>
-                    <li>自宅回線（光・Wi-Fi）との重複やセット割の見直し</li>
-                  </ul>
-                  <p className="mt-2">
-                    契約変更は手続きが必要ですが、一度見直すと<strong>効果が出やすく、継続しやすい</strong>です。スマホと自宅回線をセットで見直すと、削減額がまとまって見えやすくなります。
-                  </p>
-                </div>
+              <div className="mt-6 space-y-10">
+                <ItemBlock
+                  id="item-subs"
+                  title="サブスク"
+                  check={[
+                    "使っていない・名前だけ残っている契約がないか",
+                    "同じ用途のサービスが重複していないか",
+                    "無料や安い代替で足りるものがないか",
+                  ]}
+                  guide="解約や一時停止が比較的簡単で、まず手を付けやすいです。一覧に出してから「本当に使っているか」を見ると抜けが減ります。"
+                  skip="生活や仕事でそのサービスが不可欠なときは、解約よりプラン変更や頻度の見直しからでも構いません。"
+                />
 
-                <div>
-                  <h3 className="text-base font-semibold text-stone-900">C. 保険</h3>
-                  <ul className="mt-2 list-disc pl-5 space-y-1">
-                    <li>内容を理解しないまま入っていないか</li>
-                    <li>重複保障がないか（同じような補償が複数）</li>
-                  </ul>
-                  <p className="mt-2">
-                    保険は<strong>安易に削るのではなく、保障内容を確認したうえで慎重に</strong>見直す必要があります。必要以上の保障を減らすことで月額を下げられる一方、削りすぎるといざというときに困るので、自分で判断しづらい場合は相談窓口や専門家の助言も検討してください。
-                  </p>
-                </div>
+                <ItemBlock
+                  id="item-mobile"
+                  title="スマホ・通信費"
+                  check={[
+                    "データ量・通話が過剰になっていないか",
+                    "格安プランやセット割に切り替えられる余地はないか",
+                    "自宅回線（光・Wi-Fi）とスマホの重複や、まとめて安くなる条件がないか",
+                  ]}
+                  guide="一度変えると効果が続きやすく、スマホと自宅回線をセットで見ると削減額がまとまって見えやすいです。"
+                  skip="引っ越し直後や契約縛りが厳しい時期は、更新月をメモして次のタイミングに回してよいです。"
+                />
 
-                <div>
-                  <h3 className="text-base font-semibold text-stone-900">D. 電気・ガス・その他契約</h3>
-                  <ul className="mt-2 list-disc pl-5 space-y-1">
-                    <li>契約会社やプランの見直し（乗り換え・従量制など）</li>
-                    <li>使っていないオプションの解約</li>
-                  </ul>
-                  <p className="mt-2">
-                    単品の月額は中くらいでも、<strong>一度見直すと継続効果がある</strong>分野です。契約更新タイミングでまとめて見直すと手間が少なく済みます。
-                  </p>
-                </div>
+                <ItemBlock
+                  id="item-insurance"
+                  title="保険"
+                  check={[
+                    "保障内容を説明できるか（何にいくら入っているか）",
+                    "同じような補償が複数に重なっていないか",
+                  ]}
+                  guide="削るというより「必要以上を減らす」イメージです。医療・生命・損害など、家族構成の変化があれば設計ごと見直す価値があります。"
+                  skip="内容が複雑で不安が残るときは、無理に削らず相談窓口や専門家の助言を検討した方がよいです。"
+                />
 
-                <div>
-                  <h3 className="text-base font-semibold text-stone-900">E. 家賃・車などの大物</h3>
-                  <p className="mt-2">
-                    効果は大きいですが、<strong>すぐ動きにくく、難易度が高い</strong>ため、最初の一手としては負荷が重くなりがちです。転居・車の乗り換えや維持費の見直しは、上記のサブスク・通信費・保険などで「見直しの感覚」をつかんでから取り組むと、現実的に続きやすくなります。長期では非常に効く可能性があるので、タイミングが来たら検討するのがおすすめです。
-                  </p>
-                </div>
+                <ItemBlock
+                  id="item-utility"
+                  title="電気・ガス・その他契約"
+                  check={[
+                    "契約プランや会社の乗り換え・見直し余地はないか",
+                    "使っていないオプションが付いていないか",
+                  ]}
+                  guide="月単体では中くらいでも、継続効果があります。更新タイミングでまとめて見ると手間が少なく済みます。"
+                  skip="設備の状態や地域によって選べる会社が限られる場合は、比較に時間をかけず一度保留してよいです。"
+                />
+
+                <ItemBlock
+                  id="item-big"
+                  title="家賃・車などの大物"
+                  check={[
+                    "転居・車の乗り換え・維持費を含めたトータルで無理がないか",
+                  ]}
+                  guide="効果は大きい一方、判断と準備に時間がかかります。上記で見直しの感覚がついたあとに検討すると、現実的に進めやすいです。"
+                  skip="すぐに転居や売却が難しいときは、他の項目で浮かせた分を返済や貯蓄に回すだけでも十分意味があります。"
+                />
               </div>
             </section>
 
             <section id="order-reason">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">順番でやる理由</h2>
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">この順番にしている理由</h2>
               <p className="mt-3">
-                固定費見直しは、<strong>いきなり大物から入ると止まりやすい</strong>傾向があります。家賃や車は変更のハードルが高く、検討しているうちに疲れてやめてしまうことも少なくありません。一方で、小さくてもすぐ改善できるものから始めると、「今月から変わった」と実感しやすく、次の項目にも手が伸びやすくなります。このページでは、読者が挫折しにくい順番を重視して並べています。
+                理由はシンプルで、<strong>いきなり大物から入ると止まりやすい</strong>からです。家賃や車は金額は大きいですが、転居や売却など動きが重く、検討の途中で疲れて終わることがあります。
+              </p>
+              <p className="mt-3">
+                一方、サブスクや通信費は「今月から動かせる」ものが多く、小さくても<strong>減った実感</strong>が出やすいです。その成功体験があると、保険や光熱費など、少し手間のかかる項目にも手が伸びます。
+              </p>
+              <p className="mt-3">
+                月額だけを追うと必要なものまで切りがちなので、生活への影響が小さいところから優先する考え方にしています。金額の大小だけで並べていません。
               </p>
             </section>
 
-            <section id="impact-view">
+            <section id="impact">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月5,000円・1万円改善の見え方</h2>
               <p className="mt-3">
-                固定費削減は、月額で見ると「数千円」と小さく感じがちです。しかし<strong>年間で見ると差が大きい</strong>です。月5,000円の削減なら1年で6万円、月1万円なら12万円になります。3年・5年続けたときの合計をイメージすると、見直しのモチベーションにもつながります。
+                月5,000円は年間6万円、月1万円は年間12万円です。<strong>月額だと小さく見えても、年や数年で見ると差がはっきり</strong>します。モチベーションを維持するには、累計でイメージするのがおすすめです。
               </p>
-              <p className="mt-3">
-                自分の「月いくら削減したら、1年・3年・5年でいくらになるか」は、
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
-                でその場で試算できます。数字で確認すると理解しやすいので、チェックリストで見直し項目を洗い出したあとに、ぜひ試してみてください。
-              </p>
-              <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-base text-stone-700">
-                  毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
+            </section>
+
+            <section id="cta-impact" className="not-prose">
+              <div className="rounded-xl border-2 border-emerald-200/80 bg-emerald-50/50 p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-stone-900">自分の条件で試算する（主におすすめ）</h2>
+                <p className="mt-2 text-base text-stone-700 leading-relaxed">
+                  毎月いくら削減できたとしたとき、1年・3年・5年で合計いくらになるかを、その場で試せます。固定費見直しの「続いたときの効果」を数字で押さえるなら、まずこちらです。
                 </p>
-                <Link
+                <TrackedLink
                   href="/tools/fixed-cost-impact"
-                  className="ds-btn ds-btn-primary mt-4"
+                  className="ds-btn ds-btn-primary mt-5 inline-flex"
+                  event={{
+                    action: "click_article_primary_cta",
+                    location: "article_body",
+                    target: "/tools/fixed-cost-impact",
+                    link_type: "fixed_cost_impact",
+                    source_article_slug: "fixed-cost-checklist",
+                  }}
                 >
                   固定費削減インパクトを計算する →
-                </Link>
+                </TrackedLink>
+                <p className="mt-4 text-sm text-stone-600">
+                  手順の全体像は
+                  <Link href="/articles/fixed-cost-guide" className="font-semibold text-emerald-900 underline">
+                    固定費見直しの進め方
+                  </Link>
+                  で補足しています（補助の導線）。
+                </p>
               </div>
             </section>
 
-            <section id="loan-link">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入返済とつなげる補足</h2>
+            <section id="repayment-note">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借入返済とつなげる（補足）</h2>
               <p className="mt-3">
-                固定費を見直して浮いたお金は、借入の返済や貯蓄にも回せます。生活改善と返済改善は別の話ではなく、<strong>つながっている</strong>と考えてよいです。無理のない月々の負担を考える視点として、
-                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
-                で「月いくら返済できるか」「返済期間をどうするか」を試すと、固定費削減で浮いた分をどう使うかの判断材料になります。このページの主役はあくまで固定費見直しですが、返済中の方はシミュレーターとあわせて考えると、全体の負担の見え方が変わります。
+                浮いたお金を返済に回す場合は、
+                <Link href="/simulator/cardloan" className="font-semibold text-stone-900 underline">
+                  借入返済シミュレーター
+                </Link>
+                で月々の返済や期間のイメージをつかむと、固定費削減の効果が全体の中でどう効くか見えやすくなります。こちらは補助的な導線です。
               </p>
-            </section>
-
-            <section id="editor-memo">
-              <ArticleEditorMemo
-                purpose="読者に「何が一番削れるか」だけでなく、「何から始めると改善が続くか」に目線が移るように、私がこの順番にしました。"
-                reasonAxis="金額の大きさより、着手しやすさと続けやすさを優先しています。固定費は、最初の1〜2項目で小さくでも成功体験が作れると、そのあと大物も動かしやすいと思っています。"
-                memo="まずはサブスク・通信費あたりを一度片付けて、そのあと保険・光熱費・家賃・車に進む流れで整理しています。"
-              />
             </section>
 
             <section id="faq">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">よくある質問</h2>
-              <dl className="mt-4 space-y-4">
-                <div>
-                  <dt className="font-bold text-stone-900">固定費見直しは何から始めるべきですか？</dt>
-                  <dd className="mt-1 text-stone-700">
-                    このページでは、すぐ変えやすい「サブスク」から始めることをおすすめしています。使っていないものの解約や一時停止は手軽にでき、小さくても改善を実感しやすいため、その後の通信費・保険などの見直しにもつなげやすくなります。
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-bold text-stone-900">固定費はどれくらい削れますか？</dt>
-                  <dd className="mt-1 text-stone-700">
-                    人によって異なりますが、サブスク・通信費・保険・光熱費などを総合的に見直すと、月5,000円〜1万円程度の削減が見込めるケースも少なくありません。削減額は
-                    <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
-                    で、1年・3年・5年でいくらになるかを確認できます。
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-bold text-stone-900">家賃や保険を先に見直すべきですか？</dt>
-                  <dd className="mt-1 text-stone-700">
-                    金額は大きいですが、家賃は転居、保険は保障内容の理解が必要で、すぐには変えにくいです。このページでは、挫折しにくい順番として「サブスク → 通信費 → 保険 → 電気・ガス等 → 家賃・車」の順を推奨しています。まず着手しやすい項目で成功体験を積んでから、家賃・保険などの大物に進むと続けやすくなります。
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-bold text-stone-900">固定費の見直しにはどれくらい時間がかかりますか？</dt>
-                  <dd className="mt-1 text-stone-700">
-                    サブスクの整理なら30分〜1時間程度で一通り確認できます。通信費のプラン変更は手続き含めて数日、保険の見直しは内容確認に1〜2週間かかることもあります。一度にすべてやる必要はなく、着手しやすいものから順番に進めるのがおすすめです。
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-bold text-stone-900">チェックリストを一通り終えたら次は何をすればいいですか？</dt>
-                  <dd className="mt-1 text-stone-700">
-                    見直し後は、実際にいくら改善できたかを1〜2か月後に確認するのがおすすめです。改善額の累計は固定費削減インパクト計算で試算できます。また、浮いたお金を返済や貯蓄に回す場合は、借入返済シミュレーターで具体的な効果を確認するのも有効です。
-                  </dd>
-                </div>
+              <dl className="mt-4 space-y-5">
+                {faqItems.map((f) => (
+                  <div key={f.question}>
+                    <dt className="font-bold text-stone-900">{f.question}</dt>
+                    <dd className="mt-1.5 text-stone-700 leading-relaxed">{f.answer}</dd>
+                  </div>
+                ))}
               </dl>
             </section>
 
             <section id="summary">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
-              <ul className="mt-3 list-disc pl-5 space-y-1">
-                <li>固定費見直しは、金額だけでなく<strong>始めやすさ・続けやすさ</strong>で順番を決めるのがおすすめです。</li>
-                <li>最初はサブスクや通信費など、着手しやすいものから始めると、挫折しにくく改善が続きやすいです。</li>
-                <li>効果は月額より<strong>年間で見ると</strong>大きいので、イメージしづらいときは年間・複数年で考えてみてください。</li>
-                <li>自分の改善額は
-                  <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
-                  で確認できます。
-                </li>
-                <li>借入返済など他の固定負担も含めて考えたい方は、
-                  <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
-                  や
-                  <Link href="/articles" className="font-bold text-stone-900 hover:underline">記事一覧</Link>
-                  の関連記事もあわせてご覧ください。
-                </li>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-stone-800">
+                <li>固定費は、<strong>始めやすさと続けやすさ</strong>で順番を決めると挫折しにくいです。</li>
+                <li>まずはサブスク・通信のように手続きが軽いところから、必要なら保険・光熱・大物へ。</li>
+                <li>効果は<strong>年間・複数年</strong>で見るとイメージしやすいです。</li>
+                <li>削減額の累計は固定費削減インパクト計算、返済との関係は借入返済シミュレーターで確認できます。</li>
               </ul>
+            </section>
+
+            <section id="resources" className="not-prose">
+              <h2 className="text-lg font-semibold text-stone-900">参考・相談先</h2>
+              <p className="mt-3 text-base text-stone-700 leading-relaxed">
+                借入や生活の判断で迷うときは、公的な相談窓口の利用も検討してください。一覧は次のページにまとめています。
+              </p>
+              <p className="mt-2">
+                <Link href="/resources/consultation-guide" className="font-semibold text-emerald-900 underline">
+                  相談先・公的支援の一覧へ →
+                </Link>
+              </p>
             </section>
           </ArticleProse>
 
-          <ArticleFooter articleSlug="fixed-cost-checklist" />
+          <ArticleFooter articleSlug="fixed-cost-checklist" showCta={false} />
         </div>
       </ArticlePageShell>
     </>

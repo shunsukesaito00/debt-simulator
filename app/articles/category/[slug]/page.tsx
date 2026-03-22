@@ -43,15 +43,14 @@ export default async function CategoryPage({ params }: Props) {
   const label = CATEGORY_LABELS[cat];
   const desc = CATEGORY_DESCRIPTIONS[cat];
 
-  const showQuickReference = (
-    [
-      "loan-amount",
-      "repayment-method",
-      "revolving",
-      "repayment-planning",
-      "repayment-improvement",
-    ] as const satisfies readonly ArticleCategory[]
-  ).includes(cat);
+  const quickRefCategories: ArticleCategory[] = [
+    "loan-amount",
+    "repayment-method",
+    "revolving",
+    "repayment-planning",
+    "repayment-improvement",
+  ];
+  const showQuickReference = quickRefCategories.includes(cat);
 
   return (
     <div className="mx-auto max-w-3xl">

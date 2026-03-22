@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticleEditorMemo, ArticleFurtherReading, ArticleProse } from "@/app/components/article";
+import { ArticleFurtherReading, ArticleProse } from "@/app/components/article";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
 import { getArticleBreadcrumbJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
@@ -14,19 +14,19 @@ const metaArticle = getArticle(SLUG)!;
 
 const BASE = getSiteBaseUrl();
 const ARTICLE_URL = `${BASE}/articles/${SLUG}`;
-const ARTICLE_TITLE = "借金に気づいたときの話｜明細を見て初めて分かった金額";
+const ARTICLE_TITLE = "後から冷静に考えて初めて実感した借金額の大きさ｜一覧にして分かった重さ";
 const publishedAt = metaArticle.publishedAt ?? "2025-01-01";
 const modified = getArticleLastModifiedIso(metaArticle) ?? publishedAt;
 
 export const metadata: Metadata = {
   title: ARTICLE_TITLE,
   description:
-    "「借金がある」は分かっていても、総額は分かっていなかった。通帳と明細を並べて初めて重さを数字で認識した個人の記録。投資助言・借入勧誘ではありません。",
+    "借金があることは分かっていても、総額の重さはその場では実感できなかった。引き落としと明細に追われる日々のあと、一覧にして初めて輪郭が見えた個人の体験記。投資助言・借入勧誘ではありません。",
   alternates: { canonical: ARTICLE_URL },
   openGraph: {
     title: ARTICLE_TITLE,
     description:
-      "別々の支払いが頭の中で分断されていた。引き落とし前に明細を並べ、逃げ場のなさを数字で知った日の話です。",
+      "目の前の資金繰りに頭がいっぱいで全体が見えなかった。後から冷静に並べたとき、初めて借金額の大きさが現実としてのしかかってきた話です。",
     url: ARTICLE_URL,
     type: "article",
   },
@@ -37,7 +37,7 @@ const jsonLd = {
   "@type": "Article",
   headline: ARTICLE_TITLE,
   description:
-    "借金の全体像を数字で初めて認識した個人の体験記。投資助言・借入勧誘ではありません。",
+    "借金の総額を後から一覧化して初めて実感した個人の体験記。投資助言・借入勧誘ではありません。",
   url: ARTICLE_URL,
   datePublished: publishedAt,
   dateModified: modified,
@@ -50,19 +50,16 @@ const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
 const tocItems = [
   { id: "intro", label: "導入" },
   { id: "notice", label: "この記事について" },
-  { id: "message", label: "この記事で伝えたいこと" },
-  { id: "slight-discomfort", label: "最初は「少し苦しい」くらいの感覚だった" },
-  { id: "causes", label: "借金が増えた原因は、ひとつではなかった" },
-  { id: "before-awareness", label: "気づく前は、全体を見ないまま回していた" },
-  { id: "realization-day", label: "明細を並べた日に、ようやく現実が見えた" },
-  { id: "no-escape", label: "いちばんきつかったのは、総額より「逃げ場のなさ」だった" },
-  { id: "why-late", label: "なぜもっと早く気づけなかったのか" },
-  { id: "first-steps", label: "そこから最初にやったこと" },
-  { id: "turning-point", label: "今振り返ると、気づいた日は「終わり」ではなく「始まり」だった" },
+  { id: "tunnel-vision", label: "そのときは、数字より「今月を回すこと」しか見えていなかった" },
+  { id: "avoidance", label: "その場では、借金の大きさを直視できていなかった" },
+  { id: "after-list", label: "後から一覧にして、初めて重さが分かった" },
+  { id: "why-not-then", label: "なぜその場で実感できなかったのか" },
+  { id: "time-not-amount", label: "いちばんきつかったのは、額そのものより時間の長さだった" },
+  { id: "regret-earlier", label: "もっと早く全体を見ていれば、と思った" },
+  { id: "now-numbers", label: "今は、感覚ではなく数字で見るようにしている" },
   { id: "for-readers", label: "同じような状況の人へ" },
   { id: "simulator", label: "自分の条件で試算する" },
   { id: "resources", label: "参考・相談先" },
-  { id: "editor-memo", label: "編集メモ" },
 ];
 
 export default function Page() {
@@ -83,19 +80,19 @@ export default function Page() {
           <ArticleProse className="mt-6 space-y-10">
             <section id="intro" className="space-y-4">
               <p>
-                「借金がある」とは、なんとなく分かっていました。
-                でも、いくらあるのかを本当に分かっていたかというと、分かっていませんでした。
+                借金があること自体は、当時の自分も分かっていました。カードの請求もある。キャッシング残高もある。株式投資やFXで減らした分を埋めようとして、生活のお金まで崩れている感覚もある。だから、「まずい状態に入っている」という自覚はありました。
               </p>
               <p>
-                カードの請求、キャッシング、投資で減った分を埋めるために使ったお金。
-                それぞれは頭の中で別の箱に入っていて、私はずっと「今月を回せているなら、まだ何とかなる」と思っていました。
+                でも、その<strong>重さを本当に実感していたか</strong>というと、していなかったと思います。
               </p>
               <p>
-                実際に危機感が出たのは、ある月の引き落とし前に、通帳残高とカード明細をまとめて見たときです。
-                そのとき初めて、自分が抱えている金額が、想像していたよりずっと重いことを理解しました。
+                当時の自分は、毎月の支払いと、その場その場の資金繰りに頭がいっぱいで、全体をちゃんと見ていませんでした。今月の引き落としをどうするか。給料日までどうつなぐか。このカードの支払いは何とかなるか。そういう目の前のことばかり考えていて、借金全体がどれだけ大きくなっているかを、冷静に受け止める余裕がありませんでした。
               </p>
               <p>
-                これは、借金に気づいた“瞬間”というより、見ないままにしていた現実を、数字でようやく認識したときの話です。
+                本当に「重い」と実感したのは、その最中ではなく、<strong>後から冷静に並べて見たとき</strong>でした。
+              </p>
+              <p>
+                この記事は「いつ借金があると気づいたか」ではなく、<strong>後から整理して、初めて借金額の大きさを実感した</strong>という話です。
               </p>
             </section>
 
@@ -129,251 +126,191 @@ export default function Page() {
               </ul>
             </section>
 
-            <section id="message" className="space-y-4">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">この記事で伝えたいこと</h2>
-              <p>この体験から残ったのは、主に3つです。</p>
+            <section id="tunnel-vision" className="space-y-4">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
+                そのときは、数字より「今月を回すこと」しか見えていなかった
+              </h2>
+              <p>
+                借金が増えていた頃は、毎日何かしらの支払いのことを考えていました。
+              </p>
               <ul className="list-disc pl-5 space-y-2 text-stone-800">
-                <li>借金は、1回で大きく増えるより、別々の支払いが積み重なって見えなくなることがある</li>
-                <li>「毎月払えている」ことと、「全体を把握できている」ことは別だった</li>
-                <li>苦しくなったあとに必要だったのは、気合いより先に、明細と残高を全部並べることだった</li>
+                <li>今月のカード請求はいくらか</li>
+                <li>引き落とし日までに口座へいくら残しておく必要があるか</li>
+                <li>生活費をどこまで削れば足りるか</li>
+                <li>次の給料日まで何とか持つか</li>
               </ul>
               <p>
-                この記事は、正解の手順を示すものではありません。
-                ただ、私のように「なんとなく苦しい」のに全体が見えていない人には、ひとつの参考になるかもしれません。
+                こういうことばかり考えていたので、頭の中では借金がひとつの大きな塊ではなく、細かい支払いの集まりになっていました。
               </p>
-            </section>
-
-            <section id="slight-discomfort">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
-                最初は「少し苦しい」くらいの感覚だった
-              </h2>
-              <p className="mt-3">
-                借金に気づく前から、生活は少しずつ苦しくなっていました。
-                でもその頃の感覚は、「もう終わりだ」というほどではありませんでした。
-              </p>
-              <ul className="mt-3 list-disc pl-5 space-y-2 text-stone-800">
-                <li>カードの引き落としが少し重い</li>
-                <li>ボーナスが入ったら調整できる気がする</li>
-                <li>給料日が来ればいったん立て直せる</li>
-                <li>今月だけしのげば、来月はもう少しましになるかもしれない</li>
-              </ul>
-              <p className="mt-3">そんなふうに考えていました。</p>
-              <p className="mt-3">
-                今思うと、その時点でかなり危ない見方でした。
-                でも当時の私は、総額ではなく今月いくら出ていくかしか見ていませんでした。
-              </p>
-            </section>
-
-            <section id="causes">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">借金が増えた原因は、ひとつではなかった</h2>
-              <p className="mt-3">
-                私の場合、借金が増えた理由はひとつではありませんでした。
-              </p>
-              <p className="mt-3">
-                最初に大きかったのは、投資で減った分を取り返そうとして、手元資金を崩したことです。
-                さらに、生活費やカード払いを補うために、キャッシングや
+              <p>
+                カードの残高。キャッシング。
                 <Link href="/articles/story-revolving-spiral" className="font-semibold text-emerald-900 underline">
                   リボ払い
                 </Link>
-                のような“その月をしのぐ手段”を使う場面が増えました。
+                。生活費の不足。投資で減った資金。本当は全部つながっていたのに、そのときの自分は、別々の問題として処理していました。
               </p>
-              <p className="mt-3">ここで厄介だったのは、それぞれが別の顔をしていたことです。</p>
-              <ul className="mt-3 list-disc pl-5 space-y-2 text-stone-800">
-                <li>投資の損失は「そのうち戻したいお金」</li>
-                <li>カード払いは「買い物の支払い」</li>
-                <li>キャッシングは「一時的な穴埋め」</li>
-                <li>リボ払いは「今月の負担を軽くする手段」</li>
-              </ul>
-              <p className="mt-3">
-                頭の中では別々に管理しているつもりでした。
-                でも実際には、全部まとめて自分の返済負担になっていました。
+              <p>
+                だから「かなり危ない」とは思っていても、「全部合わせるとどれくらいなのか」「このままだと生活全体にどれだけ影響するのか」というところまでは、ちゃんと見ていませんでした。
               </p>
             </section>
 
-            <section id="before-awareness">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">気づく前は、全体を見ないまま回していた</h2>
-              <p className="mt-3">
-                いちばんまずかったのは、全体を見ないまま生活を回していたことです。
-              </p>
-              <p className="mt-3">
-                通帳は見る。
-                <br />
-                カードの請求額も見る。
-                <br />
-                でも、それは「今月落ちる金額」を確認しているだけでした。
-              </p>
-              <p className="mt-3">
-                借入残高はいくらか。
-                <br />
-                手数料や利息を含めて、合計でいくら返すことになるのか。
-                <br />
-                複数の支払いを合わせたら毎月どれくらい出ていくのか。
-              </p>
-              <p className="mt-3">
-                そのあたりを、私はちゃんと数字で並べていませんでした。
-              </p>
-              <p className="mt-3">
-                当時の感覚としては、見ていないというより、見るのが怖かったのだと思います。
-                なんとなく重いことは分かっている。
-                でも、はっきりした数字を見たら、今までの「まだ何とかなる」が崩れる気がしていました。
-              </p>
-            </section>
-
-            <section id="realization-day">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">明細を並べた日に、ようやく現実が見えた</h2>
-              <p className="mt-3">
-                はっきり意識したきっかけは、ある月の引き落とし前でした。
-              </p>
-              <p className="mt-3">
-                口座残高が思ったより少なく、
-                「このままだと足りないかもしれない」と感じて、カード明細と借入残高を一度まとめて確認しました。
-              </p>
-              <p className="mt-3">そのとき初めて、</p>
-              <ul className="mt-2 list-disc pl-5 space-y-2 text-stone-800">
-                <li>このカードでいくら残っているか</li>
-                <li>キャッシング残高がどれくらいあるか</li>
-                <li>リボ払いがどれだけ残っているか</li>
-                <li>毎月の支払いがいくつ重なっているか</li>
-              </ul>
-              <p className="mt-3">を全部、同じ目線で見ることになりました。</p>
-              <p className="mt-3">
-                その瞬間の感覚は、「驚いた」というより、固まったに近かったです。
-              </p>
-              <p className="mt-3">
-                薄々まずいとは思っていたのに、実際の合計を見ると、自分の中の想像を超えていました。
-                そこでやっと、「苦しい」の正体が感情ではなく金額になりました。
-              </p>
-            </section>
-
-            <section id="no-escape">
+            <section id="avoidance" className="space-y-4">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
-                いちばんきつかったのは、総額より“逃げ場のなさ”だった
+                その場では、借金の大きさを直視できていなかった
               </h2>
-              <p className="mt-3">
-                金額を見た瞬間にショックはありました。
-                でも、あとから振り返ると、本当にきつかったのは総額そのものより、逃げ場がない感じだったと思います。
+              <p>
+                今振り返ると、当時の自分は借金を直視していなかったのだと思います。見ていなかった、というより、正確に見たくなかったに近いです。
               </p>
-              <p className="mt-3">
-                来月の給料だけでは埋まらない。
-                <br />
-                ボーナスが入っても、一気に軽くなるわけではない。
-                <br />
-                何かを少し節約したくらいで消える金額でもない。
+              <p>
+                金額をはっきり出したら、もう「まだ何とかなる」と思えなくなる。支払いをひとつずつ見ているうちは動けるけれど、総額で見たら気持ちが止まりそうだった。そういう逃げの感覚が、かなりありました。
               </p>
-              <p className="mt-3">
-                そう分かったときに、初めて「これは気分の問題ではなく、構造の問題なんだ」と思いました。
-              </p>
-              <p className="mt-3">
-                それまでは、頑張ればどうにかなる気がしていました。
-                でも数字を並べたあとは、頑張る方向を変えないと無理だと分かりました。
+              <p>
+                だから、明細は見ても、都合の悪いところは頭の中で少しぼかしていました。残高を見ても、「今月を越えれば少し整理できるかもしれない」と考えていました。危機感はあるのに、現実の輪郭だけははっきりさせない。そんな状態だったと思います。
               </p>
             </section>
 
-            <section id="why-late">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">なぜもっと早く気づけなかったのか</h2>
-              <p className="mt-3">
-                今なら、「もっと早く合計を見ればよかった」と思います。
-                でも当時できなかったのにも理由がありました。
+            <section id="after-list" className="space-y-4">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">後から一覧にして、初めて重さが分かった</h2>
+              <p>
+                あとになって、借入や支払いをまとめて整理したとき、初めて自分の中で感覚が変わりました。
               </p>
-              <p className="mt-3">
-                ひとつは、借金が一気に増えた感じではなかったことです。
-                少しずつ、別々の理由で膨らんだので、危機感が分散しました。
-              </p>
-              <p className="mt-3">
-                もうひとつは、毎月どこかでは支払いができていたことです。
-                払えているうちは、「まだ終わっていない」と思いやすいです。
-              </p>
-              <p className="mt-3">
-                さらに、投資で減った分については、どこかで取り返せるかもしれないという感覚も残っていました。
-                この希望が、現実の把握を遅らせました。
-              </p>
-              <p className="mt-3">
-                要するに私は、
-                <br />
-                借金があることには気づいていたけれど、借金の重さには気づいていなかったのだと思います。
-              </p>
-            </section>
-
-            <section id="first-steps">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">そこから最初にやったこと</h2>
-              <p className="mt-3">
-                借金の全体像が見えたあと、すぐに前向きになれたわけではありません。
-                むしろ、最初はかなり動けませんでした。
-              </p>
-              <p className="mt-3">
-                ただ、ひとつだけ変わったのは、
-                「何となく不安」ではなく「何にいくらあるか」を見ようとしたことです。
-              </p>
-              <ul className="mt-3 list-disc pl-5 space-y-2 text-stone-800">
-                <li>残高を分けて書く</li>
-                <li>毎月の返済額を並べる</li>
-                <li>利率や手数料を確認する</li>
-                <li>生活費と返済を同じ表の上で見る</li>
+              <ul className="list-disc pl-5 space-y-2 text-stone-800">
+                <li>どこからいくら借りているのか</li>
+                <li>毎月いくら返しているのか</li>
+                <li>利息や手数料を含めるとどれくらいになるのか</li>
+                <li>生活費と返済を合わせると、毎月どれだけ出ていくのか</li>
               </ul>
-              <p className="mt-3">
-                この作業は気持ちのいいものではなかったですが、ここをやらないと何も始まらないと感じました。
+              <p>
+                こうして並べてみると、それまで「何となく苦しい」だったものが、はっきりした形になりました。
               </p>
-              <p className="mt-3">
-                今思えば、再出発の最初の一歩は、反省より先に一覧化だったと思います。
+              <p>
+                そのときの感覚は、驚きというより、静かに重さがのしかかってくる感じでした。
+              </p>
+              <p>
+                借金があるのは知っていた。苦しいのも知っていた。でも、それが生活を建て直すにはかなり時間がかかる大きさだと、そこでようやく現実として入ってきました。
+              </p>
+              <p>
+                つまり、借金に気づいていなかったわけではありません。<strong>借金額の大きさを、本当の意味で実感していなかった</strong>のだと思います。
               </p>
             </section>
 
-            <section id="turning-point">
+            <section id="why-not-then" className="space-y-4">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">なぜその場で実感できなかったのか</h2>
+              <p>
+                今なら、その理由も少し分かります。
+              </p>
+              <p>
+                ひとつは、借金が一度にできたわけではなかったことです。少しずつ増えていったので、危機感も少しずつしか上がりませんでした。
+              </p>
+              <p>
+                もうひとつは、毎月どこかでは払えていたことです。ギリギリでも引き落としが通ると、その瞬間だけは「まだ終わっていない」と感じてしまいます。
+              </p>
+              <p>
+                さらに、自分の中にはずっと「どこかで立て直せるかもしれない」「一度整えれば流れを戻せるかもしれない」という期待も残っていました。この期待があるうちは、数字を冷静に見るより先に、希望の方に寄ってしまいます。
+              </p>
+              <p>
+                でも現実には、希望だけで借金は軽くなりませんでした。後から振り返って初めて、あの頃の自分は金額そのものより<strong>「今月をやり過ごすこと」に支配されていた</strong>のだと分かりました。
+              </p>
+            </section>
+
+            <section id="time-not-amount" className="space-y-4">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
-                今振り返ると、気づいた日は“終わり”ではなく“始まり”だった
+                いちばんきつかったのは、額そのものより時間の長さだった
               </h2>
-              <p className="mt-3">
-                その日、明細を見て金額を知ったときは、かなり落ち込みました。
-                正直、もっと早く見ていればという後悔もありました。
+              <p>
+                借金額を整理してみて、つらかったのは金額だけではありませんでした。むしろ重かったのは、これを返していくにはかなり長い時間がかかると分かったことでした。
               </p>
-              <p className="mt-3">
-                でも、今振り返ると、あの日は全部が終わった日ではなく、曖昧だったものがようやく始まった日だったと思っています。
+              <p>
+                大きい金額そのものも苦しいです。でも、現実にはそれを一度に返すことはできません。そうすると問題は、
               </p>
-              <p className="mt-3">
-                見えていない不安は大きくなりやすいです。
-                逆に、見えてしまった現実はしんどいですが、少なくとも整理の入口には立てます。
+              <ul className="list-disc pl-5 space-y-2 text-stone-800">
+                <li>何か月、何年かかるのか</li>
+                <li>その間、生活をどう維持するのか</li>
+                <li>何を諦めて、何を守るのか</li>
+              </ul>
+              <p>
+                という話になります。
               </p>
-              <p className="mt-3">
-                私はそこから、返済や生活費を数字で見るようになりました。
-                まだ途中ですが、少なくとも今は「何が起きているか分からない苦しさ」からは少し離れています。
+              <p>
+                当時の自分は、借金を「今つらい問題」として見ていました。でも冷静に整理したとき、それは「しばらく生活全体に影響し続ける問題」だと分かりました。この気づきはかなり重かったです。
               </p>
             </section>
 
-            <section id="for-readers">
+            <section id="regret-earlier" className="space-y-4">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">もっと早く全体を見ていれば、と思った</h2>
+              <p>
+                後から整理していちばん強く残ったのは、もっと早く全部を並べて見ていればよかったということでした。
+              </p>
+              <p>
+                もちろん、早く見たからといって借金が消えるわけではありません。でも、少なくとも
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-stone-800">
+                <li>現実逃避の時間は短くできたかもしれない</li>
+                <li>支払いの優先順位をもっと早く整理できたかもしれない</li>
+                <li>家族に相談するタイミングも変えられたかもしれない</li>
+                <li>生活を立て直すための動き出しが少し早まったかもしれない</li>
+              </ul>
+              <p>
+                とは思います。
+              </p>
+              <p>
+                感情が追いつかないうちは、数字を見るのは本当にしんどいです。でも、見ないままの不安は、ずっと曖昧に重く残ります。あとから冷静に考えると、あの頃の自分に必要だったのは、根性でも楽観でもなく、まず全体像を出すことだったと思います。
+              </p>
+            </section>
+
+            <section id="now-numbers" className="space-y-4">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
+                今は、感覚ではなく数字で見るようにしている
+              </h2>
+              <p>
+                借金額の大きさを後から実感した経験があってから、今はできるだけ感覚だけで判断しないようにしています。
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-stone-800">
+                <li>残高はいくらか</li>
+                <li>毎月の返済はいくらか</li>
+                <li>金利や手数料はどうなっているか</li>
+                <li>完済までどれくらいかかるか</li>
+                <li>生活費と両立できるか</li>
+              </ul>
+              <p>
+                こういうことを、面倒でも数字にして見るようにしています。
+              </p>
+              <p>
+                きれいに割り切れるわけではありません。落ち込む日もあります。でも少なくとも、昔よりは「何が起きているか分からない不安」には振り回されにくくなりました。
+              </p>
+            </section>
+
+            <section id="for-readers" className="space-y-4">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">同じような状況の人へ</h2>
-              <p className="mt-3">もし今、</p>
-              <ul className="mt-2 list-disc pl-5 space-y-2 text-stone-800">
-                <li>毎月なんとか払っている</li>
-                <li>でも全体の残高ははっきり見ていない</li>
-                <li>なんとなく苦しいが、正確には把握していない</li>
+              <p>
+                もし今、
+              </p>
+              <ul className="list-disc pl-5 space-y-2 text-stone-800">
+                <li>借金はあるが、全体の金額をちゃんと並べていない</li>
+                <li>毎月の支払いに追われて、総額を見る余裕がない</li>
+                <li>何となくまずいと思いながら、細かい支払いだけを見ている</li>
               </ul>
-              <p className="mt-3">
-                という状態なら、まずは一度、明細と残高を全部並べてみる方がいいと思います。
+              <p>
+                という状態なら、一度だけでも全体を整理してみた方がいいと思います。
               </p>
-              <p className="mt-3">
-                見るのは怖いです。
-                <br />
-                私もそうでした。
+              <p>
+                その作業は、気持ちのいいものではありません。私も本当に見たくありませんでした。
               </p>
-              <p className="mt-3">
-                でも、見ないままの不安は長引きやすいです。
-                数字にして初めて、相談するにも、返済計画を考えるにも、生活費を見直すにも、スタート地点ができます。
+              <p>
+                でも、後から冷静に考えると、見ないままでいる時間が長いほど、現実とのズレも大きくなります。借金そのものに苦しむ前に、借金の輪郭が見えていないことで苦しくなることもあります。
+              </p>
+              <p>
+                だからこそ、早い段階で金額の大きさを現実としてつかむことが大事だったと思っています。
               </p>
             </section>
 
             <section id="simulator" className="rounded-xl border border-stone-200/80 bg-stone-50/80 p-5 not-prose">
               <h2 className="text-lg font-semibold text-stone-900">自分の条件で試算する</h2>
               <p className="mt-2 text-base text-stone-700 leading-relaxed">
-                私がこのサイトで返済シミュレーターを置いているのは、「頑張れば何とかなる」という話をしたいからではありません。
-                借入額、金利、返済額を数字にすると、ようやく判断の材料がそろうからです。
+                借入額、金利、返済額を入れて整理すると、感覚だけでは見えなかったものが見えやすくなります。月々の返済額、総利息、完済までの期間を数字で見ると、「何となく重い」が少し具体的になります。
               </p>
               <p className="mt-3 text-base text-stone-700 leading-relaxed">
-                明細を見て重さに気づいたあと、次に必要になるのは、
-                「この条件だと月々いくらか」「総額はいくらになるか」「完済までどれくらいか」を整理することでした。
-              </p>
-              <p className="mt-3 text-base text-stone-700 leading-relaxed">
-                感情だけではなく、数字でも状況を見たいときは、返済シミュレーターを使ってみてください。
-                ページ末尾にも、同じシミュレーターと相談先一覧への導線を置いています。
+                運営者プロフィールにあるとおり、私は株式投資・FXの失敗をきっかけに、最大で約300万円規模の借金を経験しました。一覧にしたあと必要になったのは、このサイトのシミュレーターのように、条件を数字に落として眺める作業でした。
               </p>
               <TrackedLink
                 href="/simulator/cardloan"
@@ -393,24 +330,14 @@ export default function Page() {
             <section id="resources" className="space-y-3">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">参考・相談先</h2>
               <p className="mt-3">
-                借入や返済の判断は、契約内容や状況によって変わります。
-                つらいときは、一人で抱え込まず、公的な相談窓口や専門家の情報も確認してください。
+                借入や返済の判断は、人によって条件がかなり違います。苦しいときは、一人で抱え込まず、公的な相談窓口や専門家の情報もあわせて確認してください。
               </p>
               <p className="mt-3">
                 <Link href="/resources/consultation-guide" className="font-semibold text-emerald-900 underline">
                   相談先・公的支援の一覧
                 </Link>
-                を先に開いておくと整理しやすいです。
-                ページ末尾の「参考・相談先（公的情報）」には、金融庁・日本貸金業協会・法テラス・日本クレジットカウンセリング協会などへの案内もあります。
+                を先に開いておくと整理しやすいです。ページ末尾の「参考・相談先（公的情報）」にも、金融庁・日本貸金業協会・法テラス・日本クレジットカウンセリング協会などへの案内があります。
               </p>
-            </section>
-
-            <section id="editor-memo">
-              <ArticleEditorMemo
-                purpose="「なんとなく苦しい」のに全体が見えない方の、判断材料のひとつになれば幸いです。"
-                reasonAxis="借金の“有無”ではなく、明細と残高で重さを数字として初めて認識した瞬間に焦点を当てています。"
-                memo="気づきがあれば内容を更新していきます。"
-              />
             </section>
           </ArticleProse>
 

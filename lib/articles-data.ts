@@ -20,10 +20,11 @@ export const articlesData: ArticleItem[] = [
     slug: "fixed-cost-checklist",
     title: "固定費見直しチェックリスト｜何から削るか順番で解説",
     summary:
-      "固定費を見直したい人向けに、何から手をつけるべきかを順番で整理したチェックリスト記事です。見直しやすさ・削減額・生活への影響の3軸で比較します。",
+      "何から削るかを一覧表と項目別の確認ポイントで整理した実用チェックリスト。見直しやすさ・削減額の目安・生活への影響・先にやる度で比較し、固定費削減インパクト計算への導線つき。",
     category: "fixed-cost",
     order: 1,
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-22",
     relatedLinks: [
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
       { href: "/tools/fixed-cost-impact", label: "固定費削減インパクトを計算する" },
@@ -146,7 +147,7 @@ export const articlesData: ArticleItem[] = [
     badge: "体験記",
     kind: "story",
     publishedAt: "2026-03-19",
-    dateModified: "2026-03-21",
+    dateModified: "2026-03-22",
     relatedLinks: [
       { href: "/articles/story-family-confession", label: "家族に借金を打ち明けられなかった理由と…（体験記）" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
@@ -599,13 +600,13 @@ export const articlesData: ArticleItem[] = [
   // --- 体験記・返済日記（追加） ---
   {
     slug: "story-debt-realization-awakening",
-    title: "借金に気づいたときの話｜明細を見て初めて分かった金額",
+    title: "後から冷静に考えて初めて実感した借金額の大きさ｜一覧にして分かった重さ",
     summary:
-      "「借金がある」は分かっていても総額は分かっていなかった。通帳と明細を並べて初めて重さを数字で認識した個人の記録です。投資助言・借入勧誘ではありません。",
+      "引き落としと明細に追われ、総額の重さはその場では実感できなかった。後から一覧にして初めて輪郭が見えた個人の体験記です。投資助言・借入勧誘ではありません。",
     category: "story",
     order: 1,
     publishedAt: "2025-06-01",
-    dateModified: "2026-03-22",
+    dateModified: "2026-03-21",
     kind: "story",
     relatedLinks: [
       { href: "/articles/story-revolving-spiral", label: "リボ払いが膨らんだ経緯（体験記）" },
@@ -628,7 +629,7 @@ export const articlesData: ArticleItem[] = [
     relatedLinks: [
       { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息（記事）" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
-      { href: "/articles/story-debt-realization-awakening", label: "借金に気づいたときの話" },
+      { href: "/articles/story-debt-realization-awakening", label: "後から実感した借金額の重さ（体験記）" },
       { href: "/articles/story-family-confession", label: "家族に借金を打ち明けられなかった理由と…（体験記）" },
     ],
   },
@@ -645,7 +646,7 @@ export const articlesData: ArticleItem[] = [
     badge: "体験記",
     relatedLinks: [
       { href: "/articles/investment-loss-family-trust", label: "投資で負けが膨らんだ体験記" },
-      { href: "/articles/story-debt-realization-awakening", label: "借金に気づいたときの話" },
+      { href: "/articles/story-debt-realization-awakening", label: "後から実感した借金額の重さ（体験記）" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
       { href: "/resources/consultation-guide", label: "相談先・公的支援の一覧" },
     ],
