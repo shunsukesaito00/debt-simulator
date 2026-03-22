@@ -138,16 +138,17 @@ export const articlesData: ArticleItem[] = [
   {
     slug: "investment-loss-family-trust",
     title:
-      "投資で負けが膨らんだ私の体験｜取り返し、家族への信用、投資を止めたときまで",
+      "投資で負けが膨らんだ私の体験｜取り返したかったのはお金、失った実感は家族への信用",
     summary:
-      "少しでも豊かになりたいと始めた投資が、現物株・信用・FXへとエスカレードし、家族に助けを求めるまでの体験記です。投資助言ではありません。",
+      "口座の数字を取り返したい一心から現物株・信用・FXへ進み、生活の締切と家族への助けを求める転機までの体験記です。投資助言ではありません。",
     category: "story",
     order: 0,
     badge: "体験記",
     kind: "story",
     publishedAt: "2026-03-19",
-    dateModified: "2026-03-19",
+    dateModified: "2026-03-21",
     relatedLinks: [
+      { href: "/articles/story-family-confession", label: "家族に借金を打ち明けられなかった理由と…（体験記）" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
       { href: "/tools/fixed-cost-impact", label: "固定費削減インパクト計算" },
       { href: "/articles/repayment-improvement-guide", label: "返済の見直し・改善の考え方" },
@@ -600,12 +601,15 @@ export const articlesData: ArticleItem[] = [
     slug: "story-debt-realization-awakening",
     title: "借金に気づいたときの話｜明細を見て初めて分かった金額",
     summary:
-      "引き落としと明細を見て、借金の総額が自分の想像を超えていたときの話です。投資助言・借入勧誘をするものではありません。",
+      "「借金がある」は分かっていても総額は分かっていなかった。通帳と明細を並べて初めて重さを数字で認識した個人の記録です。投資助言・借入勧誘ではありません。",
     category: "story",
     order: 1,
     publishedAt: "2025-06-01",
+    dateModified: "2026-03-22",
     kind: "story",
     relatedLinks: [
+      { href: "/articles/story-revolving-spiral", label: "リボ払いが膨らんだ経緯（体験記）" },
+      { href: "/articles/story-family-confession", label: "家族に借金を打ち明けられなかった理由と…（体験記）" },
       { href: "/articles/investment-loss-family-trust", label: "投資で負けが膨らんだ体験記" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
       { href: "/resources/consultation-guide", label: "相談先・公的支援の一覧" },
@@ -615,270 +619,36 @@ export const articlesData: ArticleItem[] = [
     slug: "story-revolving-spiral",
     title: "リボ払いが膨らんだ経緯｜最低返済だけで積み上がる怖さ",
     summary:
-      "最低返済だけで済ませていたところ、利息が積み上がり総額が伸びていった経緯を整理しました。個人の体験であり、契約条件は各社の説明を優先してください。",
+      "最低返済だけで回していたら「返しているのに減らない」感覚があった。明細と支出が重なって膨らんだ流れと、総額・完済時期を見直した個人の記録です。契約は各社の説明を優先してください。",
     category: "story",
     order: 2,
     publishedAt: "2025-06-01",
+    dateModified: "2026-03-21",
     kind: "story",
     relatedLinks: [
       { href: "/articles/revo-100-interest", label: "リボ払い100万円の利息（記事）" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
       { href: "/articles/story-debt-realization-awakening", label: "借金に気づいたときの話" },
+      { href: "/articles/story-family-confession", label: "家族に借金を打ち明けられなかった理由と…（体験記）" },
     ],
   },
   {
     slug: "story-family-confession",
-    title: "家族に借金を打ち明けたとき｜言葉にできなかったこと",
+    title: "家族に借金を打ち明けられなかった理由と、打ち明けて気づいたこと",
     summary:
-      "家族に話すまでに迷ったこと、話したあとに楽になったこと、まだ残る罪悪感について。当事者の記録であり、一般論の正解は示しません。",
+      "離婚や失望が怖くて借金を家族に言えなかった。打ち明けて分かったのは、言わないほど事態と信頼への負担が重くなることでした。個人の体験記です。",
     category: "story",
     order: 3,
-    publishedAt: "2025-07-01",
+    publishedAt: "2026-03-22",
+    dateModified: "2026-03-22",
     kind: "story",
+    badge: "体験記",
     relatedLinks: [
       { href: "/articles/investment-loss-family-trust", label: "投資で負けが膨らんだ体験記" },
+      { href: "/articles/story-debt-realization-awakening", label: "借金に気づいたときの話" },
+      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
       { href: "/resources/consultation-guide", label: "相談先・公的支援の一覧" },
     ],
   },
-  {
-    slug: "story-repayment-plan-started",
-    title: "返済計画を立てたとき｜いくらから返せるかを先に決めた",
-    summary:
-      "手取りと生活費から「月に返せる額」を決めたうえで、どの借入から手をつけるかを考えた順番の記録です。",
-    category: "story",
-    order: 4,
-    publishedAt: "2025-08-01",
-    kind: "story",
-    relatedLinks: [
-      { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法（記事）" },
-      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
-    ],
-  },
-  {
-    slug: "story-side-hustle-first-month",
-    title: "副業を始めた経緯と最初の1ヶ月｜収入より先に決めたこと",
-    summary:
-      "返済のために副業を始めるとき、最初に決めたのは「時間の上限」と「やらないこと」でした。副業の勧誘や案件紹介はしません。",
-    category: "story",
-    order: 5,
-    publishedAt: "2025-09-01",
-    kind: "story",
-    relatedLinks: [
-      { href: "/articles/side-income-debt-repayment-intro", label: "借金返済のために始めた副業と結果" },
-      { href: "/articles/side-income-30000-month-journey", label: "副業で月3万円稼ぐまでにやったこと" },
-    ],
-  },
-  {
-    slug: "story-fixed-cost-audit",
-    title: "固定費を見直した具体的な記録｜通信とサブスクから手をつけた",
-    summary:
-      "固定費の洗い出しで、通信・サブスク・保険の順に手をつけたときの記録。削減額はあくまで概算です。",
-    category: "story",
-    order: 6,
-    publishedAt: "2025-10-01",
-    kind: "story",
-    relatedLinks: [
-      { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
-      { href: "/tools/fixed-cost-impact", label: "固定費削減インパクト" },
-    ],
-  },
-  {
-    slug: "story-mental-health-while-repaying",
-    title: "返済中のメンタルの保ち方｜自分を責めすぎないときの工夫",
-    summary:
-      "返済が続くと、不安がループしやすいと感じたときの対処。メンタルヘルスの専門的助言ではなく、個人の工夫の記録です。",
-    category: "story",
-    order: 7,
-    publishedAt: "2025-11-01",
-    kind: "story",
-    relatedLinks: [
-      { href: "/welcome", label: "はじめての方へ" },
-      { href: "/resources/consultation-guide", label: "相談先・公的支援の一覧" },
-    ],
-  },
-  {
-    slug: "story-one-month-budget-diary",
-    title: "節約生活の1ヶ月の家計簿｜何を減らしたかの記録",
-    summary:
-      "食費と外食を中心に、1ヶ月の支出の振り返りを記録しました。金額は個人の例です。",
-    category: "story",
-    order: 8,
-    publishedAt: "2025-12-01",
-    kind: "story",
-    relatedLinks: [
-      { href: "/articles/saving-food-budget-20000", label: "食費を月2万円に抑える工夫" },
-      { href: "/articles/household-monthly-balance-check", label: "月の収支をざっくり把握する方法" },
-    ],
-  },
-  {
-    slug: "story-wish-i-knew-then",
-    title: "あのとき知りたかったこと｜借金を抱えたときに先に読みたかった順番",
-    summary:
-      "当事者として、後から振り返って「先に知りたかった」ことを整理した記事です。個人の経験に基づくものであり、すべての人に当てはまるとは限りません。",
-    category: "story",
-    order: 9,
-    publishedAt: "2026-01-15",
-    kind: "story",
-    relatedLinks: [
-      { href: "/welcome", label: "はじめての方へ" },
-      { href: "/articles/loan-amount-guide", label: "借入額別に見る返済負担の違い" },
-      { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法" },
-    ],
-  },
-  // --- 副業・収入改善 ---
-  {
-    slug: "side-income-debt-repayment-intro",
-    title: "借金返済のために始めた副業と結果｜最初の3ヶ月の記録",
-    summary:
-      "返済を優先するために副業を始めたときの動機と、最初の3ヶ月で起きたこと。案件紹介や勧誘はしません。",
-    category: "side-income",
-    order: 0,
-    badge: "おすすめ",
-    publishedAt: "2025-06-15",
-    relatedLinks: [
-      { href: "/articles/story-side-hustle-first-month", label: "副業を始めた経緯と最初の1ヶ月（体験記）" },
-      { href: "/articles/side-income-30000-month-journey", label: "副業で月3万円稼ぐまでにやったこと" },
-      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
-    ],
-  },
-  {
-    slug: "side-income-30000-month-journey",
-    title: "副業で月3万円稼ぐまでにやったこと｜失敗と見直しのループ",
-    summary:
-      "月3万円を目安に、単価・時間・体調のバランスを調整した記録です。再現性を保証するものではありません。",
-    category: "side-income",
-    order: 1,
-    publishedAt: "2025-07-15",
-    relatedLinks: [
-      { href: "/articles/side-income-debt-repayment-intro", label: "借金返済のために始めた副業と結果" },
-      { href: "/articles/side-income-crowdsourcing-record", label: "クラウドソーシングで稼げるまでの記録" },
-    ],
-  },
-  {
-    slug: "side-income-employee-with-debt",
-    title: "借金あり会社員の副業の選び方｜会社規程と時間の上限を先に確認する",
-    summary:
-      "会社の副業規程・競業の可能性・時間の上限を先に確認する理由を整理します。個人の判断材料であり、法律相談ではありません。",
-    category: "side-income",
-    order: 2,
-    publishedAt: "2025-08-15",
-    relatedLinks: [
-      { href: "/resources/consultation-guide", label: "相談先・公的支援の一覧" },
-      { href: "/articles/side-income-30000-month-journey", label: "副業で月3万円稼ぐまでにやったこと" },
-    ],
-  },
-  {
-    slug: "side-income-crowdsourcing-record",
-    title: "クラウドソーシングで稼げるまでの記録｜初案件から単価の見直しまで",
-    summary:
-      "クラウドソーシングで初案件を取り、単価と納期の見直しをした経緯を記録します。プラットフォームの推奨はしません。",
-    category: "side-income",
-    order: 3,
-    publishedAt: "2025-09-15",
-    relatedLinks: [
-      { href: "/articles/side-income-debt-repayment-intro", label: "借金返済のために始めた副業と結果" },
-    ],
-  },
-  {
-    slug: "side-income-frema-result",
-    title: "フリマアプリで不用品を売った結果｜手取りと手間のバランス",
-    summary:
-      "不用品を売却したときの手取り・手間・発送の負担を振り返ります。サービスや商品の推奨はしません。",
-    category: "side-income",
-    order: 4,
-    publishedAt: "2025-10-15",
-    relatedLinks: [
-      { href: "/articles/side-income-to-repayment-split", label: "副業収入を返済に回す配分の考え方" },
-    ],
-  },
-  {
-    slug: "side-income-tax-filing-notes",
-    title: "副業の確定申告で気をつけたこと｜雑所得と経費の整理のメモ",
-    summary:
-      "税務の個別相談ではなく、当事者がメモを残したレベルの整理です。判断は税務署・税理士にご確認ください。",
-    category: "side-income",
-    order: 5,
-    publishedAt: "2025-11-15",
-    relatedLinks: [
-      { href: "https://www.nta.go.jp/", label: "国税庁（外部）" },
-      { href: "/articles/side-income-30000-month-journey", label: "副業で月3万円稼ぐまでにやったこと" },
-    ],
-  },
-  {
-    slug: "side-income-to-repayment-split",
-    title: "副業収入を返済に回す配分の考え方｜生活費・貯金・緊急の優先順位",
-    summary:
-      "副業で入ったお金を、返済・生活費・少額の貯金にどう分けたかの考え方です。個人の例にすぎません。",
-    category: "side-income",
-    order: 6,
-    publishedAt: "2025-12-15",
-    relatedLinks: [
-      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
-      { href: "/articles/repayment-improvement-guide", label: "返済を軽くする方法" },
-    ],
-  },
-  // --- 節約・生活改善 ---
-  {
-    slug: "saving-food-budget-20000",
-    title: "食費を月2万円に抑える工夫｜献立と買い物のルールを決めた",
-    summary:
-      "食費を抑えるために、献立・買い物の頻度・外食の回数にルールを決めた記録です。個人の生活スタイルに依存します。",
-    category: "saving",
-    order: 0,
-    badge: "おすすめ",
-    publishedAt: "2025-03-20",
-    relatedLinks: [
-      { href: "/articles/saving-cook-vs-eat-out", label: "自炊 vs 外食のコスト比較" },
-      { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },
-    ],
-  },
-  {
-    slug: "saving-points-how-much-monthly",
-    title: "ポイ活で月いくら浮くか｜還元率を過大評価しないためのメモ",
-    summary:
-      "ポイント還元を前提にしすぎないよう、月ごとの実績をメモした記事です。特定サービスの推奨はしません。",
-    category: "saving",
-    order: 1,
-    publishedAt: "2025-04-10",
-    relatedLinks: [
-      { href: "/articles/saving-food-budget-20000", label: "食費を月2万円に抑える工夫" },
-    ],
-  },
-  {
-    slug: "saving-100yen-store-tips",
-    title: "100均活用の節約術｜日用品の置き換えで減らした買い物",
-    summary:
-      "日用品の一部を100円ショップで購入するなど、生活費の圧縮に役立った工夫を整理します。",
-    category: "saving",
-    order: 2,
-    publishedAt: "2025-05-10",
-    relatedLinks: [
-      { href: "/articles/saving-food-budget-20000", label: "食費を月2万円に抑える工夫" },
-    ],
-  },
-  {
-    slug: "saving-cook-vs-eat-out",
-    title: "自炊 vs 外食のコスト比較｜時間単価まで含めるとどう見えるか",
-    summary:
-      "自炊と外食のコストを、材料費だけでなく時間も含めて比較する考え方を整理します。正解は人それぞれです。",
-    category: "saving",
-    order: 3,
-    publishedAt: "2025-06-10",
-    relatedLinks: [
-      { href: "/articles/saving-food-budget-20000", label: "食費を月2万円に抑える工夫" },
-    ],
-  },
-  {
-    slug: "saving-utility-monthly-trend",
-    title: "光熱費の月別推移と節約記録｜エアコンとお湯の使い方を見直した",
-    summary:
-      "電気・ガスの請求を月別に見直し、季節要因と生活習慣の影響を整理した記録です。",
-    category: "saving",
-    order: 4,
-    publishedAt: "2025-07-10",
-    relatedLinks: [
-      { href: "/articles/fixed-cost-utility-switch", label: "電気・ガス乗り換えの効果は？（記事）" },
-      { href: "/simulator/cardloan", label: "借入返済シミュレーター" },
-    ],
-  },
+
 ];

@@ -66,17 +66,11 @@
 
 ### side-income（副業実験）
 
-| 役割 | slug | タイトル（短縮） |
-|------|------|------------------|
-| ピラー | `side-income-debt-repayment-intro` | 副業×返済のイントロ（おすすめ） |
-| クラスター例 | `side-income-30000-month-journey`, … | 実験記録系 |
+中身未整備のスタブ記事は削除済み。`articles-data` に該当カテゴリの記事が無いときは一覧では「準備中」表示。
 
 ### saving（節約）
 
-| 役割 | slug | タイトル（短縮） |
-|------|------|------------------|
-| ピラー | `saving-food-budget-20000` | 食費予算2万（`order: 0`・おすすめ） |
-| クラスター例 | `saving-points-how-much-monthly`, `saving-100yen-store-tips`, … | ポイント・店舗別 |
+同上（スタブ削除済み。再掲時は `articles-data` に追加）。
 
 ### story（体験記）
 

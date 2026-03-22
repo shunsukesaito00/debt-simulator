@@ -10,29 +10,8 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
-const SLUGS = [
-  "story-debt-realization-awakening",
-  "story-revolving-spiral",
-  "story-family-confession",
-  "story-repayment-plan-started",
-  "story-side-hustle-first-month",
-  "story-fixed-cost-audit",
-  "story-mental-health-while-repaying",
-  "story-one-month-budget-diary",
-  "story-wish-i-knew-then",
-  "side-income-debt-repayment-intro",
-  "side-income-30000-month-journey",
-  "side-income-employee-with-debt",
-  "side-income-crowdsourcing-record",
-  "side-income-frema-result",
-  "side-income-tax-filing-notes",
-  "side-income-to-repayment-split",
-  "saving-food-budget-20000",
-  "saving-points-how-much-monthly",
-  "saving-100yen-store-tips",
-  "saving-cook-vs-eat-out",
-  "saving-utility-monthly-trend",
-];
+/** プレースホルダ記事は削除済み。新規にテンプレだけ生成したいときに slug をここへ追加。 */
+const SLUGS = [];
 
 function pageSource(slug) {
   return `import type { Metadata } from "next";

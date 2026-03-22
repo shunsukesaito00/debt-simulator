@@ -46,7 +46,7 @@ const terms: { term: string; def: string; href?: string }[] = [
   {
     term: "副業",
     def: "本業以外の収入活動。会社規程・税務・時間管理など、個人の状況に依存する。",
-    href: "/articles/side-income-employee-with-debt",
+    href: "/articles/repayment-improvement-guide",
   },
 ];
 
