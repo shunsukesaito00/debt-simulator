@@ -97,44 +97,44 @@ export const ARTICLE_LIST_SECTIONS: ArticleListSection[] = [
   },
   {
     id: "fixed-cost",
-    label: "固定費をゆるく見直す",
+    label: "固定費見直し",
     description:
-      "通信・サブスク・保険など、「毎月ひっそり出ていくお金」が気になるときの入口です。無理なく手をつける順番と、削ったあとがイメージしやすい比較記事を集めています。",
+      "通信・サブスク・保険など、毎月出ていく固定費を何から見直すかを整理した記事群です。",
     articleCategories: ["fixed-cost"],
   },
   {
     id: "household",
-    label: "家計の見え方・体験記",
+    label: "家計管理",
     description:
-      "家計簿が続かない、収支がぼんやりする、といった悩みを、数字に強くなくても読める形で整理した記事です。体験記もここにまとめています。",
+      "収支の把握や固定費・変動費の整理など、家計の土台を整えるための記事をまとめています。",
     articleCategories: ["household"],
   },
   {
     id: "improvement-effect",
-    label: "少し削ったらどう変わる？",
+    label: "改善効果の試算",
     description:
-      "月数千円〜1万円の見直しが、1年・3年・5年でどれくらい積み上がるかを比較する記事です。「小さくても続ける」のイメージづくりに。",
+      "月数千円〜1万円の見直しで、1年・3年・5年にどれだけ差が出るかを比較する記事です。",
     articleCategories: ["improvement-effect"],
   },
   {
     id: "loan-comparison",
-    label: "借入・リボの負担を比べる",
+    label: "借入・リボ比較",
     description:
-      "借入額や返済方式が変わると、月々と利息はどう動くか。リボ・カードローン・元利均等など、条件ごとの違いがつかみやすい記事を並べています。",
+      "借入額や返済方式で、月々返済と総利息がどう変わるかを比較する記事をまとめています。",
     articleCategories: ["loan-amount", "repayment-method", "revolving"],
   },
   {
     id: "repayment-improvement",
-    label: "返済を軽くするヒント",
+    label: "返済改善",
     description:
-      "繰り上げ返済や期間の見直しで、負担や完済時期がどう変わるか。改善の選択肢を、具体例つきで読める記事です。",
+      "繰り上げ返済や返済期間の見直しで、負担や完済時期がどう変わるかを整理した記事です。",
     articleCategories: ["repayment-improvement"],
   },
   {
     id: "repayment-planning",
-    label: "返せる額から考える",
+    label: "返済計画",
     description:
-      "「月いくらなら無理がないか」から借入額や期間の目安を考えたい方向け。逆算や固定返済額の考え方がわかる記事を集めています。",
+      "毎月返せる額から、借入額や返済期間を逆算して考えるための記事をまとめています。",
     articleCategories: ["repayment-planning"],
   },
 ];

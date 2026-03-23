@@ -8,21 +8,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 /** サイトの主要導線（太め・先頭に配置） */
 const primaryNavItems = [
   { href: "/", label: "ホーム" },
-  { href: "/welcome", label: "はじめての方" },
   { href: "/articles", label: "記事" },
-  { href: "/income", label: "収益レポート" },
-  { href: "/about", label: "運営者" },
+  { href: "/articles/category/story", label: "体験記" },
+  { href: "/articles/category/fixed-cost", label: "固定費見直し" },
+  { href: "/articles/category/household", label: "家計管理" },
 ] as const;
 
 /** カテゴリ・検索・法務など（控えめ。項目数は維持） */
 const secondaryNavItems = [
-  { href: "/articles/category/story", label: "体験記" },
-  { href: "/articles/category/side-income", label: "副業実験" },
-  { href: "/articles/category/saving", label: "節約" },
+  { href: "/welcome", label: "はじめての方" },
   { href: "/resources/consultation-guide", label: "相談先" },
+  { href: "/income", label: "収益レポート" },
+  { href: "/about", label: "運営者" },
   { href: "/search", label: "検索" },
-  { href: "/contact", label: "お問い合わせ" },
-  { href: "/privacy", label: "プライバシー" },
 ] as const;
 
 const toolItems = [
@@ -267,7 +265,7 @@ function HeaderNavInner({ path }: { path: string }) {
                   );
                 })}
               </nav>
-              <p className="mt-6 ds-label">カテゴリ・その他</p>
+              <p className="mt-6 ds-label">補助メニュー</p>
               <nav className="mt-3 flex flex-col gap-0.5" aria-label="モバイル・その他メニュー">
                 {secondaryNavItems.map((it) => {
                   const active = isSecondaryActive(path, it.href);

@@ -15,9 +15,18 @@ function slugFromHref(href: string): string | undefined {
 interface ArticleFooterProps {
   articleSlug: string;
   showCta?: boolean;
+  showAuthor?: boolean;
+  showPublicResources?: boolean;
+  showPrevNext?: boolean;
 }
 
-export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProps) {
+export function ArticleFooter({
+  articleSlug,
+  showCta = true,
+  showAuthor = true,
+  showPublicResources = true,
+  showPrevNext = true,
+}: ArticleFooterProps) {
   const article = getArticle(articleSlug);
   if (!article) return null;
 
@@ -25,8 +34,8 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
   const categoryLabel = CATEGORY_LABELS[article.category];
   const categoryAnchor = `/articles#${getArticleListSectionIdForCategory(article.category)}`;
 
-  const articleLinks = relatedLinks.filter((l) => slugFromHref(l.href));
-  const otherLinks = relatedLinks.filter((l) => !slugFromHref(l.href));
+  const articleLinks = relatedLinks.filter((l) => slugFromHref(l.href)).slice(0, 2);
+  const otherLinks = relatedLinks.filter((l) => !slugFromHref(l.href)).slice(0, 1);
 
   return (
     <section className="mt-10 border-t border-stone-200 pt-8">
@@ -54,7 +63,7 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
 
       {articleLinks.length > 0 && (
         <div className="ds-section-gap">
-          <h2 className="text-base font-semibold text-stone-900">あわせて読みたい</h2>
+          <h2 className="text-base font-semibold text-stone-900">次に読む</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {articleLinks.map((link) => {
               const targetSlug = slugFromHref(link.href)!;
@@ -95,9 +104,11 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
         </div>
       )}
 
-      <div className="ds-section-gap">
-        <ArticleAuthorCard />
-      </div>
+      {showAuthor && (
+        <div className="ds-section-gap">
+          <ArticleAuthorCard />
+        </div>
+      )}
 
       {otherLinks.length > 0 && (
         <ul className="ds-section-gap flex flex-col gap-2">
@@ -136,24 +147,11 @@ export function ArticleFooter({ articleSlug, showCta = true }: ArticleFooterProp
         >
           「{categoryLabel}」の記事一覧へ
         </TrackedLink>
-        <TrackedLink
-          href="/articles"
-          className="text-sm font-medium text-stone-700 hover:text-emerald-900 hover:underline"
-          event={{
-            action: "click_article_back_to_articles",
-            location: "article_footer",
-            target: "/articles",
-            link_type: "articles_index_link",
-            source_article_slug: articleSlug,
-          }}
-        >
-          記事一覧へ戻る
-        </TrackedLink>
       </div>
 
-      <ArticlePublicResources />
+      {showPublicResources && <ArticlePublicResources />}
 
-      <ArticlePrevNext slug={articleSlug} />
+      {showPrevNext && <ArticlePrevNext slug={articleSlug} />}
     </section>
   );
 }

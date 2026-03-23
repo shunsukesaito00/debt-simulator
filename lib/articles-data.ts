@@ -54,10 +54,11 @@ export const articlesData: ArticleItem[] = [
     slug: "fixed-cost-subscription-audit",
     title: "サブスク整理の進め方｜見落としやすい月額課金を洗い出す方法",
     summary:
-      "サブスク・月額課金を見直したい方向けに、見落としがちな契約の洗い出し方と、やめる・減らすときの判断のポイントを整理します。",
+      "サブスク整理を、明細確認から一覧化・解約判断・翌月確認まで実務順で解説。見落としやすい月額課金と失敗しやすいポイントも整理しています。",
     category: "fixed-cost",
     order: 3,
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-21",
     relatedLinks: [
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
@@ -111,12 +112,13 @@ export const articlesData: ArticleItem[] = [
   },
   {
     slug: "household-fixed-vs-variable",
-    title: "固定費と変動費の分け方｜何が固定費で何が変動費か",
+    title: "固定費と変動費の分け方｜何が固定費で何が変動費か、迷いやすい支出も整理",
     summary:
-      "家計を把握するときの「固定費」と「変動費」の分け方と、それぞれ何を入れるかを整理します。",
+      "固定費と変動費の違いを、定義・迷いやすい費目・見直し順で解説。水道光熱費やスマホ代など判断に迷う支出の整理基準もまとめています。",
     category: "household",
     order: 1,
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-21",
     relatedLinks: [
       { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
@@ -125,12 +127,13 @@ export const articlesData: ArticleItem[] = [
   },
   {
     slug: "household-monthly-balance-check",
-    title: "月の収支をざっくり把握する方法｜手取りから逆算する考え方",
+    title: "月の収支をざっくり把握する方法｜手取りから逆算して家計の全体像をつかむ",
     summary:
-      "家計簿をつけずに、月の収支をざっくり把握する方法と、手取りから逆算する考え方を整理します。",
+      "家計簿が続かなくても、手取りから逆算して月の収支をざっくり把握する方法を解説。固定費・変動費・特別費を使って家計の全体像をつかむ実用ガイドです。",
     category: "household",
     order: 2,
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-22",
     relatedLinks: [
       { href: "/articles/household-budget-starter", label: "家計簿が続かない人のための最低限チェック" },
       { href: "/articles/household-fixed-vs-variable", label: "固定費と変動費の分け方" },

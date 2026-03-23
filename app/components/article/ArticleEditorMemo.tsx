@@ -1,7 +1,7 @@
 import type { ArticleEditorMemo as ArticleEditorMemoType } from "./types";
 
 export type ArticleEditorMemoProps = ArticleEditorMemoType & {
-  /** 編集メモを表示するか（デフォルト true。false にすると非表示） */
+  /** 編集メモを表示するか（デフォルト false。true のときのみ表示） */
   show?: boolean;
 };
 
@@ -13,7 +13,7 @@ export function ArticleEditorMemo({
   purpose,
   reasonAxis,
   memo,
-  show = true,
+  show = false,
 }: ArticleEditorMemoProps) {
   if (!show) return null;
 
