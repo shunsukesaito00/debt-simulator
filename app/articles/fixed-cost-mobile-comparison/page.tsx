@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
+import { ArticleProse } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -15,12 +15,12 @@ const ARTICLE_TITLE = "スマホ料金プラン見直しの考え方｜格安プ
 export const metadata: Metadata = {
   title: ARTICLE_TITLE,
   description:
-    "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。固定費チェックリストの「通信費」を深掘りする記事です。",
+    "スマホ料金の見直しを、使用量確認から失敗しにくい手順まで実用的に整理。格安プランへの変更でどれくらい変わるかの目安と注意点をまとめます。",
   alternates: { canonical: ARTICLE_URL },
   openGraph: {
     title: ARTICLE_TITLE,
     description:
-      "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。",
+      "スマホ料金見直しは使用量確認から。格安プラン比較の考え方、失敗しやすい点、削減額の目安をまとめました。",
     url: ARTICLE_URL,
     type: "article",
   },
@@ -31,34 +31,34 @@ const jsonLd = {
   "@type": "Article",
   headline: ARTICLE_TITLE,
   description:
-    "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。",
+    "スマホ料金プラン見直しの考え方と、格安プランへ変える際の確認ポイントを整理した実用ガイド。",
   url: ARTICLE_URL,
   datePublished: "2025-03-11",
-  dateModified: "2025-03-11",
+  dateModified: "2026-03-21",
   author: ARTICLE_AUTHOR_JSON_LD,
   publisher: ARTICLE_PUBLISHER_JSON_LD,
 };
 
 const faqItems = [
   {
-    question: "格安プランに変えると月いくらくらい変わりますか？",
+    question: "スマホ料金見直しで最初にやるべきことは何ですか？",
     answer:
-      "契約内容や利用量によりますが、大手キャリアから格安SIM（MVNO）に乗り換えると、月額2,000円〜5,000円程度の削減になるケースが多くあります。データ量を適正化し、使っていないオプションを外すだけでも月1,000円前後の削減になることがあります。",
+      "過去3か月程度のデータ使用量と通話量を確認することです。ここを見ないまま変更すると、安くなっても不便になったり、逆に過大プランのままになりやすくなります。",
   },
   {
-    question: "格安プランは通信品質が落ちますか？",
+    question: "格安プランに変えるとどれくらい変わりますか？",
     answer:
-      "格安プラン（MVNO）は大手キャリアの回線を借りて提供しているため、同じエリアでは基本的に同じ回線を使います。混雑時には大手契約者が優先される場合がありますが、日常利用では体感差が小さいことが多いです。利用エリアや用途に合わせてプランを選ぶとよいです。",
+      "使い方次第ですが、月1,000円〜3,000円の改善余地が出るケースは珍しくありません。大容量プランのまま使っていない人ほど差が出やすいです。",
   },
   {
-    question: "スマホ料金の見直しは何から確認すべきですか？",
+    question: "セット割がある場合でも乗り換えた方がいいですか？",
     answer:
-      "まずは「データ量」「通話オプション」「機種代金・分割」の3点を確認するのがおすすめです。データをあまり使っていないなら少なめのプランに、通話をほとんどしないなら通話オプションの見直しで削減できることがあります。機種代金の分割残高も含めて月額を把握すると見直しの余地が見えやすくなります。",
+      "スマホ単体では安く見えても、光回線や家族契約の割引を外すと逆転することがあります。家計全体で比較するのが安全です。",
   },
   {
-    question: "家族でまとめて見直すメリットはありますか？",
+    question: "すぐに見直さなくてもいいケースはありますか？",
     answer:
-      "家族プランやセット割にすると、1回線あたりの単価が下がることがあります。また、格安プランでも家族割や複数回線割引を用意している場合があるので、まとめて見直すと総額でかなり変わるケースがあります。",
+      "仕事で通信品質や店頭サポートを優先したい場合、家族全体で最適化されている場合、削減額が手間に見合わない場合は急がなくて大丈夫です。",
   },
   {
     question: "固定費全体でどれくらい削れるか知りたいです。",
@@ -71,12 +71,16 @@ const breadcrumbJsonLd = getArticleBreadcrumbJsonLd(ARTICLE_URL, ARTICLE_TITLE);
 const faqJsonLd = getArticleFaqJsonLd(faqItems);
 
 const tocItems = [
-  { id: "premise", label: "このページの前提" },
-  { id: "conclusion", label: "結論｜スマホ料金は見直しの効果が出やすい" },
-  { id: "reading-points", label: "読み方のポイント" },
-  { id: "what-to-check", label: "何を確認するか" },
-  { id: "rough-amount", label: "どれくらい変わるか（目安）" },
-  { id: "editor-memo", label: "編集メモ" },
+  { id: "intro", label: "導入" },
+  { id: "conclusion", label: "先に結論｜スマホ料金見直しは使用量確認から" },
+  { id: "first-check", label: "スマホ料金見直しで最初に確認すること" },
+  { id: "who-benefits", label: "どんな人がスマホ料金を下げやすいか" },
+  { id: "how-much", label: "格安プランに変えるとどれくらい変わる？" },
+  { id: "steps", label: "スマホ料金見直しの手順" },
+  { id: "failures", label: "失敗しやすいパターン" },
+  { id: "not-urgent", label: "今すぐ変えなくてもいいケース" },
+  { id: "impact", label: "月5,000円改善のうち、スマホ料金は現実的" },
+  { id: "simulate", label: "自分の条件で試算する" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -99,28 +103,11 @@ export default function Page() {
         />
       )}
 
-      
       <ArticlePageShell currentPageTitle={ARTICLE_TITLE} wide={articleUsesWideLayout("fixed-cost-mobile-comparison")}>
-<div className="ds-card ds-card-pad">
+        <div className="ds-card ds-card-pad">
           <h1 className="text-2xl font-semibold text-stone-900 md:text-3xl">{ARTICLE_TITLE}</h1>
 
-          <p className="mt-4 text-base text-stone-600 leading-relaxed">
-            スマホ料金は固定費のなかでも「見直しの効果が出やすく、一度変えれば継続しやすい」項目の一つです。格安プランへの乗り換えや、データ量・オプションの見直しで、月々どれくらい変わる可能性があるかを整理します。
-          </p>
-
-          <ArticleStandardBlocks slug="fixed-cost-mobile-comparison" />
-
-          <section id="premise" className="mt-6">
-            <ArticlePagePremise
-              comparisonConditions={[
-                "スマホ・通信費を「大手キャリア vs 格安プラン」「データ量・オプションの適正化」の観点で考える",
-                "実際の削減額は契約内容・利用量・家族割の有無などで異なるため、あくまで目安として記載している",
-              ]}
-              reasonForConditions="読者が「自分も見直せるか」を判断する材料にしてもらうためです。具体的な料金はキャリア・プランにより変わるため、考え方と確認ポイントを中心に解説しています。"
-            />
-          </section>
-
-          <section className="mt-6 ds-subcard p-4">
+          <section className="mt-6 ds-subcard p-4 not-prose">
             <h2 className="text-base font-semibold text-stone-900">目次</h2>
             <ul className="mt-2 space-y-1.5 text-base leading-relaxed">
               {tocItems.map((item) => (
@@ -134,83 +121,133 @@ export default function Page() {
           </section>
 
           <ArticleProse className="mt-8 space-y-10">
+            <section id="intro">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">導入</h2>
+              <p className="mt-3">
+                スマホ代は、固定費の中でも見直しやすく、効果が出やすい費目です。食費の節約は毎月がんばり続ける必要がありますが、スマホ料金は一度プランを見直せば、その後も毎月自動的に効きやすいのが強みです。
+              </p>
+              <p className="mt-3">
+                ただし、「とにかく格安SIMに変えればいい」という話ではありません。データ使用量、通話オプション、セット割、乗り換えで失うものを整理してから判断した方が失敗しにくくなります。
+              </p>
+            </section>
+
             <section id="conclusion">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">
-                結論｜スマホ料金は見直しの効果が出やすい
+                先に結論｜スマホ料金見直しは「使用量確認」から始める
               </h2>
               <p className="mt-3">
-                結論として、スマホ料金は<strong>固定費のなかでも見直しの効果が出やすく、一度見直すと毎月の負担が続けて減る</strong>分野です。大手キャリアから格安プラン（MVNO）への乗り換え、データ量や通話オプションの見直し、使っていないオプションの解約などで、月額が数千円単位で変わるケースも少なくありません。
+                最初にやるべきことはひとつです。<strong>過去3か月くらいのデータ使用量と通話量を確認すること</strong>です。ここを見ずに変更すると、不便になったり、必要以上に高いプランを続けたりしやすくなります。
+              </p>
+              <p className="mt-3">
+                契約容量と実際の使用量はズレやすいので、まず利用実態を把握してから比較するのが基本です。
               </p>
             </section>
 
-            <section id="reading-points">
-              <ArticleReadingPoints
-                points={[
-                  {
-                    label: "データ量は「実際の使用量」で選ぶ",
-                    body: "「多めが安心」で大きいプランにしていると、使っていない分だけ月額が高くなります。直近の利用量を確認し、適正なプランにすると削減できることがあります。",
-                  },
-                  {
-                    label: "通話オプションを見直す",
-                    body: "通話をほとんどしないなら、通話定額オプションを外すだけで月額が下がることがあります。かけたいときだけ従量で支払う形にすると、トータルで安くなる場合があります。",
-                  },
-                  {
-                    label: "機種代金・分割残高を把握する",
-                    body: "月額には「通信料」と「機種代金の分割」が含まれることがあります。分割残高が残っている間は月額が高く見えるので、いつまでいくらかかるかを確認すると、見直しのタイミングが判断しやすくなります。",
-                  },
-                ]}
-                misconceptions={[
-                  "「格安は品質が悪い」と思いがちですが、多くの格安プランは大手の回線を利用しており、日常利用では体感差が小さいことが多いです。",
-                  "「今の契約を変えるのは面倒」と感じがちですが、MNP（番号そのまま乗り換え）やオンライン手続きで、比較的スムーズに乗り換えられるケースが増えています。",
-                ]}
-              />
+            <section id="first-check">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">スマホ料金見直しで最初に確認すること</h2>
+              <p className="mt-3">見直し前に、次の4点を先に確認すると判断しやすくなります。</p>
+              <h3 className="mt-4 text-base font-semibold text-stone-900">1. 今のデータ使用量</h3>
+              <p className="mt-2">
+                通信会社のマイページやアプリで、直近3か月の使用量を確認します。メールや文字中心なら月1GB以内、Wi-Fi中心なら月3GB前後で収まる人も多く、過大プランの見直し余地が出ます。
+              </p>
+              <h3 className="mt-4 text-base font-semibold text-stone-900">2. 通話オプション</h3>
+              <p className="mt-2">
+                通話し放題や5分かけ放題を付けたまま、実際はほとんど使っていないケースがあります。通常通話が多いか、アプリ通話中心かを確認します。
+              </p>
+              <h3 className="mt-4 text-base font-semibold text-stone-900">3. セット割・家族割</h3>
+              <p className="mt-2">
+                スマホ単体では安く見えても、固定回線や家族割を外すと逆に高くなる場合があります。家計全体で比較するのが安全です。
+              </p>
+              <h3 className="mt-4 text-base font-semibold text-stone-900">4. 乗り換えで失うもの</h3>
+              <p className="mt-2">
+                キャリアメール、店頭サポート、一部決済や留守番電話は条件が変わることがあります。オンライン専用プランでは初期設定を自分で行う前提になる場合もあります。
+              </p>
             </section>
 
-            <section id="what-to-check">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">何を確認するか</h2>
-              <ul className="mt-3 list-disc pl-5 space-y-1">
-                <li>現在の月額（通信料＋オプション＋機種代金の合計）</li>
-                <li>データの月間使用量（設定アプリや請求書で確認）</li>
-                <li>通話の利用頻度（定額オプションが必要か）</li>
-                <li>家族割・セット割の有無（変更で変わるか）</li>
+            <section id="who-benefits">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どんな人がスマホ料金を下げやすいか</h2>
+              <ul className="mt-3 list-disc pl-5 space-y-1 text-stone-800">
+                <li>大容量プランを長くそのまま使っている</li>
+                <li>直近3か月のデータ使用量が毎月かなり余っている</li>
+                <li>通話定額を付けているのに、実際はほとんど電話しない</li>
+                <li>自宅ではWi-Fi中心で、外ではあまり使わない</li>
+                <li>家族全体ではなく、自分だけ高いプランのまま</li>
               </ul>
               <p className="mt-3">
-                固定費全体の見直し順番としては、
-                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
-                では「サブスクの次に通信費」を推奨しています。手続きはサブスクより少し手間ですが、一度見直すと効果が続きやすいです。
+                このタイプは、容量の適正化だけでも差が出ることがあります。さらにサブブランドやMVNOまで比較すると、月額が大きく変わるケースがあります。
               </p>
             </section>
 
-            <section id="rough-amount">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">どれくらい変わるか（目安）</h2>
+            <section id="how-much">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">格安プランに変えるとどれくらい変わる？</h2>
               <p className="mt-3">
-                大手キャリアの単体プランから格安プランに乗り換えた場合、月額2,000円〜5,000円程度の削減になることが多いです。データ量を適正化したり、通話オプションを外したりするだけでも、月1,000円前後の削減になるケースがあります。月3,000円の削減なら1年で36,000円なので、継続すると差は大きくなります。
+                正確には使い方次第ですが、次の3パターンで考えると整理しやすいです。
               </p>
+              <ul className="mt-3 list-disc pl-5 space-y-1 text-stone-800">
+                <li>大容量プランから中容量プランへ</li>
+                <li>メインブランドからオンライン専用・サブブランドへ</li>
+                <li>3GB前後の低容量へ最適化</li>
+              </ul>
               <p className="mt-3">
-                削減額を「1年・3年・5年でいくらになるか」で確認したい場合は、
-                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
-                で試算できます。
+                言い方としては「月1,000〜3,000円の改善余地が出ることがある」くらいが自然です。断定せず、使用量と契約条件で差が出ることを明記する方が信頼されます。
               </p>
-              <div className="mt-6 ds-subcard p-6">
-                <h3 className="text-base font-semibold text-stone-900">固定費削減インパクトを計算する</h3>
-                <p className="mt-2 text-base text-stone-700">
-                  毎月の削減額を続けたとき、1年・3年・5年で合計いくらになるかをすぐ確認できます。
-                </p>
-                <Link
-                  href="/tools/fixed-cost-impact"
-                  className="ds-btn ds-btn-primary mt-4"
-                >
-                  固定費削減インパクトを計算する →
-                </Link>
+            </section>
+
+            <section id="steps">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">スマホ料金見直しの手順</h2>
+              <ol className="mt-3 list-decimal pl-5 space-y-2 text-stone-800">
+                <li>使用量を確認する（過去3か月のデータ・通話量）</li>
+                <li>今のプラン内容を確認する（容量、通話、端末分割、割引条件）</li>
+                <li>同じ会社内のプラン変更を先に比較する</li>
+                <li>サブブランド・MVNOも含めて比較する</li>
+                <li>乗り換え時の注意点を確認する（MNP、メール、端末対応など）</li>
+              </ol>
+              <p className="mt-3">
+                まずは同一会社内で比較し、次に外部比較へ進む順番が失敗しにくいです。旧プランに戻せないケースもあるため、現契約は記録してから比較します。
+              </p>
+            </section>
+
+            <section id="failures">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">スマホ料金見直しで失敗しやすいパターン</h2>
+              <ul className="mt-3 list-disc pl-5 space-y-2 text-stone-800">
+                <li>安さだけで決める（割引条件や通話料を見落とす）</li>
+                <li>データ使用量を見ずに下げる（追加料金とストレスが増える）</li>
+                <li>セット割の損得を見ない（家計全体で逆転する）</li>
+                <li>サポート前提なのにオンライン専用へ行く（手間が増える）</li>
+              </ul>
+            </section>
+
+            <section id="not-urgent">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">こんな人は、今すぐ変えなくてもいい</h2>
+              <ul className="mt-3 list-disc pl-5 space-y-1 text-stone-800">
+                <li>仕事で通信品質やサポートを優先したい</li>
+                <li>家族全体のセット割で最適化されている</li>
+                <li>使用量とプランがかなり合っている</li>
+                <li>乗り換えの手間に対して削減額が小さい</li>
+              </ul>
+            </section>
+
+            <section id="impact">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">月5,000円改善のうち、スマホ料金はかなり現実的</h2>
+              <p className="mt-3">
+                固定費改善で月5,000円を目指すとき、スマホ料金は有力です。1人で月1,000〜3,000円、家族全体ならさらに差が出ることがあります。固定費全体では
+                <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline"> サブスクの次にスマホ </Link>
+                の順で着手すると動きやすくなります。
+              </p>
+            </section>
+
+            <section id="simulate">
+              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で試算する</h2>
+              <p className="mt-3">
+                スマホ料金を月1,500円下げると年間18,000円、月3,000円なら年間36,000円です。単月では小さく見えても、固定費なので毎月積み上がります。
+                削減額を1年・3年・5年で確認するなら
+                <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline"> 固定費削減インパクト計算 </Link>
+                が使えます。
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3 not-prose">
+                <Link href="/tools/fixed-cost-impact" className="ds-btn ds-btn-primary">固定費削減インパクトを計算する →</Link>
+                <Link href="/articles/fixed-cost-guide" className="ds-btn ds-btn-secondary">固定費見直しの進め方へ戻る</Link>
               </div>
-            </section>
-
-            <section id="editor-memo">
-              <ArticleEditorMemo
-                purpose="固定費チェックリストの「スマホ・通信費」を深掘りし、何を確認すればよいか・どれくらい変わる可能性があるかを判断材料として伝えることを目的にしています。"
-                reasonAxis="具体的なキャリア名・プラン名は変動が大きいため、考え方と確認ポイントに絞っています。実際の料金比較は各社サイトや比較サービスで確認するのが確実です。"
-                memo="格安プランへの乗り換えは、機種の縛りやMNP手続きのタイミングに注意が必要です。解約金がかかる場合は、解約金と削減額を比較してから判断するのがおすすめです。"
-              />
             </section>
 
             <section id="faq">
@@ -228,21 +265,15 @@ export default function Page() {
             <section id="summary">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">まとめ</h2>
               <ul className="mt-3 list-disc pl-5 space-y-1">
-                <li>スマホ料金は固定費のなかでも<strong>見直しの効果が出やすく、継続しやすい</strong>項目です。</li>
-                <li>データ量・通話オプションの適正化、格安プランへの乗り換えで、月額が数千円単位で変わるケースがあります。</li>
-                <li>削減額の目安は契約内容により異なります。1年・3年・5年での効果は
-                  <Link href="/tools/fixed-cost-impact" className="font-bold text-stone-900 hover:underline">固定費削減インパクト計算</Link>
-                  で確認できます。
-                </li>
-                <li>固定費全体の見直し順や他の項目は
-                  <Link href="/articles/fixed-cost-checklist" className="font-bold text-stone-900 hover:underline">固定費見直しチェックリスト</Link>
-                  を参照してください。
-                </li>
+                <li>まず使用量と通話量を確認する</li>
+                <li>次に今のプラン内容と割引条件を確認する</li>
+                <li>同一会社内 → サブブランド → MVNOの順で比較する</li>
+                <li>安さだけでなく、手間・サポート・セット割も一緒に見る</li>
               </ul>
             </section>
           </ArticleProse>
 
-          <ArticleFooter articleSlug="fixed-cost-mobile-comparison" />
+          <ArticleFooter articleSlug="fixed-cost-mobile-comparison" showCta={false} />
         </div>
       </ArticlePageShell>
     </>

@@ -4,13 +4,14 @@ import type { ArticleItem } from "./article-types";
 export const articlesData: ArticleItem[] = [
   {
     slug: "fixed-cost-guide",
-    title: "固定費見直しの進め方｜何から手をつけるか・改善効果の比較",
+    title: "固定費見直しの進め方｜何から手をつけるか、順番と効果をまとめて整理",
     summary:
-      "通信費・サブスク・保険など、毎月の固定負担を見直したい方向けに、何から手をつけるべきかと改善効果を比較する考え方を整理します。記事とシミュレーターを往復して判断材料にしてください。",
+      "固定費見直しを何から始めるか迷う人向けに、順番・判断基準・項目別チェックポイントを整理した実用ガイド。月5,000円・1万円改善の見え方と試算導線もまとめています。",
     category: "fixed-cost",
     order: 0,
     badge: "おすすめ",
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-21",
     relatedLinks: [
       { href: "/articles", label: "記事一覧で他のカテゴリも見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
@@ -37,10 +38,11 @@ export const articlesData: ArticleItem[] = [
     slug: "fixed-cost-mobile-comparison",
     title: "スマホ料金プラン見直しの考え方｜格安プランに変えるとどれくらい変わる？",
     summary:
-      "スマホ・通信費の見直しで、格安プランへの乗り換えやデータ量・オプションの見直しでどれくらい変わるかを整理します。固定費チェックリストの「通信費」を深掘りする記事です。",
+      "スマホ料金見直しを使用量確認から失敗しにくい手順まで整理。格安プランへ変えるときの削減目安、セット割やサポート面の注意点も含めて解説します。",
     category: "fixed-cost",
     order: 2,
     publishedAt: "2025-03-11",
+    dateModified: "2026-03-21",
     relatedLinks: [
       { href: "/articles/fixed-cost-guide", label: "固定費見直しの進め方を見る" },
       { href: "/articles/fixed-cost-checklist", label: "固定費見直しチェックリスト" },
