@@ -24,6 +24,7 @@ export type IncomeReport = {
   breakdown: IncomeBreakdownItem[];
   summary: string;
   highlights?: string[];
+  statusNote?: string;
   content: string;
 };
 
@@ -47,6 +48,10 @@ function isValidMonth(input: string): boolean {
   return /^\d{4}-(0[1-9]|1[0-2])$/.test(input);
 }
 
+function isValidDate(input: string): boolean {
+  return /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(input);
+}
+
 function parseFile(filePath: string): IncomeReport | null {
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(raw);
@@ -54,11 +59,12 @@ function parseFile(filePath: string): IncomeReport | null {
   if (!isValidMonth(month)) return null;
 
   const slug = month;
-  const title = String(data.title ?? `${month} の月次収益レポート`);
-  const publishedAt = String(data.publishedAt ?? `${month}-01`);
+  const title = String(data.title ?? "").trim();
+  const publishedAt = String(data.publishedAt ?? "").trim();
   const summary = String(data.summary ?? "").trim();
   const totalLabel = String(data.totalLabel ?? "").trim();
   const totalNote = data.totalNote ? String(data.totalNote) : undefined;
+  const statusNote = data.statusNote ? String(data.statusNote).trim() : undefined;
 
   const breakdownRaw = Array.isArray(data.breakdown) ? data.breakdown : [];
   const breakdown = breakdownRaw
@@ -78,7 +84,9 @@ function parseFile(filePath: string): IncomeReport | null {
     ? data.highlights.map((x: unknown) => String(x)).filter(Boolean)
     : [];
 
-  if (!summary || !totalLabel) return null;
+  if (!title || !publishedAt || !isValidDate(publishedAt) || !summary || !totalLabel || breakdown.length === 0) {
+    return null;
+  }
 
   return {
     month,
@@ -89,6 +97,7 @@ function parseFile(filePath: string): IncomeReport | null {
     breakdown,
     summary,
     highlights,
+    statusNote,
     content,
   };
 }

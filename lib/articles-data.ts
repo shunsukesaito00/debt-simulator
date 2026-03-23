@@ -240,6 +240,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
     ],
+    recommendationContext: {
+      principalBand: "small",
+      rateBand: "10-15",
+      monthlyPaymentBand: "small",
+      methods: ["equal_payment", "equal_principal"],
+    },
   },
   {
     slug: "borrow-200-monthly-payment",
@@ -255,6 +261,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/articles/monthly-50000-interest-at-15percent", label: "月5万円・金利15%の総利息比較を見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
     ],
+    recommendationContext: {
+      principalBand: "medium",
+      rateBand: "10-15",
+      monthlyPaymentBand: "medium",
+      methods: ["equal_payment", "equal_principal"],
+    },
   },
   {
     slug: "borrow-200-15percent-5years-total-interest",
@@ -287,6 +299,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/articles/monthly-50000-how-much-can-borrow", label: "返済額から借入額を逆算する" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
     ],
+    recommendationContext: {
+      principalBand: "large",
+      rateBand: "10-15",
+      monthlyPaymentBand: "large",
+      methods: ["equal_payment", "equal_principal"],
+    },
   },
   {
     slug: "borrow-300-15percent-5years-total-interest",
@@ -332,6 +350,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/articles/borrow-100-interest", label: "借金100万円の利息を知りたい方はこちら" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
     ],
+    recommendationContext: {
+      principalBand: "medium",
+      rateBand: "10-15",
+      monthlyPaymentBand: "medium",
+      methods: ["fixed_payment"],
+    },
   },
   {
     slug: "repayment-method-difference",
@@ -585,6 +609,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/articles/fixed-payment-principal-interest-cannot-payoff", label: "定額元利で完済できない理由を見る" },
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで比較する" },
     ],
+    recommendationContext: {
+      principalBand: "medium",
+      rateBand: "10-15",
+      monthlyPaymentBand: "medium",
+      methods: ["fixed_payment"],
+    },
   },
   {
     slug: "revo-50man-simulation",
@@ -601,6 +631,12 @@ export const articlesData: ArticleItem[] = [
       { href: "/simulator/cardloan", label: "借入返済シミュレーターで試す" },
       { href: "/articles", label: "記事一覧へ" },
     ],
+    recommendationContext: {
+      principalBand: "small",
+      rateBand: "10-15",
+      monthlyPaymentBand: "small",
+      methods: ["fixed_payment"],
+    },
   },
   // --- 体験記・返済日記（追加） ---
   {

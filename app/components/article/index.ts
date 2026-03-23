@@ -11,6 +11,7 @@ export { ArticleKeyTakeaways } from "./ArticleKeyTakeaways";
 export { ArticleScenarioCallout } from "./ArticleScenarioCallout";
 export { ArticleChecklist } from "./ArticleChecklist";
 export { ArticleFurtherReading } from "./ArticleFurtherReading";
+export { ArticleTrySimulatorCta } from "./ArticleTrySimulatorCta";
 export type { FurtherReadingItem } from "./ArticleFurtherReading";
 export { ArticleStandardBlocks } from "./ArticleStandardBlocks";
 export type { ArticleStandardBlocksProps } from "./ArticleStandardBlocks";

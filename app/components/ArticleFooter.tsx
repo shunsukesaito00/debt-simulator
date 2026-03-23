@@ -1,4 +1,4 @@
-import { getArticle, CATEGORY_LABELS, getArticleListSectionIdForCategory } from "@/lib/articles";
+import { getArticle, CATEGORY_LABELS, getArticleListSectionIdForCategory, getRelatedArticlesForArticleContext } from "@/lib/articles";
 import { TrackedLink } from "@/app/components/TrackedLink";
 import { ArticleAuthorCard } from "@/app/components/article";
 import { ArticlePrevNext } from "@/app/components/ArticlePrevNext";
@@ -34,8 +34,17 @@ export function ArticleFooter({
   const categoryLabel = CATEGORY_LABELS[article.category];
   const categoryAnchor = `/articles#${getArticleListSectionIdForCategory(article.category)}`;
 
-  const articleLinks = relatedLinks.filter((l) => slugFromHref(l.href)).slice(0, 2);
-  const otherLinks = relatedLinks.filter((l) => !slugFromHref(l.href)).slice(0, 1);
+  const recommendedArticles = getRelatedArticlesForArticleContext(articleSlug, 2);
+  const articleLinks = recommendedArticles.map((item) => ({
+    href: `/articles/${item.slug}`,
+    label: item.title,
+    slug: item.slug,
+    item,
+  }));
+  const otherLinks = relatedLinks
+    .filter((l) => !slugFromHref(l.href))
+    .filter((l) => l.href !== SIMULATOR_HREF)
+    .slice(0, 1);
 
   return (
     <section className="mt-10 border-t border-stone-200 pt-8">
@@ -66,8 +75,8 @@ export function ArticleFooter({
           <h2 className="text-base font-semibold text-stone-900">次に読む</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {articleLinks.map((link) => {
-              const targetSlug = slugFromHref(link.href)!;
-              const target = getArticle(targetSlug);
+              const targetSlug = link.slug;
+              const target = link.item;
               return (
                 <TrackedLink
                   key={link.href}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFooter } from "@/app/components/ArticleFooter";
-import { ArticlePagePremise, ArticleReadingPoints, ArticleEditorMemo, ArticleStandardBlocks, ArticleProse } from "@/app/components/article";
+import { ArticlePagePremise, ArticleReadingPoints, ArticleStandardBlocks, ArticleProse, ArticleTrySimulatorCta } from "@/app/components/article";
 import { getArticleBreadcrumbJsonLd, getArticleFaqJsonLd } from "@/lib/article-structured-data";
 import { ARTICLE_AUTHOR_JSON_LD, ARTICLE_PUBLISHER_JSON_LD } from "@/lib/site-author";
 import { ArticlePageShell } from "@/app/components/ArticlePageShell";
@@ -83,7 +83,6 @@ const tocItems = [
   { id: "point", label: "どの返済額が現実的かを考えるポイント" },
   { id: "simulator", label: "自分の条件で確認するならシミュレーターが早い" },
   { id: "notice", label: "注意点" },
-  { id: "editor-memo", label: "編集メモ" },
   { id: "faq", label: "よくある質問" },
   { id: "summary", label: "まとめ" },
 ];
@@ -146,7 +145,7 @@ export default function Page() {
             </p>
             <p>
               この記事では、リボ払い50万円・年利15%という条件を前提に、毎月1万円・2万円・3万円返済で何がどれだけ変わるのかを比較します。最後に、
-              <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
+              <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">借入返済シミュレーター</Link>
               への導線も用意しています。
             </p>
 
@@ -299,25 +298,7 @@ export default function Page() {
               </p>
             </section>
 
-            <section id="simulator">
-              <h2 className="text-lg font-semibold text-stone-900 md:text-xl">自分の条件で確認するならシミュレーターが早い</h2>
-              <p className="mt-3">
-                ここまでの数値は、あくまで「リボ払い50万円・年利15%」という固定条件の近似例です。実際には、利用残高、金利、返済方式、最低返済額ルール、追加返済の有無によって結果は変わります。
-              </p>
-              <p className="mt-3">
-                そのため、最終的には自分の条件を入れて確認するのが一番確実です。
-                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
-                では、借入額や金利、返済期間を入力して、月々の返済額や総利息を試算できます。
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/simulator/cardloan"
-                  className="ds-btn ds-btn-primary"
-                >
-                  借入返済シミュレーターで計算する →
-                </Link>
-              </div>
-            </section>
+            <ArticleTrySimulatorCta sourceArticleSlug="revo-50man-simulation" />
 
             <section id="notice">
               <h2 className="text-lg font-semibold text-stone-900 md:text-xl">注意点</h2>
@@ -327,14 +308,6 @@ export default function Page() {
               <p className="mt-3">
                 正確な返済条件は、利用中または検討中のカード会社・金融会社の公式情報を確認してください。
               </p>
-            </section>
-
-            <section id="editor-memo">
-              <ArticleEditorMemo
-                purpose="リボ払い50万円・年利15%という条件で、毎月の返済額の違いが完済期間と総利息にどう影響するかを具体的に示す記事です。"
-                reasonAxis="毎月返済額（1万円・2万円・3万円）を比較軸にして、返済額を上げることの効果を可視化しています。"
-                memo="50万円はリボ払いで現実的に起こりやすい残高帯です。100万円の記事と合わせて読むことで、残高規模による利息負担の違いも把握できます。"
-              />
             </section>
 
             <section id="faq">
@@ -387,20 +360,10 @@ export default function Page() {
                 で確認できます。
               </p>
               <p className="mt-3">
-                自分の条件で試算したい場合は、
-                <Link href="/simulator/cardloan" className="font-bold text-stone-900 hover:underline">返済シミュレーター</Link>
-                で確認できます。他の記事は
+                他の記事は
                 <Link href="/articles" className="font-bold text-stone-900 hover:underline">記事一覧</Link>
                 からご覧いただけます。
               </p>
-              <div className="mt-6">
-                <Link
-                  href="/simulator/cardloan"
-                  className="ds-btn ds-btn-primary"
-                >
-                  借入返済シミュレーターで計算する →
-                </Link>
-              </div>
             </section>
           </ArticleProse>
 

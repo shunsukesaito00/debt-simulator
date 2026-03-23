@@ -51,6 +51,109 @@ export function getArticle(slug: string): ArticleItem | undefined {
   return articlesData.find((a) => a.slug === slug);
 }
 
+function slugFromHref(href: string): string | undefined {
+  const m = href.match(/^\/articles\/([^#?]+)/);
+  return m ? m[1] : undefined;
+}
+
+function isLoanComparisonCategory(cat: ArticleCategory): boolean {
+  return (
+    cat === "loan-amount" ||
+    cat === "repayment-method" ||
+    cat === "revolving" ||
+    cat === "repayment-improvement" ||
+    cat === "repayment-planning"
+  );
+}
+
+function scoreRelatedArticle(source: ArticleItem, target: ArticleItem): number {
+  let score = 0;
+  if (source.category === target.category) score += 3;
+  if (!source.recommendationContext || !target.recommendationContext) return score;
+
+  if (
+    source.recommendationContext.principalBand &&
+    source.recommendationContext.principalBand === target.recommendationContext.principalBand
+  ) {
+    score += 4;
+  }
+  if (
+    source.recommendationContext.rateBand &&
+    source.recommendationContext.rateBand === target.recommendationContext.rateBand
+  ) {
+    score += 2;
+  }
+  if (
+    source.recommendationContext.monthlyPaymentBand &&
+    source.recommendationContext.monthlyPaymentBand === target.recommendationContext.monthlyPaymentBand
+  ) {
+    score += 3;
+  }
+  if (
+    source.recommendationContext.methods &&
+    target.recommendationContext.methods &&
+    source.recommendationContext.methods.some((method) =>
+      target.recommendationContext?.methods?.includes(method),
+    )
+  ) {
+    score += 2;
+  }
+  return score;
+}
+
+/**
+ * 記事本文の文脈に近い「次に読む」候補を返す。
+ * 1件目は既存 relatedLinks の先頭記事を優先し、2件目を条件近似で補完する（ハイブリッド）。
+ */
+export function getRelatedArticlesForArticleContext(articleSlug: string, limit = 2): ArticleItem[] {
+  const source = getArticle(articleSlug);
+  if (!source) return [];
+
+  const picked: ArticleItem[] = [];
+  const seen = new Set<string>([articleSlug]);
+
+  const curatedFirst = (source.relatedLinks ?? [])
+    .map((link) => slugFromHref(link.href))
+    .filter((slug): slug is string => Boolean(slug))
+    .map((slug) => getArticle(slug))
+    .find((item): item is ArticleItem => Boolean(item));
+
+  if (curatedFirst) {
+    picked.push(curatedFirst);
+    seen.add(curatedFirst.slug);
+  }
+
+  const autoCandidate = articlesData
+    .filter(
+      (item) =>
+        !seen.has(item.slug) &&
+        isLoanComparisonCategory(item.category) &&
+        isLoanComparisonCategory(source.category),
+    )
+    .map((item) => ({
+      item,
+      score: scoreRelatedArticle(source, item),
+    }))
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.item.slug.localeCompare(b.item.slug);
+    })[0]?.item;
+
+  if (autoCandidate) {
+    picked.push(autoCandidate);
+    seen.add(autoCandidate.slug);
+  }
+
+  const fallback = (source.relatedLinks ?? [])
+    .map((link) => slugFromHref(link.href))
+    .filter((slug): slug is string => Boolean(slug))
+    .map((slug) => getArticle(slug))
+    .filter((item): item is ArticleItem => Boolean(item))
+    .filter((item) => !seen.has(item.slug));
+
+  return [...picked, ...fallback].slice(0, limit);
+}
+
 /** トップページ「よくある悩みから探す」用。具体悩みに近い記事を表示優先順で返す（存在するもののみ） */
 const FEATURED_PROBLEM_SLUGS: string[] = [
   "investment-loss-family-trust",

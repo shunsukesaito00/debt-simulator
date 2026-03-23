@@ -160,6 +160,9 @@ export function getCategoryFromUrlSlug(slug: string): ArticleCategory | undefine
 }
 
 export type ArticleRelatedLink = { href: string; label: string };
+export type ArticleRecommendationBand = "small" | "medium" | "large";
+export type ArticleRateBand = "under-10" | "10-15" | "over-15";
+export type ArticleRepaymentMethod = "equal_payment" | "equal_principal" | "fixed_payment" | "fixed_principal";
 
 /** 体験記などコンテンツ種別（一覧の体験記レール・フィルタ用） */
 export type ArticleKind = "story" | "guide";
@@ -178,4 +181,11 @@ export interface ArticleItem {
   publishedAt?: string;
   /** 更新日（YYYY-MM-DD）。JSON-LD・サイトマップ用 */
   dateModified?: string;
+  /** 近い条件の記事推薦に使う最小メタ */
+  recommendationContext?: {
+    principalBand?: ArticleRecommendationBand;
+    rateBand?: ArticleRateBand;
+    monthlyPaymentBand?: ArticleRecommendationBand;
+    methods?: ArticleRepaymentMethod[];
+  };
 }

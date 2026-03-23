@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
   formatIncomeMonthJa,
+  formatPublishedDateJa,
   getIncomeReport,
   getIncomeReports,
   getIncomeReportUrl,
@@ -62,7 +63,11 @@ export default async function IncomeDetailPage({ params }: Props) {
 
       <article className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">{report.title}</h1>
+        <p className="mt-2 text-xs text-stone-500">公開: {formatPublishedDateJa(report.publishedAt)}</p>
         <p className="mt-2 text-sm text-stone-600 leading-relaxed">{report.summary}</p>
+        {report.statusNote ? (
+          <p className="mt-2 text-xs text-stone-500">ステータス: {report.statusNote}</p>
+        ) : null}
         <div className="mt-4 rounded-lg border border-stone-200 bg-stone-50 p-4">
           <p className="text-sm text-stone-700">
             合計レンジ: <span className="font-semibold text-stone-900">{report.total.label}</span>
@@ -76,6 +81,9 @@ export default async function IncomeDetailPage({ params }: Props) {
               </li>
             ))}
           </ul>
+          <p className="mt-3 text-xs text-stone-500 leading-relaxed">
+            このページの金額は月次の概算レンジです。確定値や税務上の扱いは月ごとに異なります。
+          </p>
         </div>
 
         {report.highlights && report.highlights.length > 0 ? (

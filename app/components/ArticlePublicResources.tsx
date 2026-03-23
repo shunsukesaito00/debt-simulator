@@ -18,6 +18,11 @@ export function ArticlePublicResources() {
           相談先・公的支援の一覧ページへ →
         </Link>
       </p>
+      <p className="mt-2 text-sm">
+        <Link href="/glossary" className="ds-link-prose">
+          返済方式・金利・リボ用語を用語集で確認する →
+        </Link>
+      </p>
     </section>
   );
 }

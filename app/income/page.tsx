@@ -26,7 +26,10 @@ export default function IncomeArchivePage() {
       <div className="ds-card ds-card-pad">
         <h1 className="ds-page-serif text-2xl font-bold text-stone-900 md:text-3xl">収益レポート（月次アーカイブ）</h1>
         <p className="mt-3 text-sm text-stone-600 leading-relaxed">
-          副業実験・個人開発・Web運営の定点観測です。最初は継続性を優先し、金額はレンジ（概算）で記録しています。
+          生活再建・改善の取り組みを支える副業実験の定点観測です。収益は厳密値ではなく、継続しやすさを優先したレンジ（概算）で記録しています。
+        </p>
+        <p className="mt-2 text-xs text-stone-500 leading-relaxed">
+          レンジは税・手数料・確定前項目の扱いで月ごとに変動します。詳細は各月ページの注記をご確認ください。
         </p>
 
         {reports.length === 0 ? (
@@ -54,6 +57,9 @@ export default function IncomeArchivePage() {
 
                   <div className="space-y-4 px-4 py-4 sm:px-5 sm:py-5">
                     <h2 className="text-base font-semibold leading-snug text-stone-900 sm:text-[17px]">{r.title}</h2>
+                    {r.statusNote ? (
+                      <p className="text-xs text-stone-500">ステータス: {r.statusNote}</p>
+                    ) : null}
 
                     {/* 合計レンジ：月報の「今月の着地」を上段で見せる */}
                     <div className="rounded-2xl border border-emerald-200/70 bg-gradient-to-br from-emerald-50/90 to-white px-4 py-3.5 sm:px-5">
@@ -120,6 +126,20 @@ export default function IncomeArchivePage() {
             ))}
           </ol>
         )}
+        <div className="mt-10 border-t border-stone-200 pt-4 text-sm text-stone-600">
+          <p>
+            関連する読み物は
+            <Link href="/articles/category/side-income" className="ml-1 font-medium text-emerald-900 underline">
+              副業実験・収入改善カテゴリ
+            </Link>
+            から確認できます。
+          </p>
+          <p className="mt-2">
+            <Link href="/articles" className="underline hover:text-emerald-900">
+              記事一覧へ戻る
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
