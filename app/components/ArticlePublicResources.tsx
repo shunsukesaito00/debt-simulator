@@ -19,6 +19,11 @@ export function ArticlePublicResources() {
         </Link>
       </p>
       <p className="mt-2 text-sm">
+        <Link href="/faq" className="ds-link-prose">
+          迷ったら FAQ（よくある質問）を確認する →
+        </Link>
+      </p>
+      <p className="mt-2 text-sm">
         <Link href="/glossary" className="ds-link-prose">
           返済方式・金利・リボ用語を用語集で確認する →
         </Link>

@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import {
   getHomeSpotlightArticles,
-  getPopularArticles,
   getRecentArticles,
   getArticlesByCategory,
   CATEGORY_LABELS,
@@ -46,6 +45,14 @@ const organizationJsonLd = {
 
 type Pillar = {
   icon: string;
+  title: string;
+  desc: string;
+  href: string;
+  eventLocation: string;
+  categoryKey: string;
+};
+
+type HubPillar = {
   title: string;
   desc: string;
   href: string;
@@ -143,9 +150,39 @@ const THEME_PILLARS: Pillar[] = [
   },
 ];
 
+const HUB_PILLARS: HubPillar[] = [
+  {
+    title: "ツールで試す",
+    desc: "返済条件を入力して、毎月返済額・利息・完済時期を比較",
+    href: "/simulator/cardloan",
+    eventLocation: "top_hub_pillars",
+    categoryKey: "simulator",
+  },
+  {
+    title: "体験記を読む",
+    desc: "借金や返済の体験を時系列で確認し、判断の材料にする",
+    href: "/articles#story",
+    eventLocation: "top_hub_pillars",
+    categoryKey: "story",
+  },
+  {
+    title: "固定費を見直す",
+    desc: "通信費・サブスク・保険など、毎月負担の改善ポイントを整理",
+    href: "/articles#fixed-cost",
+    eventLocation: "top_hub_pillars",
+    categoryKey: "fixed-cost",
+  },
+  {
+    title: "家計を整える",
+    desc: "収支の見える化と優先順位づけで、無理のない返済計画へつなぐ",
+    href: "/articles#household",
+    eventLocation: "top_hub_pillars",
+    categoryKey: "household",
+  },
+];
+
 export default function Page() {
   const spotlight = getHomeSpotlightArticles();
-  const popular = getPopularArticles();
   const recent = getRecentArticles(5);
   const byCat = getArticlesByCategory();
   const pillarStories = (byCat.get("story") ?? []).slice(0, 3);
@@ -178,28 +215,28 @@ export default function Page() {
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <TrackedLink
-              href="/welcome"
+              href="/simulator/cardloan"
               className="ds-btn ds-btn-primary px-6 py-3.5 text-base"
               event={{
                 action: "click_top_primary_cta",
-                location: "top_hero",
-                target: "/welcome",
-                link_type: "welcome_cta",
-              }}
-            >
-              はじめての方へ →
-            </TrackedLink>
-            <TrackedLink
-              href="/simulator/cardloan"
-              className="ds-btn ds-btn-ghost px-6 py-3.5 text-base"
-              event={{
-                action: "click_top_secondary_cta",
                 location: "top_hero",
                 target: "/simulator/cardloan",
                 link_type: "simulator_cta",
               }}
             >
-              返済を試算する
+              返済を試算する →
+            </TrackedLink>
+            <TrackedLink
+              href="/welcome"
+              className="ds-btn ds-btn-ghost px-6 py-3.5 text-base"
+              event={{
+                action: "click_top_secondary_cta",
+                location: "top_hero",
+                target: "/welcome",
+                link_type: "welcome_cta",
+              }}
+            >
+              はじめての方へ
             </TrackedLink>
           </div>
           <p className="mt-4 text-sm text-stone-600">
@@ -209,6 +246,34 @@ export default function Page() {
             </Link>
           </p>
         </div>
+      </section>
+
+      {/* 1c. サイト全体のハブ（4本柱） */}
+      <section className="ds-surface-soft ds-card-pad">
+        <h2 className="ds-section-title text-xl md:text-2xl">このサイトでできること</h2>
+        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+          まずはツールで試して、必要なテーマの記事を読む流れがおすすめです。
+        </p>
+        <ul className="mt-6 grid gap-3 md:grid-cols-2">
+          {HUB_PILLARS.map((p) => (
+            <li key={p.categoryKey}>
+              <TrackedLink
+                href={p.href}
+                className="block rounded-xl border border-stone-200/60 bg-white/60 p-4 transition hover:bg-white/90 hover:border-stone-300/80"
+                event={{
+                  action: "click_top_theme_pillar",
+                  location: p.eventLocation,
+                  target: p.href,
+                  link_type: "theme_pillar",
+                  category_key: p.categoryKey,
+                }}
+              >
+                <span className="block text-base font-semibold text-stone-900">{p.title}</span>
+                <p className="mt-1 text-sm text-stone-600 leading-relaxed">{p.desc}</p>
+              </TrackedLink>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* 1a. 最近の更新（更新ログ・収益レポートへの入口） */}
@@ -501,33 +566,6 @@ export default function Page() {
             </li>
           ))}
         </ul>
-      </section>
-
-      {/* 5. よく読まれている */}
-      <section className="ds-surface-soft ds-card-pad">
-        <h2 className="ds-section-title text-xl md:text-2xl">よく読まれている記事</h2>
-        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
-          はじめに読む方におすすめの記事を、テーマ別に並べています。
-        </p>
-        <ol className="mt-5 list-decimal space-y-3 pl-5 text-sm text-stone-800">
-          {popular.map((a) => (
-            <li key={a.slug}>
-              <TrackedLink
-                href={`/articles/${a.slug}`}
-                className="font-medium text-stone-900 underline decoration-stone-300 hover:decoration-emerald-700"
-                event={{
-                  action: "click_top_popular_article",
-                  location: "top_popular",
-                  target: `/articles/${a.slug}`,
-                  link_type: "popular_article",
-                  article_slug: a.slug,
-                }}
-              >
-                {a.title}
-              </TrackedLink>
-            </li>
-          ))}
-        </ol>
       </section>
 
       {/* 6. はじめての方（3カード） */}

@@ -34,6 +34,17 @@ export default function Page() {
         <p className="mt-3 text-base text-stone-600 leading-relaxed">
           一般的な説明であり、契約書・金融機関の説明を優先してください。外部リンクは公的サイトへの入口です。
         </p>
+        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+          迷ったら
+          <Link href="/faq" className="ml-1 font-medium text-emerald-900 underline">
+            FAQ
+          </Link>
+          、計算をすぐ試したいときは
+          <Link href="/simulator/cardloan" className="ml-1 font-medium text-emerald-900 underline">
+            返済シミュレーター
+          </Link>
+          をご利用ください。
+        </p>
         <GlossaryClient terms={glossaryTerms} />
         <p className="mt-10 text-sm">
           <Link href="/articles#loan-comparison" className="font-semibold text-emerald-900 underline">

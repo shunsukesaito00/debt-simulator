@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 /** サイトの主要導線（太め・先頭に配置） */
 const primaryNavItems = [
-  { href: "/", label: "ホーム" },
+  { href: "/simulator/cardloan", label: "ツール" },
   { href: "/articles", label: "記事" },
   { href: "/articles/category/story", label: "体験記" },
   { href: "/articles/category/fixed-cost", label: "固定費見直し" },
@@ -17,8 +17,9 @@ const primaryNavItems = [
 /** カテゴリ・検索・法務など（控えめ。項目数は維持） */
 const secondaryNavItems = [
   { href: "/welcome", label: "はじめての方" },
+  { href: "/faq", label: "FAQ" },
   { href: "/resources/consultation-guide", label: "相談先" },
-  { href: "/income", label: "収益レポート" },
+  { href: "/glossary", label: "用語集" },
   { href: "/about", label: "運営者" },
   { href: "/search", label: "検索" },
 ] as const;

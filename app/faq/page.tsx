@@ -1,5 +1,6 @@
 // app/faq/page.tsx
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SupplementPageFooterFaq } from "@/app/components/SupplementPageFooter";
 import { getArticleFaqJsonLd, getFaqPageBreadcrumbJsonLd } from "@/lib/article-structured-data";
 import { FAQ_PAGE_ITEMS } from "@/lib/faq-page-data";
@@ -53,6 +54,17 @@ export default function Page() {
         <p className="mt-3 text-base text-stone-700 leading-relaxed">
           借入返済シミュレーターの使い方・計算結果の見方・金利や返済方式の考え方について、よくある質問をまとめています。
           実際の返済条件は契約内容（適用金利、約定日、端数処理、手数料等）を優先してください。
+        </p>
+        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+          用語の意味を確認したい場合は
+          <Link href="/glossary" className="ml-1 font-medium text-emerald-900 underline">
+            用語集
+          </Link>
+          、計算をすぐ試したい場合は
+          <Link href="/simulator/cardloan" className="ml-1 font-medium text-emerald-900 underline">
+            返済シミュレーター
+          </Link>
+          をご利用ください。
         </p>
       </header>
 
@@ -214,6 +226,14 @@ export default function Page() {
           使い方の詳細は「使い方」ページ、計算の考え方は「計算ロジック」ページにまとめています。
           追加してほしい質問があれば「お問い合わせ」からご連絡ください。
         </p>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm">
+          <Link href="/articles" className="font-semibold text-emerald-900 hover:underline">
+            記事一覧へ
+          </Link>
+          <Link href="/glossary" className="font-semibold text-emerald-900 hover:underline">
+            用語集へ
+          </Link>
+        </div>
       </section>
 
       <SupplementPageFooterFaq />

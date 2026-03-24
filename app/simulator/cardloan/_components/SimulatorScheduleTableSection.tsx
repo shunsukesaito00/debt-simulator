@@ -26,11 +26,11 @@ export function SimulatorScheduleTableSection({ result, activeTab }: SimulatorSc
       </div>
       <div className="mt-3 overflow-x-auto">
         <table className="w-full min-w-[560px] text-sm">
-          <thead>
+          <thead className="sticky top-0 z-10 bg-white">
             <tr className="border-b border-stone-200 text-left text-sm text-stone-600">
               <th className="py-2.5 pr-4">年月</th>
               <th className="py-2.5 pr-4">年利(%)</th>
-              <th className="py-2.5 pr-4 text-right">支払</th>
+              <th className="py-2.5 pr-4 text-right">毎月返済額</th>
               <th className="py-2.5 pr-4 text-right">利息</th>
               <th className="py-2.5 pr-4 text-right">元金</th>
               <th className="py-2.5 pr-4 text-right">追加返済</th>
@@ -39,7 +39,7 @@ export function SimulatorScheduleTableSection({ result, activeTab }: SimulatorSc
           </thead>
           <tbody>
             {result.schedule.map((r, i) => (
-              <tr key={i} className="border-b border-stone-100">
+              <tr key={i} className={`border-b border-stone-100 ${i % 2 === 0 ? "bg-white" : "bg-stone-50/40"}`}>
                 <td className="py-2.5 pr-4">{r.year}/{r.month}</td>
                 <td className="py-2.5 pr-4">{r.annualRatePercent}</td>
                 <td className="py-2.5 pr-4 text-right">{formatYen(r.payment)}</td>

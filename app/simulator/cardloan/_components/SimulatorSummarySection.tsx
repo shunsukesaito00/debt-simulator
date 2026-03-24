@@ -27,7 +27,7 @@ export function SimulatorSummarySection({
 }: SimulatorSummarySectionProps) {
   return (
     <section className="flex min-h-0 flex-col rounded-ds border border-stone-200/70 bg-white/90 p-5 shadow-sm">
-      <h2 className="text-lg font-semibold text-stone-900">サマリー（A/B 比較）</h2>
+      <h2 className="text-lg font-semibold text-stone-900">選択中プラン（{activeTab}）のサマリー</h2>
       {result.ok && (
         <div className="mt-4 grid grid-cols-2 gap-4 rounded-ds border border-emerald-200/60 bg-emerald-50/40 p-6">
           <div>
@@ -76,27 +76,6 @@ export function SimulatorSummarySection({
               {resultB.ok
                 ? repaymentBurdenPercent(resultB.schedule[0]?.payment ?? 0, takeHomeMonthly)
                 : "-"}
-            </div>
-          </>
-        )}
-        {resultA.ok && resultB.ok && (
-          <>
-            <div className="text-xs text-stone-500 pt-2 border-t border-stone-100">差分（B−A）</div>
-            <div className="pt-2 border-t border-stone-100" />
-            <div className="pt-2 border-t border-stone-100" />
-            <div className="text-xs text-stone-500">総返済額</div>
-            <div className={`col-span-2 font-bold ${(resultB.totalPayment + resultB.totalBonus) - (resultA.totalPayment + resultA.totalBonus) <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
-              {formatYen((resultB.totalPayment + resultB.totalBonus) - (resultA.totalPayment + resultA.totalBonus))}
-            </div>
-            <div className="text-xs text-stone-500">利息</div>
-            <div className={`col-span-2 font-bold ${resultB.totalInterest - resultA.totalInterest <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
-              {formatYen(resultB.totalInterest - resultA.totalInterest)}
-            </div>
-            <div className="text-xs text-stone-500">完済月数</div>
-            <div className={`col-span-2 font-bold ${resultB.months - resultA.months <= 0 ? "text-emerald-600" : "text-amber-600"}`}>
-              {resultB.months <= resultA.months
-                ? `${resultA.months - resultB.months}ヶ月短縮`
-                : `${resultB.months - resultA.months}ヶ月延長`}
             </div>
           </>
         )}

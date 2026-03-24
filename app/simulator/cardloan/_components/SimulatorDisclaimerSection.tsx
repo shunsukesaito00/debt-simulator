@@ -44,7 +44,21 @@ export function SimulatorDisclaimerSection() {
             })
           }
         >
-          FAQ
+          迷ったら FAQ
+        </Link>
+        <Link
+          href="/glossary"
+          className="font-semibold text-emerald-900 hover:underline"
+          onClick={() =>
+            trackEvent({
+              action: "click_simulator_support_link",
+              location: "simulator_footer",
+              target: "/glossary",
+              link_type: "support_link",
+            })
+          }
+        >
+          用語集
         </Link>
         <Link
           href="/how-to"

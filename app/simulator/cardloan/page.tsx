@@ -41,10 +41,6 @@ export default function Page() {
             <h1 className="text-2xl font-bold tracking-tight text-stone-900 md:text-3xl">カードローン返済シミュレーター</h1>
             <p className="ds-meta mt-1 text-stone-500">入力値はサーバーに送信されません。ブラウザ内だけで計算しています。</p>
             <p className="mt-1.5 text-sm text-stone-600">4つの返済方式・A/B比較・入力に連動したおすすめ記事で、条件の違いをすぐ比較できます。</p>
-            <p className="mt-3 text-sm text-stone-600 leading-relaxed">
-              返済の見え方って、どの前提で数字を見ているかで変わってしまうんですよね。
-              この画面は、条件を切り替えて自分の状況に近い形で確かめられるように作っています。
-            </p>
           </div>
           <div className="flex gap-2">
             <button
@@ -95,11 +91,11 @@ export default function Page() {
             <SimulatorChartsSection result={result} activeTab={activeTab} />
           </div>
 
-          {result.ok && <SimulatorScheduleTableSection result={result} activeTab={activeTab} />}
-
           {resultA.ok && resultB.ok && (
             <SimulatorAbCompareSection resultA={resultA} resultB={resultB} />
           )}
+
+          {result.ok && <SimulatorScheduleTableSection result={result} activeTab={activeTab} />}
         </section>
       )}
 

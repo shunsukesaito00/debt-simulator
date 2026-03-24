@@ -71,6 +71,17 @@ export default function ArticlesListPage() {
             早見表（100万・200万・300万・年利15%・3年/5年）
           </Link>
         </p>
+        <p className="mt-3 text-sm text-stone-600 leading-relaxed">
+          迷ったら
+          <Link href="/faq" className="ml-1 font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
+            FAQ
+          </Link>
+          、用語の意味を確認したいときは
+          <Link href="/glossary" className="ml-1 font-medium text-emerald-900 underline decoration-emerald-200 hover:decoration-emerald-700">
+            用語集
+          </Link>
+          を先に見ると読み進めやすくなります。
+        </p>
 
         {storyArticles.length > 0 && (
           <section className="mt-10 border-t border-stone-200/80 pt-10" aria-labelledby="articles-story-heading">
@@ -196,6 +207,21 @@ export default function ArticlesListPage() {
               className="ds-btn ds-btn-secondary text-base"
             >
               固定費削減インパクトを計算する →
+            </Link>
+          </div>
+        </section>
+
+        <section className="mt-6 rounded-xl border border-stone-200/55 bg-white/50 p-6 shadow-sm">
+          <h2 className="ds-h2">迷ったときの補助ページ</h2>
+          <p className="mt-3 text-base text-stone-700 leading-relaxed">
+            迷ったら FAQ、用語の意味を確認したい場合は用語集を活用してください。
+          </p>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href="/faq" className="ds-btn ds-btn-secondary text-base">
+              FAQを見る →
+            </Link>
+            <Link href="/glossary" className="ds-btn ds-btn-secondary text-base">
+              用語集を見る →
             </Link>
           </div>
         </section>
