@@ -451,10 +451,7 @@ export default function Page() {
       {/* 3. 運営者一言 + 自己紹介 */}
       <section className="ds-section-alt border border-stone-200/60">
         <p className="ds-label">運営者より一言</p>
-        <blockquote className="ds-page-serif mt-3 text-base font-semibold leading-relaxed text-stone-900 md:text-lg">
-          数字が先に来ると、もっとしんどくなることがあります。体験と試算の両方を置いて、自分のペースで比べられるようにしています。
-        </blockquote>
-        <p className="mt-4 text-sm text-stone-700 leading-relaxed">
+        <p className="mt-3 text-sm text-stone-700 leading-relaxed">
           投資助言や借入の勧誘はしていません。経緯やスタンスの詳細は
           <TrackedLink
             href="/about"
